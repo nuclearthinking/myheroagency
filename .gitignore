@@ -1,3 +1,4 @@
+/core/build
 ## Java
 
 *.class
@@ -39,6 +40,7 @@ tmp/
 *.bak
 *.swp
 *~.nib
+/desktop/build
 local.properties
 .settings/
 .loadpath
