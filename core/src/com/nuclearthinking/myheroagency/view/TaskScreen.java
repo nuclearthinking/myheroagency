@@ -1,11 +1,31 @@
 package com.nuclearthinking.myheroagency.view;
 
+import com.nuclearthinking.myheroagency.controller.GameStateManager;
+
 /**
  * Date: 05.05.2016
  * Time: 7:01
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class TaskScreen extends AbstractScreen {
+public class TaskScreen extends GameState {
 
+    public TaskScreen(GameStateManager gsm) {
+        super(gsm);
+    }
+
+    @Override
+    public void update(float delta) {
+
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
