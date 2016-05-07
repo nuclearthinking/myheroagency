@@ -1,13 +1,12 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.nuclearthinking.myheroagency.GameState;
+import com.nuclearthinking.myheroagency.State;
 import com.nuclearthinking.myheroagency.GameStateManager;
-import com.nuclearthinking.myheroagency.input.KeyboardListener;
 import com.nuclearthinking.myheroagency.ui.FontFactory;
+
+import static com.badlogic.gdx.Input.Keys;
 
 /**
  * Date: 05.05.2016
@@ -15,16 +14,23 @@ import com.nuclearthinking.myheroagency.ui.FontFactory;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class TaskScreen extends GameState {
+public class TaskScreen extends State {
 
     public TaskScreen(GameStateManager gsm) {
         super(gsm);
-        Gdx.input.setInputProcessor(new KeyboardListener(this));
     }
 
     @Override
-    public void handleInput() {
-
+    public void handleKeyboard(int key) {
+        if (key == Keys.Q) {
+            gsm.setState(GameStateManager.GameState.BATTLE);
+        } else if (key == Keys.W) {
+            gsm.setState(GameStateManager.GameState.HOME);
+        } else if (key == Keys.E) {
+            gsm.setState(GameStateManager.GameState.START);
+        } else if (key == Keys.R) {
+            gsm.setState(GameStateManager.GameState.QUEST);
+        }
     }
 
     @Override
@@ -40,8 +46,6 @@ public class TaskScreen extends GameState {
         FontFactory.getFont9().draw(spriteBatch, "Task screen", 20, 20);
         spriteBatch.end();
     }
-
-
 
 
     @Override

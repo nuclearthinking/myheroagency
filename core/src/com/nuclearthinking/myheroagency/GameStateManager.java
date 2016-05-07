@@ -1,7 +1,9 @@
 package com.nuclearthinking.myheroagency;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.nuclearthinking.myheroagency.input.KeyboardListener;
 import com.nuclearthinking.myheroagency.view.BattleScreen;
 import com.nuclearthinking.myheroagency.view.HomeScreen;
 import com.nuclearthinking.myheroagency.view.StartScreen;
@@ -17,30 +19,31 @@ import java.util.Stack;
  */
 public class GameStateManager {
 
-    public enum State {START, HOME, QUEST, BATTLE}
+    public enum GameState {START, HOME, QUEST, BATTLE}
 
     private SpriteBatch spriteBatch;
     private OrthographicCamera camera;
-    private Stack<GameState> gameStates;
+    private Stack<State> states;
 
     public GameStateManager() {
         spriteBatch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 600);
-        gameStates = new Stack<GameState>();
-        pushState(State.START);
+        states = new Stack<State>();
+        pushState(GameState.START);
+        Gdx.input.setInputProcessor(new KeyboardListener(states.peek()));
     }
 
     public void update(float dt) {
-        gameStates.peek().update(dt);
+        states.peek().update(dt);
     }
 
     public void render() {
-        gameStates.peek().render();
+        states.peek().render();
     }
 
-    private GameState getState(State state) {
-        switch (state) {
+    private com.nuclearthinking.myheroagency.State getState(GameState gameState) {
+        switch (gameState) {
             case START:
                 return new StartScreen(this);
             case HOME:
@@ -54,17 +57,17 @@ public class GameStateManager {
         }
     }
 
-    public void setState(State state) {
+    public void setState(GameState gameState) {
         popState();
-        pushState(state);
+        pushState(gameState);
     }
 
-    public void pushState(State state) {
-        gameStates.push(getState(state));
+    public void pushState(GameState gameState) {
+        states.push(getState(gameState));
     }
 
     public void popState() {
-        GameState g = gameStates.pop();
+        com.nuclearthinking.myheroagency.State g = states.pop();
         g.dispose();
     }
 

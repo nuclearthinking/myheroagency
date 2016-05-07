@@ -1,8 +1,7 @@
 package com.nuclearthinking.myheroagency.input;
 
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.GameState;
-import com.nuclearthinking.myheroagency.GameStateManager;
+import com.nuclearthinking.myheroagency.State;
 
 /**
  * Date: 07.05.2016
@@ -11,23 +10,15 @@ import com.nuclearthinking.myheroagency.GameStateManager;
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
 public class KeyboardListener implements InputProcessor {
-    GameState gameState;
+    State state;
 
-    public KeyboardListener(GameState gameState) {
-        this.gameState = gameState;
+    public KeyboardListener(State state) {
+        this.state = state;
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == 45) {
-            gameState.setState(GameStateManager.State.BATTLE);
-        } else if (keycode == 51) {
-            gameState.setState(GameStateManager.State.HOME);
-        } else if (keycode == 33) {
-            gameState.setState(GameStateManager.State.START);
-        } else if (keycode == 46) {
-            gameState.setState(GameStateManager.State.QUEST);
-        }
+        state.handleKeyboard(keycode);
         return true;
     }
 

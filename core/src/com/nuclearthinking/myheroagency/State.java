@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public abstract class GameState {
+public abstract class State {
 
     public SpriteBatch spriteBatch;
     public OrthographicCamera camera;
-    private GameStateManager gsm;
+    public GameStateManager gsm;
 
-    public GameState(GameStateManager gsm){
+    public State(GameStateManager gsm){
         this.spriteBatch = gsm.getSpriteBatch();
         this.camera = gsm.getCamera();
         this.gsm  = gsm;
     }
 
-    public abstract void handleInput();
+    public abstract void handleKeyboard(int key);
 
     public abstract void update(float dt);
 
@@ -29,7 +29,4 @@ public abstract class GameState {
 
     public abstract void dispose();
 
-    public void setState(GameStateManager.State state){
-        gsm.pushState(state);
-    }
 }
