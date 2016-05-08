@@ -8,4 +8,8 @@ package com.nuclearthinking.myheroagency.view;
  */
 public class TaskScreen extends AbstractScreen {
 
+    @Override
+    public void buildStage() {
+
+    }
 }
