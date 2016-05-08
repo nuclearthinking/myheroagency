@@ -19,26 +19,26 @@ public class Localisation {
     I18NBundle localisationBundle;
 
     public Localisation(Class initiatorClass) {
-        baseFileHandle = Gdx.files.internal("i18n/" + initiatorClass.getName());
+        baseFileHandle = Gdx.files.internal("i18n/" + initiatorClass.getSimpleName());
     }
 
     public void setLocale(Locale locale) {
         localisationBundle = I18NBundle.createBundle(baseFileHandle, locale);
     }
 
-    public String get(String key) throws LocalisationException {
+    public String get(String key) {
         if (localisationBundle != null) {
             return localisationBundle.get(key);
         } else {
-            throw new LocalisationException("Locale is not defined");
+            return null;
         }
     }
 
-    public String format(String key, Object... args) throws LocalisationException {
+    public String format(String key, Object... args) {
         if (localisationBundle != null) {
             return localisationBundle.format(localisationBundle.get(key), args);
         } else {
-            throw new LocalisationException("Locale is not defined");
+            return null;
         }
     }
 
