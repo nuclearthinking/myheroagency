@@ -13,12 +13,12 @@ import java.util.Locale;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class Localisation {
+public class Localization {
 
     FileHandle baseFileHandle;
     I18NBundle localisationBundle;
 
-    public Localisation(Class initiatorClass) {
+    public Localization(Class initiatorClass) {
         baseFileHandle = Gdx.files.internal("i18n/" + initiatorClass.getSimpleName());
     }
 
