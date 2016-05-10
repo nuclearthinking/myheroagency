@@ -2,7 +2,6 @@ package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.nuclearthinking.myheroagency.view.AbstractScreen;
 
 /**
@@ -10,7 +9,6 @@ import com.nuclearthinking.myheroagency.view.AbstractScreen;
  */
 public class ScreenManager {
     private static ScreenManager instance;
-    private BitmapFont font;
 
     private Game game;
 
@@ -27,11 +25,9 @@ public class ScreenManager {
 
     public void initialize(Game game) {
         this.game = game;
-        font = new BitmapFont();
     }
 
     public void showScreen(ScreenEnum screenEnum, Object... params) {
-
         Screen currentScreen = game.getScreen();
 
         AbstractScreen newScreen = screenEnum.getScreen(params);
@@ -43,7 +39,4 @@ public class ScreenManager {
         }
     }
 
-    public BitmapFont getFont(){
-        return font;
-    }
 }
