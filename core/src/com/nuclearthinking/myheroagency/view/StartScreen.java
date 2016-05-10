@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,7 +26,8 @@ public class StartScreen extends AbstractScreen {
     {
         super();
 
-        texture = new Texture(Gdx.files.internal("img/splash.png"));
+        //texture = new Texture(Gdx.files.internal("img/splash.png"));
+        texture = ScreenManager.getInstance().getAssetManager().get("img/splash.png", Texture.class);
     }
 
     @Override
