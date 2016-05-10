@@ -8,5 +8,8 @@ package com.nuclearthinking.myheroagency.view;
  */
 public class BattleScreen extends AbstractScreen
 {
+    @Override
+    public void buildStage() {
 
+    }
 }
