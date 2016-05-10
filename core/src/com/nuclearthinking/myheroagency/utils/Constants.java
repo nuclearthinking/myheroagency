@@ -3,10 +3,15 @@ package com.nuclearthinking.myheroagency.utils;
 /**
  * Created by Izonami on 05.05.2016.
  */
-public class Constants
-{
+public class Constants {
     public static final String GAME_TITLE = "My Hero Agency";
     public static final int GAME_W = 800;
     public static final int GAME_H = 600;
     public static final String LOG = "FOG";
+    public static final String ALL_CHARACTERS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+            + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            + "abcdefghijklmnopqrstuvwxyz"
+            + "1234567890.,:;_¡!¿?\"'+-*/()[]={}";
+
 }
