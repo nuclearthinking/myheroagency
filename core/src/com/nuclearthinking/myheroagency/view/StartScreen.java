@@ -27,7 +27,6 @@ public class StartScreen extends AbstractScreen {
     {
         super();
 
-        //texture = new Texture(Gdx.files.internal("img/splash.png"));
         texture = Assets.getInstance().getAssetManager().get("img/splash.png", Texture.class);
     }
 

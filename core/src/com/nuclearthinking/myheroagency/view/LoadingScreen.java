@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Assets;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
-import com.nuclearthinking.myheroagency.model.LoadingBar;
+import com.nuclearthinking.myheroagency.model.ui.LoadingBar;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
