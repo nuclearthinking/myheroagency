@@ -1,12 +1,12 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.nuclearthinking.myheroagency.controller.Assets;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.LoadingBar;
@@ -27,10 +27,11 @@ public class LoadingScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        preLoadAsset(); // Загружает ассет для экрана загузки
-        ScreenManager.getInstance().getAssetManager().finishLoading(); // Проверяет загруженность ассета
+        Assets.getInstance().init();
+        Assets.getInstance().preLoadAssets(); // Загружает ассет для экрана загузки
+        Assets.getInstance().getAssetManager().finishLoading(); // Проверяет загруженность ассета
 
-        TextureAtlas atlas = ScreenManager.getInstance().getAssetManager().get("img/loading.pack", TextureAtlas.class); //Получает ассет
+        TextureAtlas atlas = Assets.getInstance().getAssetManager().get("img/loading.pack", TextureAtlas.class); //Получает ассет
 
         if(isFirst){
             //Разбивает полученный ассет на регионы, описанные в loading.pack
@@ -54,7 +55,7 @@ public class LoadingScreen extends AbstractScreen {
             addActor(logo);
         }
 
-        postLoadingAssets(); //Загрузка остальных ассетов
+        Assets.getInstance().postLoadAssets(); //Загрузка остальных ассетов
     }
 
     @Override
@@ -96,10 +97,10 @@ public class LoadingScreen extends AbstractScreen {
        super.render(delta);
 
         //Получает процент загрузки
-        percent = Interpolation.linear.apply(percent, ScreenManager.getInstance().getAssetManager().getProgress(), 0.1f);
+        percent = Interpolation.linear.apply(percent, Assets.getInstance().getAssetManager().getProgress(), 0.1f);
 
         if(isFirst){
-            if (ScreenManager.getInstance().getAssetManager().update()) { // Каждый фрейм проверяет загруженны ли ассеты
+            if (Assets.getInstance().getAssetManager().update()) { // Каждый фрейм проверяет загруженны ли ассеты
                 if(Gdx.input.isTouched())
                     ScreenManager.getInstance().showScreen( ScreenEnum.START_SCREEN );
             }
@@ -111,7 +112,7 @@ public class LoadingScreen extends AbstractScreen {
             loadingBg.invalidate();
         }
         else{
-            if (ScreenManager.getInstance().getAssetManager().update() && percent >= ScreenManager.getInstance().getAssetManager().getProgress() - .001f) {
+            if (Assets.getInstance().getAssetManager().update() && percent >= Assets.getInstance().getAssetManager().getProgress() - .001f) {
                 ScreenManager.getInstance().showScreen( ScreenEnum.START_SCREEN );
             }
 
@@ -122,22 +123,4 @@ public class LoadingScreen extends AbstractScreen {
 
     }
 
-    @Override
-    public void hide() {
-        unloadingAssets(); //Выгрузка ассетов при сворочивании апп
-    }
-
-    //Сюда нужно пихать, то что нужно для первоначального рендеренга экрана загрузки, полосочка, лого, текстовка и прочее
-    private void preLoadAsset(){
-        ScreenManager.getInstance().getAssetManager().load("img/loading.pack", TextureAtlas.class);
-    }
-
-    //Сюда пихать, то что нужно для рендеринга сцены
-    private void postLoadingAssets(){
-        ScreenManager.getInstance().getAssetManager().load("img/splash.png", Texture.class);
-    }
-
-    private void unloadingAssets(){
-        ScreenManager.getInstance().getAssetManager().unload("img/loading.pack");
-    }
 }
