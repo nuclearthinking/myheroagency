@@ -4,14 +4,13 @@ import com.badlogic.gdx.math.Interpolation;
 import com.nuclearthinking.myheroagency.controller.Assets;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
-import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
  * Created by Izonami on 10.05.2016.
  */
 public class LoadingScreen extends AbstractScreen {
 
-    private float percent;
+    private float loadingPercent;
 
     @Override
     public void buildStage() {
@@ -29,15 +28,16 @@ public class LoadingScreen extends AbstractScreen {
        super.render(delta);
 
         //Получает процент загрузки
-        percent = Interpolation.linear.apply(percent, Assets.getInstance().getAssetManager().getProgress(), 0.1f);
+        loadingPercent = Interpolation.linear.apply(loadingPercent, Assets.getInstance().getAssetManager().getProgress(), 0.1f);
 
-        if (Assets.getInstance().getAssetManager().update() && percent >= Assets.getInstance().getAssetManager().getProgress() - .001f) {
+        if (Assets.getInstance().getAssetManager().update() && loadingPercent >= Assets.getInstance().getAssetManager().getProgress() - .001f) {
             ScreenManager.getInstance().showScreen( ScreenEnum.START_SCREEN );
         }
 
-        getBatch().begin();
+        //Пока фонт фактори из-за статика юзать невозможно, закомментирую
+        /*getBatch().begin();
         Assets.getInstance().getFont().draw(getBatch(), "Loading: " + Float.toString(percent * 100) + "%", Constants.GAME_W - 150, 35);
-        getBatch().end();
+        getBatch().end();*/
 
     }
 
