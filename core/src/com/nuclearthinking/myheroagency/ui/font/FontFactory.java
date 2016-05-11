@@ -29,6 +29,7 @@ public class FontFactory {
 
     private static void generateFont9(FreeTypeFontGenerator.FreeTypeFontParameter param) {
         font9 = generator.generateFont(param);
+        generator.dispose();
     }
 
 }
