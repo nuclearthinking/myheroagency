@@ -19,8 +19,16 @@ public class Localization {
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
-        localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
-        Gdx.app.log(this.getClass().getName(), "Loaded I18NBundle with name " + bundleName);
+        loadBundle(bundleName);
+    }
+
+    void loadBundle(String bundleName) {
+        if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
+            localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+            Gdx.app.log(this.getClass().getName(), "Loaded I18NBundle with name " + bundleName);
+        } else {
+            Gdx.app.error(this.getClass().getName(), "I18NBundle " + bundleName + " is not loaded yet");
+        }
     }
 
 

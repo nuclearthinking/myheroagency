@@ -23,9 +23,8 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     @Override
     public void show() {
-        if (!this.getName().equals(LoadingScreen.class.getSimpleName())) {
-            locale = new Localization(this.getClass());
-        }
+        locale = new Localization(this.getClass());
+
 
         Gdx.app.log(Constants.LOG, "Show screen: " + getName());
         Gdx.input.setInputProcessor(this);
