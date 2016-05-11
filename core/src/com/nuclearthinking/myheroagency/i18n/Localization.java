@@ -1,10 +1,10 @@
 package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.nuclearthinking.myheroagency.controller.Assets;
 
-import java.util.Locale;
+import java.util.MissingResourceException;
 
 
 /**
@@ -15,20 +15,23 @@ import java.util.Locale;
  */
 public class Localization {
 
-    FileHandle baseFileHandle;
     I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
-        baseFileHandle = Gdx.files.internal("i18n/" + initiatorClass.getSimpleName());
+        String bundleName = "i18n/" + initiatorClass.getSimpleName();
+        localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+        Gdx.app.log(this.getClass().getName(), "Loaded I18NBundle with name " + bundleName);
     }
 
-    public void setLocale(Locale locale) {
-        localisationBundle = I18NBundle.createBundle(baseFileHandle, locale);
-    }
 
     public String get(String key) {
         if (localisationBundle != null) {
-            return localisationBundle.get(key);
+            try {
+                return localisationBundle.get(key);
+            } catch (MissingResourceException ex) {
+                Gdx.app.error(this.getClass().getName(), "Can't load key with name " + key, ex);
+                return null;
+            }
         } else {
             return null;
         }

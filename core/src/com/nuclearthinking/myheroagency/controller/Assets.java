@@ -1,7 +1,12 @@
 package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.I18NBundleLoader;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.I18NBundle;
+
+import java.io.File;
+import java.util.Locale;
 
 /**
  * Created by Izonami on 10.05.2016.
@@ -10,6 +15,7 @@ public class Assets {
 
     private static Assets instance;
     private AssetManager assetManager;
+    Locale locale;
 
     public static Assets getInstance() {
         if (instance == null) {
@@ -18,21 +24,20 @@ public class Assets {
         return instance;
     }
 
-    public void init(){
+    public void init() {
         assetManager = new AssetManager();
+        locale = new Locale("ru"); //TODO: Брать локаль из настроек
     }
 
-    //До загрузки
-    public void preLoadAssets(){
-
-    }
-
-    //После загрузки
-    public void postLoadAssets(){
+    public void loadAssets() {
         assetManager.load("img/splash.png", Texture.class);
+        assetManager.load("i18n/BattleScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/HomeScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/StartScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/TaskScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
     }
 
-    public AssetManager getAssetManager(){
+    public AssetManager getAssetManager() {
         return assetManager;
     }
 
