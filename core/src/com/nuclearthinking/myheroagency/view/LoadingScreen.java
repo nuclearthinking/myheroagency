@@ -31,7 +31,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = Interpolation.linear.apply(loadingPercent, Assets.getInstance().getAssetManager().getProgress(), 0.1f);
 
         if (Assets.getInstance().getAssetManager().update() && loadingPercent >= Assets.getInstance().getAssetManager().getProgress() - .001f) {
-            ScreenManager.getInstance().showScreen( ScreenEnum.START_SCREEN );
+            ScreenManager.getInstance().showScreen( ScreenEnum.SPLASH_SCREEN );
         }
 
         //Пока фонт фактори из-за статика юзать невозможно, закомментирую

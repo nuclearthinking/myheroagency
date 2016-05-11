@@ -1,9 +1,6 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.nuclearthinking.myheroagency.view.AbstractScreen;
-import com.nuclearthinking.myheroagency.view.HomeScreen;
-import com.nuclearthinking.myheroagency.view.LoadingScreen;
-import com.nuclearthinking.myheroagency.view.StartScreen;
+import com.nuclearthinking.myheroagency.view.*;
 
 /**
  * Created by Izonami on 09.05.2016.
@@ -15,9 +12,16 @@ public enum ScreenEnum {
         }
     },
 
-    START_SCREEN {
+    SPLASH_SCREEN {
         public AbstractScreen getScreen(Object... params) {
-            return new StartScreen();
+            return new SplashScreen();
+        }
+    },
+
+    MAIN_MENU_SCREEN {
+        @Override
+        public AbstractScreen getScreen(Object... params) {
+            return new MainMenuScreen();
         }
     },
 
