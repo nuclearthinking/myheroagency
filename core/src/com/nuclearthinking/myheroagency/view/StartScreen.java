@@ -3,13 +3,14 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.nuclearthinking.myheroagency.controller.Assets;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.utils.TextActor;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.nuclearthinking.myheroagency.utils.Constants.*;
+import static com.nuclearthinking.myheroagency.utils.Constants.GAME_H;
+import static com.nuclearthinking.myheroagency.utils.Constants.GAME_W;
 
 /**
  * Date: 05.05.2016
@@ -26,15 +27,15 @@ public class StartScreen extends AbstractScreen {
     public StartScreen() {
         super();
 
-        texture = Assets.getInstance().getAssetManager().get("img/splash.png", Texture.class);
+        texture = Asset.getInstance().get("img/splash.png", Texture.class);
     }
 
     @Override
     public void buildStage() {
-        actor = new TextActor(Assets.getInstance().getFont(), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
+        /*actor = new TextActor(Assets.getInstance().getFont(), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
         actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
         actor.setPosition(GAME_W / 2 - 32, GAME_H / 2 + 32);
-        actor.fadeText();
+        actor.fadeText();*/
 
         Runnable load = new Runnable() {
             @Override
