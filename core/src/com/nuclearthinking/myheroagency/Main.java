@@ -35,7 +35,11 @@ public class Main extends Game {
         File file;
         try {
             file = new File("myheroagency.log");
-            return file.exists() || file.createNewFile();
+            if (!file.exists()) {
+                return file.createNewFile();
+            } else {
+                return true;
+            }
         } catch (IOException ex) {
             System.err.println("Can't create logfile in log directory");
             return false;
