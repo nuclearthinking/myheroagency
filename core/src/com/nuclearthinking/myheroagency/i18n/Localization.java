@@ -15,14 +15,14 @@ import java.util.MissingResourceException;
  */
 public class Localization {
 
-    I18NBundle localisationBundle;
+    private I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
         loadBundle(bundleName);
     }
 
-    void loadBundle(String bundleName) {
+    private void loadBundle(String bundleName) {
         if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
             localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
             Gdx.app.log(this.getClass().getName(), "Loaded I18NBundle with name " + bundleName);

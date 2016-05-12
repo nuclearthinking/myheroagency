@@ -15,10 +15,10 @@ public class HomeScreen extends AbstractScreen {
     }
 
     @Override
-    public void render(float delta){
+    public void render(float delta) {
         super.render(delta);
 
-        if(Gdx.input.isKeyPressed(131))
+        if (Gdx.input.isKeyPressed(131))
             Gdx.app.exit();
     }
 }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.loaders.I18NBundleLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import java.io.File;
 import java.util.Locale;
 
 /**
@@ -15,7 +14,7 @@ public class Assets {
 
     private static Assets instance;
     private AssetManager assetManager;
-    Locale locale;
+    private Locale locale;
 
     public static Assets getInstance() {
         if (instance == null) {
@@ -31,10 +30,10 @@ public class Assets {
 
     public void loadAssets() {
         assetManager.load("img/splash.png", Texture.class);
-        assetManager.load("i18n/BattleScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
-        assetManager.load("i18n/HomeScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
-        assetManager.load("i18n/StartScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
-        assetManager.load("i18n/TaskScreen",I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/BattleScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/HomeScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/StartScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/TaskScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
     }
 
     public AssetManager getAssetManager() {

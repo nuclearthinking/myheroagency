@@ -13,11 +13,11 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  * Created by Izonami on 05.05.2016.
  */
 public abstract class AbstractScreen extends Stage implements Screen {
-    public AbstractScreen() {
+    protected Localization locale;
+
+    AbstractScreen() {
         super(new StretchViewport(Constants.GAME_W, Constants.GAME_H, new OrthographicCamera()));
     }
-
-    Localization locale;
 
     public abstract void buildStage();
 
@@ -66,7 +66,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     }
 
-    protected String getName() {
+    private String getName() {
         return getClass().getSimpleName();
     }
 }

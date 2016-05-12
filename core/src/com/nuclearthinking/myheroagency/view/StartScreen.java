@@ -22,9 +22,9 @@ import static com.nuclearthinking.myheroagency.utils.Constants.GAME_W;
  */
 public class StartScreen extends AbstractScreen {
 
+    private final Texture texture;
     private Image splashImage;
     private TextActor actor;
-    private Texture texture;
     private Localization localization;
 
     public StartScreen() {

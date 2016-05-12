@@ -9,7 +9,7 @@ public class Main extends Game {
     @Override
     public void create() {
         ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().showScreen( ScreenEnum.LOADING_SCREEN );
+        ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
     }
 
 }
