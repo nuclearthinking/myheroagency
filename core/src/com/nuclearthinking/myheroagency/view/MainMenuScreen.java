@@ -1,19 +1,17 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Assets;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 
 /**
  * Created by Izonami on 11.05.2016.
@@ -26,8 +24,11 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        Assets.getInstance().getSkin().addRegions(Assets.getInstance().getAssetManager().get("ui/ui.atlas", TextureAtlas.class));
-        Assets.getInstance().getSkin().load(Gdx.files.internal("ui/ui.json")); //TODO: Надо поискать способы избавится от этого
+        Assets.getInstance().setSkin(Assets.getInstance().getAssetManager().get("ui/ui.json", Skin.class));
+        Assets.getInstance().getSkin().addRegions(Assets
+                .getInstance()
+                .getAssetManager()
+                .get("ui/ui.atlas", TextureAtlas.class));
 
         initButton();
 
