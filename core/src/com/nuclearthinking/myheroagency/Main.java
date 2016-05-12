@@ -19,8 +19,9 @@ public class Main extends Game {
 
     private void initLogging(boolean fileLogging) {
         if (fileLogging) {
-            createLogFile();
-            System.setProperty("org.slf4j.simpleLogger.logFile", "myheroagency.log");
+            if (createLogFile()) {
+                System.setProperty("org.slf4j.simpleLogger.logFile", "myheroagency.log");
+            }
         } else {
             System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
         }
@@ -30,15 +31,14 @@ public class Main extends Game {
         System.setProperty("org.slf4j.simpleLogger.showThreadName", "true");
     }
 
-    private void createLogFile() {
+    private boolean createLogFile() {
         File file;
         try {
             file = new File("myheroagency.log");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            return file.exists() || file.createNewFile();
         } catch (IOException ex) {
             System.err.println("Can't create logfile in log directory");
+            return false;
         }
     }
 
