@@ -1,8 +1,9 @@
 package com.nuclearthinking.myheroagency.i18n;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.nuclearthinking.myheroagency.controller.Assets;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
 import java.util.MissingResourceException;
 
@@ -16,18 +17,20 @@ import java.util.MissingResourceException;
 public class Localization {
 
     private I18NBundle localisationBundle;
+    private final Logger logger;
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
+        logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
         loadBundle(bundleName);
     }
 
     private void loadBundle(String bundleName) {
         if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
             localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
-            Gdx.app.log(this.getClass().getName(), "Loaded I18NBundle with name " + bundleName);
+            logger.info("Loaded I18NBundle with name {}", bundleName);
         } else {
-            Gdx.app.error(this.getClass().getName(), "I18NBundle " + bundleName + " is not loaded yet");
+            logger.error("I18NBundle {} is not loaded yet", bundleName);
         }
     }
 
@@ -37,7 +40,7 @@ public class Localization {
             try {
                 return localisationBundle.get(key);
             } catch (MissingResourceException ex) {
-                Gdx.app.error(this.getClass().getName(), "Can't load key with name " + key, ex);
+                logger.error("Can't load key with name {}", key);
                 return null;
             }
         } else {

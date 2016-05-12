@@ -17,13 +17,10 @@ public class LoadingScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        logger.info("Initializing AssetsManager");
         Assets.getInstance().init();
+        logger.info("Loading assets");
         Assets.getInstance().loadAssets();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
     }
 
     @Override
