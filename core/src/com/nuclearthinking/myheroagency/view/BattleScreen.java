@@ -6,10 +6,9 @@ package com.nuclearthinking.myheroagency.view;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class BattleScreen extends AbstractScreen
-{
+public class BattleScreen extends AbstractScreen {
     @Override
-    public void buildStage() {
+    public void buildStage(){
 
     }
 }
