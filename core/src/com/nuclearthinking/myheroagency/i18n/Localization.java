@@ -2,7 +2,6 @@ package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.utils.I18NBundle;
 import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.controller.Assets;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
