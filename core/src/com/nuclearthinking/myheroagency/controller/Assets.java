@@ -39,6 +39,7 @@ public class Assets {
         assetManager.load("i18n/HomeScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
         assetManager.load("i18n/StartScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
         assetManager.load("i18n/TaskScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
+        assetManager.load("i18n/MainMenuScreen", I18NBundle.class, new I18NBundleLoader.I18NBundleParameter(locale));
         assetManager.load("ui/ui.atlas", TextureAtlas.class);
         assetManager.load("ui/ui.json", Skin.class, new SkinLoader.SkinParameter("ui/ui.atlas"));
     }

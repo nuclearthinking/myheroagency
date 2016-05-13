@@ -24,6 +24,12 @@ public enum ScreenEnum {
         }
     },
 
+    SETTINGS_SCREEN {
+        public AbstractScreen getScreen(Object... params) {
+            return new SettingsScreen();
+        }
+    },
+
     START_SCREEN {
         public AbstractScreen getScreen(Object... params) {
             return new StartScreen();

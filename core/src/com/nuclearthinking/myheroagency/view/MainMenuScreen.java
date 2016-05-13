@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,7 +21,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class MainMenuScreen extends AbstractScreen {
 
     private Table table;
-    private TextButton play, load, exit;
+    private TextButton play, load, settings, exit;
     private ClickListener buttonListener;
 
     @Override
@@ -40,11 +41,13 @@ public class MainMenuScreen extends AbstractScreen {
         initButton(); // Создаем кнопки
 
         // Таблица рулит размером кнопок, отступами и прочей хренотой
-        table.add(play).left().expandX().width(100).height(50).pad(10);
+        table.add(play).left().expandX().width(100).height(40).pad(10);
         table.row(); // Перенос строки
-        table.add(load).left().expandX().width(100).pad(10);
+        table.add(load).left().expandX().width(100).height(40).pad(10);
         table.row();
-        table.add(exit).left().expandX().width(100).pad(10);
+        table.add(settings).left().expandX().width(100).height(40).pad(10);
+        table.row();
+        table.add(exit).left().expandX().width(100).height(40).pad(10);
 
         addActor(table); // Добавляем таблицу на Stage
         // Этот экшен "выплывает" меню
@@ -53,11 +56,18 @@ public class MainMenuScreen extends AbstractScreen {
 
     private void initButton(){
         // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
-        play = new TextButton("Play", Assets.getInstance().getSkin(), "default");
+        play = new TextButton(locale.get("buttonPlay"), Assets.getInstance().getSkin(), "kramola");
+        play.getLabel().setFontScale(.9f);
+        play.getLabel().setColor(Color.FOREST);
         play.addListener(buttonListener); //Добавляет листнер кнопке
-        load = new TextButton("Loading", Assets.getInstance().getSkin(), "default");
+        load = new TextButton(locale.get("buttonLoad"), Assets.getInstance().getSkin(), "kramola");
+        load.getLabel().setFontScale(.7f);
         load.addListener(buttonListener);
-        exit = new TextButton("Exit", Assets.getInstance().getSkin(), "default");
+        settings = new TextButton(locale.get("buttonSettings"), Assets.getInstance().getSkin(), "kramola");
+        settings.getLabel().setFontScale(.7f);
+        settings.addListener(buttonListener);
+        exit = new TextButton(locale.get("buttonExit"), Assets.getInstance().getSkin(), "kramola");
+        exit.getLabel().setFontScale(.7f);
         exit.addListener(buttonListener);
     }
 
@@ -75,6 +85,8 @@ public class MainMenuScreen extends AbstractScreen {
                     ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN );
                 }else if(event.getListenerActor() == load){
 
+                }else if(event.getListenerActor() == settings){
+                    ScreenManager.getInstance().showScreen( ScreenEnum.SETTINGS_SCREEN );
                 }else if(event.getListenerActor() == exit){
                     Gdx.app.exit();
                 }else {
@@ -96,6 +108,8 @@ public class MainMenuScreen extends AbstractScreen {
                     play.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
                 }else if(event.getListenerActor() == load){
                     load.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
+                }else if(event.getListenerActor() == settings){
+                    settings.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
                 }else if(event.getListenerActor() == exit){
                     exit.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
                 }else {
