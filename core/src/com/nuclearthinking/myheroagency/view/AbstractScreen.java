@@ -16,7 +16,7 @@ import org.slf4j.impl.SimpleLoggerFactory;
  */
 public abstract class AbstractScreen extends Stage implements Screen {
     private Localization locale;
-    final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+    final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
 
 
     AbstractScreen() {
