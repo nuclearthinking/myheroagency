@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.controller;
 
+import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.view.AbstractScreen;
 import com.nuclearthinking.myheroagency.view.HomeScreen;
 import com.nuclearthinking.myheroagency.view.LoadingScreen;
