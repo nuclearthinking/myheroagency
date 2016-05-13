@@ -14,8 +14,8 @@ import org.slf4j.impl.SimpleLoggerFactory;
 /**
  * Created by Izonami on 05.05.2016.
  */
-public abstract class AbstractScreen extends Stage implements Screen {
-    private Localization locale;
+public abstract class   AbstractScreen extends Stage implements Screen {
+    protected Localization locale = new Localization(this.getClass());
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
 
 
@@ -27,7 +27,6 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     @Override
     public void show() {
-        locale = new Localization(this.getClass());
         logger.info("Show screen: {}", getName());
         Gdx.input.setInputProcessor(this);
     }

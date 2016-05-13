@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.utils.I18NBundle;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.Assets;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
@@ -26,8 +27,8 @@ public class Localization {
     }
 
     private void loadBundle(String bundleName) {
-        if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
-            localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+        if (Asset.getInstance().isLoaded(bundleName)) {
+            localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             logger.info("Loaded I18NBundle with name {}", bundleName);
         } else {
             logger.error("I18NBundle {} is not loaded yet", bundleName);
