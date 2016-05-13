@@ -13,7 +13,7 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  */
 public class FontFactory {
 
-    private static FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.TTF"));
+    private static final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.TTF"));
     private static BitmapFont font9;
 
     public static BitmapFont getFont9() {

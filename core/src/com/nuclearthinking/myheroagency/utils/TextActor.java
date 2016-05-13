@@ -14,9 +14,9 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  * Created by Izonami on 09.05.2016.
  */
 public class TextActor extends Actor {
-    private TextButton[] listchar;
-    private TextButton.TextButtonStyle style;
-    private String text;
+    private final TextButton[] listchar;
+    private final TextButton.TextButtonStyle style;
+    private final String text;
     private float x, y;
 
     public TextActor(BitmapFont bitmapFont, String text, Stage stage) {
@@ -60,11 +60,11 @@ public class TextActor extends Actor {
 
     public void appearText(float time, float delay) {
         resetText();
-        for (int i=0; i<text.length(); i++) {
+        for (int i = 0; i < text.length(); i++) {
             listchar[i].setScale(0f);
             listchar[i].setColor(0, 0, 0, 0);
             listchar[i].addAction(
-                    Actions.delay(delay*i,
+                    Actions.delay(delay * i,
                             Actions.parallel(Actions.alpha(1, time),
                                     Actions.scaleTo(1, 1, time, Interpolation.swingOut))));
         }
@@ -81,11 +81,10 @@ public class TextActor extends Actor {
                             alpha(0), //Альфа канал 0
                             scaleTo(.1f, .1f), //Размер картинки
                             //Выполняется поралельно с сиквенцией
-                            parallel
-                                    (
-                                            fadeIn(2f, Interpolation.pow2), //Появление
-                                            scaleTo(1f, 1f, 2.5f, Interpolation.pow5), //Изменение размера
-                                            moveTo(x - 32, y - 32, 2f, Interpolation.swing)), //Положение на экране
+                            parallel(
+                                    fadeIn(2f, Interpolation.pow2), //Появление
+                                    scaleTo(1f, 1f, 2.5f, Interpolation.pow5), //Изменение размера
+                                    moveTo(x - 32, y - 32, 2f, Interpolation.swing)), //Положение на экране
                             delay(1.5f), //Задержка
                             fadeOut(1.25f) //Исчезновение
                     )); //Запуск сцены
@@ -95,14 +94,6 @@ public class TextActor extends Actor {
 
     public void setPosition(float x, float y) {
         this.x = x;
-        this.y = y;
-    }
-
-    public void setPositionX(float x) {
-        this.x = x;
-    }
-
-    public void setPositionY(float y) {
         this.y = y;
     }
 
@@ -119,7 +110,15 @@ public class TextActor extends Actor {
         return this.x;
     }
 
+    private void setPositionX(float x) {
+        this.x = x;
+    }
+
     private float getPositionY() {
         return this.y;
+    }
+
+    public void setPositionY(float y) {
+        this.y = y;
     }
 }

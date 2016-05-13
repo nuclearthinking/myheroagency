@@ -1,10 +1,11 @@
 package com.nuclearthinking.myheroagency.i18n;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.nuclearthinking.myheroagency.controller.Assets;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
-import java.util.Locale;
+import java.util.MissingResourceException;
 
 
 /**
@@ -15,20 +16,33 @@ import java.util.Locale;
  */
 public class Localization {
 
-    FileHandle baseFileHandle;
-    I18NBundle localisationBundle;
+    private I18NBundle localisationBundle;
+    private final Logger logger;
 
     public Localization(Class initiatorClass) {
-        baseFileHandle = Gdx.files.internal("i18n/" + initiatorClass.getSimpleName());
+        String bundleName = "i18n/" + initiatorClass.getSimpleName();
+        logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
+        loadBundle(bundleName);
     }
 
-    public void setLocale(Locale locale) {
-        localisationBundle = I18NBundle.createBundle(baseFileHandle, locale);
+    private void loadBundle(String bundleName) {
+        if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
+            localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+            logger.info("Loaded I18NBundle with name {}", bundleName);
+        } else {
+            logger.error("I18NBundle {} is not loaded yet", bundleName);
+        }
     }
+
 
     public String get(String key) {
         if (localisationBundle != null) {
-            return localisationBundle.get(key);
+            try {
+                return localisationBundle.get(key);
+            } catch (MissingResourceException ex) {
+                logger.error("Can't load key with name {}", key);
+                return null;
+            }
         } else {
             return null;
         }
