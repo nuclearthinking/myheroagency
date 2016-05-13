@@ -8,12 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 05.05.2016.
  */
 public abstract class AbstractScreen extends Stage implements Screen {
-    protected Localization locale;
+    private Localization locale;
+    final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
+
 
     AbstractScreen() {
         super(new StretchViewport(Constants.GAME_W, Constants.GAME_H, new OrthographicCamera()));
@@ -24,9 +28,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     @Override
     public void show() {
         locale = new Localization(this.getClass());
-
-
-        Gdx.app.log(Constants.LOG, "Show screen: " + getName());
+        logger.info("Show screen: {}", getName());
         Gdx.input.setInputProcessor(this);
     }
 
@@ -41,29 +43,28 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        Gdx.app.log(Constants.LOG, "Resizing screen: " + getName() + " to: " + width + " x " + height);
+        logger.info("Resizing screen: {} to: y = {} x = {}", getName(), width, height);
         getViewport().update(width, height, true);
     }
 
     @Override
     public void pause() {
-        Gdx.app.log(Constants.LOG, "Pausing screen: " + getName());
+        logger.info("Pausing screen: {}", getName());
     }
 
     @Override
     public void resume() {
-        Gdx.app.log(Constants.LOG, "Resuming screen: " + getName());
+        logger.info("Resuming screen: {}", getName());
     }
 
     @Override
     public void hide() {
-        Gdx.app.log(Constants.LOG, "Hiding screen: " + getName());
+        logger.info("Hiding screen: {}", getName());
     }
 
     @Override
     public void dispose() {
-        Gdx.app.log(Constants.LOG, "Disposing screen: " + getName());
-
+        logger.info("Disposing screen: {}", getName());
     }
 
     private String getName() {

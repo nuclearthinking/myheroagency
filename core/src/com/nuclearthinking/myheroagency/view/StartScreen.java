@@ -25,7 +25,6 @@ public class StartScreen extends AbstractScreen {
     private final Texture texture;
     private Image splashImage;
     private TextActor actor;
-    private Localization localization;
 
     public StartScreen() {
         super();
@@ -69,8 +68,4 @@ public class StartScreen extends AbstractScreen {
         addActor(splashImage);
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }
