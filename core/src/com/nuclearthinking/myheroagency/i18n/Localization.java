@@ -1,7 +1,7 @@
 package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.utils.I18NBundle;
-import com.nuclearthinking.myheroagency.controller.Assets;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
@@ -16,8 +16,8 @@ import java.util.MissingResourceException;
  */
 public class Localization {
 
-    private I18NBundle localisationBundle;
     private final Logger logger;
+    private I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
@@ -26,8 +26,8 @@ public class Localization {
     }
 
     private void loadBundle(String bundleName) {
-        if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
-            localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+        if (Asset.getInstance().isLoaded(bundleName)) {
+            localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             logger.info("Loaded I18NBundle with name {}", bundleName);
         } else {
             logger.error("I18NBundle {} is not loaded yet", bundleName);
@@ -50,7 +50,7 @@ public class Localization {
 
     public String format(String key, Object... args) {
         if (localisationBundle != null) {
-            return localisationBundle.format(localisationBundle.get(key), args);
+            return localisationBundle.format(key, args);
         } else {
             return null;
         }

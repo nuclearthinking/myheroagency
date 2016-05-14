@@ -11,7 +11,6 @@ import com.badlogic.gdx.Gdx;
 public class HomeScreen extends AbstractScreen {
     @Override
     public void buildStage() {
-
     }
 
     @Override
