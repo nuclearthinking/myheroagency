@@ -3,9 +3,10 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.nuclearthinking.myheroagency.controller.Assets;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
 
@@ -28,7 +29,7 @@ public class StartScreen extends AbstractScreen {
     public StartScreen() {
         super();
 
-        texture = Assets.getInstance().getAssetManager().get("img/splash.png", Texture.class);
+        texture = Asset.getInstance().get("img/splash.png");
     }
 
     @Override

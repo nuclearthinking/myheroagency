@@ -11,6 +11,6 @@ public class Constants {
             + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "abcdefghijklmnopqrstuvwxyz"
-            + "1234567890.,:;_¡!¿?\"'+-*/()[]={}";
+            + "1234567890.,:;_¡!¿?\"'+-*/()[]={}%";
 
 }

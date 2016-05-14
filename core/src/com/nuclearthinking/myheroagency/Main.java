@@ -27,7 +27,7 @@ public class Main extends Game {
         }
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
         System.setProperty("org.slf4j.simpleLogger.showDateTime", "true");
-        System.setProperty("org.slf4j.simpleLogger.dateTimeFormat", "yyyy-MM-dd HH:mm:ss.SSS");
+        System.setProperty("org.slf4j.simpleLogger.dateTimeFormat", "HH:mm:ss.SSS");
         System.setProperty("org.slf4j.simpleLogger.showThreadName", "true");
     }
 
