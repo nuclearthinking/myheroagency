@@ -54,6 +54,7 @@ public class Asset implements Disposable, AssetErrorListener {
         if (assets != null) {
             for (Assetes asset : assets) {
                 manager.load(asset.path, asset.type);
+                logger.info("Asset {} added to loading queue", asset.path);
             }
         } else {
             logger.error("Error loading group {}, not found ", groupName);

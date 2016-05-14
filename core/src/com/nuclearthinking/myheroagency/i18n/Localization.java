@@ -16,8 +16,8 @@ import java.util.MissingResourceException;
  */
 public class Localization {
 
-    private I18NBundle localisationBundle;
     private final Logger logger;
+    private I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
@@ -50,7 +50,7 @@ public class Localization {
 
     public String format(String key, Object... args) {
         if (localisationBundle != null) {
-            return localisationBundle.format(localisationBundle.get(key), args);
+            return localisationBundle.format(key, args);
         } else {
             return null;
         }
