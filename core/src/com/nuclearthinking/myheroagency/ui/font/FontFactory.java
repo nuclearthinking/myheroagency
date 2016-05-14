@@ -27,9 +27,6 @@ public class FontFactory {
     private BitmapFont robotoBold18;
     private BitmapFont robotoBold26;
 
-    private Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
-
-
     public BitmapFont getRobotoLight14() {
         if (robotoLight14 == null) {
             robotoLight14 = generateFont(getRobotoLightGenerator(), 14);
