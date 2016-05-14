@@ -12,7 +12,7 @@ import com.nuclearthinking.myheroagency.ui.font.FontFactory;
  */
 public class HomeScreen extends AbstractScreen {
 
-    FontFactory fontFactory;
+    private FontFactory fontFactory;
 
     @Override
     public void buildStage() {
