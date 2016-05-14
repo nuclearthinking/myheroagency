@@ -28,13 +28,8 @@ public class Settings {
         if (preferences == null) {
             logger.error("Can't load preferences {}", PREFERENCES_NAME);
             return defaultSettings();
-        } else if (preferences.contains(LANGUAGE_KEY)) {
-            settings.setLanguage(preferences.getString(LANGUAGE_KEY));
-            logger.info("Language setting loaded");
-        } else {
-            logger.info("Preferences does not containing language, setting default value {}", DEFAULT_LANGUAGE);
-            settings.setLanguage(DEFAULT_LANGUAGE);
         }
+        settings.setLanguage(preferences.getString(LANGUAGE_KEY, DEFAULT_LANGUAGE));
 
         return settings;
     }
