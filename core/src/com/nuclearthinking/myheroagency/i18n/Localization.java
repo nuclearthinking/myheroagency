@@ -16,8 +16,8 @@ import java.util.MissingResourceException;
  */
 public class Localization {
 
-    private I18NBundle localisationBundle;
     private final Logger logger;
+    private I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
         String bundleName = "i18n/" + initiatorClass.getSimpleName();
@@ -26,11 +26,13 @@ public class Localization {
     }
 
     private void loadBundle(String bundleName) {
-        if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
-            localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
-            logger.info("Loaded I18NBundle with name {}", bundleName);
-        } else {
-            logger.error("I18NBundle {} is not loaded yet", bundleName);
+        if (Assets.getInstance().getAssetManager() != null) {
+            if (Assets.getInstance().getAssetManager().isLoaded(bundleName)) {
+                localisationBundle = Assets.getInstance().getAssetManager().get(bundleName, I18NBundle.class);
+                logger.info("Loaded I18NBundle with name {}", bundleName);
+            } else {
+                logger.error("I18NBundle {} is not loaded yet", bundleName);
+            }
         }
     }
 
