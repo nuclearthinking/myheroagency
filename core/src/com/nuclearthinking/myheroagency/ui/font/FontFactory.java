@@ -13,23 +13,63 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  */
 public class FontFactory {
 
-    private static final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.TTF"));
-    private static BitmapFont font9;
+    private FreeTypeFontGenerator robotoLightGenerator = new FreeTypeFontGenerator(Gdx.files.internal("font/RobotoSlab-Light.ttf"));
+    private FreeTypeFontGenerator robotoBoldGenerator = new FreeTypeFontGenerator(Gdx.files.internal("font/RobotoSlab-Bold.ttf"));
+    private BitmapFont robotoLight14;
+    private BitmapFont robotoLight18;
+    private BitmapFont robotoLight26;
+    private BitmapFont robotoBold14;
+    private BitmapFont robotoBold18;
+    private BitmapFont robotoBold26;
 
-    public static BitmapFont getFont9() {
-        if (font9 == null) {
-            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.characters = Constants.ALL_CHARACTERS;
-            parameter.size = 9;
-            generateFont9(parameter);
+
+    public BitmapFont getRobotoLight14() {
+        if (robotoLight14 == null) {
+            robotoLight14 = generateFont(robotoLightGenerator, 14);
         }
-        return font9;
+        return robotoLight14;
     }
 
+    public BitmapFont getRobotoLight18() {
+        if (robotoLight18 == null) {
+            robotoLight18 = generateFont(robotoLightGenerator, 18);
+        }
+        return robotoLight18;
+    }
 
-    private static void generateFont9(FreeTypeFontGenerator.FreeTypeFontParameter param) {
-        font9 = generator.generateFont(param);
-        generator.dispose();
+    public BitmapFont getRobotoLight26() {
+        if (robotoLight26 == null) {
+            robotoLight26 = generateFont(robotoLightGenerator, 26);
+        }
+        return robotoLight26;
+    }
+
+    public BitmapFont getRobotoBold14() {
+        if (robotoBold14 == null) {
+            robotoBold14 = generateFont(robotoBoldGenerator, 14);
+        }
+        return robotoBold14;
+    }
+
+    public BitmapFont getRobotoBold18() {
+        if (robotoBold18 == null) {
+            robotoBold18 = generateFont(robotoBoldGenerator, 18);
+        }
+        return robotoBold18;
+    }
+
+    public BitmapFont getRobotoBold26() {
+        if (robotoBold26 == null) {
+            robotoBold26 = generateFont(robotoBoldGenerator, 26);
+        }
+        return robotoBold26;
+    }
+
+    private BitmapFont generateFont(FreeTypeFontGenerator generator, int size) {
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.characters = Constants.ALL_CHARACTERS;
+        parameter.size = size;
+        return generator.generateFont(parameter);
     }
 
 }

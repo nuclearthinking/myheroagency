@@ -7,16 +7,20 @@ import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
+import java.awt.*;
+
 /**
  * Created by Izonami on 10.05.2016.
  */
 public class LoadingScreen extends AbstractScreen {
 
     private float loadingPercent;
+    FontFactory fontFactory;
 
 
     @Override
     public void buildStage() {
+        fontFactory = new FontFactory();
         logger.info("Initializing AssetsManager");
         Assets.getInstance().init();
         logger.info("Loading assets");
@@ -30,7 +34,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = loading();
 
         getBatch().begin();
-        FontFactory.getFont9().draw(getBatch(), "Loading: " + Float.toString(loadingPercent * 100) + "%", Constants.GAME_W - 150, 35);
+        fontFactory.getRobotoLight18().draw(getBatch(), "Loading: " + Float.toString(loadingPercent * 100) + "%", Constants.GAME_W - 150, 35);
         getBatch().end();
 
     }
