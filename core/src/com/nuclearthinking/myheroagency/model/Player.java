@@ -1,7 +1,26 @@
 package com.nuclearthinking.myheroagency.model;
 
-/**
- * Created by Izonami on 05.05.2016.
- */
-class Player {
+import java.io.Serializable;
+
+class Player implements Serializable {
+
+    private int level;
+
+    private int exp;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
 }
