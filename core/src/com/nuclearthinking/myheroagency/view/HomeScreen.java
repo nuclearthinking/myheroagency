@@ -9,6 +9,11 @@ import com.badlogic.gdx.Gdx;
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
 public class HomeScreen extends AbstractScreen {
+
+    public HomeScreen() {
+    }
+
+
     @Override
     public void buildStage() {
     }
