@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.nuclearthinking.myheroagency.model.Settings;
 
 import java.util.Locale;
 
@@ -18,7 +19,7 @@ public class Assets {
     private static Assets instance;
     private AssetManager assetManager;
     private Locale locale;
-    private Skin skin;
+    private Settings settings;
 
     public static Assets getInstance() {
         if (instance == null) {
@@ -29,7 +30,8 @@ public class Assets {
 
     public void init() {
         assetManager = new AssetManager();
-        locale = new Locale("ru"); //TODO: Брать локаль из настроек
+        settings = Settings.loadSettings();
+        locale = new Locale(settings.getLanguage());
         skin = new Skin();
     }
 

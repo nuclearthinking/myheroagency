@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main extends Game {
+    private final static String LOG_FILE_NAME = "myheroagency.log";
 
     @Override
     public void create() {
@@ -19,8 +20,11 @@ public class Main extends Game {
 
     private void initLogging(boolean fileLogging) {
         if (fileLogging) {
-            if (createLogFile()) {
-                System.setProperty("org.slf4j.simpleLogger.logFile", "myheroagency.log");
+            if (new File(LOG_FILE_NAME).exists()) {
+                System.setProperty("org.slf4j.simpleLogger.logFile", LOG_FILE_NAME);
+            } else if (createLogFile()) {
+                System.err.println(String.format("Can't create logfile %s", LOG_FILE_NAME));
+                System.setProperty("org.slf4j.simpleLogger.logFile", LOG_FILE_NAME);
             }
         } else {
             System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
