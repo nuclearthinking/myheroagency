@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 class Player implements Serializable {
 
-    private int level;
+    private byte level;
 
     private int exp;
 
