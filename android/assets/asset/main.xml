@@ -12,5 +12,8 @@
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Bold.ttf"/>
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Thin.ttf"/>
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Regular.ttf"/>
+        <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/MainMenuScreen"/>
+        <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json" />
+        <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="ui/ui.atlas"/>
     </group>
 </assets>
