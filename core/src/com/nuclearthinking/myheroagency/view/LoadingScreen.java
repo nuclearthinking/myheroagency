@@ -36,7 +36,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = loading();
 
         getBatch().begin();
-        fontFactory.getRobotoLight18().draw(getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
+        fontFactory.getRobotoLight(18).draw(getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
         getBatch().end();
 
     }
