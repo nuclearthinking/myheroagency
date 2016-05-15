@@ -43,8 +43,6 @@ public class Asset implements Disposable, AssetErrorListener {
         manager.setLoader(I18NBundle.class, new I18NBundleLoader(new InternalFileHandleResolver()));
         manager.setLoader(Skin.class, new SkinLoader(new InternalFileHandleResolver()));
 
-        skin = new Skin();
-
         loadGroups(assetFile);
     }
 
