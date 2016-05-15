@@ -2,7 +2,7 @@ package com.nuclearthinking.myheroagency.model;
 
 class Player {
 
-    int level;
+    byte level;
     int exp;
 
 }
