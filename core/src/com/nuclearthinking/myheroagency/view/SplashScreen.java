@@ -14,18 +14,21 @@ import static com.nuclearthinking.myheroagency.utils.Constants.GAME_H;
 import static com.nuclearthinking.myheroagency.utils.Constants.GAME_W;
 
 /**
- * Created by Izonami on 13.05.2016.
+ * Date: 05.05.2016
+ * Time: 7:00
+ *
+ * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class StartScreen extends AbstractScreen {
+public class SplashScreen extends AbstractScreen {
 
     private final Texture texture;
     private Image splashImage;
     private TextActor actor;
 
-    public StartScreen() {
+    public SplashScreen() {
         super();
 
-        texture = Asset.getInstance().get("img/splash.png");
+        texture = Asset.getInstance().get("img/splash.png", Texture.class);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class StartScreen extends AbstractScreen {
         Runnable load = new Runnable() {
             @Override
             public void run() {
-                ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
             }
         };
 
@@ -63,4 +66,5 @@ public class StartScreen extends AbstractScreen {
 
         addActor(splashImage);
     }
+
 }
