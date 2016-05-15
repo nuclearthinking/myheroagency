@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.nuclearthinking.myheroagency.controller.Asset;
 
+import static com.nuclearthinking.myheroagency.utils.Constants.ALL_CHARACTERS;
+
 /**
  * Date: 08.05.2016
  * Time: 11:22
@@ -11,14 +13,6 @@ import com.nuclearthinking.myheroagency.controller.Asset;
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
 public class FontFactory {
-
-    private static final String ROBOTO_LIGHT = "font/RobotoSlab-Light.ttf";
-    private static final String ROBOTO_BOLD = "font/RobotoSlab-Bold.ttf";
-    private static final String ALL_CHARACTERS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
-            + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            + "abcdefghijklmnopqrstuvwxyz"
-            + "1234567890.,:;_¡!¿?\"'+-*/()[]={}%";
 
     private FreeTypeFontGenerator robotoLightGenerator;
     private FreeTypeFontGenerator robotoBoldGenerator;
@@ -74,14 +68,14 @@ public class FontFactory {
 
     private FreeTypeFontGenerator getRobotoLightGenerator() {
         if (robotoLightGenerator == null) {
-            robotoLightGenerator = Asset.getInstance().get(ROBOTO_LIGHT);
+            robotoLightGenerator = Asset.getInstance().get("font/RobotoSlab-Light.ttf");
         }
         return robotoLightGenerator;
     }
 
     private FreeTypeFontGenerator getRobotoBoldGenerator() {
         if (robotoBoldGenerator == null) {
-            robotoBoldGenerator = Asset.getInstance().get(ROBOTO_BOLD);
+            robotoBoldGenerator = Asset.getInstance().get("font/RobotoSlab-Bold.ttf");
         }
         return robotoBoldGenerator;
     }
@@ -89,7 +83,7 @@ public class FontFactory {
 
     private BitmapFont generateFont(FreeTypeFontGenerator generator, int size) {
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.characters = ALL_CHARACTERS;
+            parameter.characters = ALL_CHARACTERS;
         parameter.size = size;
         return generator.generateFont(parameter);
     }
