@@ -13,22 +13,22 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  */
 public class FontFactory {
 
-    private static final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.TTF"));
-    private static BitmapFont font9;
+    private static final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.ttf"));
+    private static BitmapFont font;
 
-    public static BitmapFont getFont9() {
-        if (font9 == null) {
+    public static BitmapFont getFont() {
+        if (font == null) {
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.characters = Constants.ALL_CHARACTERS;
-            parameter.size = 9;
-            generateFont9(parameter);
+            parameter.size = 21;
+            generateFont(parameter);
         }
-        return font9;
+        return font;
     }
 
 
-    private static void generateFont9(FreeTypeFontGenerator.FreeTypeFontParameter param) {
-        font9 = generator.generateFont(param);
+    private static void generateFont(FreeTypeFontGenerator.FreeTypeFontParameter param) {
+        font = generator.generateFont(param);
         generator.dispose();
     }
 
