@@ -32,7 +32,6 @@ public class Assets {
         assetManager = new AssetManager();
         settings = Settings.loadSettings();
         locale = new Locale(settings.getLanguage());
-        skin = new Skin();
     }
 
     public void loadAssets() {
@@ -48,14 +47,6 @@ public class Assets {
 
     public AssetManager getAssetManager() {
         return assetManager;
-    }
-
-    public Skin getSkin(){
-        return skin;
-    }
-
-    public void setSkin(Skin skin){
-        this.skin = skin;
     }
 
 }
