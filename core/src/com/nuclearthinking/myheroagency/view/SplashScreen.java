@@ -14,23 +14,27 @@ import static com.nuclearthinking.myheroagency.utils.Constants.GAME_H;
 import static com.nuclearthinking.myheroagency.utils.Constants.GAME_W;
 
 /**
- * Created by Izonami on 13.05.2016.
+ * Date: 05.05.2016
+ * Time: 7:00
+ *
+ * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class StartScreen extends AbstractScreen {
+public class SplashScreen extends AbstractScreen {
 
     private final Texture texture;
     private Image splashImage;
     private TextActor actor;
+    private FontFactory fontFactory;
 
-    public StartScreen() {
+    public SplashScreen() {
         super();
 
-        texture = Asset.getInstance().get("img/splash.png");
+        texture = Asset.getInstance().get("img/splash.png", Texture.class);
     }
 
     @Override
     public void buildStage() {
-        FontFactory fontFactory = new FontFactory();
+        fontFactory = new FontFactory();
         actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
         actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
         actor.setPosition(GAME_W / 2 - 32, GAME_H / 2 + 32);
@@ -63,4 +67,5 @@ public class StartScreen extends AbstractScreen {
 
         addActor(splashImage);
     }
+
 }

@@ -1,6 +1,7 @@
 <assets>
     <group name="loading">
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/LoadingScreen"/>
+        <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Light.ttf"/>
     </group>
     <group name="base">
         <asset type="com.badlogic.gdx.graphics.Texture" path="img/splash.png"/>
@@ -8,5 +9,11 @@
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/HomeScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/StartScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/TaskScreen"/>
+        <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Bold.ttf"/>
+        <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Thin.ttf"/>
+        <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Regular.ttf"/>
+        <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/MainMenuScreen"/>
+        <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json" />
+        <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="ui/ui.atlas"/>
     </group>
 </assets>

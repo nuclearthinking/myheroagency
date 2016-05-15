@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.view.*;
 
 /**
@@ -10,6 +9,24 @@ public enum ScreenEnum {
     LOADING_SCREEN {
         public AbstractScreen getScreen(Object... params) {
             return new LoadingScreen();
+        }
+    },
+
+    SPLASH_SCREEN {
+        public AbstractScreen getScreen(Object... params) {
+            return new SplashScreen();
+        }
+    },
+
+    MAIN_MENU_SCREEN {
+        public AbstractScreen getScreen(Object... params) {
+            return new MainMenuScreen();
+        }
+    },
+
+    SETTINGS_SCREEN {
+        public AbstractScreen getScreen(Object... params) {
+            return new SettingsScreen();
         }
     },
 
