@@ -39,7 +39,7 @@ public class StartScreen extends AbstractScreen {
         Runnable load = new Runnable() {
             @Override
             public void run() {
-                ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
             }
         };
 

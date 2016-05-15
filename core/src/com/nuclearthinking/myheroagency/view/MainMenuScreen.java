@@ -54,7 +54,7 @@ public class MainMenuScreen extends AbstractScreen {
         addAction(sequence(moveTo(getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
     }
 
-    private void initButton(){
+    private void initButton() {
         // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
         play = new TextButton(locale.get("buttonPlay"), Asset.getInstance().getSkin(), "kramola");
         play.getLabel().setFontScale(.9f);
@@ -71,8 +71,8 @@ public class MainMenuScreen extends AbstractScreen {
         exit.addListener(buttonListener);
     }
 
-    private void createListener(){
-        buttonListener = new ClickListener(){
+    private void createListener() {
+        buttonListener = new ClickListener() {
             /**
              * Собитие по нажатию на кнопку
              * @param event - определяет куда мы ткнули
@@ -81,15 +81,15 @@ public class MainMenuScreen extends AbstractScreen {
              */
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(event.getListenerActor() == play){
-                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN );
-                }else if(event.getListenerActor() == load){
+                if (event.getListenerActor() == play) {
+                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+                } else if (event.getListenerActor() == load) {
 
-                }else if(event.getListenerActor() == settings){
-                    ScreenManager.getInstance().showScreen( ScreenEnum.SETTINGS_SCREEN );
-                }else if(event.getListenerActor() == exit){
+                } else if (event.getListenerActor() == settings) {
+                    ScreenManager.getInstance().showScreen(ScreenEnum.SETTINGS_SCREEN);
+                } else if (event.getListenerActor() == exit) {
                     Gdx.app.exit();
-                }else {
+                } else {
                     logger.error("Event clicked for button {} not found", event.getListenerActor());
                 }
             }
@@ -104,15 +104,15 @@ public class MainMenuScreen extends AbstractScreen {
              */
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                if(event.getListenerActor() == play){
+                if (event.getListenerActor() == play) {
                     play.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                }else if(event.getListenerActor() == load){
+                } else if (event.getListenerActor() == load) {
                     load.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                }else if(event.getListenerActor() == settings){
+                } else if (event.getListenerActor() == settings) {
                     settings.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                }else if(event.getListenerActor() == exit){
+                } else if (event.getListenerActor() == exit) {
                     exit.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                }else {
+                } else {
                     logger.error("Event enter for button {} not found", event.getListenerActor());
                 }
             }

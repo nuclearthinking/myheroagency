@@ -15,7 +15,7 @@ public class FontFactory {
     private FreeTypeFontGenerator robotoLightGenerator;
     private FreeTypeFontGenerator robotoBoldGenerator;
 
-    public BitmapFont getRobotoLight(int size) {
+    public final BitmapFont getRobotoLight(final int size) {
         BitmapFont font = robotoLightMap.get(size);
         if (font == null) {
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -27,7 +27,7 @@ public class FontFactory {
         return font;
     }
 
-    public BitmapFont getRobotoBold(int size) {
+    public final BitmapFont getRobotoBold(final int size) {
         BitmapFont font = robotoBoldMap.get(size);
         if (font == null) {
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

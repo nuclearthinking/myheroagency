@@ -18,9 +18,6 @@ import com.badlogic.gdx.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
-/**
- * Created by Izonami on 12.05.2016.
- */
 public class Asset implements Disposable, AssetErrorListener {
 
     private static Asset instance;
@@ -148,11 +145,11 @@ public class Asset implements Disposable, AssetErrorListener {
         }
     }
 
-    public Skin getSkin(){
+    public Skin getSkin() {
         return skin;
     }
 
-    public void setSkin(Skin skin){
+    public void setSkin(Skin skin) {
         this.skin = skin;
     }
 
