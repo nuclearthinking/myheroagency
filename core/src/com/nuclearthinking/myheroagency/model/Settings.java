@@ -14,6 +14,8 @@ public class Settings {
     private static Logger logger = new SimpleLoggerFactory().getLogger("Settings");
 
     private String language;
+    private String height;
+    private String width;
 
     private static Settings defaultSettings() {
         logger.info("Loading default settings");
@@ -39,6 +41,8 @@ public class Settings {
         Preferences preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
         preferences.clear();
         preferences.putString(LANGUAGE_KEY, language);
+        preferences.putString("height", height);
+        preferences.putString("width", width);
         preferences.flush();
     }
 
@@ -50,5 +54,22 @@ public class Settings {
         this.language = language;
     }
 
+    public int getHeight()
+    {
+        return Integer.parseInt(height);
+    }
+
+    public void setHeight(String height){
+        this.height = height;
+    }
+
+    public int getWidth()
+    {
+        return Integer.parseInt(width);
+    }
+
+    public void setWidth(String width){
+        this.width = width;
+    }
 
 }

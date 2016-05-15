@@ -72,7 +72,18 @@
   default: {
     font: default-font, fontColor: white, background: default-select,
     scrollStyle: default,
-    listStyle: { font: default-font, selection: default-select-selection }
+    listStyle: {
+      font: default-font,
+      selection: default-select-selection
+    }
+  },
+  kramola: {
+    font: kramola-font, fontColor: white, background: default-select,
+    scrollStyle: default,
+    listStyle: {
+      font: kramola-font,
+      selection: default-select-selection
+    }
   }
 },
   com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
