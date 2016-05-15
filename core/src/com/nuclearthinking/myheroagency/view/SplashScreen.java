@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.nuclearthinking.myheroagency.controller.Assets;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
@@ -28,13 +28,13 @@ public class SplashScreen extends AbstractScreen {
     public SplashScreen() {
         super();
 
-        texture = Assets.getInstance().getAssetManager().get("img/splash.png", Texture.class);
+        texture = Asset.getInstance().get("img/splash.png", Texture.class);
     }
 
     @Override
     public void buildStage() {
 
-        actor = new TextActor(FontFactory.getFont9(), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
+        actor = new TextActor(FontFactory.getFont(), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
         actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
         actor.setPosition(GAME_W / 2 - 32, GAME_H / 2 + 32);
         actor.fadeText();

@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.nuclearthinking.myheroagency.controller.Assets;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 
@@ -26,10 +26,9 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        Assets.getInstance().setSkin(Assets.getInstance().getAssetManager().get("ui/ui.json", Skin.class)); // Создаем скин на основе json
-        Assets.getInstance().getSkin().addRegions(Assets
+        Asset.getInstance().setSkin(Asset.getInstance().get("ui/ui.json", Skin.class)); // Создаем скин на основе json
+        Asset.getInstance().getSkin().addRegions(Asset
                 .getInstance()
-                .getAssetManager()
                 .get("ui/ui.atlas", TextureAtlas.class)); // Добавляем области картинки полученные из атласа
 
         table = new Table(); // Создаем таблицу
@@ -56,17 +55,17 @@ public class MainMenuScreen extends AbstractScreen {
 
     private void initButton(){
         // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
-        play = new TextButton(locale.get("buttonPlay"), Assets.getInstance().getSkin(), "kramola");
+        play = new TextButton(locale.get("buttonPlay"), Asset.getInstance().getSkin(), "kramola");
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
         play.addListener(buttonListener); //Добавляет листнер кнопке
-        load = new TextButton(locale.get("buttonLoad"), Assets.getInstance().getSkin(), "kramola");
+        load = new TextButton(locale.get("buttonLoad"), Asset.getInstance().getSkin(), "kramola");
         load.getLabel().setFontScale(.7f);
         load.addListener(buttonListener);
-        settings = new TextButton(locale.get("buttonSettings"), Assets.getInstance().getSkin(), "kramola");
+        settings = new TextButton(locale.get("buttonSettings"), Asset.getInstance().getSkin(), "kramola");
         settings.getLabel().setFontScale(.7f);
         settings.addListener(buttonListener);
-        exit = new TextButton(locale.get("buttonExit"), Assets.getInstance().getSkin(), "kramola");
+        exit = new TextButton(locale.get("buttonExit"), Asset.getInstance().getSkin(), "kramola");
         exit.getLabel().setFontScale(.7f);
         exit.addListener(buttonListener);
     }

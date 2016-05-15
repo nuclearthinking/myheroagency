@@ -36,7 +36,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .1f) {
             logger.info("Assets loading done");
-            ScreenManager.getInstance().showScreen(ScreenEnum.START_SCREEN);
+            ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);
         }
         getBatch().begin();
         font.draw(getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
