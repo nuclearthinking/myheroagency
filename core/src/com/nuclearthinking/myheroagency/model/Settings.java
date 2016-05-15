@@ -10,7 +10,7 @@ import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
 public class Settings {
 
     private static final String LANGUAGE_KEY = "language";
-    private static final String DEFAULT_LANGUAGE = "ru";
+    private static final String DEFAULT_LANGUAGE = "en";
     private static Logger logger = new SimpleLoggerFactory().getLogger("Settings");
 
     private String language;

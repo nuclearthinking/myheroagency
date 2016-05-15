@@ -15,8 +15,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.*;
+import com.nuclearthinking.myheroagency.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
+
+import java.util.Locale;
 
 public class Asset implements Disposable, AssetErrorListener {
 
@@ -34,6 +37,7 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     public void init(String assetFile) {
+        Locale.setDefault(new Locale(Settings.loadSettings().getLanguage()));
         logger.info("Loading assets");
         manager = new AssetManager();
         manager.setErrorListener(this);
