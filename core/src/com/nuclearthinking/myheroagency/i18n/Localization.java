@@ -34,7 +34,6 @@ public class Localization {
         }
     }
 
-
     public String get(String key) {
         if (localisationBundle != null) {
             try {

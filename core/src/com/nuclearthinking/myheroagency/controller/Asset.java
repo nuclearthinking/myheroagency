@@ -5,24 +5,26 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.I18NBundleLoader;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
-/**
- * Created by Izonami on 12.05.2016.
- */
 public class Asset implements Disposable, AssetErrorListener {
 
     private static Asset instance;
     private Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
     private AssetManager manager;
     private ObjectMap<String, Array<Assetes>> groups;
+    private Skin skin;
 
     public static Asset getInstance() {
         if (instance == null) {
@@ -32,12 +34,14 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     public void init(String assetFile) {
-
+        logger.info("Loading assets");
         manager = new AssetManager();
         manager.setErrorListener(this);
         manager.setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
         manager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
         manager.setLoader(I18NBundle.class, new I18NBundleLoader(new InternalFileHandleResolver()));
+        manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
+        manager.setLoader(Skin.class, new SkinLoader(new InternalFileHandleResolver()));
 
         loadGroups(assetFile);
     }
@@ -139,6 +143,14 @@ public class Asset implements Disposable, AssetErrorListener {
         } catch (Exception e) {
             logger.error("Error loading file {} {}", assetFile, e.getMessage());
         }
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public void setSkin(Skin skin) {
+        this.skin = skin;
     }
 
     private class Assetes {

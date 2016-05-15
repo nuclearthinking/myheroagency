@@ -14,6 +14,7 @@ public class Constants {
             + "1234567890.,:;_¡!¿?\"'+-*/()[]={}%";
     public static final String SAVE_NAME = "myheroagency.bin";
     public static final String PREFERENCES_NAME = "MyHeroAgency Settings";
+    public static boolean DEBUG = true; //TODO: Выключить в самом конце
 
 
 }

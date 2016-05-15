@@ -12,7 +12,7 @@ class Player implements Serializable {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(byte level) {
         this.level = level;
     }
 

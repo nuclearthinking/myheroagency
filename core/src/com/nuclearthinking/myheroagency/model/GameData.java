@@ -16,25 +16,17 @@ public class GameData implements Serializable {
 
     public static void save(GameData gameData) {
         Kryo kryo = new Kryo();
-        Output output = null;
-        try {
-            output = new Output(new FileOutputStream(Constants.SAVE_NAME));
+        try (Output output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
             kryo.writeObject(output, gameData);
         } catch (FileNotFoundException ex) {
             new SimpleLoggerFactory().getLogger("GameData").info("Can't save game to file {}", Constants.SAVE_NAME);
-        } finally {
-            if (output != null) {
-                output.close();
-            }
         }
     }
 
     public static GameData load() {
         Kryo kryo = new Kryo();
         GameData gameData = null;
-        Input input = null;
-        try {
-            input = new Input(new FileInputStream(Constants.SAVE_NAME));
+        try (Input input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
             gameData = kryo.readObject(input, GameData.class);
         } catch (FileNotFoundException ex) {
             new SimpleLoggerFactory().getLogger("GameData").info("Can't load game from file", Constants.SAVE_NAME);
