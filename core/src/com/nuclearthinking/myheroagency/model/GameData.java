@@ -1,30 +1,45 @@
 package com.nuclearthinking.myheroagency.model;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.Output;
+import com.nuclearthinking.myheroagency.utils.Constants;
+import org.slf4j.impl.SimpleLoggerFactory;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 
 public class GameData implements Serializable {
-
-
-    private int qutestNumber;
-
-    private String test;
-
     private Player player;
 
-    public int getQutestNumber() {
-        return qutestNumber;
+    public static void save(GameData gameData) {
+        Kryo kryo = new Kryo();
+        Output output = null;
+        try {
+            output = new Output(new FileOutputStream(Constants.SAVE_NAME));
+            kryo.writeObject(output, gameData);
+        } catch (FileNotFoundException ex) {
+            new SimpleLoggerFactory().getLogger("GameData").info("Can't save game to file {}", Constants.SAVE_NAME);
+        } finally {
+            if (output != null) {
+                output.close();
+            }
+        }
     }
 
-    public void setQutestNumber(int qutestNumber) {
-        this.qutestNumber = qutestNumber;
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
+    public static GameData load() {
+        Kryo kryo = new Kryo();
+        GameData gameData = null;
+        Input input = null;
+        try {
+            input = new Input(new FileInputStream(Constants.SAVE_NAME));
+            gameData = kryo.readObject(input, GameData.class);
+        } catch (FileNotFoundException ex) {
+            new SimpleLoggerFactory().getLogger("GameData").info("Can't load game from file", Constants.SAVE_NAME);
+        }
+        return gameData;
     }
 
     public Player getPlayer() {
