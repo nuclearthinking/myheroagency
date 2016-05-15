@@ -1,7 +1,6 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
-import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 
 
@@ -16,11 +15,6 @@ public class HomeScreen extends AbstractScreen {
     private FontFactory fontFactory;
 
     public HomeScreen() {
-        gameData = new GameData();
-    }
-
-    public HomeScreen(GameData gameData) {
-        this.gameData = gameData;
     }
 
     @Override
