@@ -14,6 +14,9 @@ public class HomeScreen extends AbstractScreen {
 
     private FontFactory fontFactory;
 
+    public HomeScreen() {
+    }
+
     @Override
     public void buildStage() {
         fontFactory = new FontFactory();
