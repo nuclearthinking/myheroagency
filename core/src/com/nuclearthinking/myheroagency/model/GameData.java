@@ -29,9 +29,15 @@ public class GameData implements Serializable {
         try (Input input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
             gameData = kryo.readObject(input, GameData.class);
         } catch (FileNotFoundException ex) {
-            new SimpleLoggerFactory().getLogger("GameData").info("Can't load game from file", Constants.SAVE_NAME);
+            new SimpleLoggerFactory().getLogger("GameData").info("Can't load game from file {}", Constants.SAVE_NAME);
         }
-        return gameData;
+        if (gameData == null) {
+            new SimpleLoggerFactory().getLogger("GameData").info("Loading game is failed, create new one");
+            return new GameData();
+        } else {
+            new SimpleLoggerFactory().getLogger("GameData").info("Loading success");
+            return gameData;
+        }
     }
 
     public Player getPlayer() {

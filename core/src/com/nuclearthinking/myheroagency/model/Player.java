@@ -2,7 +2,7 @@ package com.nuclearthinking.myheroagency.model;
 
 import java.io.Serializable;
 
-class Player implements Serializable {
+public class Player implements Serializable {
 
     private byte level;
 
