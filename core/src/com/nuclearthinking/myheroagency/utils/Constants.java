@@ -12,5 +12,7 @@ public class Constants {
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "abcdefghijklmnopqrstuvwxyz"
             + "1234567890.,:;_¡!¿?\"'+-*/()[]={}%";
+    public static final String PREFERENCES_NAME = "MyHeroAgency Settings";
+
 
 }

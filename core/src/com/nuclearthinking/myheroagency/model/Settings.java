@@ -5,9 +5,10 @@ import com.badlogic.gdx.Preferences;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
+import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
+
 public class Settings {
 
-    private static final String PREFERENCES_NAME = "MyHeroAgency Settings";
     private static final String LANGUAGE_KEY = "language";
     private static final String DEFAULT_LANGUAGE = "ru";
     private static Logger logger = new SimpleLoggerFactory().getLogger("Settings");
