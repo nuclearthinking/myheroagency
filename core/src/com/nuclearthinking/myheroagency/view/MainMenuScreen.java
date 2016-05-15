@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.utils.Constants;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -32,7 +33,7 @@ public class MainMenuScreen extends AbstractScreen {
                 .get("ui/ui.atlas", TextureAtlas.class)); // Добавляем области картинки полученные из атласа
 
         table = new Table(); // Создаем таблицу
-        table.setDebug(true); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
+        table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
 
 
