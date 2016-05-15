@@ -16,6 +16,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
     protected Localization locale = new Localization(this.getClass());
 
+<<<<<<< HEAD
     protected GameData gameData;
 
     public GameData getGameData() {
@@ -26,6 +27,8 @@ public abstract class AbstractScreen extends Stage implements Screen {
         this.gameData = gameData;
     }
 
+=======
+>>>>>>> refs/remotes/origin/master
     AbstractScreen() {
         super(new StretchViewport(Constants.GAME_W, Constants.GAME_H, new OrthographicCamera()));
     }
