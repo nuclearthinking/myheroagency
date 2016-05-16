@@ -40,6 +40,9 @@ tmp/
 *.bak
 *.swp
 *~.nib
+/android/build
+/android/libs/arm64-v8a
+/android/libs/x86_64
 /desktop/build
 local.properties
 .settings/
@@ -60,7 +63,6 @@ nb-configuration.xml
 
 .gradle
 gradle-app.setting
-build/
 myheroagency.bin
 ## OS Specific
 .DS_Store
