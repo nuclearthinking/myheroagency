@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
@@ -20,9 +21,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class SettingsScreen extends AbstractScreen {
 
     private Table table;
-    private TextButton back;
-    private SelectBox selectLanguage;
-    private Label selectLanguageLabel;
+    private TextButton back, save;
+    private SelectBox<String> selectLanguage;
     private TextField height, width;
 
     @Override
@@ -30,30 +30,42 @@ public class SettingsScreen extends AbstractScreen {
         table = new Table(); // Создаем таблицу
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
+        table.align(Align.center | Align.top);
 
         initButton();
 
         // Таблица рулит размером кнопок, отступами и прочей хренотой
-        table.add(selectLanguageLabel).top().expandY().pad(10);
-        table.add(selectLanguage).top().expandY().pad(10);
+        table.add(new Label(locale.get("mainTitle"), Asset.getInstance().getSkin(), "kramola")).spaceBottom(50).colspan(3).expandX().row();
+        table.row();
+        table.add(new Label(locale.get("languageLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(selectLanguage).top().expandX().center().left();
         table.add().row();
-        table.add(width).top().expandY();
-        table.add(height).top().expandY();
+        table.add(new Label(locale.get("widthLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(width).top().center().left();
         table.add().row();
-        table.add(back).bottom().right().width(100).height(40);
+        table.add(new Label(locale.get("heightLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(height).top().center().left();
+        table.row();
+        table.add(save).right().expandX().width(100).height(40);
+        table.add(back).left().expandX().width(100).height(40);
 
         addActor(table);
     }
 
     private void initButton(){
-        back = new TextButton("Назад", Asset.getInstance().getSkin(), "kramola");
+        back = new TextButton(locale.get("buttonBack"), Asset.getInstance().getSkin(), "kramola");
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
         back.addListener(new BackListener()); //Добавляет листнер кнопке
 
-        selectLanguageLabel = new Label("Язык", Asset.getInstance().getSkin(), "kramola");
-        selectLanguage = new SelectBox(Asset.getInstance().getSkin(), "kramola");
-        selectLanguage.setItems("ru","en"); //TODO: Переделать, так как uses unchecked or unsafe operations
+        save = new TextButton(locale.get("buttonSave"), Asset.getInstance().getSkin(), "kramola");
+        save.getLabel().setFontScale(.8f);
+        save.getLabel().setColor(Color.FOREST);
+        save.addListener(new SaveListener()); //Добавляет листнер кнопке
+
+        selectLanguage = new SelectBox<String>(Asset.getInstance().getSkin(), "kramola");
+        selectLanguage.setItems("ru", "en");
+        selectLanguage.setSelected(Settings.getLanguage());
 
         width = new TextField(Integer.toString(Gdx.graphics.getWidth()), Asset.getInstance().getSkin());
         height = new TextField(Integer.toString(Gdx.graphics.getHeight()), Asset.getInstance().getSkin());
@@ -63,23 +75,33 @@ public class SettingsScreen extends AbstractScreen {
     private class BackListener extends ClickListener{
         @Override
         public void clicked (InputEvent event, float x, float y) {
-            Settings settings = new Settings();
-            settings.setLanguage(selectLanguage.getSelected().toString());
-            logger.debug("Language {}", settings.getLanguage().toString());
-            settings.setHeight(height.getText());
-            settings.setWidth(width.getText());
-            logger.debug("height {}", height.getText());
-            logger.debug("height {}", width.getText());
-            settings.save();
-            Asset.getInstance().reloadLocale();
-            Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
-
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );
         }
 
         @Override
         public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
             back.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
+        }
+    }
+
+    private class SaveListener extends ClickListener{
+        @Override
+        public void clicked (InputEvent event, float x, float y) {
+            Settings settings = new Settings();
+            settings.setLanguage(selectLanguage.getSelected().toString());
+            logger.debug("Language {}", settings.getLanguage().toString());
+            settings.setHeight(Integer.parseInt(height.getText()));
+            settings.setWidth(Integer.parseInt(width.getText()));
+            logger.debug("height {}", height.getText());
+            logger.debug("height {}", width.getText());
+            settings.save();
+            Asset.getInstance().reloadLocale();
+            Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
+        }
+
+        @Override
+        public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            save.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
         }
     }
 
