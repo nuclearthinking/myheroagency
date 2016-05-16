@@ -24,6 +24,7 @@ public class SettingsScreen extends AbstractScreen {
     private TextButton back, save;
     private SelectBox<String> selectLanguage;
     private TextField height, width;
+    private Label titleLabel, languageLabel, widthLabel, heightLabel;
 
     @Override
     public void buildStage() {
@@ -35,15 +36,15 @@ public class SettingsScreen extends AbstractScreen {
         initButton();
 
         // Таблица рулит размером кнопок, отступами и прочей хренотой
-        table.add(new Label(locale.get("mainTitle"), Asset.getInstance().getSkin(), "kramola")).spaceBottom(50).colspan(3).expandX().row();
+        table.add(titleLabel).spaceBottom(50).colspan(3).expandX().row();
         table.row();
-        table.add(new Label(locale.get("languageLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(languageLabel).height(80).right();
         table.add(selectLanguage).top().expandX().center().left();
         table.add().row();
-        table.add(new Label(locale.get("widthLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(widthLabel).height(80).right();
         table.add(width).top().center().left();
         table.add().row();
-        table.add(new Label(locale.get("heightLabel"), Asset.getInstance().getSkin(), "kramola")).height(80).right();
+        table.add(heightLabel).height(80).right();
         table.add(height).top().center().left();
         table.row();
         table.add(save).right().expandX().width(100).height(40);
@@ -53,7 +54,13 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void initButton(){
+        titleLabel = new Label(locale.get("mainTitle"), Asset.getInstance().getSkin(), "kramola");
+        languageLabel = new Label(locale.get("languageLabel"), Asset.getInstance().getSkin(), "kramola");
+        widthLabel = new Label(locale.get("widthLabel"), Asset.getInstance().getSkin(), "kramola");
+        heightLabel = new Label(locale.get("heightLabel"), Asset.getInstance().getSkin(), "kramola");
+
         back = new TextButton(locale.get("buttonBack"), Asset.getInstance().getSkin(), "kramola");
+
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
         back.addListener(new BackListener()); //Добавляет листнер кнопке
@@ -69,6 +76,16 @@ public class SettingsScreen extends AbstractScreen {
 
         width = new TextField(Integer.toString(Gdx.graphics.getWidth()), Asset.getInstance().getSkin());
         height = new TextField(Integer.toString(Gdx.graphics.getHeight()), Asset.getInstance().getSkin());
+    }
+
+    private void reloadLabel(){
+        locale.loadBundle(this.getClass());
+        titleLabel.setText(locale.get("mainTitle"));
+        languageLabel.setText(locale.get("languageLabel"));
+        widthLabel.setText(locale.get("widthLabel"));
+        heightLabel.setText(locale.get("heightLabel"));
+        back.setText(locale.get("buttonBack"));
+        save.setText(locale.get("buttonSave"));
     }
 
 
@@ -97,6 +114,8 @@ public class SettingsScreen extends AbstractScreen {
             settings.save();
             Asset.getInstance().reloadLocale();
             Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
+            //ScreenManager.getInstance().showScreen( ScreenEnum.SETTINGS_SCREEN );
+            reloadLabel();
         }
 
         @Override

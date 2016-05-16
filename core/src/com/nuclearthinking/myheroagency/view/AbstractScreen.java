@@ -14,7 +14,7 @@ import org.slf4j.impl.SimpleLoggerFactory;
 
 public abstract class AbstractScreen extends Stage implements Screen {
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
-    protected Localization locale = new Localization(this.getClass());
+    final protected Localization locale = new Localization(this.getClass());
 
     protected GameData gameData;
 
