@@ -101,6 +101,10 @@ public class Asset implements Disposable, AssetErrorListener {
         manager.finishLoading();
     }
 
+    public void finishLoadingAsset(String filename){
+        manager.finishLoadingAsset(filename);
+    }
+
     public float getProgress() {
         return manager.getProgress();
     }
@@ -113,7 +117,7 @@ public class Asset implements Disposable, AssetErrorListener {
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
-        logger.error("Error loading {}", asset);
+        logger.error("Error loading {} exception is {}", asset, throwable);
     }
 
     private void loadGroups(String assetFile) {

@@ -11,9 +11,9 @@ public class LoadingScreen extends AbstractScreen {
 
     static {
         Asset.getInstance().init("asset/main.xml");
-        Asset.getInstance().loadGroup("loading");
-        Asset.getInstance().finishLoading();
         Asset.getInstance().loadGroup("base");
+        Asset.getInstance().finishLoadingAsset("i18n/LoadingScreen");
+        Asset.getInstance().finishLoadingAsset("font/RobotoSlab-Light.ttf");
     }
 
     private FontFactory fontFactory;
