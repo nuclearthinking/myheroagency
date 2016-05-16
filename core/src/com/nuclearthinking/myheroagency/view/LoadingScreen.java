@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
@@ -12,6 +13,7 @@ public class LoadingScreen extends AbstractScreen {
     static {
         Asset.getInstance().init("asset/main.xml");
         Asset.getInstance().loadGroup("loading");
+        Asset.getInstance().loadGroup("localization");
         Asset.getInstance().finishLoading();
         Asset.getInstance().loadGroup("base");
     }
@@ -35,6 +37,7 @@ public class LoadingScreen extends AbstractScreen {
 
         loadingPercent = loading();
 
+        Settings.getLanguage();
         getBatch().begin();
         fontFactory.getRobotoLight(18).draw(getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
         getBatch().end();

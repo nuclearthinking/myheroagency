@@ -28,6 +28,7 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        //Settings.loadSettings();
         Asset.getInstance().setSkin(Asset.getInstance().get("ui/ui.json", Skin.class)); // Создаем скин на основе json
         Asset.getInstance().getSkin().addRegions(Asset
                 .getInstance()

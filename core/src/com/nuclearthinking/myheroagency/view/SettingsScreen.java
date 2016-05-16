@@ -53,7 +53,7 @@ public class SettingsScreen extends AbstractScreen {
 
         selectLanguageLabel = new Label("Язык", Asset.getInstance().getSkin(), "kramola");
         selectLanguage = new SelectBox(Asset.getInstance().getSkin(), "kramola");
-        selectLanguage.setItems("ru","en");
+        selectLanguage.setItems("ru","en"); //TODO: Переделать, так как uses unchecked or unsafe operations
 
         width = new TextField(Integer.toString(Gdx.graphics.getWidth()), Asset.getInstance().getSkin());
         height = new TextField(Integer.toString(Gdx.graphics.getHeight()), Asset.getInstance().getSkin());
@@ -65,12 +65,16 @@ public class SettingsScreen extends AbstractScreen {
         public void clicked (InputEvent event, float x, float y) {
             Settings settings = new Settings();
             settings.setLanguage(selectLanguage.getSelected().toString());
-            logger.info("Language {}", settings.getLanguage().toString());
+            logger.debug("Language {}", settings.getLanguage().toString());
             settings.setHeight(height.getText());
             settings.setWidth(width.getText());
-            logger.info("height {}", height.getText());
-            logger.info("height {}", width.getText());
+            logger.debug("height {}", height.getText());
+            logger.debug("height {}", width.getText());
             settings.save();
+            Asset.getInstance().unloadGroup("localization");
+            Asset.getInstance().reloadLocale();
+            Asset.getInstance().loadGroup("localization");
+            Asset.getInstance().finishLoading();
             Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
 
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );

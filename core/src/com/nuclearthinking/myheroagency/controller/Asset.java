@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.I18NBundleLoader;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
@@ -28,6 +27,7 @@ public class Asset implements Disposable, AssetErrorListener {
     private AssetManager manager;
     private ObjectMap<String, Array<Assetes>> groups;
     private Skin skin;
+    private Locale locale;
 
     public static Asset getInstance() {
         if (instance == null) {
@@ -37,17 +37,23 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     public void init(String assetFile) {
-        Locale.setDefault(new Locale(Settings.loadSettings().getLanguage()));
-        logger.info("Loading assets");
         manager = new AssetManager();
         manager.setErrorListener(this);
+
+        logger.info("Loading assets");
+        locale = new Locale(Settings.loadSettings().getLanguage());
+        manager.setLoader(I18NBundle.class, new MyI18(new InternalFileHandleResolver(), new MyI18.I18NBundleParameter(locale)));
         manager.setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
         manager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
-        manager.setLoader(I18NBundle.class, new I18NBundleLoader(new InternalFileHandleResolver()));
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
         manager.setLoader(Skin.class, new SkinLoader(new InternalFileHandleResolver()));
 
         loadGroups(assetFile);
+    }
+
+    public void reloadLocale(){
+        locale = new Locale(Settings.loadSettings().getLanguage());
+        manager.setLoader(I18NBundle.class, new MyI18(new InternalFileHandleResolver(), new MyI18.I18NBundleParameter(locale)));
     }
 
     public boolean isLoaded(String fileName) {
@@ -78,6 +84,7 @@ public class Asset implements Disposable, AssetErrorListener {
             for (Assetes asset : assets) {
                 if (manager.isLoaded(asset.path, asset.type)) {
                     manager.unload(asset.path);
+                    logger.error("Asset {} added to loading queue", asset.path);
                 }
             }
         } else {

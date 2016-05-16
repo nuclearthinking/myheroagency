@@ -13,7 +13,7 @@ public class Settings {
     private static final String DEFAULT_LANGUAGE = "en";
     private static Logger logger = new SimpleLoggerFactory().getLogger("Settings");
 
-    private String language;
+    private static String language;
     private String height;
     private String width;
 
@@ -46,7 +46,7 @@ public class Settings {
         preferences.flush();
     }
 
-    public String getLanguage() {
+    public static String getLanguage() {
         return language;
     }
 
