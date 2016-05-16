@@ -1,35 +1,56 @@
 package com.nuclearthinking.myheroagency.ui.font;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.nuclearthinking.myheroagency.utils.Constants;
+import com.nuclearthinking.myheroagency.controller.Asset;
 
-/**
- * Date: 08.05.2016
- * Time: 11:22
- *
- * @author Vladislav Radchenko (onfient@gmail.com)
- */
+import java.util.HashMap;
+
+import static com.nuclearthinking.myheroagency.utils.Constants.ALL_CHARACTERS;
+
 public class FontFactory {
+    private static final HashMap<Integer, BitmapFont> robotoLightMap = new HashMap<Integer, BitmapFont>();
+    private static final HashMap<Integer, BitmapFont> robotoBoldMap = new HashMap<Integer, BitmapFont>();
 
-    private static final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Kramola.ttf"));
-    private static BitmapFont font;
+    private FreeTypeFontGenerator robotoLightGenerator;
+    private FreeTypeFontGenerator robotoBoldGenerator;
 
-    public static BitmapFont getFont() {
+    public final BitmapFont getRobotoLight(final int size) {
+        BitmapFont font = robotoLightMap.get(size);
         if (font == null) {
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.characters = Constants.ALL_CHARACTERS;
-            parameter.size = 21;
-            generateFont(parameter);
+            parameter.characters = ALL_CHARACTERS;
+            parameter.size = size;
+            font = getRobotoLightGenerator().generateFont(parameter);
+            robotoLightMap.put(size, font);
         }
         return font;
     }
 
+    public final BitmapFont getRobotoBold(final int size) {
+        BitmapFont font = robotoBoldMap.get(size);
+        if (font == null) {
+            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            parameter.characters = ALL_CHARACTERS;
+            parameter.size = size;
+            font = getRobotoBoldGenerator().generateFont(parameter);
+            robotoBoldMap.put(size, font);
+        }
+        return font;
+    }
 
-    private static void generateFont(FreeTypeFontGenerator.FreeTypeFontParameter param) {
-        font = generator.generateFont(param);
-        generator.dispose();
+    private FreeTypeFontGenerator getRobotoLightGenerator() {
+        if (robotoLightGenerator == null) {
+            robotoLightGenerator = Asset.getInstance().get("font/RobotoSlab-Light.ttf");
+        }
+        return robotoLightGenerator;
+    }
+
+    private FreeTypeFontGenerator getRobotoBoldGenerator() {
+        if (robotoBoldGenerator == null) {
+            robotoBoldGenerator = Asset.getInstance().get("font/RobotoSlab-Bold.ttf");
+        }
+        return robotoBoldGenerator;
     }
 
 }

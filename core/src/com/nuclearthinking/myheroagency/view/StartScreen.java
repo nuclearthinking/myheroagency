@@ -30,8 +30,8 @@ public class StartScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-
-        actor = new TextActor(FontFactory.getFont(), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
+        FontFactory fontFactory = new FontFactory();
+        actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", this); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
         actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
         actor.setPosition(GAME_W / 2 - 32, GAME_H / 2 + 32);
         actor.fadeText();
@@ -39,7 +39,7 @@ public class StartScreen extends AbstractScreen {
         Runnable load = new Runnable() {
             @Override
             public void run() {
-                ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
             }
         };
 

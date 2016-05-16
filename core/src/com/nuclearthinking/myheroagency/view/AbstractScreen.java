@@ -7,16 +7,24 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
+import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
-/**
- * Created by Izonami on 05.05.2016.
- */
 public abstract class AbstractScreen extends Stage implements Screen {
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
     protected Localization locale = new Localization(this.getClass());
+
+    protected GameData gameData;
+
+    public GameData getGameData() {
+        return gameData;
+    }
+
+    public void setGameData(GameData gameData) {
+        this.gameData = gameData;
+    }
 
     AbstractScreen() {
         super(new StretchViewport(Constants.GAME_W, Constants.GAME_H, new OrthographicCamera()));

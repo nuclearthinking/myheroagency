@@ -73,6 +73,7 @@ project(":core") {
 
 
     dependencies {
+        compile "com.esotericsoftware:kryo:3.0.3"
         compile "org.slf4j:slf4j-simple:1.7.21"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"

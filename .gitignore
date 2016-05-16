@@ -61,6 +61,6 @@ nb-configuration.xml
 .gradle
 gradle-app.setting
 build/
-
+myheroagency.bin
 ## OS Specific
 .DS_Store
