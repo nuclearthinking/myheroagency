@@ -71,10 +71,7 @@ public class SettingsScreen extends AbstractScreen {
             logger.debug("height {}", height.getText());
             logger.debug("height {}", width.getText());
             settings.save();
-            Asset.getInstance().unloadGroup("localization");
             Asset.getInstance().reloadLocale();
-            Asset.getInstance().loadGroup("localization");
-            Asset.getInstance().finishLoading();
             Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
 
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );

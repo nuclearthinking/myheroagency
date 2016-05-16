@@ -52,8 +52,11 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     public void reloadLocale(){
+        unloadGroup("localization");
         locale = new Locale(Settings.loadSettings().getLanguage());
         manager.setLoader(I18NBundle.class, new MyI18(new InternalFileHandleResolver(), new MyI18.I18NBundleParameter(locale)));
+        loadGroup("localization");
+        finishLoading();
     }
 
     public boolean isLoaded(String fileName) {
@@ -68,7 +71,7 @@ public class Asset implements Disposable, AssetErrorListener {
         if (assets != null) {
             for (Assetes asset : assets) {
                 manager.load(asset.path, asset.type);
-                logger.info("Asset {} added to loading queue", asset.path);
+                logger.debug("Asset {} added to loading queue", asset.path);
             }
         } else {
             logger.error("Error loading group {}, not found ", groupName);
@@ -84,7 +87,7 @@ public class Asset implements Disposable, AssetErrorListener {
             for (Assetes asset : assets) {
                 if (manager.isLoaded(asset.path, asset.type)) {
                     manager.unload(asset.path);
-                    logger.error("Asset {} added to loading queue", asset.path);
+                    logger.debug("Asset {} added to unload queue", asset.path);
                 }
             }
         } else {
