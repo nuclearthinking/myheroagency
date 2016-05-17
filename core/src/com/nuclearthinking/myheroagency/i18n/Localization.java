@@ -20,12 +20,12 @@ public class Localization {
     private I18NBundle localisationBundle;
 
     public Localization(Class initiatorClass) {
-        String bundleName = "i18n/" + initiatorClass.getSimpleName();
         logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
-        loadBundle(bundleName);
+        loadBundle(initiatorClass);
     }
 
-    private void loadBundle(String bundleName) {
+    public void loadBundle(Class bundleClass) {
+        String bundleName = "i18n/" + bundleClass.getSimpleName();
         if (Asset.getInstance().isLoaded(bundleName)) {
             localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             logger.info("Loaded I18NBundle with name {}", bundleName);

@@ -13,6 +13,7 @@ public class LoadingScreen extends AbstractScreen {
         Asset.getInstance().init("asset/main.xml");
         Asset.getInstance().loadGroup("loading");
         Asset.getInstance().finishLoading();
+        Asset.getInstance().loadGroup("localization");
         Asset.getInstance().loadGroup("base");
     }
 
@@ -38,14 +39,13 @@ public class LoadingScreen extends AbstractScreen {
         getBatch().begin();
         fontFactory.getRobotoLight(18).draw(getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
         getBatch().end();
-
     }
 
     private float loading() {
         float loadingProgress = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
             logger.info("Assets loading done");
-            ScreenManager.getInstance().showScreen(ScreenEnum.START_SCREEN);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
         }
         return loadingProgress;
     }
