@@ -43,7 +43,7 @@ public class Asset implements Disposable, AssetErrorListener {
         logger.info("Loading assets");
         locale = new Locale(Settings.getLanguage());
         Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight());
-        manager.setLoader(I18NBundle.class, new MyI18(new InternalFileHandleResolver(), new MyI18.I18NBundleParameter(locale)));
+        manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         manager.setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
         manager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
@@ -55,7 +55,7 @@ public class Asset implements Disposable, AssetErrorListener {
     public void reloadLocale(){
         unloadGroup("localization");
         locale = new Locale(Settings.getLanguage());
-        manager.setLoader(I18NBundle.class, new MyI18(new InternalFileHandleResolver(), new MyI18.I18NBundleParameter(locale)));
+        manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         loadGroup("localization");
         finishLoading();
     }

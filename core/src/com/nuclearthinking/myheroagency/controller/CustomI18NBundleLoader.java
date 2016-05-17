@@ -14,11 +14,11 @@ import java.util.Locale;
 /**
  * Created by Izonami on 16.05.2016.
  */
-public class MyI18 extends AsynchronousAssetLoader<I18NBundle, MyI18.I18NBundleParameter> {
+public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, CustomI18NBundleLoader.I18NBundleParameter> {
 
     private I18NBundleParameter parameter;
 
-    public MyI18(FileHandleResolver resolver, I18NBundleParameter parameter) {
+    public CustomI18NBundleLoader(FileHandleResolver resolver, I18NBundleParameter parameter) {
         super(resolver);
         this.parameter = parameter;
     }
