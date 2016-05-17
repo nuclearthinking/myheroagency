@@ -105,7 +105,7 @@ public class SettingsScreen extends AbstractScreen {
         @Override
         public void clicked (InputEvent event, float x, float y) {
             Settings settings = new Settings();
-            settings.setLanguage(selectLanguage.getSelected().toString());
+            settings.setLanguage(selectLanguage.getSelected());
             logger.debug("Language {}", Settings.getLanguage());
             settings.setHeight(Integer.parseInt(height.getText()));
             settings.setWidth(Integer.parseInt(width.getText()));
@@ -113,7 +113,7 @@ public class SettingsScreen extends AbstractScreen {
             logger.debug("height {}", width.getText());
             settings.save();
             Asset.getInstance().reloadLocale();
-            Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
+            Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight());
             reloadLabel();
         }
 

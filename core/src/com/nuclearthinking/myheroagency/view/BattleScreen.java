@@ -10,12 +10,22 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class BattleScreen extends AbstractScreen {
 
+
     public BattleScreen(GameData gameData) {
         this.gameData = gameData;
     }
 
     @Override
     public void buildStage() {
+    }
 
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

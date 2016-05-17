@@ -12,7 +12,11 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 
 public class GameData implements Serializable {
+
     private Player player;
+    private BattleData battleData;
+
+
 
     public static void save(GameData gameData) {
         Kryo kryo = new Kryo();

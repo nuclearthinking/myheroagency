@@ -8,6 +8,30 @@ public class Player implements Serializable {
 
     private int exp;
 
+    private int attack;
+
+    private int health;
+
+    public Player() {
+    }
+
+    public Player(int attack, int health) {
+        this.attack = attack;
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public int getLevel() {
         return level;
     }
