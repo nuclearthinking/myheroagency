@@ -18,7 +18,6 @@ public class Localization {
 
     private final Logger logger;
     private I18NBundle localisationBundle;
-    private String bundleName;
 
     public Localization(Class initiatorClass) {
         logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
@@ -26,7 +25,7 @@ public class Localization {
     }
 
     public void loadBundle(Class bundleClass) {
-        bundleName = "i18n/" + bundleClass.getSimpleName();
+        String bundleName = "i18n/" + bundleClass.getSimpleName();
         if (Asset.getInstance().isLoaded(bundleName)) {
             localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             logger.info("Loaded I18NBundle with name {}", bundleName);
