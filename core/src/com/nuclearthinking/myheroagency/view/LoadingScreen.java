@@ -12,8 +12,8 @@ public class LoadingScreen extends AbstractScreen {
     static {
         Asset.getInstance().init("asset/main.xml");
         Asset.getInstance().loadGroup("loading");
-        Asset.getInstance().loadGroup("localization");
         Asset.getInstance().finishLoading();
+        Asset.getInstance().loadGroup("localization");
         Asset.getInstance().loadGroup("base");
     }
 

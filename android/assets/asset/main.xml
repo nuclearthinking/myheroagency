@@ -1,9 +1,9 @@
 <assets>
     <group name="loading">
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Light.ttf"/>
+        <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/LoadingScreen"/>
     </group>
     <group name="localization">
-        <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/LoadingScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/BattleScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/HomeScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/StartScreen"/>
