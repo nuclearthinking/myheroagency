@@ -25,7 +25,7 @@ public class Asset implements Disposable, AssetErrorListener {
     private static Asset instance;
     private Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
     private AssetManager manager;
-    private ObjectMap<String, Array<Assetes>> groups;
+    private ObjectMap<String, Array<Assets>> groups;
     private Skin skin;
     private Locale locale;
 
@@ -37,29 +37,43 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     public void init(String assetFile) {
-        manager = new AssetManager();
-        manager.setErrorListener(this);
-        Settings.loadSettings();
+        manager = new AssetManager(); // Инициализируем менеджер ассетов
+        manager.setErrorListener(this); // Ставим листнера ошибок
+        Settings.loadSettings(); // Загружаем настройки
+
         logger.info("Loading assets");
-        locale = new Locale(Settings.getLanguage());
-        Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight());
+        locale = new Locale(Settings.getLanguage()); // Получаем локаль из пропертей
+        Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight()); // Получаем разрешение из пропертей
+
+        //Задаем загрузчики для ресурсов
         manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         manager.setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
         manager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
         manager.setLoader(Skin.class, new SkinLoader(new InternalFileHandleResolver()));
 
+        // Получаем список групп с ресурсами
         loadGroups(assetFile);
     }
 
+    /**
+     * Перезагрузка локализаций
+     */
     public void reloadLocale(){
+        logger.debug("Start reloading localization");
         unloadGroup("localization");
         locale = new Locale(Settings.getLanguage());
         manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         loadGroup("localization");
         finishLoading();
+        logger.debug("Finish reloading localization");
     }
 
+    /**
+     *
+     * @param fileName
+     * @return - Возвращает результат проверки наличия файла в ассет менеджере
+     */
     public boolean isLoaded(String fileName) {
         return manager != null && manager.isLoaded(fileName);
     }
@@ -67,10 +81,10 @@ public class Asset implements Disposable, AssetErrorListener {
     public void loadGroup(String groupName) {
         logger.info("Loading group of assets {}", groupName);
 
-        Array<Assetes> assets = groups.get(groupName, null);
+        Array<Assets> assets = groups.get(groupName, null);
 
         if (assets != null) {
-            for (Assetes asset : assets) {
+            for (Assets asset : assets) {
                 manager.load(asset.path, asset.type);
                 logger.debug("Asset {} added to loading queue", asset.path);
             }
@@ -82,10 +96,10 @@ public class Asset implements Disposable, AssetErrorListener {
     public void unloadGroup(String groupName) {
         logger.info("Unloading group of assets {}", groupName);
 
-        Array<Assetes> assets = groups.get(groupName, null);
+        Array<Assets> assets = groups.get(groupName, null);
 
         if (assets != null) {
-            for (Assetes asset : assets) {
+            for (Assets asset : assets) {
                 if (manager.isLoaded(asset.path, asset.type)) {
                     manager.unload(asset.path);
                     logger.debug("Asset {} added to unload queue", asset.path);
@@ -128,7 +142,7 @@ public class Asset implements Disposable, AssetErrorListener {
     }
 
     private void loadGroups(String assetFile) {
-        groups = new ObjectMap<String, Array<Assetes>>();
+        groups = new ObjectMap<String, Array<Assets>>();
 
         logger.info("Loading file {}", assetFile);
 
@@ -137,23 +151,22 @@ public class Asset implements Disposable, AssetErrorListener {
             XmlReader.Element root = reader.parse(Gdx.files.internal(assetFile));
 
             for (XmlReader.Element groupElement : root.getChildrenByName("group")) {
-                String groupName = groupElement.getAttribute("name", "base");
+                String groupName = groupElement.getAttribute("name", "");
 
                 if (groups.containsKey(groupName)) {
                     logger.error("Group {} already exists, skipping", groupName);
                     continue;
                 }
 
-                logger.info("Registering group {}", groupName);
-
-                Array<Assetes> assets = new Array<Assetes>();
+                Array<Assets> assets = new Array<Assets>();
 
                 for (XmlReader.Element assetElement : groupElement.getChildrenByName("asset")) {
-                    assets.add(new Assetes(assetElement.getAttribute("type", ""),
+                    assets.add(new Assets(assetElement.getAttribute("type", ""),
                             assetElement.getAttribute("path", "")));
                 }
 
                 groups.put(groupName, assets);
+                logger.info("Registering group {}", groupName);
             }
         } catch (Exception e) {
             logger.error("Error loading file {} {}", assetFile, e.getMessage());
@@ -168,11 +181,11 @@ public class Asset implements Disposable, AssetErrorListener {
         this.skin = skin;
     }
 
-    private class Assetes {
+    private class Assets {
         public Class<?> type;
         public String path;
 
-        public Assetes(String type, String path) {
+        public Assets(String type, String path) {
             try {
                 this.type = Class.forName(type);
                 this.path = path;

@@ -3,6 +3,7 @@
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Light.ttf"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/LoadingScreen"/>
     </group>
+    <!-- Сюда складывать все локализации -->
     <group name="localization">
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/BattleScreen"/>
         <asset type="com.badlogic.gdx.utils.I18NBundle" path="i18n/HomeScreen"/>
