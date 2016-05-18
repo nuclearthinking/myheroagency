@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -66,6 +67,16 @@ public class SplashScreen extends AbstractScreen {
                         run(load))); //Запуск сцены
 
         addActor(splashImage);
+    }
+
+    @Override
+    public void render(float delta){
+        super.render(delta);
+
+        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(66) || Gdx.input.isKeyPressed(131))
+        {
+            ScreenManager.getInstance().showScreen( ScreenEnum.MAIN_MENU_SCREEN );
+        }
     }
 
 }
