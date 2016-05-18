@@ -45,7 +45,7 @@ public class LoadingScreen extends AbstractScreen {
         float loadingProgress = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
             logger.info("Assets loading done");
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
+            ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);
         }
         return loadingProgress;
     }
