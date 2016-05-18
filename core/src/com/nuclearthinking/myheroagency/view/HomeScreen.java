@@ -1,8 +1,11 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.ui.font.hud.HudGame;
 
 
 /**
@@ -13,35 +16,43 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class HomeScreen extends AbstractScreen {
 
-    private FontFactory fontFactory;
+    private SpriteBatch sb;
+    private HudGame hudGame;
+    private final Texture texture;
+    private Image image;
 
     public HomeScreen() {
+        sb = new SpriteBatch();
         gameData = new GameData();
+        texture = Asset.getInstance().get("img/base.jpg", Texture.class);
     }
 
     public HomeScreen(GameData gameData) {
+        sb = new SpriteBatch();
         this.gameData = gameData;
+        texture = Asset.getInstance().get("img/base.jpg", Texture.class);
     }
 
     @Override
     public void buildStage() {
-        fontFactory = new FontFactory();
+        hudGame = new HudGame(sb);
+        multi.addProcessor(hudGame.stage);
+        image = new Image(texture);
+        addActor(image);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        getBatch().begin();
-        fontFactory.getRobotoBold(14).draw(getBatch(), "Roboto Bold 14, Робото Болд", 100, 100);
-        fontFactory.getRobotoBold(18).draw(getBatch(), "Roboto Bold 18, Робото Болд", 100, 150);
-        fontFactory.getRobotoBold(26).draw(getBatch(), "Roboto Bold 26, Робото Болд", 100, 200);
-        fontFactory.getRobotoLight(14).draw(getBatch(), "Roboto Light 14, Робото Лайт", 100, 250);
-        fontFactory.getRobotoLight(18).draw(getBatch(), "Roboto Light 18, Робото Лайт", 100, 300);
-        fontFactory.getRobotoLight(26).draw(getBatch(), "Roboto Light 26, Робото Лайт", 100, 350);
-        getBatch().end();
+        sb.setProjectionMatrix(hudGame.stage.getCamera().combined);
+        hudGame.stage.draw();
+    }
 
-        if (Gdx.input.isKeyPressed(131))
-            Gdx.app.exit();
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+
+        hudGame.stage.getViewport().update(width, height, true);
     }
 }
