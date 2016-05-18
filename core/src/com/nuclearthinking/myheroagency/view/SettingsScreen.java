@@ -50,7 +50,7 @@ public class SettingsScreen extends AbstractScreen {
         table.add(save).right().expandX().width(100).height(40);
         table.add(back).left().expandX().width(100).height(40);
 
-        addActor(table);
+        stage.addActor(table);
     }
 
     private void initButton(){
