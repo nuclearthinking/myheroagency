@@ -26,32 +26,38 @@ public class BattleScreen extends AbstractScreen {
     public BattleScreen(GameData gameData) {
         this.gameData = gameData;
         asset = Asset.getInstance();
-        skin = asset.get("ui/ui.json");
-        atlas = asset.get("ui/ui.atlas");
+        skin = asset.get("ui/ui.json", Skin.class);
+        atlas = asset.get("ui/ui.atlas", TextureAtlas.class);
         table = new Table();
-        defend = createButton("defendButtonLabel", .9f, skin);
-        attack = createButton("attackButtonLabel", .7f, skin);
-        done = createButton("doneButtonLabel", .7f, skin);
+        skin.addRegions(atlas);
+        defend = createButton("defendButtonLabel", .9f, skin, "kramola");
+        attack = createButton("attackButtonLabel", .7f, skin, "kramola");
+        done = createButton("doneButtonLabel", .7f, skin, "kramola");
     }
 
     @Override
     public void buildStage() {
-        skin.addRegions(atlas);
         table.setFillParent(true);
         table.setDebug(Constants.DEBUG);
+        table.left().bottom();
+        table.row();
+        table.add(attack).left().bottom().width(100).height(40).pad(10).fill(false);
+        table.add(defend).left().bottom().width(100).height(40).pad(10).fill(false);
+        table.add(done).right().bottom().width(100).height(40).pad(10).expandX();
 
+
+        stage.addActor(table);
     }
 
     private TextButton.TextButtonStyle getButtonStyle() {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = new FontFactory().getRobotoBold(16);
+        style.font = new FontFactory().getRobotoBold(20);
         return style;
     }
 
-    private TextButton createButton(String localKey, float fontScale, Skin skin) {
-        TextButton button = new TextButton(locale.get(localKey), skin);
+    private TextButton createButton(String localKey, float fontScale, Skin skin, String font) {
+        TextButton button = new TextButton(locale.get(localKey), skin, font);
         button.getLabel().setFontScale(fontScale);
-        button.setStyle(getButtonStyle());
         return button;
     }
 
