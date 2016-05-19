@@ -84,11 +84,11 @@ public class MainMenuScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (event.getListenerActor() == play) {
-                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+                    ScreenManager.getInstance().showScreen(ScreenEnum.BATTLE_SCREEN, gameData);
                 } else if (event.getListenerActor() == load) {
                     logger.info("Loading game from save");
                     GameData gameData = GameData.load();
-                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, gameData);
+                    ScreenManager.getInstance().showScreen(ScreenEnum.BATTLE_SCREEN, gameData);
                 } else if (event.getListenerActor() == settings) {
                     ScreenManager.getInstance().showScreen(ScreenEnum.SETTINGS_SCREEN);
                 } else if (event.getListenerActor() == exit) {
