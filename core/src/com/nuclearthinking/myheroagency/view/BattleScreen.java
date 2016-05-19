@@ -49,12 +49,6 @@ public class BattleScreen extends AbstractScreen {
         stage.addActor(table);
     }
 
-    private TextButton.TextButtonStyle getButtonStyle() {
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = new FontFactory().getRobotoBold(20);
-        return style;
-    }
-
     private TextButton createButton(String localKey, float fontScale, Skin skin, String font) {
         TextButton button = new TextButton(locale.get(localKey), skin, font);
         button.getLabel().setFontScale(fontScale);

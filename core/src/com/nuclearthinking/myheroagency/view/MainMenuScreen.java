@@ -53,7 +53,7 @@ public class MainMenuScreen extends AbstractScreen {
 
         stage.addActor(table); // Добавляем таблицу на Stage
         // Этот экшен "выплывает" меню
-        addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
+        stage.addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
     }
 
     private void initButton() {
