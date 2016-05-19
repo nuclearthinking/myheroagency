@@ -39,6 +39,7 @@ public class BattleScreen extends AbstractScreen {
         skin.addRegions(atlas);
         table.setFillParent(true);
         table.setDebug(Constants.DEBUG);
+
     }
 
     private TextButton.TextButtonStyle getButtonStyle() {
