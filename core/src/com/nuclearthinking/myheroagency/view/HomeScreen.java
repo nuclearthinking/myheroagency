@@ -36,27 +36,27 @@ public class HomeScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        hudGame = new HudGame(getBatch());
+        hudGame = new HudGame(stage.getBatch());
 
         multi.addProcessor(hudGame.getHudStage());
         image = new Image(texture);
-        addActor(image);
+        stage.addActor(image);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
+        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
         hudGame.renderHud(delta);
 
         if(Gdx.input.isTouched())
         {
             countClick++;
             if(countClick == 1)
-                hudGame.getMainTable().addAction(sequence(moveTo(getWidth(), 0), moveTo(0, 0, .5f)));
+                hudGame.getMainTable().addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f)));
 
-            hudGame.getHudElement("Quest").addAction(sequence(moveTo(10,10), moveTo(0,0,.1f)));
+            hudGame.getUiFactory().getTextButton("Quest").addAction(sequence(moveTo(10,10), moveTo(0,0,.1f)));
 
         }
 

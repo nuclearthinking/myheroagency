@@ -11,6 +11,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
+import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -25,9 +26,11 @@ public class SettingsScreen extends AbstractScreen {
     private SelectBox<String> selectLanguage;
     private TextField height, width;
     private Label titleLabel, languageLabel, widthLabel, heightLabel;
+    private UiFactory uiFactory;
 
     @Override
     public void buildStage() {
+        uiFactory = new UiFactory();
         table = new Table(); // Создаем таблицу
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
@@ -54,32 +57,33 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void initButton(){
-        titleLabel = new Label(locale.get("mainTitle"), Asset.getInstance().getSkin(), "kramola");
-        languageLabel = new Label(locale.get("languageLabel"), Asset.getInstance().getSkin(), "kramola");
-        widthLabel = new Label(locale.get("widthLabel"), Asset.getInstance().getSkin(), "kramola");
-        heightLabel = new Label(locale.get("heightLabel"), Asset.getInstance().getSkin(), "kramola");
+        titleLabel = uiFactory.getLabel(locale.get("mainTitle"));
+        languageLabel = uiFactory.getLabel(locale.get("languageLabel"));
+        widthLabel = uiFactory.getLabel(locale.get("widthLabel"));
+        heightLabel = uiFactory.getLabel(locale.get("heightLabel"));
 
-        back = new TextButton(locale.get("buttonBack"), Asset.getInstance().getSkin(), "kramola");
+        back = uiFactory.getTextButton(locale.get("buttonBack"));
 
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
         back.addListener(new BackListener()); //Добавляет листнер кнопке
 
-        save = new TextButton(locale.get("buttonSave"), Asset.getInstance().getSkin(), "kramola");
+        save = uiFactory.getTextButton(locale.get("buttonSave"));
         save.getLabel().setFontScale(.8f);
         save.getLabel().setColor(Color.FOREST);
         save.addListener(new SaveListener()); //Добавляет листнер кнопке
 
-        selectLanguage = new SelectBox<String>(Asset.getInstance().getSkin(), "kramola");
+        selectLanguage = new SelectBox<String>(uiFactory.getSkin(), "kramola");
         selectLanguage.setItems("ru", "en");
         selectLanguage.setSelected(Settings.getLanguage());
 
-        width = new TextField(Integer.toString(Gdx.graphics.getWidth()), Asset.getInstance().getSkin());
-        height = new TextField(Integer.toString(Gdx.graphics.getHeight()), Asset.getInstance().getSkin());
+        width = uiFactory.getTextField(Integer.toString(Gdx.graphics.getWidth()));
+        height = uiFactory.getTextField(Integer.toString(Gdx.graphics.getHeight()));
     }
 
     private void reloadLabel(){
         locale.loadBundle(this.getClass());
+
         titleLabel.setText(locale.get("mainTitle"));
         languageLabel.setText(locale.get("languageLabel"));
         widthLabel.setText(locale.get("widthLabel"));
