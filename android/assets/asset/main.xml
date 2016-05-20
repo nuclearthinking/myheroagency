@@ -17,7 +17,9 @@
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Bold.ttf"/>
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Thin.ttf"/>
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Regular.ttf"/>
-        <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json" />
+        <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json"/>
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="ui/ui.atlas"/>
+        <asset type="com.badlogic.gdx.graphics.Texture" path="img/battleBackground.png"/>
+        <asset type="com.badlogic.gdx.graphics.Texture" path="img/man.png"/>
     </group>
 </assets>
