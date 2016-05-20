@@ -9,14 +9,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.model.GameData;
-import com.nuclearthinking.myheroagency.utils.Constants;
+import com.nuclearthinking.myheroagency.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
-public abstract class AbstractScreen extends Stage implements Screen {
+public abstract class AbstractScreen implements Screen {
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
     final protected Localization locale = new Localization(this.getClass());
     final protected InputMultiplexer multi = new InputMultiplexer();
+    final protected Stage stage;
 
     protected GameData gameData;
 
@@ -29,7 +30,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     }
 
     AbstractScreen() {
-        super(new StretchViewport(Constants.GAME_W, Constants.GAME_H, new OrthographicCamera()));
+        stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()));
     }
 
     public abstract void buildStage();
@@ -37,6 +38,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     @Override
     public void show() {
         logger.info("Show screen: {}", getName());
+        Gdx.input.setInputProcessor(stage);
 
         multi.addProcessor(this);
         Gdx.input.setInputProcessor(multi);
@@ -47,14 +49,14 @@ public abstract class AbstractScreen extends Stage implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        super.act(delta);
-        super.draw();
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
         logger.info("Resizing screen: {} to: y = {} x = {}", getName(), width, height);
-        getViewport().update(width, height, true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

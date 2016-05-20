@@ -50,9 +50,9 @@ public class MainMenuScreen extends AbstractScreen {
         table.row();
         table.add(exit).left().expandX().width(100).height(40).pad(10);
 
-        addActor(table); // Добавляем таблицу на Stage
+        stage.addActor(table); // Добавляем таблицу на Stage
         // Этот экшен "выплывает" меню
-        addAction(sequence(moveTo(getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
+        addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
     }
 
     private void initButton() {
