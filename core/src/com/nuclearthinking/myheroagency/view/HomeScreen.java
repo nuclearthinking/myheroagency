@@ -56,8 +56,7 @@ public class HomeScreen extends AbstractScreen {
             if(countClick == 1)
                 hudGame.getMainTable().addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f)));
 
-            hudGame.getUiFactory().getTextButton("Quest").addAction(sequence(moveTo(10,10), moveTo(0,0,.1f)));
-
+            hudGame.getUiFactory().getTextButton("Quest").addAction(sequence(moveTo(10,10), moveTo(0,0,.1f))); //TODO: неверное обращение к элементу. Так делать не стоит
         }
 
     }

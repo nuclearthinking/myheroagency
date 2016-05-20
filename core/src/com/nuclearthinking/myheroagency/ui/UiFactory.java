@@ -60,8 +60,4 @@ public class UiFactory {
         return skin;
     }
 
-    public TextButton getTextButtonMap(String name){
-        return textButtonHashMap.get(name);
-    }
-
 }
