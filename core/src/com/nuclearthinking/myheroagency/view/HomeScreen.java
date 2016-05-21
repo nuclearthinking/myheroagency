@@ -1,14 +1,10 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 /**
@@ -22,11 +18,9 @@ public class HomeScreen extends AbstractScreen {
     private HudGame hudGame;
     private final Texture texture;
     private Image image;
-    int countClick = 0;
 
     public HomeScreen() {
-        gameData = new GameData();
-        texture = Asset.getInstance().get("img/base.jpg", Texture.class);
+        this(new GameData());
     }
 
     public HomeScreen(GameData gameData) {
@@ -49,16 +43,6 @@ public class HomeScreen extends AbstractScreen {
 
         stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
         hudGame.renderHud(delta);
-
-        if(Gdx.input.isTouched())
-        {
-            countClick++;
-            if(countClick == 1)
-                hudGame.getMainTable().addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f)));
-
-            hudGame.getUiFactory().getTextButton("Quest").addAction(sequence(moveTo(10,10), moveTo(0,0,.1f))); //TODO: неверное обращение к элементу. Так делать не стоит
-        }
-
     }
 
     @Override

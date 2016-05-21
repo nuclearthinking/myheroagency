@@ -13,43 +13,53 @@ import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
  * Created by Izonami on 18.05.2016.
+ *
+ * rightTable,leftTable, r,l это тестовые и их нужно будет убрать
+ * есть идея разделить таблицы на отдельные классы, но пока непонятно как выглядит интерфейс это избыточно.
+ *
  */
 public class HudGame{
 
     private final Stage stage;
-    private final Table mainTable, buttomTable, rightTable;
-    private TextButton questButton, testButton, testButton2;
+    private final Table mainTable, buttomTable, rightTable, leftTable;
+    private TextButton questButton, r,l;
     private UiFactory uiFactory;
 
     public HudGame(Batch batch){
         stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()), batch);
         uiFactory = new UiFactory();
 
-        mainTable = new Table();
-        buttomTable = new Table();
-        rightTable = new Table();
-
+        mainTable = getTable();
         mainTable.setFillParent(true);
-        mainTable.setDebug(Constants.DEBUG);
-        mainTable.setPosition(Settings.getWidth(), Settings.getHeight());
+
+        buttomTable = getTable();
+        rightTable = getTable();
+        leftTable = getTable();
 
         initButton();
 
-        buttomTable.add(questButton).pad(10);
-        buttomTable.add(testButton2);
+        buttomTable.add(questButton);
+        rightTable.add(r);
+        leftTable.add(l);
 
-        rightTable.add(testButton);
-
-        mainTable.add(buttomTable).expand().bottom();
         mainTable.add(rightTable).expand().right();
+        mainTable.add(buttomTable).expand().bottom();
+        mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
     }
 
     private void initButton(){
         questButton = uiFactory.getTextButton("Quest");
-        testButton = uiFactory.getTextButton("Test");
-        testButton2 = uiFactory.getTextButton("Test2");
+        r = uiFactory.getTextButton("Right");
+        l = uiFactory.getTextButton("Left");
+    }
+
+    private Table getTable(){
+        Table table = new Table();
+        table.setDebug(Constants.DEBUG);
+
+        return table;
     }
 
     public void renderHud(float delta) {
@@ -65,15 +75,8 @@ public class HudGame{
         return stage;
     }
 
-    public Table getMainTable(){
-        return mainTable;
-    }
-
     public Camera getHudCamera(){
         return stage.getCamera();
     }
 
-    public UiFactory getUiFactory(){
-        return uiFactory;
-    }
 }
