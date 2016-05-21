@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.ui.hud;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -26,8 +25,6 @@ public class Quests{
 
         Texture t = Asset.getInstance().get("img/test.jpg", Texture.class);
         Image i = new Image(t);
-        questGroup.setSize(100,100);
-        questGroup.setColor(Color.YELLOW);
         questGroup.setPosition(-Constants.GAME_W, 0);
 
         questGroup.addActor(i);
