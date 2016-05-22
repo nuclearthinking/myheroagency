@@ -67,7 +67,7 @@ public class BattleScreen extends AbstractScreen {
 //        stage.addActor(manImage);
         stage.addActor(table);
 //        manImage.setPosition(50, 100);
-//        manImage.addListener(new ManListner());
+        manImage.addListener(new ManListner());
         castle = new Sprite(castleTexture);
         sprite = new Sprite(manTexture);
         castle.setPosition(200, 200);
@@ -90,22 +90,30 @@ public class BattleScreen extends AbstractScreen {
         castle.draw(stage.getBatch());
         sprite.draw(stage.getBatch());
         if (Gdx.input.justTouched()) {
-//            System.out.println("Toched");
-            Vector3 tochPoint = new Vector3();
-            camera.unproject(tochPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
-
-            if (castle.getBoundingRectangle().contains(tochPoint.x, tochPoint.y)) {
-                System.out.println("toch on sprite");
-                castle.getTexture().getTextureData().prepare();
-                Pixmap pixmap = castle.getTexture().getTextureData().consumePixmap();
-                System.out.println("touch point " + tochPoint.toString());
-                System.out.println(pixmap.getPixel(20,20));
-                System.out.println(pixmap.getPixel((int) tochPoint.x, (int) tochPoint.y));
-            }
+            clicklistner(sprite);
         }
         stage.getBatch().end();
 
+    }
+
+
+    void clicklistner(Sprite sprite) {
+        Vector3 touchPoint = new Vector3();
+        camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+        if (sprite.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+            System.out.println("toch on sprite");
+            sprite.getTexture().getTextureData().prepare();
+            Pixmap pixmap = sprite.getTexture().getTextureData().consumePixmap();
+            int pixelX = (int) (touchPoint.x - sprite.getX());
+            int pixelY = (int) (touchPoint.y - sprite.getY());
+            System.out.println("touch point " + touchPoint.toString());
+            System.out.println(pixmap.getPixel(pixelX, pixelY));
+            System.out.println(pixmap.getFormat());
+            System.out.println(pixmap.getGLFormat());
+            System.out.println(pixmap.getGLType());
+            System.out.println(pixmap.getGLInternalFormat());
+            pixmap.dispose();
+        }
     }
 
     @Override
