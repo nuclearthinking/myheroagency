@@ -1,19 +1,14 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.utils.AccurateListener;
@@ -61,19 +56,16 @@ public class BattleScreen extends AbstractScreen {
         table.setDebug(Constants.DEBUG);
         table.left().bottom();
         table.row();
-//        table.add(attack).left().bottom().width(100).height(40).pad(10).fill(false);
-//        table.add(defend).left().bottom().width(100).height(40).pad(10).fill(false);
-//        table.add(done).right().bottom().width(100).height(40).pad(10).expandX();
+        table.add(attack).left().bottom().width(100).height(40).pad(10).fill(false);
+        table.add(defend).left().bottom().width(100).height(40).pad(10).fill(false);
+        table.add(done).right().bottom().width(100).height(40).pad(10).expandX();
 
         stage.addActor(backgroundImage);
         stage.addActor(manImage);
         stage.addActor(table);
-//        manImage.setPosition(50, 100);
-        castle = new Sprite(castleTexture);
+        manImage.setPosition(50, 100);
         sprite = new Sprite(manTexture);
         manImage.addListener(new AccurateImplText(manTexture));
-
-        castle.setPosition(200, 200);
         camera.setToOrtho(false);
     }
 
@@ -92,30 +84,8 @@ public class BattleScreen extends AbstractScreen {
         stage.getBatch().begin();
         castle.draw(stage.getBatch());
         sprite.draw(stage.getBatch());
-        if (Gdx.input.justTouched()) {
-            clicklistner(castle);
-        }
         stage.getBatch().end();
 
-    }
-
-
-    void clicklistner(Sprite sprite) {
-        Vector3 touchPoint = new Vector3();
-        camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-        if (sprite.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
-            sprite.getTexture().getTextureData().prepare();
-            Pixmap pixmap = sprite.getTexture().getTextureData().consumePixmap();
-            int pixelX = (int) (touchPoint.x - sprite.getX());
-            int pixelY = (int) (touchPoint.y - sprite.getY());
-            Color color = new Color(pixmap.getPixel(pixelX, pixelY));
-            if (color.a > 0f) {
-                System.out.println("Sprite touched");
-            } else {
-                System.out.println("Sprite doesn't touched");
-            }
-            pixmap.dispose();
-        }
     }
 
     @Override
@@ -123,15 +93,6 @@ public class BattleScreen extends AbstractScreen {
         super.dispose();
     }
 
-
-    class ManListner extends ClickListener {
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            logger.debug("Man pressed");
-            logger.debug("is visual pressed {}", isVisualPressed());
-            return true;
-        }
-    }
 
     class AccurateImplText extends AccurateListener {
 
