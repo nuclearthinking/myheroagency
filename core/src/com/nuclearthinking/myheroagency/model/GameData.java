@@ -16,8 +16,6 @@ public class GameData implements Serializable {
     private Player player;
     private BattleData battleData;
 
-
-
     public static void save(GameData gameData) {
         Kryo kryo = new Kryo();
         try (Output output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
@@ -42,6 +40,10 @@ public class GameData implements Serializable {
             new SimpleLoggerFactory().getLogger("GameData").info("Loading success");
             return gameData;
         }
+    }
+
+    public BattleData getBattleData() {
+        return battleData;
     }
 
     public Player getPlayer() {

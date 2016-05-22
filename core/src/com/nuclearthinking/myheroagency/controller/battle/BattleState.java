@@ -16,8 +16,9 @@ public abstract class BattleState {
         this.battleData = battleData;
     }
 
+    public abstract void attack();
 
-    public abstract void act();
+    public abstract void defense();
 
-
+    public abstract void endTurn();
 }

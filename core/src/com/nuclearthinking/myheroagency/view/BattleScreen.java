@@ -2,14 +2,16 @@ package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.battle.BattleState;
+import com.nuclearthinking.myheroagency.controller.battle.StartBattleState;
 import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.utils.AccurateListener;
 import com.nuclearthinking.myheroagency.utils.Constants;
@@ -29,11 +31,13 @@ public class BattleScreen extends AbstractScreen {
     TextButton defend, attack, done;
     Image backgroundImage, manImage;
     Texture backgroundTexture, manTexture, castleTexture;
-    Sprite sprite, castle;
     OrthographicCamera camera;
+    BattleState state;
 
     public BattleScreen(GameData gameData) {
         this.gameData = gameData;
+
+        state = new StartBattleState(gameData.getBattleData());
         asset = Asset.getInstance();
         skin = asset.get("ui/ui.json", Skin.class);
         atlas = asset.get("ui/ui.atlas", TextureAtlas.class);
@@ -64,8 +68,10 @@ public class BattleScreen extends AbstractScreen {
         stage.addActor(manImage);
         stage.addActor(table);
         manImage.setPosition(50, 100);
-        sprite = new Sprite(manTexture);
-        manImage.addListener(new AccurateImplText(manTexture));
+        manImage.addListener(new ManListener(manTexture));
+        attack.addListener(new AttackListener());
+        defend.addListener(new DefenseListener());
+        done.addListener(new EndTurnListener());
         camera.setToOrtho(false);
     }
 
@@ -82,8 +88,6 @@ public class BattleScreen extends AbstractScreen {
         stage.getBatch().setProjectionMatrix(camera.combined);
         super.render(delta);
         stage.getBatch().begin();
-        castle.draw(stage.getBatch());
-        sprite.draw(stage.getBatch());
         stage.getBatch().end();
 
     }
@@ -94,15 +98,43 @@ public class BattleScreen extends AbstractScreen {
     }
 
 
-    class AccurateImplText extends AccurateListener {
+    class ManListener extends AccurateListener {
 
-        public AccurateImplText(Texture texture) {
+        public ManListener(Texture texture) {
             super(texture);
         }
 
         @Override
         public boolean accurateClicked(InputEvent event, float x, float y) {
             System.out.println("SPRITE TOUCHED");
+            return true;
+        }
+    }
+
+    class AttackListener extends ClickListener {
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            state.attack();
+            return true;
+        }
+    }
+
+    class DefenseListener extends ClickListener {
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            state.defense();
+
+            return true;
+        }
+    }
+
+    class EndTurnListener extends ClickListener {
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            state.endTurn();
             return true;
         }
     }

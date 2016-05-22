@@ -15,7 +15,17 @@ public class DefenceState extends BattleState {
     }
 
     @Override
-    public void act() {
+    public void attack() {
+
+    }
+
+    @Override
+    public void defense() {
+
+    }
+
+    @Override
+    public void endTurn() {
 
     }
 }

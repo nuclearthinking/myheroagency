@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.utils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -21,6 +22,10 @@ public class AccurateListener extends InputListener {
         this.texture = texture;
     }
 
+    public AccurateListener(Sprite sprite) {
+        this(sprite.getTexture());
+    }
+
     @Override
     public final boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         super.touchDown(event, x, y, pointer, button);
@@ -28,9 +33,7 @@ public class AccurateListener extends InputListener {
             texture.getTextureData().prepare();
         }
         Pixmap pixmap = texture.getTextureData().consumePixmap();
-        int pixelX = (int) (x - event.getListenerActor().getX());
-        int pixelY = (int) (y - event.getListenerActor().getY());
-        Color color = new Color(pixmap.getPixel(pixelX, pixelY));
+        Color color = new Color(pixmap.getPixel((int) x, (int) y));
         pixmap.dispose();
         if (color.a > 0f) {
             accurateClicked(event, x, y);

@@ -8,14 +8,24 @@ import com.nuclearthinking.myheroagency.model.BattleData;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class StartTurn extends BattleState {
+public class StartBattleState extends BattleState {
 
-    public StartTurn(BattleData battleData) {
+    public StartBattleState(BattleData battleData) {
         super(battleData);
     }
 
     @Override
-    public void act() {
+    public void attack() {
+
+    }
+
+    @Override
+    public void defense() {
+
+    }
+
+    @Override
+    public void endTurn() {
 
     }
 }
