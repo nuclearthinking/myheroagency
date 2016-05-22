@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -90,7 +91,7 @@ public class BattleScreen extends AbstractScreen {
         castle.draw(stage.getBatch());
         sprite.draw(stage.getBatch());
         if (Gdx.input.justTouched()) {
-            clicklistner(sprite);
+            clicklistner(castle);
         }
         stage.getBatch().end();
 
@@ -101,18 +102,19 @@ public class BattleScreen extends AbstractScreen {
         Vector3 touchPoint = new Vector3();
         camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         if (sprite.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
-            System.out.println("toch on sprite");
             sprite.getTexture().getTextureData().prepare();
             Pixmap pixmap = sprite.getTexture().getTextureData().consumePixmap();
             int pixelX = (int) (touchPoint.x - sprite.getX());
             int pixelY = (int) (touchPoint.y - sprite.getY());
+
             System.out.println("touch point " + touchPoint.toString());
-            System.out.println(pixmap.getPixel(pixelX, pixelY));
-            System.out.println(pixmap.getFormat());
-            System.out.println(pixmap.getGLFormat());
-            System.out.println(pixmap.getGLType());
-            System.out.println(pixmap.getGLInternalFormat());
-            pixmap.dispose();
+            Color color = new Color(pixmap.getPixel(pixelX, pixelY));
+            if (color.a > 0f) {
+                System.out.println("Sprite touched");
+            } else {
+                System.out.println("Sprite doesn't touched");
+            }
+                pixmap.dispose();
         }
     }
 
