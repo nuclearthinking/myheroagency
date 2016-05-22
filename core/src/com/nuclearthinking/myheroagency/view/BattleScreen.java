@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.utils.AccurateListener;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
@@ -65,12 +66,13 @@ public class BattleScreen extends AbstractScreen {
 //        table.add(done).right().bottom().width(100).height(40).pad(10).expandX();
 
         stage.addActor(backgroundImage);
-//        stage.addActor(manImage);
+        stage.addActor(manImage);
         stage.addActor(table);
 //        manImage.setPosition(50, 100);
-        manImage.addListener(new ManListner());
         castle = new Sprite(castleTexture);
         sprite = new Sprite(manTexture);
+        manImage.addListener(new AccurateImplText(manTexture));
+
         castle.setPosition(200, 200);
         camera.setToOrtho(false);
     }
@@ -127,6 +129,19 @@ public class BattleScreen extends AbstractScreen {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             logger.debug("Man pressed");
             logger.debug("is visual pressed {}", isVisualPressed());
+            return true;
+        }
+    }
+
+    class AccurateImplText extends AccurateListener {
+
+        public AccurateImplText(Texture texture) {
+            super(texture);
+        }
+
+        @Override
+        public boolean accurateClicked(InputEvent event, float x, float y) {
+            System.out.println("SPRITE TOUCHED");
             return true;
         }
     }
