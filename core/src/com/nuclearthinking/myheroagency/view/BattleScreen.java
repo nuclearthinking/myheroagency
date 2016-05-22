@@ -106,15 +106,13 @@ public class BattleScreen extends AbstractScreen {
             Pixmap pixmap = sprite.getTexture().getTextureData().consumePixmap();
             int pixelX = (int) (touchPoint.x - sprite.getX());
             int pixelY = (int) (touchPoint.y - sprite.getY());
-
-            System.out.println("touch point " + touchPoint.toString());
             Color color = new Color(pixmap.getPixel(pixelX, pixelY));
             if (color.a > 0f) {
                 System.out.println("Sprite touched");
             } else {
                 System.out.println("Sprite doesn't touched");
             }
-                pixmap.dispose();
+            pixmap.dispose();
         }
     }
 
