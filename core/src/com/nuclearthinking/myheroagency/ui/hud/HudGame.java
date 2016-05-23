@@ -3,13 +3,18 @@ package com.nuclearthinking.myheroagency.ui.hud;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by Izonami on 18.05.2016.
@@ -21,13 +26,16 @@ import com.nuclearthinking.myheroagency.utils.Constants;
 public class HudGame{
 
     private final Stage stage;
+    private final UiFactory uiFactory = new UiFactory();
     private final Table mainTable, buttomTable, rightTable, leftTable;
     private TextButton questButton, r,l;
-    private UiFactory uiFactory;
+    private Quests quest;
+    private boolean show = true;
 
     public HudGame(Batch batch){
         stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()), batch);
-        uiFactory = new UiFactory();
+
+        quest = new Quests(uiFactory);
 
         mainTable = getTable();
         mainTable.setFillParent(true);
@@ -47,19 +55,14 @@ public class HudGame{
         mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
+        stage.addActor(quest.getQuestGroup());
     }
 
-    private void initButton(){
+    private void initButton() {
         questButton = uiFactory.getTextButton("Quest");
         r = uiFactory.getTextButton("Right");
         l = uiFactory.getTextButton("Left");
-    }
-
-    private Table getTable(){
-        Table table = new Table();
-        table.setDebug(Constants.DEBUG);
-
-        return table;
+        questButton.addListener(new Quest());
     }
 
     public void renderHud(float delta) {
@@ -77,6 +80,28 @@ public class HudGame{
 
     public Camera getHudCamera(){
         return stage.getCamera();
+    }
+
+    public Table getTable(){
+        Table table = new Table();
+        table.setDebug(Constants.DEBUG);
+
+        return table;
+    }
+
+    private class Quest extends ClickListener{
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            if(show){
+                quest.getQuestGroup().addAction(sequence(moveTo(-Constants.GAME_W, 0), moveTo(0, 0, .5f)));
+                show = false;
+            }
+            else{
+                quest.getQuestGroup().addAction(sequence(moveTo(0, 0), moveTo(-Constants.GAME_W, 0, .5f)));
+                show = true;
+            }
+
+        }
     }
 
 }
