@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,6 +16,7 @@ import org.slf4j.impl.SimpleLoggerFactory;
 public abstract class AbstractScreen implements Screen {
     final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
     final protected Localization locale = new Localization(this.getClass());
+    final protected InputMultiplexer multi = new InputMultiplexer();
     final protected Stage stage;
 
     protected GameData gameData;
@@ -36,7 +38,9 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void show() {
         logger.info("Show screen: {}", getName());
-        Gdx.input.setInputProcessor(stage);
+
+        multi.addProcessor(stage);
+        Gdx.input.setInputProcessor(multi);
     }
 
     @Override

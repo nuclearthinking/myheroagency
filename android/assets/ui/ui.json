@@ -170,6 +170,13 @@
       "font": "default-font",
       "fontColor": "white",
       "cursor": "cursor"
+    },
+    "kramola": {
+      "selection": "selection",
+      "background": "textfield",
+      "font": "kramola-font",
+      "fontColor": "white",
+      "cursor": "cursor"
     }
   },
   "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {

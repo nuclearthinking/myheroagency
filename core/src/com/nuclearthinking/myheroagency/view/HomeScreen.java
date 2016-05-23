@@ -1,8 +1,10 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
 
 /**
@@ -13,35 +15,40 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class HomeScreen extends AbstractScreen {
 
-    private FontFactory fontFactory;
+    private HudGame hudGame;
+    private final Texture texture;
+    private Image image;
 
     public HomeScreen() {
-        gameData = new GameData();
+        this(new GameData());
     }
 
     public HomeScreen(GameData gameData) {
         this.gameData = gameData;
+        texture = Asset.getInstance().get("img/base.jpg", Texture.class);
     }
 
     @Override
     public void buildStage() {
-        fontFactory = new FontFactory();
+        hudGame = new HudGame(stage.getBatch());
+
+        multi.addProcessor(hudGame.getHudStage());
+        image = new Image(texture);
+        stage.addActor(image);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        stage.getBatch().begin();
-        fontFactory.getRobotoBold(14).draw(stage.getBatch(), "Roboto Bold 14, Робото Болд", 100, 100);
-        fontFactory.getRobotoBold(18).draw(stage.getBatch(), "Roboto Bold 18, Робото Болд", 100, 150);
-        fontFactory.getRobotoBold(26).draw(stage.getBatch(), "Roboto Bold 26, Робото Болд", 100, 200);
-        fontFactory.getRobotoLight(14).draw(stage.getBatch(), "Roboto Light 14, Робото Лайт", 100, 250);
-        fontFactory.getRobotoLight(18).draw(stage.getBatch(), "Roboto Light 18, Робото Лайт", 100, 300);
-        fontFactory.getRobotoLight(26).draw(stage.getBatch(), "Roboto Light 26, Робото Лайт", 100, 350);
-        stage.getBatch().end();
+        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
+        hudGame.renderHud(delta);
+    }
 
-        if (Gdx.input.isKeyPressed(131))
-            Gdx.app.exit();
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+
+        hudGame.resizeHud(width, height);
     }
 }

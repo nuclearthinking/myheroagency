@@ -26,7 +26,6 @@ public class Asset implements Disposable, AssetErrorListener {
     private Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
     private AssetManager manager;
     private ObjectMap<String, Array<Assets>> groups;
-    private Skin skin;
     private Locale locale;
 
     public static Asset getInstance() {
@@ -171,14 +170,6 @@ public class Asset implements Disposable, AssetErrorListener {
         } catch (Exception e) {
             logger.error("Error loading file {} {}", assetFile, e.getMessage());
         }
-    }
-
-    public Skin getSkin() {
-        return skin;
-    }
-
-    public void setSkin(Skin skin) {
-        this.skin = skin;
     }
 
     private class Assets {

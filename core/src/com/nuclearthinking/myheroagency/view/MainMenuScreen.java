@@ -2,17 +2,15 @@ package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -25,14 +23,11 @@ public class MainMenuScreen extends AbstractScreen {
     private Table table;
     private TextButton play, load, settings, exit;
     private ClickListener buttonListener;
+    private UiFactory uiFactory;
 
     @Override
     public void buildStage() {
-        //Settings.loadSettings();
-        Asset.getInstance().setSkin(Asset.getInstance().get("ui/ui.json", Skin.class)); // Создаем скин на основе json
-        Asset.getInstance().getSkin().addRegions(Asset
-                .getInstance()
-                .get("ui/ui.atlas", TextureAtlas.class)); // Добавляем области картинки полученные из атласа
+        uiFactory = new UiFactory();
 
         table = new Table(); // Создаем таблицу
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
@@ -53,22 +48,22 @@ public class MainMenuScreen extends AbstractScreen {
 
         stage.addActor(table); // Добавляем таблицу на Stage
         // Этот экшен "выплывает" меню
-        addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
+        stage.addAction(sequence(moveTo(stage.getWidth(), 0), moveTo(0, 0, .5f))); // Это чисто попробовать возможности. Акшены очень мощьная штука.
     }
 
     private void initButton() {
         // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
-        play = new TextButton(locale.get("buttonPlay"), Asset.getInstance().getSkin(), "kramola");
+        play = uiFactory.getTextButton(locale.get("buttonPlay"));
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
         play.addListener(buttonListener); //Добавляет листнер кнопке
-        load = new TextButton(locale.get("buttonLoad"), Asset.getInstance().getSkin(), "kramola");
+        load = uiFactory.getTextButton(locale.get("buttonLoad"));
         load.getLabel().setFontScale(.7f);
         load.addListener(buttonListener);
-        settings = new TextButton(locale.get("buttonSettings"), Asset.getInstance().getSkin(), "kramola");
+        settings = uiFactory.getTextButton(locale.get("buttonSettings"));
         settings.getLabel().setFontScale(.7f);
         settings.addListener(buttonListener);
-        exit = new TextButton(locale.get("buttonExit"), Asset.getInstance().getSkin(), "kramola");
+        exit = uiFactory.getTextButton(locale.get("buttonExit"));
         exit.getLabel().setFontScale(.7f);
         exit.addListener(buttonListener);
     }
