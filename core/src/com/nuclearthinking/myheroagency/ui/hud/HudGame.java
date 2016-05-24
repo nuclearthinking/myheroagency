@@ -64,6 +64,7 @@ public class HudGame{
         questButton = uiFactory.getTextButton("Quest");
         r = uiFactory.getTextButton("Right");
         l = uiFactory.getTextButton("Left");
+        l.addListener(new AddQuest());
         questButton.addListener(new QuestListener());
     }
 
@@ -104,6 +105,16 @@ public class HudGame{
                 isShowQuest = true;
             }
 
+        }
+    }
+
+    //TODO: Полностью является кодом для проверки
+    private class AddQuest extends ClickListener{
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            for (int i = 0; i < 5; i++) {
+                quest.addQuestToList("New Quest" + i);
+            }
         }
     }
 
