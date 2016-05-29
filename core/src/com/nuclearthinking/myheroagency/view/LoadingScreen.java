@@ -4,8 +4,8 @@ import com.badlogic.gdx.math.Interpolation;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
-import com.nuclearthinking.myheroagency.utils.Constants;
 
 public class LoadingScreen extends AbstractScreen {
 
@@ -37,7 +37,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = loading();
 
         stage.getBatch().begin();
-        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
+        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Settings.getWidth() - 150, 35);
         stage.getBatch().end();
     }
 

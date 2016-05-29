@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
@@ -43,6 +44,14 @@ public class HomeScreen extends AbstractScreen {
 
         stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
         hudGame.renderHud(delta);
+
+        //TODO: Подобное, стоит вынести в контроллер
+        if(Gdx.input.isKeyJustPressed(131) && !hudGame.getSettings().isShowSettings()){
+            hudGame.getSettings().tableVisible(true);
+        }
+        else if (Gdx.input.isKeyJustPressed(131) && hudGame.getSettings().isShowSettings()){
+            hudGame.getSettings().tableVisible(false);
+        }
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
+import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -30,6 +31,7 @@ public class HudGame{
     private TextButton questButton, r,l;
     private UiFactory uiFactory;
     private Quest quest;
+    private SettingsLayer settings;
     private boolean isShowQuest = true;
 
     public HudGame(Batch batch){
@@ -38,6 +40,7 @@ public class HudGame{
 
         //Инициализация слоёв
         quest = new Quest(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
+        settings = new SettingsLayer(uiFactory);
 
         mainTable = getTable();
         mainTable.setFillParent(true);
@@ -57,7 +60,8 @@ public class HudGame{
         mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
-        stage.addActor(quest.getQuestGroup()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
+        stage.addActor(quest.getQuestTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
+        stage.addActor(settings.getSettingsTable());
     }
 
     private void initButton(){
@@ -97,11 +101,11 @@ public class HudGame{
         @Override
         public void clicked(InputEvent event, float x, float y) {
             if(isShowQuest){
-                quest.getQuestGroup().addAction(sequence(moveTo(-Constants.GAME_W, 0), moveTo(0, 0, .5f)));
+                quest.getQuestTable().addAction(sequence(moveTo(-Constants.GAME_W, 0), moveTo(0, 0, .5f)));
                 isShowQuest = false;
             }
             else{
-                quest.getQuestGroup().addAction(sequence(moveTo(0, 0), moveTo(-Constants.GAME_W, 0, .5f)));
+                quest.getQuestTable().addAction(sequence(moveTo(0, 0), moveTo(-Constants.GAME_W, 0, .5f)));
                 isShowQuest = true;
             }
 
@@ -116,6 +120,10 @@ public class HudGame{
                 quest.addQuestToList("New Quest" + i);
             }
         }
+    }
+
+    public SettingsLayer getSettings(){
+        return settings;
     }
 
 }

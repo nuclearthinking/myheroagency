@@ -7,12 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.nuclearthinking.myheroagency.utils.Constants.GAME_H;
-import static com.nuclearthinking.myheroagency.utils.Constants.GAME_W;
 
 /**
  * Date: 05.05.2016
@@ -38,7 +37,7 @@ public class SplashScreen extends AbstractScreen {
         fontFactory = new FontFactory();
         actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", stage); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
         actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
-        actor.setPosition(GAME_W / 2 - 32, GAME_H / 2 + 32);
+        actor.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight() / 2 + 32);
         actor.fadeText();
 
         Runnable load = new Runnable() {
@@ -50,7 +49,7 @@ public class SplashScreen extends AbstractScreen {
 
         splashImage = new Image(texture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-        splashImage.setPosition(GAME_W / 2 - 32, GAME_H + 32);
+        splashImage.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight()  + 32);
         splashImage.addAction(
                 //Секвенция задаёт порядок действий
                 sequence(
@@ -61,7 +60,7 @@ public class SplashScreen extends AbstractScreen {
                                 (
                                         fadeIn(2f, Interpolation.pow2), //Появление
                                         scaleTo(2f, 2f, 2.5f, Interpolation.pow5), //Изменение размера
-                                        moveTo(GAME_W / 2 - 32, GAME_H / 2 - 32, 2f, Interpolation.swing)), //Положение на экране
+                                        moveTo(Settings.getWidth() / 2 - 32, Settings.getHeight()  / 2 - 32, 2f, Interpolation.swing)), //Положение на экране
                         delay(1.5f), //Задержка
                         fadeOut(1.25f), //Исчезновение
                         run(load))); //Запуск сцены
