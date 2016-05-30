@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
@@ -18,57 +21,52 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 /**
  * Created by Izonami on 24.05.2016.
  */
-public class SettingsLayer {
+public class SettingsLayer extends AbstractLayer{
 
-    private final UiFactory factory;
-    private final Table settingsTable;
     private Image i;
     private Label titleLabel, widthLabel, heightLabel;
     private TextField height, width;
-    private TextButton back, save;
-    private boolean isShowSettings = false;
+    private TextButton exit, save;
+    private boolean isShowTable = false;
 
     public SettingsLayer(final UiFactory factory){
-        this.factory = factory;
+        super(factory);
 
-        settingsTable = new Table();
-        settingsTable.setSize(Settings.getWidth(), Settings.getHeight());
-        settingsTable.setDebug(true);
-        settingsTable.setPosition(-Settings.getWidth(), 0);
+        getTable().setSize(Settings.getWidth(), Settings.getHeight());
 
         Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
         i = new Image(t);
         i.setColor(Color.BLACK);
-        i.setSize(settingsTable.getWidth(), settingsTable.getHeight());
+        i.setSize(getTable().getWidth(), getTable().getHeight());
 
         initButton();
 
-        settingsTable.addActor(i);
+        getTable().addActor(i);
 
-        settingsTable.add(titleLabel).spaceBottom(50).colspan(3).expandX().row();
-        settingsTable.row();
-        settingsTable.add(widthLabel).height(80).right();
-        settingsTable.add(width).top().center().left();
-        settingsTable.add().row();
-        settingsTable.add(heightLabel).height(80).right();
-        settingsTable.add(height).top().center().left();
-        settingsTable.row();
-        settingsTable.add(save).right().expandX().width(100).height(40);
-        settingsTable.add(back).left().expandX().width(100).height(40);
+        getTable().add(titleLabel).spaceBottom(50).colspan(3).expandX().row();
+        getTable().row();
+        getTable().add(widthLabel).height(80).right();
+        getTable().add(width).top().center().left();
+        getTable().add().row();
+        getTable().add(heightLabel).height(80).right();
+        getTable().add(height).top().center().left();
+        getTable().row();
+        getTable().add(save).right().expandX().width(100).height(40);
+        getTable().add(exit).left().expandX().width(100).height(40);
     }
 
     private void initButton(){
-        titleLabel = factory.getLabel("mainTitle");
-        widthLabel = factory.getLabel("widthLabel");
-        heightLabel = factory.getLabel("heightLabel");
+        titleLabel = factory.getLabel(locale.get("mainTitle"));
+        widthLabel = factory.getLabel(locale.get("widthLabel"));
+        heightLabel = factory.getLabel(locale.get("heightLabel"));
 
-        back = factory.getTextButton("buttonBack");
+        exit = factory.getTextButton(locale.get("buttonExit"));
 
-        back.getLabel().setFontScale(.9f);
-        back.getLabel().setColor(Color.FOREST);
-        back.addListener(new BackListener()); //Добавляет листнер кнопке
+        exit.getLabel().setFontScale(.9f);
+        exit.getLabel().setColor(Color.FOREST);
+        exit.addListener(new ExitListener()); //Добавляет листнер кнопке
 
-        save = factory.getTextButton("buttonSave");
+        save = factory.getTextButton(locale.get("buttonSave"));
         save.getLabel().setFontScale(.8f);
         save.getLabel().setColor(Color.FOREST);
         save.addListener(new SaveListener()); //Добавляет листнер кнопке
@@ -77,24 +75,20 @@ public class SettingsLayer {
         height = factory.getTextField(Integer.toString(Gdx.graphics.getHeight()));
     }
 
-    public Table getSettingsTable(){
-        return settingsTable;
-    }
+    public void setTableVisible(boolean isShowTable){
+        this.isShowTable = isShowTable;
 
-    public void tableVisible(boolean isShowSettings){
-        this.isShowSettings = isShowSettings;
-
-        if (isShowSettings)
-            settingsTable.addAction(sequence(moveTo(-Settings.getWidth(), 0), moveTo(0, 0, .5f)));
+        if (isShowTable)
+            getTable().addAction(sequence(moveTo(-Settings.getWidth(), 0), moveTo(0, 0, .5f)));
         else
-            settingsTable.addAction(sequence(moveTo(0, 0), moveTo(-Settings.getWidth(), 0, .5f)));
+            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Settings.getWidth(), 0, .5f)));
     }
 
-    public boolean isShowSettings(){
-        return isShowSettings;
+    public boolean isShowTable(){
+        return isShowTable;
     }
 
-    private class BackListener extends ClickListener {
+    private class ExitListener extends ClickListener {
         @Override
         public void clicked (InputEvent event, float x, float y) {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );
@@ -102,7 +96,7 @@ public class SettingsLayer {
 
         @Override
         public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-            back.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
+            exit.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
         }
     }
 

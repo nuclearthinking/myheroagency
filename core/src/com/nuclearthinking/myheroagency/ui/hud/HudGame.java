@@ -15,8 +15,6 @@ import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-
 /**
  * Created by Izonami on 18.05.2016.
  *
@@ -32,9 +30,9 @@ public class HudGame{
     private UiFactory uiFactory;
     private Quest quest;
     private SettingsLayer settings;
-    private boolean isShowQuest = true;
 
-    public HudGame(Batch batch){
+
+    public HudGame(final Batch batch){
         stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()), batch);
         uiFactory = new UiFactory();
 
@@ -60,12 +58,12 @@ public class HudGame{
         mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
-        stage.addActor(quest.getQuestTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
-        stage.addActor(settings.getSettingsTable());
+        stage.addActor(quest.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
+        stage.addActor(settings.getTable());
     }
 
     private void initButton(){
-        questButton = uiFactory.getTextButton("Quest");
+        questButton = uiFactory.getTextButton("?");
         r = uiFactory.getTextButton("Right");
         l = uiFactory.getTextButton("Left");
         l.addListener(new AddQuest());
@@ -100,15 +98,10 @@ public class HudGame{
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            if(isShowQuest){
-                quest.getQuestTable().addAction(sequence(moveTo(-Constants.GAME_W, 0), moveTo(0, 0, .5f)));
-                isShowQuest = false;
-            }
-            else{
-                quest.getQuestTable().addAction(sequence(moveTo(0, 0), moveTo(-Constants.GAME_W, 0, .5f)));
-                isShowQuest = true;
-            }
-
+            if(!quest.isShowTable())
+                quest.setTableVisible(true);
+            else
+                quest.setTableVisible(false);
         }
     }
 

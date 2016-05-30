@@ -1,9 +1,9 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
@@ -19,6 +19,7 @@ public class HomeScreen extends AbstractScreen {
     private HudGame hudGame;
     private final Texture texture;
     private Image image;
+    private LayerController layerController;
 
     public HomeScreen() {
         this(new GameData());
@@ -27,12 +28,14 @@ public class HomeScreen extends AbstractScreen {
     public HomeScreen(GameData gameData) {
         this.gameData = gameData;
         texture = Asset.getInstance().get("img/base.jpg", Texture.class);
+
     }
 
     @Override
     public void buildStage() {
         hudGame = new HudGame(stage.getBatch());
 
+        layerController = new LayerController(hudGame);
         multi.addProcessor(hudGame.getHudStage());
         image = new Image(texture);
         stage.addActor(image);
@@ -44,14 +47,7 @@ public class HomeScreen extends AbstractScreen {
 
         stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
         hudGame.renderHud(delta);
-
-        //TODO: Подобное, стоит вынести в контроллер
-        if(Gdx.input.isKeyJustPressed(131) && !hudGame.getSettings().isShowSettings()){
-            hudGame.getSettings().tableVisible(true);
-        }
-        else if (Gdx.input.isKeyJustPressed(131) && hudGame.getSettings().isShowSettings()){
-            hudGame.getSettings().tableVisible(false);
-        }
+        layerController.update();
     }
 
     @Override
