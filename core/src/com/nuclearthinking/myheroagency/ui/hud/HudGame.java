@@ -8,8 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.nuclearthinking.myheroagency.model.Settings;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
@@ -31,9 +30,8 @@ public class HudGame{
     private Quest quest;
     private SettingsLayer settings;
 
-
     public HudGame(final Batch batch){
-        stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()), batch);
+        stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
         uiFactory = new UiFactory();
 
         //Инициализация слоёв
@@ -83,7 +81,9 @@ public class HudGame{
     }
 
     public void resizeHud(int width, int height){
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().update(width, height);
+        settings.resize(width,height);
+        quest.resize(width,height);
     }
 
     public Stage getHudStage(){

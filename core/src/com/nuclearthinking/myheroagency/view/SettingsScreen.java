@@ -56,6 +56,14 @@ public class SettingsScreen extends AbstractScreen {
         stage.addActor(table);
     }
 
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width,height);
+
+        table.setClip(true);
+        table.setSize(width, height);
+    }
+
     private void initButton(){
         titleLabel = uiFactory.getLabel(locale.get("mainTitle"));
         languageLabel = uiFactory.getLabel(locale.get("languageLabel"));
@@ -77,8 +85,8 @@ public class SettingsScreen extends AbstractScreen {
         selectLanguage.setItems("ru", "en");
         selectLanguage.setSelected(Settings.getLanguage());
 
-        width = uiFactory.getTextField(Integer.toString(Gdx.graphics.getWidth()));
-        height = uiFactory.getTextField(Integer.toString(Gdx.graphics.getHeight()));
+        width = uiFactory.getTextField("800");
+        height = uiFactory.getTextField("600");
     }
 
     private void reloadLabel(){

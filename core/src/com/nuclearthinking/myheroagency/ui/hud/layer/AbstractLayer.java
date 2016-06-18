@@ -1,8 +1,8 @@
 package com.nuclearthinking.myheroagency.ui.hud.layer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.i18n.Localization;
-import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
@@ -19,13 +19,17 @@ public abstract class AbstractLayer {
         this.factory = factory;
     }
 
-    public abstract void setTableVisible(boolean isShowTable);
+    public abstract void setTableVisible(final boolean isShowTable);
+
+    public void resize(final int w, final int h){
+        getTable().getStage().getViewport().update(w, h, true);
+    }
 
     public Table getTable(){
         if (table == null){
             table = new Table();
             table.setDebug(Constants.DEBUG);
-            table.setPosition(-Settings.getWidth(), 0);
+            table.setPosition(-Gdx.graphics.getWidth(), 0);
             return table;
         }
         return table;

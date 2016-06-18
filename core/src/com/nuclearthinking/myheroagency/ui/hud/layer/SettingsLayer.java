@@ -32,7 +32,7 @@ public class SettingsLayer extends AbstractLayer{
     public SettingsLayer(final UiFactory factory){
         super(factory);
 
-        getTable().setSize(Settings.getWidth(), Settings.getHeight());
+        getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
         i = new Image(t);
@@ -60,8 +60,10 @@ public class SettingsLayer extends AbstractLayer{
         widthLabel = factory.getLabel(locale.get("widthLabel"));
         heightLabel = factory.getLabel(locale.get("heightLabel"));
 
-        exit = factory.getTextButton(locale.get("buttonExit"));
+        width = factory.getTextField("800");
+        height = factory.getTextField("600");
 
+        exit = factory.getTextButton(locale.get("buttonExit"));
         exit.getLabel().setFontScale(.9f);
         exit.getLabel().setColor(Color.FOREST);
         exit.addListener(new ExitListener()); //Добавляет листнер кнопке
@@ -70,22 +72,28 @@ public class SettingsLayer extends AbstractLayer{
         save.getLabel().setFontScale(.8f);
         save.getLabel().setColor(Color.FOREST);
         save.addListener(new SaveListener()); //Добавляет листнер кнопке
-
-        width = factory.getTextField(Integer.toString(Gdx.graphics.getWidth()));
-        height = factory.getTextField(Integer.toString(Gdx.graphics.getHeight()));
     }
 
     public void setTableVisible(boolean isShowTable){
         this.isShowTable = isShowTable;
 
         if (isShowTable)
-            getTable().addAction(sequence(moveTo(-Settings.getWidth(), 0), moveTo(0, 0, .5f)));
+            getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
         else
-            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Settings.getWidth(), 0, .5f)));
+            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
     }
 
     public boolean isShowTable(){
         return isShowTable;
+    }
+
+    @Override
+    public void resize(int w, int h){
+        super.resize(w,h);
+
+        getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+        getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        i.setSize(getTable().getWidth(), getTable().getHeight());
     }
 
     private class ExitListener extends ClickListener {

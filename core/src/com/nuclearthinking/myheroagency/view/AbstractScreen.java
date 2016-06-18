@@ -6,10 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.model.GameData;
-import com.nuclearthinking.myheroagency.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
@@ -30,7 +29,7 @@ public abstract class AbstractScreen implements Screen {
     }
 
     AbstractScreen() {
-        stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()));
+        stage = new Stage(new ScreenViewport(new OrthographicCamera()));
     }
 
     public abstract void buildStage();

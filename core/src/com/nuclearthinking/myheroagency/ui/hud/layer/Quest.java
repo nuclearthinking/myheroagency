@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.ui.hud.layer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -28,9 +29,9 @@ public class Quest extends AbstractLayer {
     public Quest(final UiFactory factory){
         super(factory);
 
-        getTable().setSize(Settings.getWidth() - 500, Settings.getHeight());
+        getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
 
-        Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
+        final Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
         i = new Image(t);
         i.setSize(getTable().getWidth(), getTable().getHeight());
         i.setColor(Color.FOREST);
@@ -46,13 +47,13 @@ public class Quest extends AbstractLayer {
         }
     }
 
-    public void setTableVisible(boolean isShowTable){
+    public void setTableVisible(final boolean isShowTable){
         this.isShowTable = isShowTable;
 
         if (isShowTable)
-            getTable().addAction(sequence(moveTo(-Settings.getWidth(), 0), moveTo(0, 0, .5f)));
+            getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
         else
-            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Settings.getWidth(), 0, .5f)));
+            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
     }
 
     public boolean isShowTable(){
@@ -63,8 +64,8 @@ public class Quest extends AbstractLayer {
      * Служит для добавления нового задания в карту и перерисовку таблицы
      * @param name - является ключом и названием кнопки
      */
-    public void addQuestToList(String name){
-        Label quest = factory.getLabel(name);
+    public void addQuestToList(final String name){
+        final Label quest = factory.getLabel(name);
         quest.setColor(Color.BLACK);
         questsList.put(name, quest);
 
@@ -75,6 +76,15 @@ public class Quest extends AbstractLayer {
             getTable().add(a.getValue()).pad(10);
             getTable().row();
         }
+    }
+
+    @Override
+    public void resize(final int w, final int h){
+        super.resize(w,h);
+        
+        getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+        getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+        i.setSize(getTable().getWidth(), getTable().getHeight());
     }
 
 }
