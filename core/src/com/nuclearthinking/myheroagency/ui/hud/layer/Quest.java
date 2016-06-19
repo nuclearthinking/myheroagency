@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 import java.util.LinkedHashMap;
@@ -33,7 +32,7 @@ public class Quest extends AbstractLayer {
 
         final Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
         i = new Image(t);
-        i.setSize(getTable().getWidth(), getTable().getHeight());
+        i.setFillParent(true);
         i.setColor(Color.FOREST);
 
         addQuestToList("Test");
@@ -81,10 +80,8 @@ public class Quest extends AbstractLayer {
     @Override
     public void resize(final int w, final int h){
         super.resize(w,h);
-        
-        getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+
         getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-        i.setSize(getTable().getWidth(), getTable().getHeight());
     }
 
 }

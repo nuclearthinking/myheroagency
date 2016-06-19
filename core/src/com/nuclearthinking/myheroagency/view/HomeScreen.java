@@ -48,6 +48,7 @@ public class HomeScreen extends AbstractScreen {
         manager.getRenderer().render();
         hudGame.renderHud(delta);
 
+        //TODO: Это тестовый код контроллера, нужно приучить себя выносить все контроллеры отдельно
         if(Gdx.input.isKeyJustPressed(19))
             ((OrthographicCamera) stage.getCamera()).translate(0,100);
         else if(Gdx.input.isKeyJustPressed(20))

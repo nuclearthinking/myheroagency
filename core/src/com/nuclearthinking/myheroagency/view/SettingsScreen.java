@@ -1,20 +1,13 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.controller.button.BackListener;
+import com.nuclearthinking.myheroagency.controller.button.SaveListener;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 /**
  * Created by Izonami on 13.05.2016.
@@ -74,22 +67,24 @@ public class SettingsScreen extends AbstractScreen {
 
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
-        back.addListener(new BackListener()); //Добавляет листнер кнопке
+        back.addListener(new BackListener(back)); //Добавляет листнер кнопке
 
         save = uiFactory.getTextButton(locale.get("buttonSave"));
         save.getLabel().setFontScale(.8f);
         save.getLabel().setColor(Color.FOREST);
-        save.addListener(new SaveListener()); //Добавляет листнер кнопке
+        save.addListener(new SaveListener(save, this)); //Добавляет листнер кнопке
 
         selectLanguage = new SelectBox<String>(uiFactory.getSkin(), "kramola");
         selectLanguage.setItems("ru", "en");
         selectLanguage.setSelected(Settings.getLanguage());
 
+        //TODO: Это костыль для фабрики, так как если выставить в настройках одинаковые значения, начинает браться один и тот же объект
+        // по хорошему это надо бы переделать в слайдер или лучше в селектор
         width = uiFactory.getTextField("800");
         height = uiFactory.getTextField("600");
     }
 
-    private void reloadLabel(){
+    public void reloadLabel(){
         locale.loadBundle(this.getClass());
 
         titleLabel.setText(locale.get("mainTitle"));
@@ -100,39 +95,16 @@ public class SettingsScreen extends AbstractScreen {
         save.setText(locale.get("buttonSave"));
     }
 
-
-    private class BackListener extends ClickListener{
-        @Override
-        public void clicked (InputEvent event, float x, float y) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );
-        }
-
-        @Override
-        public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-            back.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-        }
+    public TextField getHeight(){
+        return height;
     }
 
-    private class SaveListener extends ClickListener{
-        @Override
-        public void clicked (InputEvent event, float x, float y) {
-            Settings settings = new Settings();
-            settings.setLanguage(selectLanguage.getSelected().toString());
-            logger.debug("Language {}", Settings.getLanguage());
-            settings.setHeight(Integer.parseInt(height.getText()));
-            settings.setWidth(Integer.parseInt(width.getText()));
-            logger.debug("height {}", height.getText());
-            logger.debug("height {}", width.getText());
-            settings.save();
-            Asset.getInstance().reloadLocale();
-            Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
-            reloadLabel();
-        }
+    public TextField getWidth(){
+        return width;
+    }
 
-        @Override
-        public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-            save.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-        }
+    public SelectBox<String> getSelectLanguage(){
+        return selectLanguage;
     }
 
 }

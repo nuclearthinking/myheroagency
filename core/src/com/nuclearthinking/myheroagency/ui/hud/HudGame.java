@@ -3,12 +3,12 @@ package com.nuclearthinking.myheroagency.ui.hud;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.nuclearthinking.myheroagency.controller.button.QuestAddListener;
+import com.nuclearthinking.myheroagency.controller.button.QuestListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
@@ -64,8 +64,8 @@ public class HudGame{
         questButton = uiFactory.getTextButton("?");
         r = uiFactory.getTextButton("Right");
         l = uiFactory.getTextButton("Left");
-        l.addListener(new AddQuest());
-        questButton.addListener(new QuestListener());
+        l.addListener(new QuestAddListener(l, quest));
+        questButton.addListener(new QuestListener(questButton, quest));
     }
 
     private Table getTable(){
@@ -92,27 +92,6 @@ public class HudGame{
 
     public Camera getHudCamera(){
         return stage.getCamera();
-    }
-
-    private class QuestListener extends ClickListener {
-
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            if(!quest.isShowTable())
-                quest.setTableVisible(true);
-            else
-                quest.setTableVisible(false);
-        }
-    }
-
-    //TODO: Полностью является кодом для проверки
-    private class AddQuest extends ClickListener{
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            for (int i = 0; i < 5; i++) {
-                quest.addQuestToList("New Quest" + i);
-            }
-        }
     }
 
     public SettingsLayer getSettings(){
