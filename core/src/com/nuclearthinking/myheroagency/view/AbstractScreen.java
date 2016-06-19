@@ -24,7 +24,7 @@ public abstract class AbstractScreen implements Screen {
         return gameData;
     }
 
-    public void setGameData(GameData gameData) {
+    public void setGameData(final GameData gameData) {
         this.gameData = gameData;
     }
 

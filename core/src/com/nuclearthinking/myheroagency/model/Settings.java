@@ -22,7 +22,9 @@ public class Settings {
 
     private static Settings defaultSettings() {
         logger.info("Loading default settings");
-        Settings settings = new Settings();
+
+        final Settings settings = new Settings();
+
         settings.setLanguage(DEFAULT_LANGUAGE);
         settings.setWidth(Constants.GAME_W);
         settings.setHeight(Constants.GAME_H);
@@ -31,8 +33,10 @@ public class Settings {
 
     public static Settings loadSettings() {
         logger.info("Loading settings {} from preferences", PREFERENCES_NAME);
-        Settings settings = new Settings();
-        Preferences preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
+
+        final Settings settings = new Settings();
+        final Preferences preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
+
         if (preferences == null) {
             logger.error("Can't load preferences {}", PREFERENCES_NAME);
             return defaultSettings();
@@ -45,7 +49,8 @@ public class Settings {
     }
 
     public void save() {
-        Preferences preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
+        final Preferences preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
+
         preferences.clear();
         preferences.putString(LANGUAGE_KEY, language);
         preferences.putInteger(HEIGHT_KEY, height);
@@ -57,7 +62,7 @@ public class Settings {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(final String language) {
         this.language = language;
     }
 
@@ -66,7 +71,7 @@ public class Settings {
         return height;
     }
 
-    public void setHeight(int height){
+    public void setHeight(final int height){
         this.height = height;
     }
 
@@ -75,7 +80,7 @@ public class Settings {
         return width;
     }
 
-    public void setWidth(int width){
+    public void setWidth(final int width){
         this.width = width;
     }
 

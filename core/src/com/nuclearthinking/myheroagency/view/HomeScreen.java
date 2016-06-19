@@ -24,7 +24,7 @@ public class HomeScreen extends AbstractScreen {
         this(new GameData());
     }
 
-    public HomeScreen(GameData gameData) {
+    public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
     }
 

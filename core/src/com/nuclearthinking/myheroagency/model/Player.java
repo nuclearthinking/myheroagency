@@ -12,7 +12,7 @@ public class Player implements Serializable {
         return level;
     }
 
-    public void setLevel(byte level) {
+    public void setLevel(final byte level) {
         this.level = level;
     }
 
@@ -20,7 +20,7 @@ public class Player implements Serializable {
         return exp;
     }
 
-    public void setExp(int exp) {
+    public void setExp(final int exp) {
         this.exp = exp;
     }
 }

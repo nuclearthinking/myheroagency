@@ -69,18 +69,19 @@ public class HudGame{
     }
 
     private Table getTable(){
-        Table table = new Table();
+        final Table table = new Table();
+
         table.setDebug(Constants.DEBUG);
 
         return table;
     }
 
-    public void renderHud(float delta) {
+    public void renderHud(final float delta) {
         stage.draw();
         stage.act(delta);
     }
 
-    public void resizeHud(int width, int height){
+    public void resizeHud(final int width, final int height){
         stage.getViewport().update(width, height);
         settings.resize(width,height);
         quest.resize(width,height);

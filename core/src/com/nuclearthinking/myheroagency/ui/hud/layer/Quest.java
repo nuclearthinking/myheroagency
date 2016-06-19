@@ -40,7 +40,7 @@ public class Quest extends AbstractLayer {
 
         getTable().addActor(i);
 
-        for(Map.Entry<String, Actor> a : questsList.entrySet()){
+        for(final Map.Entry<String, Actor> a : questsList.entrySet()){
             getTable().add(a.getValue()).pad(10);
             getTable().row();
         }
@@ -65,13 +65,14 @@ public class Quest extends AbstractLayer {
      */
     public void addQuestToList(final String name){
         final Label quest = factory.getLabel(name);
+
         quest.setColor(Color.BLACK);
         questsList.put(name, quest);
 
         //TODO: Пока не придумал ничего лучше кроме как сбрасывать и добавлять по новой
         getTable().reset();
         getTable().addActor(i);
-        for(Map.Entry<String, Actor> a : questsList.entrySet()){
+        for(final Map.Entry<String, Actor> a : questsList.entrySet()){
             getTable().add(a.getValue()).pad(10);
             getTable().row();
         }

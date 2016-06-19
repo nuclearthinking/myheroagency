@@ -18,9 +18,9 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
  */
 public class MainMenuScreen extends AbstractScreen {
 
-    private Table table;
-    private TextButton play, load, settings, exit;
-    private UiFactory uiFactory;
+    private static Table table;
+    private static TextButton play, load, settings, exit;
+    private static UiFactory uiFactory;
 
     @Override
     public void buildStage() {
@@ -52,12 +52,15 @@ public class MainMenuScreen extends AbstractScreen {
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
         play.addListener(new PlayListener(play)); //Добавляет листнер кнопке
+
         load = uiFactory.getTextButton(locale.get("buttonLoad"));
         load.getLabel().setFontScale(.7f);
         load.addListener(new LoadListener(load));
+
         settings = uiFactory.getTextButton(locale.get("buttonSettings"));
         settings.getLabel().setFontScale(.7f);
         settings.addListener(new SettingListener(settings));
+
         exit = uiFactory.getTextButton(locale.get("buttonExit"));
         exit.getLabel().setFontScale(.7f);
         exit.addListener(new ExitListener(exit));

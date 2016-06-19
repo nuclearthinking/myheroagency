@@ -19,13 +19,13 @@ public class Localization {
     private final Logger logger;
     private I18NBundle localisationBundle;
 
-    public Localization(Class initiatorClass) {
+    public Localization(final Class initiatorClass) {
         logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
         loadBundle(initiatorClass);
     }
 
-    public void loadBundle(Class bundleClass) {
-        String bundleName = "i18n/" + bundleClass.getSimpleName();
+    public void loadBundle(final Class bundleClass) {
+        final String bundleName = "i18n/" + bundleClass.getSimpleName();
         if (Asset.getInstance().isLoaded(bundleName)) {
             localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             logger.info("Loaded I18NBundle with name {}", bundleName);
@@ -34,7 +34,7 @@ public class Localization {
         }
     }
 
-    public String get(String key) {
+    public String get(final String key) {
         if (localisationBundle != null) {
             try {
                 return localisationBundle.get(key);
@@ -47,7 +47,7 @@ public class Localization {
         }
     }
 
-    public String format(String key, Object... args) {
+    public String format(final String key, final Object... args) {
         if (localisationBundle != null) {
             return localisationBundle.format(key, args);
         } else {

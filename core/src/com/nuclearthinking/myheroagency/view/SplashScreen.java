@@ -1,10 +1,10 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.ScreenController;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
@@ -22,14 +22,16 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class SplashScreen extends AbstractScreen {
 
     private final Texture texture;
-    private Image splashImage;
-    private TextActor actor;
-    private FontFactory fontFactory;
+    private static Image splashImage;
+    private static TextActor actor;
+    private static FontFactory fontFactory;
+    private static ScreenController controller;
 
     public SplashScreen() {
         super();
 
         texture = Asset.getInstance().get("img/splash.png", Texture.class);
+        controller = new ScreenController();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class SplashScreen extends AbstractScreen {
         actor.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight() / 2 + 32);
         actor.fadeText();
 
-        Runnable load = new Runnable() {
+        final Runnable load = new Runnable() {
             @Override
             public void run() {
                 ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);
@@ -72,10 +74,7 @@ public class SplashScreen extends AbstractScreen {
     public void render(float delta){
         super.render(delta);
 
-        if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(66) || Gdx.input.isKeyPressed(131))
-        {
-            ScreenManager.getInstance().showScreen( ScreenEnum.MAIN_MENU_SCREEN );
-        }
+        controller.splashUpdate();
     }
 
 }

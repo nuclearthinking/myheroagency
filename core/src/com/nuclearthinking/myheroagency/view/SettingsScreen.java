@@ -14,12 +14,12 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  */
 public class SettingsScreen extends AbstractScreen {
 
-    private Table table;
-    private TextButton back, save;
-    private SelectBox<String> selectLanguage;
-    private TextField height, width;
-    private Label titleLabel, languageLabel, widthLabel, heightLabel;
-    private UiFactory uiFactory;
+    private static Table table;
+    private static TextButton back, save;
+    private static SelectBox<String> selectLanguage;
+    private static TextField height, width;
+    private static Label titleLabel, languageLabel, widthLabel, heightLabel;
+    private static UiFactory uiFactory;
 
     @Override
     public void buildStage() {
@@ -64,7 +64,6 @@ public class SettingsScreen extends AbstractScreen {
         heightLabel = uiFactory.getLabel(locale.get("heightLabel"));
 
         back = uiFactory.getTextButton(locale.get("buttonBack"));
-
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
         back.addListener(new BackListener(back)); //Добавляет листнер кнопке

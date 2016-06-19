@@ -17,12 +17,13 @@ public class LoadingScreen extends AbstractScreen {
         Asset.getInstance().loadGroup("base");
     }
 
-    private FontFactory fontFactory;
-    private float loadingPercent;
+    private static FontFactory fontFactory;
+    private static float loadingPercent;
 
     @Override
     public void buildStage() {
         fontFactory = new FontFactory();
+        loadingPercent = .0f;
     }
 
     @Override

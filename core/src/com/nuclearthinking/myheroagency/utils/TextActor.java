@@ -19,7 +19,7 @@ public class TextActor extends Actor {
     private final String text;
     private float x, y;
 
-    public TextActor(BitmapFont bitmapFont, String text, Stage stage) {
+    public TextActor(final BitmapFont bitmapFont, final String text, final Stage stage) {
         this.text = text;
 
         bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -36,7 +36,7 @@ public class TextActor extends Actor {
         }
     }
 
-    public void dropText(float time, float delay) {
+    public void dropText(final float time, final float delay) {
         resetText();
         for (int i = 0; i < text.length(); i++) {
             listchar[i].setY(y + 200f);
@@ -49,7 +49,7 @@ public class TextActor extends Actor {
         }
     }
 
-    public void spinText(float time, float delay) {
+    public void spinText(final float time, final float delay) {
         resetText();
         for (int i = 0; i < text.length(); i++) {
             listchar[i].addAction(
@@ -58,7 +58,7 @@ public class TextActor extends Actor {
         }
     }
 
-    public void appearText(float time, float delay) {
+    public void appearText(final float time, final float delay) {
         resetText();
         for (int i = 0; i < text.length(); i++) {
             listchar[i].setScale(0f);
@@ -92,7 +92,7 @@ public class TextActor extends Actor {
         }
     }
 
-    public void setPosition(float x, float y) {
+    public void setPosition(final float x, final float y) {
         this.x = x;
         this.y = y;
     }
@@ -110,7 +110,7 @@ public class TextActor extends Actor {
         return this.x;
     }
 
-    private void setPositionX(float x) {
+    private void setPositionX(final float x) {
         this.x = x;
     }
 
@@ -118,7 +118,7 @@ public class TextActor extends Actor {
         return this.y;
     }
 
-    public void setPositionY(float y) {
+    public void setPositionY(final float y) {
         this.y = y;
     }
 }
