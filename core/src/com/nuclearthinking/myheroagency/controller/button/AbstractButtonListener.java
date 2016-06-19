@@ -22,6 +22,9 @@ public abstract class AbstractButtonListener extends ClickListener {
     }
 
     @Override
+    public abstract void clicked (InputEvent event, float x, float y);
+
+    @Override
     public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
         button.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
     }
