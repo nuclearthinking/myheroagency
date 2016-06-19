@@ -4,8 +4,8 @@ import com.badlogic.gdx.math.Interpolation;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
-import com.nuclearthinking.myheroagency.utils.Constants;
 
 public class LoadingScreen extends AbstractScreen {
 
@@ -17,12 +17,13 @@ public class LoadingScreen extends AbstractScreen {
         Asset.getInstance().loadGroup("base");
     }
 
-    private FontFactory fontFactory;
-    private float loadingPercent;
+    private static FontFactory fontFactory;
+    private static float loadingPercent;
 
     @Override
     public void buildStage() {
         fontFactory = new FontFactory();
+        loadingPercent = .0f;
     }
 
     @Override
@@ -37,12 +38,12 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = loading();
 
         stage.getBatch().begin();
-        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Constants.GAME_W - 150, 35);
+        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Settings.getWidth() - 150, 35);
         stage.getBatch().end();
     }
 
     private float loading() {
-        float loadingProgress = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
+        final float loadingProgress = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
             logger.info("Assets loading done");
             ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);

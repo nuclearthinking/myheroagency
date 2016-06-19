@@ -19,7 +19,7 @@ public class Main extends Game {
         ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
     }
 
-    private void initLogging(boolean debug) {
+    private void initLogging(final boolean debug) {
         if (debug) {
             System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
         } else {

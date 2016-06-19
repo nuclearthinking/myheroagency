@@ -8,6 +8,7 @@ import com.nuclearthinking.myheroagency.view.AbstractScreen;
  * Created by Izonami on 09.05.2016.
  */
 public class ScreenManager {
+
     private static ScreenManager instance;
 
     private Game game;
@@ -23,14 +24,14 @@ public class ScreenManager {
         return instance;
     }
 
-    public void initialize(Game game) {
+    public void initialize(final Game game) {
         this.game = game;
     }
 
-    public void showScreen(ScreenEnum screenEnum, Object... params) {
-        Screen currentScreen = game.getScreen();
+    public void showScreen(final ScreenEnum screenEnum, final Object... params) {
+        final Screen currentScreen = game.getScreen();
 
-        AbstractScreen newScreen = screenEnum.getScreen(params);
+        final AbstractScreen newScreen = screenEnum.getScreen(params);
         newScreen.buildStage();
         game.setScreen(newScreen);
 

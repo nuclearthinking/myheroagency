@@ -18,12 +18,12 @@ public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, 
 
     private I18NBundleParameter parameter;
 
-    public CustomI18NBundleLoader(FileHandleResolver resolver, I18NBundleParameter parameter) {
+    public CustomI18NBundleLoader(final FileHandleResolver resolver, final I18NBundleParameter parameter) {
         super(resolver);
         this.parameter = parameter;
     }
 
-    I18NBundle bundle;
+    private I18NBundle bundle;
 
     @Override
     public void loadAsync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
@@ -46,7 +46,7 @@ public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, 
 
     @Override
     public I18NBundle loadSync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
-        I18NBundle bundle = this.bundle;
+        final I18NBundle bundle = this.bundle;
         this.bundle = null;
         return bundle;
     }
@@ -64,11 +64,11 @@ public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, 
             this(null, null);
         }
 
-        public I18NBundleParameter (Locale locale) {
+        public I18NBundleParameter (final Locale locale) {
             this(locale, null);
         }
 
-        public I18NBundleParameter (Locale locale, String encoding) {
+        public I18NBundleParameter (final Locale locale, String encoding) {
             this.locale = locale;
             this.encoding = encoding;
         }

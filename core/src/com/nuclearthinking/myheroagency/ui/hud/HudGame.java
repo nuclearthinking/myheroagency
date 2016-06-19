@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.nuclearthinking.myheroagency.model.Settings;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.nuclearthinking.myheroagency.controller.button.QuestAddListener;
+import com.nuclearthinking.myheroagency.controller.button.QuestListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
+import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
+import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
@@ -24,10 +27,16 @@ public class HudGame{
     private final Table mainTable, buttomTable, rightTable, leftTable;
     private TextButton questButton, r,l;
     private UiFactory uiFactory;
+    private Quest quest;
+    private SettingsLayer settings;
 
-    public HudGame(Batch batch){
-        stage = new Stage(new StretchViewport(Settings.getWidth(), Settings.getHeight(), new OrthographicCamera()), batch);
+    public HudGame(final Batch batch){
+        stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
         uiFactory = new UiFactory();
+
+        //Инициализация слоёв
+        quest = new Quest(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
+        settings = new SettingsLayer(uiFactory);
 
         mainTable = getTable();
         mainTable.setFillParent(true);
@@ -47,28 +56,35 @@ public class HudGame{
         mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
+        stage.addActor(quest.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
+        stage.addActor(settings.getTable());
     }
 
     private void initButton(){
-        questButton = uiFactory.getTextButton("Quest");
+        questButton = uiFactory.getTextButton("?");
         r = uiFactory.getTextButton("Right");
         l = uiFactory.getTextButton("Left");
+        l.addListener(new QuestAddListener(l, quest));
+        questButton.addListener(new QuestListener(questButton, quest));
     }
 
     private Table getTable(){
-        Table table = new Table();
+        final Table table = new Table();
+
         table.setDebug(Constants.DEBUG);
 
         return table;
     }
 
-    public void renderHud(float delta) {
+    public void renderHud(final float delta) {
         stage.draw();
         stage.act(delta);
     }
 
-    public void resizeHud(int width, int height){
-        stage.getViewport().update(width, height, true);
+    public void resizeHud(final int width, final int height){
+        stage.getViewport().update(width, height);
+        settings.resize(width,height);
+        quest.resize(width,height);
     }
 
     public Stage getHudStage(){
@@ -77,6 +93,10 @@ public class HudGame{
 
     public Camera getHudCamera(){
         return stage.getCamera();
+    }
+
+    public SettingsLayer getSettings(){
+        return settings;
     }
 
 }

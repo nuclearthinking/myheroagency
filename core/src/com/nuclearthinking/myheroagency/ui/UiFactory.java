@@ -46,6 +46,7 @@ public class UiFactory {
         return label;
     }
 
+    //TODO: Для размера экрана вылазит баг, когда высота и ширина совпадают, по хорошему в ползунок разрешение переделать или в селект
     public final TextField getTextField(final String name) {
         TextField textField = textFieldHashMap.get(name);
         if (textField == null) {

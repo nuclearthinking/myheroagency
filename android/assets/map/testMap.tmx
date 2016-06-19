@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1801" name="hyptosis_tile-art-batch-1" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="./hyptosis_tile-art-batch-1.png" width="960" height="960"/>
+ </tileset>
+ <layer name="Слой тайлов 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1LsNgmAYhtHfSnE4F9FGC3bQTZzBMRyARmtXEBKNNxSDKF/iKU5CCFC8D1BkKRWB7UYp7UuTP7Ae9b93k0HW/0566BHJ+R9VWZzkV8efyAOL2qP6Jq433AxfO7xxzTu6ek5bUXo8e5d/vaMelx4RdtRDj4g9KhF2jNBjOk5pNr7dpu5ckzb3dNWjKxF6LMsNV3c71p1r0uYePR57zLMYqi0i6LvHdhhD399GBJF6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwDcdAaxxpoM=
+  </data>
+ </layer>
+ <layer name="Слой тайлов 2" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1ksKwjAQAFBd2Va8gHuP5E4vop7KO3gBr+BaXLuzXUiLZLTir8X3oBAykyFkWprBAIBXzbJf74BKqg/nUbu5Z+ejXOgi72s3nfJ6fMzjWJv1UZ22tf7NPnEmk6Iej4s4Fknl3NZp5u16+F0uyv/s8gN3nlQ/vrm+cuhhP1ZlL9bls3lzT+6d5zaITRt7uK6fZ3HOo3pDd2sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOuACM2EXHA==
+  </data>
+ </layer>
+</map>

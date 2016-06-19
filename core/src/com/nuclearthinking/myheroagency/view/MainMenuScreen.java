@@ -1,29 +1,26 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
-import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.controller.button.ExitListener;
+import com.nuclearthinking.myheroagency.controller.button.LoadListener;
+import com.nuclearthinking.myheroagency.controller.button.PlayListener;
+import com.nuclearthinking.myheroagency.controller.button.SettingListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by Izonami on 13.05.2016.
  */
 public class MainMenuScreen extends AbstractScreen {
 
-    private Table table;
-    private TextButton play, load, settings, exit;
-    private ClickListener buttonListener;
-    private UiFactory uiFactory;
+    private static Table table;
+    private static TextButton play, load, settings, exit;
+    private static UiFactory uiFactory;
 
     @Override
     public void buildStage() {
@@ -33,8 +30,6 @@ public class MainMenuScreen extends AbstractScreen {
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
 
-
-        createListener(); // Создаем слушателя для кнопок
         initButton(); // Создаем кнопки
 
         // Таблица рулит размером кнопок, отступами и прочей хренотой
@@ -56,65 +51,19 @@ public class MainMenuScreen extends AbstractScreen {
         play = uiFactory.getTextButton(locale.get("buttonPlay"));
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
-        play.addListener(buttonListener); //Добавляет листнер кнопке
+        play.addListener(new PlayListener(play)); //Добавляет листнер кнопке
+
         load = uiFactory.getTextButton(locale.get("buttonLoad"));
         load.getLabel().setFontScale(.7f);
-        load.addListener(buttonListener);
+        load.addListener(new LoadListener(load));
+
         settings = uiFactory.getTextButton(locale.get("buttonSettings"));
         settings.getLabel().setFontScale(.7f);
-        settings.addListener(buttonListener);
+        settings.addListener(new SettingListener(settings));
+
         exit = uiFactory.getTextButton(locale.get("buttonExit"));
         exit.getLabel().setFontScale(.7f);
-        exit.addListener(buttonListener);
+        exit.addListener(new ExitListener(exit));
     }
 
-    private void createListener() {
-        buttonListener = new ClickListener() {
-            /**
-             * Собитие по нажатию на кнопку
-             * @param event - определяет куда мы ткнули
-             * @param x - можно определять по координатам
-             * @param y
-             */
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (event.getListenerActor() == play) {
-                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
-                } else if (event.getListenerActor() == load) {
-                    logger.info("Loading game from save");
-                    GameData gameData = GameData.load();
-                    ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, gameData);
-                } else if (event.getListenerActor() == settings) {
-                    ScreenManager.getInstance().showScreen(ScreenEnum.SETTINGS_SCREEN);
-                } else if (event.getListenerActor() == exit) {
-                    Gdx.app.exit();
-                } else {
-                    logger.error("Event clicked for button {} not found", event.getListenerActor());
-                }
-            }
-
-            /**
-             * Слушатель при наведении на область (маусовер)
-             * @param event - определяет куда мы навели
-             * @param x - можно определять по координатам
-             * @param y
-             * @param pointer - не особо разобрался что это
-             * @param fromActor - аналогично
-             */
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                if (event.getListenerActor() == play) {
-                    play.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                } else if (event.getListenerActor() == load) {
-                    load.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                } else if (event.getListenerActor() == settings) {
-                    settings.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                } else if (event.getListenerActor() == exit) {
-                    exit.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-                } else {
-                    logger.error("Event enter for button {} not found", event.getListenerActor());
-                }
-            }
-        };
-    }
 }

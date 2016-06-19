@@ -10,7 +10,7 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class BattleScreen extends AbstractScreen {
 
-    public BattleScreen(GameData gameData) {
+    public BattleScreen(final GameData gameData) {
         this.gameData = gameData;
     }
 
