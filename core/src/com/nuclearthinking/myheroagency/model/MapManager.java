@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.model;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.nuclearthinking.myheroagency.controller.Asset;
@@ -19,6 +20,10 @@ public class MapManager {
 
     public OrthogonalTiledMapRenderer getRenderer(){
         return renderer;
+    }
+
+    public Batch getBatch(){
+        return renderer.getBatch();
     }
 
 }

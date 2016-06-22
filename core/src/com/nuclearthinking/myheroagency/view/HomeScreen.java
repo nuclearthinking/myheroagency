@@ -2,9 +2,15 @@ package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.LayerController;
+import com.nuclearthinking.myheroagency.controller.SpriteManager;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.model.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
+import com.nuclearthinking.myheroagency.model.Player;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
 
@@ -19,6 +25,7 @@ public class HomeScreen extends AbstractScreen {
     private HudGame hudGame;
     private MapManager manager;
     private LayerController layerController;
+    private Player player;
 
     public HomeScreen() {
         this(new GameData());
@@ -26,6 +33,10 @@ public class HomeScreen extends AbstractScreen {
 
     public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
+
+        final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
+        final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"));
+        player = new Player(null, 40, 35, idle);
     }
 
     @Override
@@ -33,6 +44,9 @@ public class HomeScreen extends AbstractScreen {
         hudGame = new HudGame(stage.getBatch());
         manager = new MapManager();
         layerController = new LayerController(hudGame);
+
+        player.setPosition(1000, 3000);
+        SpriteManager.addGameObject(player);
 
         multi.addProcessor(hudGame.getHudStage());
     }
@@ -44,8 +58,16 @@ public class HomeScreen extends AbstractScreen {
         manager.getRenderer().setView((OrthographicCamera) stage.getCamera());
         stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
 
+        stage.getCamera().position.set(player.getX(), player.getY(), 0);
         layerController.update();
+
         manager.getRenderer().render();
+        manager.getBatch().begin();
+        for(final GameObject object : SpriteManager.getAllObjects()){
+            object.draw(manager.getRenderer().getBatch());
+        }
+        manager.getBatch().end();
+
         hudGame.renderHud(delta);
 
         //TODO: Это тестовый код контроллера, нужно приучить себя выносить все контроллеры отдельно
