@@ -1,11 +1,11 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.LayerController;
+import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.SpriteManager;
 import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.model.GameObject;
@@ -25,6 +25,7 @@ public class HomeScreen extends AbstractScreen {
     private HudGame hudGame;
     private MapManager manager;
     private LayerController layerController;
+    private PlayerController playerController;
     private Player player;
 
     public HomeScreen() {
@@ -34,9 +35,13 @@ public class HomeScreen extends AbstractScreen {
     public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
 
+        //TODO: Думаю стоит для этого сделать какую нибудь фабрику, что бы каждый раз не создавать
         final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
-        final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"));
-        player = new Player(null, 40, 35, idle);
+        Animation idle, left,right;
+        idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
+        left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
+        right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
+        player = new Player(null, 40, 35, idle,left,right);
     }
 
     @Override
@@ -44,11 +49,13 @@ public class HomeScreen extends AbstractScreen {
         hudGame = new HudGame(stage.getBatch());
         manager = new MapManager();
         layerController = new LayerController(hudGame);
+        playerController = new PlayerController(player);
 
         player.setPosition(1000, 3000);
         SpriteManager.addGameObject(player);
 
         multi.addProcessor(hudGame.getHudStage());
+        multi.addProcessor(playerController);
     }
 
     @Override
@@ -60,6 +67,7 @@ public class HomeScreen extends AbstractScreen {
 
         stage.getCamera().position.set(player.getX(), player.getY(), 0);
         layerController.update();
+        playerController.update();
 
         manager.getRenderer().render();
         manager.getBatch().begin();
@@ -71,14 +79,14 @@ public class HomeScreen extends AbstractScreen {
         hudGame.renderHud(delta);
 
         //TODO: Это тестовый код контроллера, нужно приучить себя выносить все контроллеры отдельно
-        if(Gdx.input.isKeyJustPressed(19))
+        /*if(Gdx.input.isKeyJustPressed(19))
             ((OrthographicCamera) stage.getCamera()).translate(0,100);
         else if(Gdx.input.isKeyJustPressed(20))
             ((OrthographicCamera) stage.getCamera()).translate(0,-100);
         else if(Gdx.input.isKeyJustPressed(21))
             ((OrthographicCamera) stage.getCamera()).translate(-100,0);
         else if(Gdx.input.isKeyJustPressed(22))
-            ((OrthographicCamera) stage.getCamera()).translate(100,0);
+            ((OrthographicCamera) stage.getCamera()).translate(100,0);*/
     }
 
     @Override

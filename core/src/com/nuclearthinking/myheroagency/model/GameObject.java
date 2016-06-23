@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
  */
 public abstract class GameObject extends Sprite {
 
+    protected float animationTimer = 0;
+
     private final TiledMapTileLayer collisionLayer;
 
     /**
