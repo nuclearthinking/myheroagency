@@ -1,10 +1,8 @@
 package com.nuclearthinking.myheroagency;
 
 import android.os.Bundle;
-
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.nuclearthinking.myheroagency.Main;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

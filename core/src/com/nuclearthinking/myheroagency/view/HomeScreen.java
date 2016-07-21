@@ -31,27 +31,19 @@ public class HomeScreen extends AbstractScreen {
 
     public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
-
-        //TODO: Думаю стоит для этого сделать какую нибудь фабрику, что бы каждый раз не создавать
-        /*final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
-        Animation idle, left,right;
-        idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
-        left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
-        right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
-        player = new Player(null, 40, 35, idle,left,right);*/
-
         object = new ObjectManager();
     }
 
     @Override
     public void buildStage() {
-        hudGame = new HudGame(stage.getBatch());
-        manager = new MapManager();
-        layerController = new LayerController(hudGame);
-        playerController = new PlayerController(object.getPlayer());
-        object.getPlayer().setPosition(1000,3000);
-        SpriteManager.addGameObject(object.getPlayer());
+        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
+        manager = new MapManager(); // Создаем карту
+        layerController = new LayerController(hudGame); // Добоавляем слои
+        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
+        object.getPlayer().setPosition(1000,3000); // Устанавливаем начальную позицию для игрока
+        SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
 
+        // Мультиконтроллер. Все новые контроллеры добавлять чере addProcessor
         multi.addProcessor(hudGame.getHudStage());
         multi.addProcessor(playerController);
     }
@@ -60,31 +52,22 @@ public class HomeScreen extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
 
-        manager.getRenderer().setView((OrthographicCamera) stage.getCamera());
-        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
+        manager.getRenderer().setView((OrthographicCamera) stage.getCamera()); // Рендерим карту
+        stage.getCamera().position.set(object.getPlayer().getX(), object.getPlayer().getY(), 0); // Привязываем позицию камеры к персонажу
+        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined); // Накладываем худ
 
-        stage.getCamera().position.set(object.getPlayer().getX(), object.getPlayer().getY(), 0);
+        // Обновляем контроллеры
         layerController.update();
         playerController.update();
 
         manager.getRenderer().render();
         manager.getBatch().begin();
-        for(final GameObject object : SpriteManager.getAllObjects()){
+        for(final GameObject object : SpriteManager.getAllObjects()) {
             object.draw(manager.getRenderer().getBatch());
         }
         manager.getBatch().end();
 
         hudGame.renderHud(delta);
-
-        //TODO: Это тестовый код контроллера, нужно приучить себя выносить все контроллеры отдельно
-        /*if(Gdx.input.isKeyJustPressed(19))
-            ((OrthographicCamera) stage.getCamera()).translate(0,100);
-        else if(Gdx.input.isKeyJustPressed(20))
-            ((OrthographicCamera) stage.getCamera()).translate(0,-100);
-        else if(Gdx.input.isKeyJustPressed(21))
-            ((OrthographicCamera) stage.getCamera()).translate(-100,0);
-        else if(Gdx.input.isKeyJustPressed(22))
-            ((OrthographicCamera) stage.getCamera()).translate(100,0);*/
     }
 
     @Override

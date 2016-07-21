@@ -19,8 +19,7 @@ public class LoadListener extends AbstractButtonListener {
     public void clicked(InputEvent event, float x, float y) {
         logger.info("Loading game from save");
 
-        final GameData gameData = GameData.load();
-        ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, gameData);
+        ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, GameData.load());
     }
 
 }

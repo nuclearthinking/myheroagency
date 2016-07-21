@@ -14,7 +14,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  */
 public abstract class AbstractButtonListener extends ClickListener {
 
-    final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
+    protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+
     private final TextButton button;
 
     protected AbstractButtonListener(final TextButton button){
@@ -27,10 +28,6 @@ public abstract class AbstractButtonListener extends ClickListener {
     @Override
     public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
         button.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
-    }
-
-    protected TextButton getTextButton(){
-        return button;
     }
 
     private String getName() {
