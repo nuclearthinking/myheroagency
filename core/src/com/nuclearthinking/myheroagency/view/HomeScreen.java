@@ -1,9 +1,12 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.nuclearthinking.myheroagency.controller.LayerController;
+import com.nuclearthinking.myheroagency.controller.ObjectManager;
+import com.nuclearthinking.myheroagency.controller.PlayerController;
+import com.nuclearthinking.myheroagency.controller.SpriteManager;
 import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.model.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
@@ -19,6 +22,8 @@ public class HomeScreen extends AbstractScreen {
     private HudGame hudGame;
     private MapManager manager;
     private LayerController layerController;
+    private PlayerController playerController;
+    private ObjectManager object;
 
     public HomeScreen() {
         this(new GameData());
@@ -26,37 +31,43 @@ public class HomeScreen extends AbstractScreen {
 
     public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
+        object = new ObjectManager();
     }
 
     @Override
     public void buildStage() {
-        hudGame = new HudGame(stage.getBatch());
-        manager = new MapManager();
-        layerController = new LayerController(hudGame);
+        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
+        manager = new MapManager(); // Создаем карту
+        layerController = new LayerController(hudGame); // Добоавляем слои
+        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
+        object.getPlayer().setPosition(1000,3000); // Устанавливаем начальную позицию для игрока
+        SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
 
+        // Мультиконтроллер. Все новые контроллеры добавлять чере addProcessor
         multi.addProcessor(hudGame.getHudStage());
+        multi.addProcessor(playerController);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        manager.getRenderer().setView((OrthographicCamera) stage.getCamera());
-        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined);
+        manager.getRenderer().setView((OrthographicCamera) stage.getCamera()); // Рендерим карту
+        stage.getCamera().position.set(object.getPlayer().getX(), object.getPlayer().getY(), 0); // Привязываем позицию камеры к персонажу
+        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined); // Накладываем худ
 
+        // Обновляем контроллеры
         layerController.update();
-        manager.getRenderer().render();
-        hudGame.renderHud(delta);
+        playerController.update();
 
-        //TODO: Это тестовый код контроллера, нужно приучить себя выносить все контроллеры отдельно
-        if(Gdx.input.isKeyJustPressed(19))
-            ((OrthographicCamera) stage.getCamera()).translate(0,100);
-        else if(Gdx.input.isKeyJustPressed(20))
-            ((OrthographicCamera) stage.getCamera()).translate(0,-100);
-        else if(Gdx.input.isKeyJustPressed(21))
-            ((OrthographicCamera) stage.getCamera()).translate(-100,0);
-        else if(Gdx.input.isKeyJustPressed(22))
-            ((OrthographicCamera) stage.getCamera()).translate(100,0);
+        manager.getRenderer().render();
+        manager.getBatch().begin();
+        for(final GameObject object : SpriteManager.getAllObjects()) {
+            object.draw(manager.getRenderer().getBatch());
+        }
+        manager.getBatch().end();
+
+        hudGame.renderHud(delta);
     }
 
     @Override

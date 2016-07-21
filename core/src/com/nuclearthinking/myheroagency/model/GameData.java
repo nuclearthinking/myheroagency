@@ -15,7 +15,7 @@ public class GameData implements Serializable {
     private Player player;
 
     public static void save(GameData gameData) {
-        Kryo kryo = new Kryo();
+        final Kryo kryo = new Kryo();
         try (Output output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
             kryo.writeObject(output, gameData);
         } catch (FileNotFoundException ex) {
@@ -24,7 +24,7 @@ public class GameData implements Serializable {
     }
 
     public static GameData load() {
-        Kryo kryo = new Kryo();
+        final Kryo kryo = new Kryo();
         GameData gameData = null;
         try (Input input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
             gameData = kryo.readObject(input, GameData.class);

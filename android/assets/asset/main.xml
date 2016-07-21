@@ -22,5 +22,8 @@
         <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json" />
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="ui/ui.atlas"/>
         <asset type="com.badlogic.gdx.maps.tiled.TiledMap" path="map/testMap.tmx"/>
+
+        <asset type="com.badlogic.gdx.graphics.Texture" path="player/player.png"/>
+        <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="player/player.pack"/>
     </group>
 </assets>
