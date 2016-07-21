@@ -5,6 +5,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
+import com.nuclearthinking.myheroagency.scripts.QuestLoader;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 
 public class LoadingScreen extends AbstractScreen {
@@ -15,6 +16,7 @@ public class LoadingScreen extends AbstractScreen {
         Asset.getInstance().finishLoading();
         Asset.getInstance().loadGroup("localization");
         Asset.getInstance().loadGroup("base");
+        QuestLoader.load();
     }
 
     private static FontFactory fontFactory;

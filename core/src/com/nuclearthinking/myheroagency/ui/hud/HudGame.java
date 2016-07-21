@@ -8,9 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.button.QuestAddListener;
+import com.nuclearthinking.myheroagency.controller.button.QuestCheck;
 import com.nuclearthinking.myheroagency.controller.button.QuestListener;
+import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
-import com.nuclearthinking.myheroagency.ui.hud.layer.Quest;
+import com.nuclearthinking.myheroagency.ui.hud.layer.QuestLayer;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
@@ -27,7 +29,7 @@ public class HudGame{
     private final Table mainTable, buttomTable, rightTable, leftTable;
     private TextButton questButton, r,l;
     private UiFactory uiFactory;
-    private Quest quest;
+    private QuestLayer questLayer;
     private SettingsLayer settings;
 
     public HudGame(final Batch batch){
@@ -35,7 +37,7 @@ public class HudGame{
         uiFactory = new UiFactory();
 
         //Инициализация слоёв
-        quest = new Quest(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
+        questLayer = new QuestLayer(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
         settings = new SettingsLayer(uiFactory);
 
         mainTable = getTable();
@@ -56,16 +58,17 @@ public class HudGame{
         mainTable.add(leftTable).expand().left();
 
         stage.addActor(mainTable);
-        stage.addActor(quest.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
+        stage.addActor(questLayer.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
         stage.addActor(settings.getTable());
     }
 
     private void initButton(){
         questButton = uiFactory.getTextButton("?");
         r = uiFactory.getTextButton("Right");
+        r.addListener(new QuestCheck(r, QuestManager.getQuestById(1)));
         l = uiFactory.getTextButton("Left");
-        l.addListener(new QuestAddListener(l, quest));
-        questButton.addListener(new QuestListener(questButton, quest));
+        l.addListener(new QuestAddListener(l, questLayer));
+        questButton.addListener(new QuestListener(questButton, questLayer));
     }
 
     private Table getTable(){
@@ -84,7 +87,7 @@ public class HudGame{
     public void resizeHud(final int width, final int height){
         stage.getViewport().update(width, height);
         settings.resize(width,height);
-        quest.resize(width,height);
+        questLayer.resize(width,height);
     }
 
     public Stage getHudStage(){

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 import java.util.LinkedHashMap;
@@ -18,14 +19,14 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Izonami on 23.05.2016.
  */
-public class Quest extends AbstractLayer {
+public class QuestLayer extends AbstractLayer {
 
     //LinkedHashMap используется для того что бы отображать в порядке добавления
     private static final Map<String, Actor> questsList = new LinkedHashMap<String, Actor>();
     private Image i;
     private boolean isShowTable = false;
 
-    public Quest(final UiFactory factory){
+    public QuestLayer(final UiFactory factory){
         super(factory);
 
         getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
@@ -35,8 +36,7 @@ public class Quest extends AbstractLayer {
         i.setFillParent(true);
         i.setColor(Color.FOREST);
 
-        addQuestToList("Test");
-        addQuestToList("Test2");
+        addQuestToList(QuestManager.getQuestById(1).getName()); //TODO: Убрать, это для теста
 
         getTable().addActor(i);
 
