@@ -81,6 +81,7 @@ public class SettingsLayer extends AbstractLayer{
     public void resize(final int w, final int h){
         super.resize(w,h);
 
+        getTable().setPosition(-Gdx.graphics.getWidth(), 0);
         getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 

@@ -11,8 +11,8 @@ public class Player extends GameObject implements Serializable {
     private final Vector3 velocity = new Vector3();
     private static float speed = 100;
     private static Animation idle, left, right;
-    private byte level;
-    private int exp;
+    private byte level = 1;
+    private int exp = 0;
 
     /**
      * @param collisionLayer - коллизия объекта
@@ -37,7 +37,7 @@ public class Player extends GameObject implements Serializable {
         setRegion(velocity.x < 0 ? left.getKeyFrame(animationTimer) : velocity.x > 0 ? right.getKeyFrame(animationTimer) : idle.getKeyFrame(animationTimer));
     }
 
-    public int getLevel() {
+    public byte getLevel() {
         return level;
     }
 
