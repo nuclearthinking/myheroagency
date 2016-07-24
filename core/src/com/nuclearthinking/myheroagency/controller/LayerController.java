@@ -16,6 +16,7 @@ public class LayerController {
 
     public void update(){
         settingsUpdate();
+        questLayer();
     }
 
     private void settingsUpdate(){
@@ -24,6 +25,15 @@ public class LayerController {
         }
         else if (Gdx.input.isKeyJustPressed(131) && layer.getSettings().isShowTable()){
             layer.getSettings().setTableVisible(false);
+        }
+    }
+
+    private void questLayer(){
+        if(Gdx.input.isKeyJustPressed(38) && !layer.getQuestLayer().isShowTable()){
+            layer.getQuestLayer().setTableVisible(true);
+        }
+        else if (Gdx.input.isKeyJustPressed(38) && layer.getQuestLayer().isShowTable()){
+            layer.getQuestLayer().setTableVisible(false);
         }
     }
 }

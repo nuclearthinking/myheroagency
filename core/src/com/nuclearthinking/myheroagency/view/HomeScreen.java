@@ -37,6 +37,7 @@ public class HomeScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
+        hudGame.buildHud(); // Строим слои
         manager = new MapManager(); // Создаем карту
         layerController = new LayerController(hudGame); // Добоавляем слои
         playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока

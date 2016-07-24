@@ -11,30 +11,38 @@ import com.nuclearthinking.myheroagency.ui.UiFactory;
  */
 public class PlayerLayer extends AbstractLayer {
 
-    private Label playerLvl;
-    private Label playerHp;
-    private Label playerExp;
-    private ObjectManager objectManager;
+    //Блок статуса персонажа
+    private final Label playerLvl;
+    private final Label playerHp;
+    private final Label playerExp;
+    private final ObjectManager objectManager;
 
     public PlayerLayer(final UiFactory factory) {
         super(factory);
+
         objectManager = new ObjectManager();
         playerLvl = factory.getLabel("playerLvl");
         playerHp = factory.getLabel("playerHp");
         playerExp = factory.getLabel("playerExp");
+    }
+
+    @Override
+    public void buildLayer() {
         playerLvl.setText("Lvl " + Integer.toString(objectManager.getPlayer().getLevel()));
-        playerHp.setText("Hp " + "1000");
+        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
         playerExp.setText("Exp " + Integer.toString(objectManager.getPlayer().getExp()));
-        getTable().setPosition(60, Gdx.graphics.getHeight()-60);
+
+        table.setPosition(60, Gdx.graphics.getHeight()-60);
+
         playerLvl.setColor(Color.WHITE);
         playerHp.setColor(Color.RED);
         playerExp.setColor(Color.CORAL);
 
-        getTable().add(playerLvl).left();
-        getTable().row();
-        getTable().add(playerHp).left();
-        getTable().row();
-        getTable().add(playerExp).left();
+        table.add(playerLvl).left();
+        table.row();
+        table.add(playerHp).left();
+        table.row();
+        table.add(playerExp).left();
     }
 
     public void updateAll(){
@@ -48,22 +56,18 @@ public class PlayerLayer extends AbstractLayer {
     }
 
     public void updateHp(){
-        playerHp.setText(Integer.toString(objectManager.getPlayer().getLevel()));
+        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
     }
 
     public void updateExp(){
-        playerExp.setText(Integer.toString(objectManager.getPlayer().getExp()));
-    }
-
-    @Override
-    public void setTableVisible(boolean isShowTable) {
-
+        playerExp.setText("Exp " + Integer.toString(objectManager.getPlayer().getExp()));
     }
 
     @Override
     public void resize(final int w, final int h){
         super.resize(w,h);
 
-        getTable().setPosition(60, Gdx.graphics.getHeight()-60);
+        table.setPosition(60, Gdx.graphics.getHeight()-60);
     }
+
 }

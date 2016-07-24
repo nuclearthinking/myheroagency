@@ -13,20 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
 public abstract class AbstractScreen implements Screen {
-    final protected Logger logger = new SimpleLoggerFactory().getLogger(getName());
-    final protected Localization locale = new Localization(this.getClass());
-    final protected InputMultiplexer multi = new InputMultiplexer();
-    final protected Stage stage;
+    protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+    protected final Localization locale = new Localization(this.getClass());
+    protected final InputMultiplexer multi = new InputMultiplexer();
+
+    protected final Stage stage;
 
     protected GameData gameData;
-
-    public GameData getGameData() {
-        return gameData;
-    }
-
-    public void setGameData(final GameData gameData) {
-        this.gameData = gameData;
-    }
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));
@@ -79,5 +72,13 @@ public abstract class AbstractScreen implements Screen {
 
     private String getName() {
         return getClass().getSimpleName();
+    }
+
+    public GameData getGameData() {
+        return gameData;
+    }
+
+    public void setGameData(final GameData gameData) {
+        this.gameData = gameData;
     }
 }
