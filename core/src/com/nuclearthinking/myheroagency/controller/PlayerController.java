@@ -2,7 +2,7 @@ package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.Player;
+import com.nuclearthinking.myheroagency.model.actor.Player;
 
 import java.util.HashMap;
 import java.util.Map;

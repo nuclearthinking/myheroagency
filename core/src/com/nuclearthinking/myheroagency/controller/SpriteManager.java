@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.nuclearthinking.myheroagency.model.GameObject;
+import com.nuclearthinking.myheroagency.model.actor.GameObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;

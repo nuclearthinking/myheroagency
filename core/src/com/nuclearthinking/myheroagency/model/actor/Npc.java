@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.model;
+package com.nuclearthinking.myheroagency.model.actor;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

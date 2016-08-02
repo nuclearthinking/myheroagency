@@ -2,7 +2,7 @@ package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.nuclearthinking.myheroagency.model.Player;
+import com.nuclearthinking.myheroagency.model.actor.Player;
 
 /**
  * Created by Izonami on 23.06.2016.

@@ -6,7 +6,7 @@ import com.nuclearthinking.myheroagency.controller.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.SpriteManager;
 import com.nuclearthinking.myheroagency.model.GameData;
-import com.nuclearthinking.myheroagency.model.GameObject;
+import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 

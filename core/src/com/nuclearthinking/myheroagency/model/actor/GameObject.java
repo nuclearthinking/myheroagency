@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.model;
+package com.nuclearthinking.myheroagency.model.actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -12,6 +12,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 public abstract class GameObject extends Sprite {
 
     protected float animationTimer = 0;
+
+    private int hp = 100;
+    private int mp = 100;
+    private byte level = 1;
 
     private final TiledMapTileLayer collisionLayer;
 
@@ -37,6 +41,32 @@ public abstract class GameObject extends Sprite {
     // Все действия над объектом производить в этом методе
     protected abstract void update(final float delta);
 
+    // Характеристики
+    public int getHp(){
+        return hp;
+    }
+
+    public void setHp(final int hp){
+        this.hp = hp;
+    }
+
+    public int getMp(){
+        return mp;
+    }
+
+    public void setMp(final int mp){
+        this.mp = mp;
+    }
+
+    public byte getLevel() {
+        return level;
+    }
+
+    public void setLevel(final byte level) {
+        this.level = level;
+    }
+
+    // Отрисовка
     public TiledMapTileLayer getCollisionLayer(){
         return collisionLayer;
     }

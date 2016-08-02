@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 
 public class GameData implements Serializable {
-    private Player player;
+    private com.nuclearthinking.myheroagency.model.actor.Player player;
 
     public static void save(GameData gameData) {
         final Kryo kryo = new Kryo();
@@ -40,11 +40,11 @@ public class GameData implements Serializable {
         }
     }
 
-    public Player getPlayer() {
+    public com.nuclearthinking.myheroagency.model.actor.Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(com.nuclearthinking.myheroagency.model.actor.Player player) {
         this.player = player;
     }
 }
