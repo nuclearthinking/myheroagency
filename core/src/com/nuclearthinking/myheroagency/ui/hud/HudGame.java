@@ -58,7 +58,8 @@ public class HudGame{
         stage.addActor(questLayer.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
         stage.addActor(settings.getTable());
 
-        stage.addActor(utilsLayer.getTable());
+        //Отладочный слой
+        if(Constants.DEBUG) stage.addActor(utilsLayer.getTable());
     }
 
     public void renderHud(final float delta) {
