@@ -106,4 +106,12 @@ public class SettingsScreen extends AbstractScreen {
         return selectLanguage;
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+
+        back.clearListeners();
+        save.clearListeners();
+    }
+
 }

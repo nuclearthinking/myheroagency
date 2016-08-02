@@ -25,7 +25,6 @@ public class MainMenuScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         uiFactory = new UiFactory();
-
         table = new Table(); // Создаем таблицу
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
@@ -64,6 +63,16 @@ public class MainMenuScreen extends AbstractScreen {
         exit = uiFactory.getTextButton(locale.get("buttonExit"));
         exit.getLabel().setFontScale(.7f);
         exit.addListener(new ExitListener(exit));
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+
+        play.clearListeners();
+        load.clearListeners();
+        settings.clearListeners();
+        exit.clearListeners();
     }
 
 }

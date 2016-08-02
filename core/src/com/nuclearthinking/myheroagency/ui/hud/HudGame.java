@@ -4,16 +4,12 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.nuclearthinking.myheroagency.controller.button.QuestAddListener;
-import com.nuclearthinking.myheroagency.controller.button.QuestCheck;
-import com.nuclearthinking.myheroagency.controller.button.QuestListener;
-import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
+import com.nuclearthinking.myheroagency.ui.hud.layer.PlayerLayer;
 import com.nuclearthinking.myheroagency.ui.hud.layer.QuestLayer;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
+import com.nuclearthinking.myheroagency.ui.hud.layer.UtilsLayer;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
@@ -25,69 +21,63 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  */
 public class HudGame{
 
+    private static final UiFactory uiFactory = new UiFactory();
+
     private final Stage stage;
-    private final Table mainTable, buttomTable, rightTable, leftTable;
-    private TextButton questButton, r,l;
-    private UiFactory uiFactory;
-    private QuestLayer questLayer;
-    private SettingsLayer settings;
+    private final PlayerLayer playerLayer;
+    private final QuestLayer questLayer;
+    private final SettingsLayer settings;
+
+    private UtilsLayer utilsLayer;
 
     public HudGame(final Batch batch){
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
-        uiFactory = new UiFactory();
 
         //Инициализация слоёв
+        playerLayer = new PlayerLayer(uiFactory);
         questLayer = new QuestLayer(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
         settings = new SettingsLayer(uiFactory);
 
-        mainTable = getTable();
-        mainTable.setFillParent(true);
+        //Отладочный слой
+        if(Constants.DEBUG) utilsLayer = new UtilsLayer(uiFactory);
+    }
 
-        buttomTable = getTable();
-        rightTable = getTable();
-        leftTable = getTable();
+    /**
+     * Нужно обязательно билдить слои
+     */
+    public void buildHud(){
+        playerLayer.buildLayer();
+        questLayer.buildLayer();
+        settings.buildLayer();
 
-        initButton();
+        //Отладочный слой
+        if(Constants.DEBUG) utilsLayer.buildLayer();
 
-        buttomTable.add(questButton);
-        rightTable.add(r);
-        leftTable.add(l);
-
-        mainTable.add(rightTable).expand().right();
-        mainTable.add(buttomTable).expand().bottom();
-        mainTable.add(leftTable).expand().left();
-
-        stage.addActor(mainTable);
+        // В каком порядке добавляется актер, в таком и отрисовывается
+        stage.addActor(playerLayer.getTable());
         stage.addActor(questLayer.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
         stage.addActor(settings.getTable());
-    }
 
-    private void initButton(){
-        questButton = uiFactory.getTextButton("?");
-        r = uiFactory.getTextButton("Right");
-        r.addListener(new QuestCheck(r, QuestManager.getQuestById(1)));
-        l = uiFactory.getTextButton("Left");
-        l.addListener(new QuestAddListener(l, questLayer));
-        questButton.addListener(new QuestListener(questButton, questLayer));
-    }
-
-    private Table getTable(){
-        final Table table = new Table();
-
-        table.setDebug(Constants.DEBUG);
-
-        return table;
+        //Отладочный слой
+        if(Constants.DEBUG) stage.addActor(utilsLayer.getTable());
     }
 
     public void renderHud(final float delta) {
         stage.draw();
         stage.act(delta);
+
+        //Отладочный слой
+        if(Constants.DEBUG) utilsLayer.update();
     }
 
     public void resizeHud(final int width, final int height){
         stage.getViewport().update(width, height);
-        settings.resize(width,height);
+        playerLayer.resize(width,height);
         questLayer.resize(width,height);
+        settings.resize(width,height);
+
+        //Отладочный слой
+        if(Constants.DEBUG) utilsLayer.resize(width,height);
     }
 
     public Stage getHudStage(){
@@ -100,6 +90,14 @@ public class HudGame{
 
     public SettingsLayer getSettings(){
         return settings;
+    }
+
+    public PlayerLayer getPlayerLayer(){
+        return playerLayer;
+    }
+
+    public QuestLayer getQuestLayer(){
+        return questLayer;
     }
 
 }

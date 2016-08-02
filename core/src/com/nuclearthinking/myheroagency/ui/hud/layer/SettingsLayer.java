@@ -15,7 +15,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Izonami on 24.05.2016.
  */
-public class SettingsLayer extends AbstractLayer{
+public class SettingsLayer extends AbstractLayer implements ILayer{
 
     private Label titleLabel, widthLabel, heightLabel;
     private TextField height, width;
@@ -24,23 +24,27 @@ public class SettingsLayer extends AbstractLayer{
 
     public SettingsLayer(final UiFactory factory){
         super(factory);
+    }
 
-        getTable().setSkin(factory.getSkin());
-        getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        getTable().setBackground("default-window");
+    @Override
+    public void buildLayer() {
+        table.setSkin(factory.getSkin());
+        table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        table.setPosition(-Gdx.graphics.getWidth(), 0);
+        table.setBackground("default-window");
 
         initButton();
 
-        getTable().add(titleLabel).spaceBottom(50).colspan(3).expandX().row();
-        getTable().row();
-        getTable().add(widthLabel).height(80).right();
-        getTable().add(width).top().center().left();
-        getTable().add().row();
-        getTable().add(heightLabel).height(80).right();
-        getTable().add(height).top().center().left();
-        getTable().row();
-        getTable().add(save).right().expandX().width(100).height(40);
-        getTable().add(exit).left().expandX().width(100).height(40);
+        table.add(titleLabel).spaceBottom(50).colspan(3).expandX().row();
+        table.row();
+        table.add(widthLabel).height(80).right();
+        table.add(width).top().center().left();
+        table.add().row();
+        table.add(heightLabel).height(80).right();
+        table.add(height).top().center().left();
+        table.row();
+        table.add(save).right().expandX().width(100).height(40);
+        table.add(exit).left().expandX().width(100).height(40);
     }
 
     private void initButton(){
@@ -68,9 +72,9 @@ public class SettingsLayer extends AbstractLayer{
         this.isShowTable = isShowTable;
 
         if (isShowTable)
-            getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            table.addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
         else
-            getTable().addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
+            table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
     }
 
     public boolean isShowTable(){
@@ -81,7 +85,8 @@ public class SettingsLayer extends AbstractLayer{
     public void resize(final int w, final int h){
         super.resize(w,h);
 
-        getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        table.setPosition(-Gdx.graphics.getWidth(), 0);
+        table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     public TextField getHeight(){

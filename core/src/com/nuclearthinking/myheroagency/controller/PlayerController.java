@@ -50,20 +50,20 @@ public class PlayerController implements InputProcessor {
         keys.get(keys.put(Keys.DOWN, true));
     }
 
-    public void leftReleased()
+    private void leftReleased()
     {
         keys.get(keys.put(Keys.LEFT, false));
     }
 
-    public void rightReleased() {
+    private void rightReleased() {
         keys.get(keys.put(Keys.RIGHT, false));
     }
 
-    public void upReleased() {
+    private void upReleased() {
         keys.get(keys.put(Keys.UP, false));
     }
 
-    public void downReleased() {
+    private void downReleased() {
         keys.get(keys.put(Keys.DOWN, false));
     }
 

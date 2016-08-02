@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.nuclearthinking.myheroagency.controller.Asset;
-import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
  * Created by Izonami on 30.05.2016.
