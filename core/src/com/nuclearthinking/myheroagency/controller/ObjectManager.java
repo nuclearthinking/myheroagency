@@ -18,7 +18,10 @@ public class ObjectManager {
             idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
             left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
             right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
-            player = new Player(null, 40, 35, idle,left,right);
+            player = new Player(null, 40, 35);
+            player.setIdleAnimation(idle);
+            player.setLeftAnimation(left);
+            player.setRightAnimation(right);
             return player;
         }
         return player;

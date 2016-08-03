@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.model.actor;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 /**
@@ -11,10 +10,9 @@ public class Monster extends GameObject {
      * @param collisionLayer - коллизия объекта
      * @param sizeHeight     - высота спрайта
      * @param sizeWidth      - ширина спрайта
-     * @param direction      - первый кадр(состояние)
      */
-    public Monster(TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth, Animation... direction) {
-        super(collisionLayer, sizeHeight, sizeWidth, direction);
+    public Monster(final TiledMapTileLayer collisionLayer, final int sizeHeight, final int sizeWidth) {
+        super(collisionLayer, sizeHeight, sizeWidth);
     }
 
     @Override

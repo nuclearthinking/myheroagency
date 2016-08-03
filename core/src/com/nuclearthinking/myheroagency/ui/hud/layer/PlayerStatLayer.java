@@ -9,6 +9,7 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer{
 
     public PlayerStatLayer(final UiFactory factory) {
         super(factory);
+
     }
 
     @Override
@@ -18,7 +19,7 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer{
 
     @Override
     public void setTableVisible(boolean isShowTable) {
-        
+
     }
 
     @Override

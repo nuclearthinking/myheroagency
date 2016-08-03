@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
-import com.nuclearthinking.myheroagency.ui.hud.layer.PlayerLayer;
-import com.nuclearthinking.myheroagency.ui.hud.layer.QuestLayer;
-import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
-import com.nuclearthinking.myheroagency.ui.hud.layer.UtilsLayer;
+import com.nuclearthinking.myheroagency.ui.hud.layer.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**
@@ -25,6 +22,7 @@ public class HudGame{
 
     private final Stage stage;
     private final PlayerLayer playerLayer;
+    private final PlayerStatLayer playerStatLayer;
     private final QuestLayer questLayer;
     private final SettingsLayer settings;
 
@@ -35,6 +33,7 @@ public class HudGame{
 
         //Инициализация слоёв
         playerLayer = new PlayerLayer(uiFactory);
+        playerStatLayer = new PlayerStatLayer(uiFactory);
         questLayer = new QuestLayer(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
         settings = new SettingsLayer(uiFactory);
 
@@ -47,6 +46,7 @@ public class HudGame{
      */
     public void buildHud(){
         playerLayer.buildLayer();
+        playerStatLayer.buildLayer();
         questLayer.buildLayer();
         settings.buildLayer();
 
@@ -55,6 +55,7 @@ public class HudGame{
 
         // В каком порядке добавляется актер, в таком и отрисовывается
         stage.addActor(playerLayer.getTable());
+        stage.addActor(playerStatLayer.getTable());
         stage.addActor(questLayer.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
         stage.addActor(settings.getTable());
 
@@ -73,6 +74,7 @@ public class HudGame{
     public void resizeHud(final int width, final int height){
         stage.getViewport().update(width, height);
         playerLayer.resize(width,height);
+        playerStatLayer.resize(width,height);
         questLayer.resize(width,height);
         settings.resize(width,height);
 
@@ -98,6 +100,10 @@ public class HudGame{
 
     public QuestLayer getQuestLayer(){
         return questLayer;
+    }
+
+    public PlayerStatLayer getPlayerStatLayer(){
+        return playerStatLayer;
     }
 
 }

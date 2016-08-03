@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.nuclearthinking.myheroagency.model.skills.Function;
+import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 
 /**
  * Created by Izonami on 22.06.2016.
@@ -12,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 public abstract class GameObject extends Sprite {
 
     protected float animationTimer = 0;
+    protected Animation idleAnimation, leftAnimation, rightAnimation;
 
     private int hp = 100;
     private int mp = 100;
@@ -23,13 +26,12 @@ public abstract class GameObject extends Sprite {
      * @param collisionLayer    - коллизия объекта
      * @param sizeHeight        - высота спрайта
      * @param sizeWidth         - ширина спрайта
-     * @param direction         - первый кадр(состояние)
      */
-    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth, final Animation... direction){
-        super(direction[0].getKeyFrame(0)); //Кадр по умолчанию
-
+    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth){
         this.collisionLayer = collisionLayer;
         setSize(sizeWidth, sizeHeight);
+
+        Function.addFuncToChar(this);
     }
 
     @Override
@@ -66,6 +68,14 @@ public abstract class GameObject extends Sprite {
         this.level = level;
     }
 
+    public final void addStatFunc(final Func f){
+
+    }
+    //TODO;
+    public byte getSTR() {
+        return 10;
+    }
+
     // Отрисовка
     public TiledMapTileLayer getCollisionLayer(){
         return collisionLayer;
@@ -77,6 +87,18 @@ public abstract class GameObject extends Sprite {
 
     public void setObjectSizeWidth(final int width){
         setSize(width, getHeight());
+    }
+
+    public void setIdleAnimation(final Animation idleAnimation){
+        this.idleAnimation = idleAnimation;
+    }
+
+    public void setRightAnimation(final Animation rightAnimation){
+        this.rightAnimation = rightAnimation;
+    }
+
+    public void setLeftAnimation(final Animation leftAnimation){
+        this.leftAnimation = leftAnimation;
     }
 
     // Определяющие методы, опредяляют к какому типу относится объект.
