@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
+import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.actor.Monster;
 import com.nuclearthinking.myheroagency.model.actor.Player;
 
@@ -8,8 +9,8 @@ import com.nuclearthinking.myheroagency.model.actor.Player;
  */
 public final class Env {
 
-    public Player player;
-    public Monster target;
+    public GameObject player;
+    public GameObject target;
 
     public double value;
 

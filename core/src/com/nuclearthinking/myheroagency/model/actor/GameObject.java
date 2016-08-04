@@ -5,8 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.nuclearthinking.myheroagency.model.skills.Calculator;
+import com.nuclearthinking.myheroagency.model.skills.Env;
 import com.nuclearthinking.myheroagency.model.skills.Function;
+import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
+import com.nuclearthinking.myheroagency.model.template.CharTemplate;
 
 /**
  * Created by Izonami on 22.06.2016.
@@ -15,21 +19,27 @@ public abstract class GameObject extends Sprite {
 
     protected float animationTimer = 0;
     protected Animation idleAnimation, leftAnimation, rightAnimation;
+    protected CharTemplate template;
 
     private int hp = 100;
     private int mp = 100;
     private byte level = 1;
 
     private final TiledMapTileLayer collisionLayer;
+    private final Calculator[] _calculators;
 
     /**
      * @param collisionLayer    - коллизия объекта
      * @param sizeHeight        - высота спрайта
      * @param sizeWidth         - ширина спрайта
      */
-    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth){
+    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth, final CharTemplate template){
         this.collisionLayer = collisionLayer;
         setSize(sizeWidth, sizeHeight);
+
+        this.template = template;
+
+        _calculators = new Calculator[Stats.NUM_STATS];
 
         Function.addFuncToChar(this);
     }
@@ -43,9 +53,42 @@ public abstract class GameObject extends Sprite {
     // Все действия над объектом производить в этом методе
     protected abstract void update(final float delta);
 
+    public final void addStatFunc(final Func f) {
+        if(f == null)
+            return;
+
+        final int stat = f._stat.ordinal();
+        synchronized (_calculators) {
+            // Select the Calculator of the affected state in the Calculator set
+            if(_calculators[stat] == null)
+                _calculators[stat] = new Calculator(f._stat, this);
+
+            // Add the Func to the calculator corresponding to the state
+            _calculators[stat].addFunc(f);
+        }
+    }
+
+    public final double calcStat(final Stats stat, final double init, final GameObject object){
+        final int id = stat.ordinal();
+        final Calculator c = _calculators[id];
+        // If no Func object found, no modifier is applied
+        if(c == null || c.size() == 0)
+            return init;
+
+        // Create and init an Env object to pass parameters to the Calculator
+        final Env env = new Env();
+        env.player = this;
+        env.target = object;
+        env.value = init;
+        // Launch the calculation
+        c.calc(env);
+
+        return env.value;
+    }
+
     // Характеристики
     public int getHp(){
-        return hp;
+        return (int) calcStat(Stats.MAX_HP, template.baseHpMax, null);
     }
 
     public void setHp(final int hp){
@@ -68,12 +111,17 @@ public abstract class GameObject extends Sprite {
         this.level = level;
     }
 
-    public final void addStatFunc(final Func f){
-
-    }
     //TODO;
     public byte getSTR() {
         return 10;
+    }
+
+    public byte getINT(){
+        return 10;
+    }
+
+    public byte getCON(){
+        return (byte) template.baseCON;
     }
 
     // Отрисовка

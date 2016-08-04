@@ -1,15 +1,14 @@
 package com.nuclearthinking.myheroagency.model.actor;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
+import com.nuclearthinking.myheroagency.model.template.CharTemplate;
 
 import java.io.Serializable;
 
 public class Player extends GameObject implements Serializable {
 
     private final Vector3 velocity = new Vector3();
-    private static float speed = 100;
     private int exp = 0;
 
     /**
@@ -17,8 +16,8 @@ public class Player extends GameObject implements Serializable {
      * @param sizeHeight     - высота спрайта
      * @param sizeWidth      - ширина спрайта
      */
-    public Player(final TiledMapTileLayer collisionLayer, final int sizeHeight, final int sizeWidth) {
-        super(collisionLayer, sizeHeight, sizeWidth);
+    public Player(final TiledMapTileLayer collisionLayer, final int sizeHeight, final int sizeWidth, final CharTemplate template) {
+        super(collisionLayer, sizeHeight, sizeWidth, template);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class Player extends GameObject implements Serializable {
     }
 
     public float getSpeed(){
-        return speed;
+        return template.baseRunSpd;
     }
 
     public Vector3 getVelocity(){

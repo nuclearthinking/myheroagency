@@ -41,18 +41,15 @@ public enum Stats {
 
     private String _value;
 
-    public String getValue()
-    {
+    public String getValue() {
         return _value;
     }
 
-    private Stats(String s)
-    {
+    private Stats(String s) {
         _value = s;
     }
 
-    public static Stats valueOfXml(String name)
-    {
+    public static Stats valueOfXml(String name) {
         for(Stats s : values())
             if(s.getValue().equals(name))
                 return s;
@@ -61,8 +58,8 @@ public enum Stats {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return _value;
     }
+
 }
