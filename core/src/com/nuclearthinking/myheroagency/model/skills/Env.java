@@ -1,23 +1,45 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
-import com.nuclearthinking.myheroagency.model.actor.Monster;
-import com.nuclearthinking.myheroagency.model.actor.Player;
 
 /**
  * Created by Izonami on 03.08.2016.
  */
 public final class Env {
 
-    public GameObject player;
-    public GameObject target;
+    private GameObject character;
+    private GameObject target;
 
-    public double value;
+    private double value;
 
     public Env(){}
 
-    public Env(final Player player, final Monster target){
-        this.player = player;
+    public Env(final GameObject player, final GameObject target){
+        this.character = player;
         this.target = target;
+    }
+
+    public GameObject getCharacter(){
+        return character;
+    }
+
+    public void setCharacter(final GameObject character){
+        this.character = character;
+    }
+
+    public GameObject getTarget(){
+        return target;
+    }
+
+    public void setTarget(final GameObject target){
+        this.target = target;
+    }
+
+    public double getValue(){
+        return value;
+    }
+
+    public void setValue(final double value){
+        this.value = value;
     }
 }

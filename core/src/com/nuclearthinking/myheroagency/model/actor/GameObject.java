@@ -59,31 +59,26 @@ public abstract class GameObject extends Sprite {
 
         final int stat = f._stat.ordinal();
         synchronized (_calculators) {
-            // Select the Calculator of the affected state in the Calculator set
             if(_calculators[stat] == null)
                 _calculators[stat] = new Calculator(f._stat, this);
 
-            // Add the Func to the calculator corresponding to the state
             _calculators[stat].addFunc(f);
         }
     }
 
-    public final double calcStat(final Stats stat, final double init, final GameObject object){
+    public final double calcStat(final Stats stat, final double init, final GameObject target){
         final int id = stat.ordinal();
-        final Calculator c = _calculators[id];
-        // If no Func object found, no modifier is applied
-        if(c == null || c.size() == 0)
+        final Calculator calculator = _calculators[id];
+
+        if(calculator == null || calculator.size() == 0)
             return init;
 
-        // Create and init an Env object to pass parameters to the Calculator
-        final Env env = new Env();
-        env.player = this;
-        env.target = object;
-        env.value = init;
-        // Launch the calculation
-        c.calc(env);
+        final Env env = new Env(this, target);
+        env.setValue(init);
 
-        return env.value;
+        calculator.calculate(env);
+
+        return env.getValue();
     }
 
     // Характеристики

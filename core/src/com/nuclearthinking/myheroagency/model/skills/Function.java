@@ -37,7 +37,7 @@ public class Function {
 
         @Override
         public void calc(final Env env) {
-            env.value *= STRbonus[env.player.getSTR()] * env.player.getLevel() * STR_MOD;
+            env.setValue(env.getValue() * STRbonus[env.getCharacter().getSTR()] * env.getCharacter().getLevel() * STR_MOD);
         }
     }
 
@@ -50,7 +50,7 @@ public class Function {
 
         @Override
         public void calc(Env env) {
-            env.value *= INTbonus[env.player.getINT()] * env.player.getLevel() * INT_MOD;
+            env.setValue(env.getValue() * INTbonus[env.getCharacter().getINT()] * env.getCharacter().getLevel() * INT_MOD);
         }
     }
 
@@ -64,7 +64,7 @@ public class Function {
 
         @Override
         public void calc(Env env) {
-            env.value *= CONbonus[env.player.getCON()] * CON_MOD;
+            env.setValue(env.getValue() * CONbonus[env.getCharacter().getCON()] * CON_MOD);
         }
     }
 

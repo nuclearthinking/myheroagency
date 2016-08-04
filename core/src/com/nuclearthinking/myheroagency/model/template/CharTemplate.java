@@ -29,6 +29,7 @@ public class CharTemplate {
 
     public final int baseRunSpd;
 
+    //TODO: Получать из файла
     public CharTemplate(){
         baseSTR = 10;
         baseCON = 10;

@@ -1,7 +1,5 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import java.util.NoSuchElementException;
-
 /**
  * Created by Izonami on 03.08.2016.
  */
@@ -29,7 +27,6 @@ public enum Stats {
     MCRITICAL_BASE("mBaseCrit"),
     MCRITICAL_RATE("mCritRate"),
 
-
     STAT_STR("STR"),
     STAT_CON("CON"),
     STAT_DEX("DEX"),
@@ -41,20 +38,12 @@ public enum Stats {
 
     private String _value;
 
-    public String getValue() {
-        return _value;
-    }
-
-    private Stats(String s) {
+    Stats(String s) {
         _value = s;
     }
 
-    public static Stats valueOfXml(String name) {
-        for(Stats s : values())
-            if(s.getValue().equals(name))
-                return s;
-
-        throw new NoSuchElementException("Unknown name '" + name + "' for enum BaseStats");
+    public String getValue() {
+        return _value;
     }
 
     @Override
