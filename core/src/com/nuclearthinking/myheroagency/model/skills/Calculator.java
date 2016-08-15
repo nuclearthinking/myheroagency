@@ -12,8 +12,6 @@ public final class Calculator {
 
     private ArrayList<Func> _functions;
 
-    private double _base;
-
     public final Stats _stat;
     public final GameObject _character;
 
@@ -47,7 +45,6 @@ public final class Calculator {
     }
 
     public void calculate(final Env env) {
-        _base = env.getValue();
         for(final Func func : _functions)
             func.calc(env);
     }

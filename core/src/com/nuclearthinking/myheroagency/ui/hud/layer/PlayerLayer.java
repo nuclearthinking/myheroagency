@@ -14,6 +14,7 @@ public class PlayerLayer extends AbstractLayer {
     //Блок статуса персонажа
     private final Label playerLvl;
     private final Label playerHp;
+    private final Label playerMp;
     private final Label playerExp;
     private final ObjectManager objectManager;
 
@@ -23,6 +24,7 @@ public class PlayerLayer extends AbstractLayer {
         objectManager = new ObjectManager();
         playerLvl = factory.getLabel("playerLvl");
         playerHp = factory.getLabel("playerHp");
+        playerMp = factory.getLabel("playerMp");
         playerExp = factory.getLabel("playerExp");
     }
 
@@ -30,6 +32,7 @@ public class PlayerLayer extends AbstractLayer {
     public void buildLayer() {
         playerLvl.setText("Lvl " + Integer.toString(objectManager.getPlayer().getLevel()));
         playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
+        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
         playerExp.setText("Exp " + Integer.toString(objectManager.getPlayer().getExp()));
 
         table.setPosition(60, Gdx.graphics.getHeight()-60);
@@ -42,12 +45,15 @@ public class PlayerLayer extends AbstractLayer {
         table.row();
         table.add(playerHp).left();
         table.row();
+        table.add(playerMp).left();
+        table.row();
         table.add(playerExp).left();
     }
 
     public void updateAll(){
         updateLvl();
         updateHp();
+        updateMp();
         updateExp();
     }
 
@@ -57,6 +63,10 @@ public class PlayerLayer extends AbstractLayer {
 
     public void updateHp(){
         playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
+    }
+
+    public void updateMp(){
+        playerHp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
     }
 
     public void updateExp(){

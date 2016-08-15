@@ -18,7 +18,7 @@ public abstract class AbstractButtonListener extends ClickListener {
 
     private final TextButton button;
 
-    protected AbstractButtonListener(final TextButton button){
+    public AbstractButtonListener(final TextButton button){
         this.button = button;
     }
 

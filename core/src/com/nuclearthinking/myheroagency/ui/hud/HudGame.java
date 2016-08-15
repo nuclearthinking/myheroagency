@@ -38,34 +38,31 @@ public class HudGame{
         settings = new SettingsLayer(uiFactory);
 
         //Отладочный слой
-        if(Constants.DEBUG) utilsLayer = new UtilsLayer(uiFactory);
+        if(Constants.DEBUG){
+            utilsLayer = new UtilsLayer(uiFactory);
+            buildHud(utilsLayer);
+        }
+
+        buildHud(playerLayer);
+        buildHud(playerStatLayer);
+        buildHud(questLayer);
+        buildHud(settings);
+
     }
 
     /**
      * Нужно обязательно билдить слои
      */
-    public void buildHud(){
-        playerLayer.buildLayer();
-        playerStatLayer.buildLayer();
-        questLayer.buildLayer();
-        settings.buildLayer();
-
-        //Отладочный слой
-        if(Constants.DEBUG) utilsLayer.buildLayer();
-
-        // В каком порядке добавляется актер, в таком и отрисовывается
-        stage.addActor(playerLayer.getTable());
-        stage.addActor(playerStatLayer.getTable());
-        stage.addActor(questLayer.getTable()); // Добавляю актера из слоя. Получение через гетер, что бы не экстендить весь класс Group
-        stage.addActor(settings.getTable());
-
-        //Отладочный слой
-        if(Constants.DEBUG) stage.addActor(utilsLayer.getTable());
+    private void buildHud(final AbstractLayer layer){
+        layer.buildLayer();
+        stage.addActor(layer.getTable());
     }
 
     public void renderHud(final float delta) {
         stage.draw();
         stage.act(delta);
+
+       // playerLayer.updateHp(); //TODO: Нужно сделать слушателя. Так категорически не хорошо
 
         //Отладочный слой
         if(Constants.DEBUG) utilsLayer.update();
@@ -73,6 +70,7 @@ public class HudGame{
 
     public void resizeHud(final int width, final int height){
         stage.getViewport().update(width, height);
+
         playerLayer.resize(width,height);
         playerStatLayer.resize(width,height);
         questLayer.resize(width,height);

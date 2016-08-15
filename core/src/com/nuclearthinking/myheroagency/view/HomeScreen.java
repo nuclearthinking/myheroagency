@@ -31,16 +31,16 @@ public class HomeScreen extends AbstractScreen {
 
     public HomeScreen(final GameData gameData) {
         this.gameData = gameData;
+
         object = new ObjectManager();
+        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
+        manager = new MapManager(); // Создаем карту
+        layerController = new LayerController(hudGame); // Добоавляем слои
+        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
     }
 
     @Override
     public void buildStage() {
-        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
-        hudGame.buildHud(); // Строим слои
-        manager = new MapManager(); // Создаем карту
-        layerController = new LayerController(hudGame); // Добоавляем слои
-        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
         object.getPlayer().setPosition(1000,3000); // Устанавливаем начальную позицию для игрока
         SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
 

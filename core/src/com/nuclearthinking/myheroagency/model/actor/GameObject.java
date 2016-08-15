@@ -91,7 +91,7 @@ public abstract class GameObject extends Sprite {
     }
 
     public int getMp(){
-        return mp;
+        return (int) calcStat(Stats.MAX_MP, template.baseMpMax, null);
     }
 
     public void setMp(final int mp){
@@ -106,17 +106,32 @@ public abstract class GameObject extends Sprite {
         this.level = level;
     }
 
-    //TODO;
     public byte getSTR() {
-        return 10;
-    }
-
-    public byte getINT(){
-        return 10;
+        return template.baseSTR;
     }
 
     public byte getCON(){
-        return (byte) template.baseCON;
+        return template.baseCON;
+    }
+
+    public void setCon(final byte con){
+        template.baseCON = con;
+    }
+
+    public byte getDEX(){
+        return template.baseDEX;
+    }
+
+    public byte getINT(){
+        return template.baseINT;
+    }
+
+    public byte getWIT(){
+        return template.baseWIT;
+    }
+
+    public byte getMEN(){
+        return template.baseMEN;
     }
 
     // Отрисовка

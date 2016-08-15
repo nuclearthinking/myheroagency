@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main extends Game {
+
     private final static String LOG_FILE_NAME = "myheroagency.log";
 
     @Override
