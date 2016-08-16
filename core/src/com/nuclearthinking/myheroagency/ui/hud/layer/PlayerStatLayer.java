@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.ObjectManager;
-import com.nuclearthinking.myheroagency.controller.button.PlusStrListener;
+import com.nuclearthinking.myheroagency.controller.button.PlusConListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -13,12 +13,19 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Izonami on 02.08.2016.
  */
-public class PlayerStatLayer extends AbstractLayer implements ILayer{
+public class PlayerStatLayer extends AbstractLayer implements ILayer, ObserverStats{
 
     private boolean isShowTable = false;
+    private TextButton plus;
+    private Label con;
+    private final ObjectManager objectManager;
 
     public PlayerStatLayer(final UiFactory factory) {
         super(factory);
+
+        this.con = factory.getLabel("con");
+        this.plus = factory.getTextButton("plusCon");
+        this.objectManager = new ObjectManager();
 
     }
 
@@ -27,14 +34,10 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer{
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         table.setPosition(60, Gdx.graphics.getHeight()-60);
 
-        ObjectManager objectManager = new ObjectManager();
-        Label str = factory.getLabel("str");
-        TextButton plus = factory.getTextButton("plusStr");
+        con.setText(Integer.toString(objectManager.getPlayer().getCON()));
+        plus.addListener(new PlusConListener(plus, objectManager));
 
-        str.setText(Integer.toString(objectManager.getPlayer().getSTR()));
-        plus.addListener(new PlusStrListener(plus, objectManager));
-
-        table.add(str).center();
+        table.add(con).center();
         table.add(plus);
     }
 
@@ -61,4 +64,13 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer{
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
     }
 
+    //TODO: Вот это мне очень не нравится
+    public PlusConListener getListener(){
+        return (PlusConListener) plus.getListeners().get(1);
+    }
+
+    @Override
+    public void update() {
+        con.setText(Integer.toString(objectManager.getPlayer().getCON()));
+    }
 }

@@ -115,7 +115,7 @@ public abstract class GameObject extends Sprite {
     }
 
     public void setCon(final byte con){
-        template.baseCON = con;
+        template.baseCON += con;
     }
 
     public byte getDEX(){

@@ -48,6 +48,9 @@ public class HudGame{
         buildHud(questLayer);
         buildHud(settings);
 
+        //TODO: Пока не придумал как лучше сделать
+        playerStatLayer.getListener().subscribe(playerLayer);
+        playerStatLayer.getListener().subscribe(playerStatLayer);
     }
 
     /**
@@ -61,8 +64,6 @@ public class HudGame{
     public void renderHud(final float delta) {
         stage.draw();
         stage.act(delta);
-
-       // playerLayer.updateHp(); //TODO: Нужно сделать слушателя. Так категорически не хорошо
 
         //Отладочный слой
         if(Constants.DEBUG) utilsLayer.update();

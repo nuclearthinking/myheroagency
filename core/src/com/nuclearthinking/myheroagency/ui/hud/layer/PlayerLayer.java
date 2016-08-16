@@ -9,7 +9,7 @@ import com.nuclearthinking.myheroagency.ui.UiFactory;
 /**
  * Created by Izonami on 22.07.2016.
  */
-public class PlayerLayer extends AbstractLayer {
+public class PlayerLayer extends AbstractLayer implements ObserverStats{
 
     //Блок статуса персонажа
     private final Label playerLvl;
@@ -50,7 +50,8 @@ public class PlayerLayer extends AbstractLayer {
         table.add(playerExp).left();
     }
 
-    public void updateAll(){
+    @Override
+    public void update(){
         updateLvl();
         updateHp();
         updateMp();
@@ -66,7 +67,7 @@ public class PlayerLayer extends AbstractLayer {
     }
 
     public void updateMp(){
-        playerHp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
+        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
     }
 
     public void updateExp(){
