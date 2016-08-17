@@ -49,8 +49,11 @@ public class HudGame{
         buildHud(settings);
 
         //TODO: Пока не придумал как лучше сделать
-        playerStatLayer.getListener().subscribe(playerLayer);
-        playerStatLayer.getListener().subscribe(playerStatLayer);
+        playerStatLayer.getObservable().subscribe(playerLayer);
+        playerStatLayer.getObservable().subscribe(playerStatLayer);
+        //TODO: Для проверки убрать после тестов
+        playerStatLayer.getObs().subscribe(playerLayer);
+        playerStatLayer.getObs().subscribe(playerStatLayer);
     }
 
     /**

@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.ObjectManager;
-import com.nuclearthinking.myheroagency.controller.button.PlusConListener;
+import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
+import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
+import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -13,19 +15,25 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Izonami on 02.08.2016.
  */
-public class PlayerStatLayer extends AbstractLayer implements ILayer, ObserverStats{
+public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
 
     private boolean isShowTable = false;
     private TextButton plus;
+    private TextButton minus;
     private Label con;
     private final ObjectManager objectManager;
+    private final AddStatsListener listenerPlus;
+    private final RemoveStatsListener listenerMinus;
 
     public PlayerStatLayer(final UiFactory factory) {
         super(factory);
 
         this.con = factory.getLabel("con");
-        this.plus = factory.getTextButton("plusCon");
+        this.plus = factory.getTextButton("+");
+        this.minus = factory.getTextButton("-");
         this.objectManager = new ObjectManager();
+        this.listenerPlus = new AddStatsListener(plus, objectManager);
+        this.listenerMinus = new RemoveStatsListener(minus, objectManager);
 
     }
 
@@ -35,10 +43,12 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, ObserverSt
         table.setPosition(60, Gdx.graphics.getHeight()-60);
 
         con.setText(Integer.toString(objectManager.getPlayer().getCON()));
-        plus.addListener(new PlusConListener(plus, objectManager));
+        plus.addListener(listenerPlus);
+        minus.addListener(listenerMinus);
 
         table.add(con).center();
         table.add(plus);
+        table.add(minus);
     }
 
     @Override
@@ -64,9 +74,12 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, ObserverSt
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
     }
 
-    //TODO: Вот это мне очень не нравится
-    public PlusConListener getListener(){
-        return (PlusConListener) plus.getListeners().get(1);
+    public AddStatsListener getObservable(){
+        return listenerPlus;
+    }
+
+    public RemoveStatsListener getObs(){
+        return listenerMinus;
     }
 
     @Override

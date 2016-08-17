@@ -16,7 +16,7 @@ public abstract class AbstractButtonListener extends ClickListener {
 
     protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
 
-    private final TextButton button;
+    protected final TextButton button;
 
     public AbstractButtonListener(final TextButton button){
         this.button = button;

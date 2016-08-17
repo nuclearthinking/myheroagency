@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.nuclearthinking.myheroagency.controller.button.ExitListener;
-import com.nuclearthinking.myheroagency.controller.button.SaveLayerListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;

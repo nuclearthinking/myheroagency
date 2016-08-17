@@ -3,10 +3,10 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.nuclearthinking.myheroagency.controller.button.ExitListener;
-import com.nuclearthinking.myheroagency.controller.button.LoadListener;
-import com.nuclearthinking.myheroagency.controller.button.PlayListener;
-import com.nuclearthinking.myheroagency.controller.button.SettingListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.LoadListener;
+import com.nuclearthinking.myheroagency.controller.button.player.PlayListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.SettingListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 

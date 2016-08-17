@@ -1,9 +1,10 @@
-package com.nuclearthinking.myheroagency.controller.button;
+package com.nuclearthinking.myheroagency.controller.button.menu;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.model.GameData;
 
 /**

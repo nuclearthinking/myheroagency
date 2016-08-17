@@ -4,12 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.ObjectManager;
+import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 /**
  * Created by Izonami on 22.07.2016.
  */
-public class PlayerLayer extends AbstractLayer implements ObserverStats{
+public class PlayerLayer extends AbstractLayer implements ObserverCon {
 
     //Блок статуса персонажа
     private final Label playerLvl;
@@ -62,6 +63,7 @@ public class PlayerLayer extends AbstractLayer implements ObserverStats{
         playerLvl.setText("Lvl " + Integer.toString(objectManager.getPlayer().getLevel()));
     }
 
+    @Override
     public void updateHp(){
         playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
     }
