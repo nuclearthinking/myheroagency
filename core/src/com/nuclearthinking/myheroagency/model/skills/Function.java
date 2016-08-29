@@ -26,7 +26,7 @@ public class Function {
     static {
         for (int i = 0; i < MAX_STAT_VALUE; i++) {
             CONbonus[i] = (200.0 + (i+.0)) / 100.0;
-            MENbonus[i] = (100.0 + MAX_STAT_VALUE - (i+.0)) / 100.0;
+            MENbonus[i] = (200.0 + (i+.0)) / 100.0;
         }
     }
 
@@ -85,6 +85,10 @@ public class Function {
 
         @Override
         public void calc(Env env) {
+            logger.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
+            logger.debug("MEN: "+env.getCharacter().getMEN());
+            logger.debug("MenBonus: "+MENbonus[env.getCharacter().getMEN()]);
+            logger.debug("All Env :"+env.getValue() * MENbonus[env.getCharacter().getMEN()] * MAX_MP_MOD);
             env.setValue(env.getValue() * MENbonus[env.getCharacter().getMEN()] * MAX_MP_MOD);
         }
     }

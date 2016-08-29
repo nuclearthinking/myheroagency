@@ -5,17 +5,20 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
+import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 
 /**
  * Created by Izonami on 22.07.2016.
  */
-public class PlayerLayer extends AbstractLayer implements ObserverCon {
+public class PlayerLayer extends AbstractLayer implements ObserverCon, ObserverMen {
 
     //Блок статуса персонажа
     private final Label playerLvl;
     private final Label playerHp;
+    private final Label playerBaseHp;
     private final Label playerMp;
+    private final Label playerBaseMp;
     private final Label playerExp;
     private final ObjectManager objectManager;
 
@@ -25,15 +28,19 @@ public class PlayerLayer extends AbstractLayer implements ObserverCon {
         objectManager = new ObjectManager();
         playerLvl = factory.getLabel("playerLvl");
         playerHp = factory.getLabel("playerHp");
+        playerBaseHp = factory.getLabel("playerBaseHp");
         playerMp = factory.getLabel("playerMp");
+        playerBaseMp = factory.getLabel("playerBaseMp");
         playerExp = factory.getLabel("playerExp");
     }
 
     @Override
     public void buildLayer() {
         playerLvl.setText("Lvl " + Integer.toString(objectManager.getPlayer().getLevel()));
-        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
-        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
+        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getCurHp()));
+        playerBaseHp.setText("/" + Integer.toString(objectManager.getPlayer().getBaseHp()));
+        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getCurMp()));
+        playerBaseMp.setText("/" + Integer.toString(objectManager.getPlayer().getBaseMp()));
         playerExp.setText("Exp " + Integer.toString(objectManager.getPlayer().getExp()));
 
         table.setPosition(60, Gdx.graphics.getHeight()-60);
@@ -45,8 +52,10 @@ public class PlayerLayer extends AbstractLayer implements ObserverCon {
         table.add(playerLvl).left();
         table.row();
         table.add(playerHp).left();
+        table.add(playerBaseHp).right();
         table.row();
         table.add(playerMp).left();
+        table.add(playerBaseMp).right();
         table.row();
         table.add(playerExp).left();
     }
@@ -65,11 +74,14 @@ public class PlayerLayer extends AbstractLayer implements ObserverCon {
 
     @Override
     public void updateHp(){
-        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getHp()));
+        playerHp.setText("Hp " + Integer.toString(objectManager.getPlayer().getCurHp()));
+        playerBaseHp.setText("/" + Integer.toString(objectManager.getPlayer().getBaseHp()));
     }
 
+    @Override
     public void updateMp(){
-        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getMp()));
+        playerMp.setText("Mp " + Integer.toString(objectManager.getPlayer().getCurMp()));
+        playerBaseMp.setText("/" + Integer.toString(objectManager.getPlayer().getBaseMp()));
     }
 
     public void updateExp(){

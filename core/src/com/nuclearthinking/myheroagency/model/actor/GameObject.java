@@ -11,18 +11,22 @@ import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 22.06.2016.
  */
 public abstract class GameObject extends Sprite {
 
+    protected final Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
+
     protected float animationTimer = 0;
     protected Animation idleAnimation, leftAnimation, rightAnimation;
     protected CharTemplate template;
 
-    private int hp = 100;
-    private int mp = 100;
+    private int curHp;
+    private int curMp;
     private byte level = 1;
 
     private final TiledMapTileLayer collisionLayer;
@@ -42,6 +46,9 @@ public abstract class GameObject extends Sprite {
         _calculators = new Calculator[Stats.NUM_STATS];
 
         Function.addFuncToChar(this);
+
+        curHp = getBaseHp();
+        curMp = getBaseMp();
     }
 
     @Override
@@ -82,20 +89,61 @@ public abstract class GameObject extends Sprite {
     }
 
     // Характеристики
-    public int getHp(){
+    public int getBaseHp(){
         return (int) calcStat(Stats.MAX_HP, template.baseHpMax, null);
     }
 
-    public void setHp(final int hp){
-        this.hp = hp;
+    public int getCurHp(){
+        return curHp;
     }
 
-    public int getMp(){
+    public void setCurHpDamage(final int damage){
+        int tmpCurHp = curHp - damage;
+        logger.debug("Damage: " + damage + " "
+        + "hpCur: " + curHp + " "
+        + "getBaseHp:" + curHp + " "
+        + "BaseHp - damage: " + tmpCurHp);
+        if(tmpCurHp <= 0){
+            curHp = 0;
+            logger.debug("You dead");
+            return;
+        }
+        else
+            this.curHp = tmpCurHp;
+    }
+
+    public void setCurHpRegen(final int regen){
+        int tmpCurHp = curHp + regen;
+        logger.debug("Regen: " + regen + " "
+                + "hpCur: " + curHp + " "
+                + "getBaseHp:" + getBaseHp() + " "
+                + "curHp + regen: " + tmpCurHp);
+        if(tmpCurHp >= getBaseHp()){
+            curHp = getBaseHp();
+            logger.debug("Hp is full");
+            return;
+        }
+        else
+            this.curHp = tmpCurHp;
+    }
+
+    public int getBaseMp(){
         return (int) calcStat(Stats.MAX_MP, template.baseMpMax, null);
     }
 
-    public void setMp(final int mp){
-        this.mp = mp;
+    public int getCurMp(){
+        return curMp;
+    }
+
+    public void setCurMp(final int damage){
+        int tmpCurMp = curMp - damage;
+        if(tmpCurMp <= 0){
+            curMp = 0;
+            logger.debug("Your manna is over");
+            return;
+        }
+        else
+            this.curMp = tmpCurMp;
     }
 
     public byte getLevel() {

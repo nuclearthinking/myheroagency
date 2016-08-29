@@ -38,7 +38,7 @@ public class CharTemplate {
         baseWIT = 10;
         baseMEN = 10;
         baseHpMax = 100;
-        baseMpMax = 50;
+        baseMpMax = 100;
         baseHpReg = 0.1f;
         baseMpReg = 0.1f;
         basePAtk = 10;

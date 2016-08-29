@@ -7,6 +7,7 @@ import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener
 import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
+import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,8 @@ public class RemoveStatsListener extends AbstractButtonListener implements Obser
         for(Observer observerStats : subscribers){
             if(observerStats instanceof ObserverCon)
                 ((ObserverCon) observerStats).updateHp();
+            if(observerStats instanceof ObserverMen)
+                ((ObserverMen)observerStats).updateMp();
             else
                 observerStats.update();
         }
