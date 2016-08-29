@@ -32,7 +32,7 @@ public final class Calculator {
     public void removeFunc(final Func f) {
         int index = _functions.indexOf(f);
 
-        if(index >=0){
+        if(index >= 0){
             _functions.remove(index);
         }
     }

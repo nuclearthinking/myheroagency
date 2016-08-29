@@ -100,9 +100,8 @@ public abstract class GameObject extends Sprite {
     public void setCurHpDamage(final int damage){
         int tmpCurHp = curHp - damage;
         logger.debug("Damage: " + damage + " "
-        + "hpCur: " + curHp + " "
-        + "getBaseHp:" + curHp + " "
-        + "BaseHp - damage: " + tmpCurHp);
+        + "curHp: " + curHp + " "
+        + "curHp - damage: " + tmpCurHp);
         if(tmpCurHp <= 0){
             curHp = 0;
             logger.debug("You dead");
@@ -115,8 +114,7 @@ public abstract class GameObject extends Sprite {
     public void setCurHpRegen(final int regen){
         int tmpCurHp = curHp + regen;
         logger.debug("Regen: " + regen + " "
-                + "hpCur: " + curHp + " "
-                + "getBaseHp:" + getBaseHp() + " "
+                + "curHp: " + curHp + " "
                 + "curHp + regen: " + tmpCurHp);
         if(tmpCurHp >= getBaseHp()){
             curHp = getBaseHp();
@@ -135,8 +133,11 @@ public abstract class GameObject extends Sprite {
         return curMp;
     }
 
-    public void setCurMp(final int damage){
+    public void setCurMpDamage(final int damage){
         int tmpCurMp = curMp - damage;
+        logger.debug("Damage: " + damage + " "
+                + "curMp: " + curMp + " "
+                + "curMp - damage: " + tmpCurMp);
         if(tmpCurMp <= 0){
             curMp = 0;
             logger.debug("Your manna is over");
@@ -158,6 +159,10 @@ public abstract class GameObject extends Sprite {
         return template.baseSTR;
     }
 
+    public void setSTR(final byte str){
+        template.baseDEX = str;
+    }
+
     public byte getCON(){
         return template.baseCON;
     }
@@ -170,16 +175,36 @@ public abstract class GameObject extends Sprite {
         return template.baseDEX;
     }
 
+    public void setDEX(final byte dex){
+        template.baseDEX = dex;
+    }
+
     public byte getINT(){
         return template.baseINT;
+    }
+
+    public void setINT(final byte intellegent){
+        template.baseINT = intellegent;
     }
 
     public byte getWIT(){
         return template.baseWIT;
     }
 
+    public void setWIT(final byte wit){
+        template.baseWIT = wit;
+    }
+
     public byte getMEN(){
         return template.baseMEN;
+    }
+
+    public void setMEN(final byte men){
+        template.baseMEN = men;
+    }
+
+    public int getSpeed(){
+        return (int) calcStat(Stats.RUN_SPEED, template.baseRunSpd, null);
     }
 
     // Отрисовка
@@ -207,7 +232,7 @@ public abstract class GameObject extends Sprite {
         this.leftAnimation = leftAnimation;
     }
 
-    // Определяющие методы, опредяляют к какому типу относится объект.
+    // Методы, опредяляют к какому типу относится объект.
     // Нужно переопределять в классах наследниках
     public boolean isPlayer(){
         return false;

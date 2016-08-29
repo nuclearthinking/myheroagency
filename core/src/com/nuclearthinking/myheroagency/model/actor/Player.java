@@ -23,6 +23,7 @@ public class Player extends GameObject implements Serializable {
     @Override
     protected void update(float delta) {
         setX(getX() + velocity.x * delta); // Задаем новую позицию
+        setY(getY() + velocity.y * delta);
 
         animationTimer += delta;
         setRegion(velocity.x < 0 ? leftAnimation.getKeyFrame(animationTimer) : velocity.x > 0 ? rightAnimation.getKeyFrame(animationTimer) : idleAnimation.getKeyFrame(animationTimer));
@@ -33,11 +34,12 @@ public class Player extends GameObject implements Serializable {
     }
 
     public void setExp(final int exp) {
-        this.exp = exp;
-    }
+        int tmpExp = this.exp + exp;
 
-    public float getSpeed(){
-        return template.baseRunSpd;
+        if(checkLvlUp(tmpExp)){
+            setLevel((byte)1);
+            this.exp = tmpExp;
+        }
     }
 
     public Vector3 getVelocity(){
@@ -47,6 +49,14 @@ public class Player extends GameObject implements Serializable {
     public void resetVelocity() {
         velocity.x = 0;
         velocity.y = 0;
+    }
+
+    //TODO: Условие для поднятие уровня
+    private boolean checkLvlUp(final int exp){
+        if(exp > 100){
+            return true;
+        }
+        return false;
     }
 
     @Override

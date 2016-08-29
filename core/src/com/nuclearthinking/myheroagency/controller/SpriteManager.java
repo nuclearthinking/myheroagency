@@ -20,12 +20,10 @@ public class SpriteManager {
         return spriteObject;
     }
 
-    public static void removeObject(final GameObject gameObject)
-    {
+    public static void removeObject(final GameObject gameObject) {
         final Iterator<GameObject> iterator = spriteObject.iterator();
 
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             final GameObject tmp = iterator.next();
             if (tmp.equals(gameObject))
                 iterator.remove();

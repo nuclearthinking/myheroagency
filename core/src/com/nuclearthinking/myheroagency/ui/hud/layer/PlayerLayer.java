@@ -43,7 +43,7 @@ public class PlayerLayer extends AbstractLayer implements ObserverCon, ObserverM
         playerBaseMp.setText("/" + Integer.toString(objectManager.getPlayer().getBaseMp()));
         playerExp.setText("Exp " + Integer.toString(objectManager.getPlayer().getExp()));
 
-        table.setPosition(60, Gdx.graphics.getHeight()-60);
+        table.setPosition(70, Gdx.graphics.getHeight()-60);
 
         playerLvl.setColor(Color.WHITE);
         playerHp.setColor(Color.RED);
@@ -92,7 +92,7 @@ public class PlayerLayer extends AbstractLayer implements ObserverCon, ObserverM
     public void resize(final int w, final int h){
         super.resize(w,h);
 
-        table.setPosition(60, Gdx.graphics.getHeight()-60);
+        table.setPosition(70, Gdx.graphics.getHeight()-60);
     }
 
 }

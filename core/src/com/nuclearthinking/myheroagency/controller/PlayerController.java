@@ -80,11 +80,13 @@ public class PlayerController implements InputProcessor {
         if (keys.get(Keys.RIGHT))
             player.getVelocity().x = player.getSpeed();
 
-        if (keys.get(Keys.UP))
-        {}
+        if (keys.get(Keys.UP)) {
+            player.getVelocity().y = player.getSpeed();
+        }
 
-        if (keys.get(Keys.DOWN))
-        {}
+        if (keys.get(Keys.DOWN)) {
+            player.getVelocity().y =- player.getSpeed();
+        }
 
         if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)) ||
                 (!keys.get(Keys.UP) && (!keys.get(Keys.DOWN))))
@@ -102,6 +104,10 @@ public class PlayerController implements InputProcessor {
                 break;
             case Input.Keys.RIGHT:rightPressed();
                 break;
+            case Input.Keys.UP:upPressed();
+                break;
+            case Input.Keys.DOWN:downPressed();
+                break;
         }
         return true;
     }
@@ -112,6 +118,10 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.LEFT:leftReleased();
                 break;
             case Input.Keys.RIGHT:rightReleased();
+                break;
+            case Input.Keys.UP:upReleased();
+                break;
+            case Input.Keys.DOWN:downReleased();
                 break;
         }
         return true;

@@ -7,10 +7,10 @@ public class CharTemplate {
 
     public final byte baseSTR;
     public byte baseCON;
-    public final byte baseDEX;
-    public final byte baseINT;
-    public final byte baseWIT;
-    public final byte baseMEN;
+    public byte baseDEX;
+    public byte baseINT;
+    public byte baseWIT;
+    public byte baseMEN;
 
     public final int baseHpMax;
     public final int baseMpMax;

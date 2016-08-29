@@ -13,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
 public abstract class AbstractScreen implements Screen {
+
     protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+
     protected final Localization locale = new Localization(this.getClass());
     protected final InputMultiplexer multi = new InputMultiplexer();
 

@@ -4,11 +4,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 29.05.2016.
  */
 public abstract class AbstractLayer {
+
+    protected final Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
 
     protected final UiFactory factory;
     protected final Localization locale = new Localization(this.getClass());
