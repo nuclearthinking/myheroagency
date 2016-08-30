@@ -31,4 +31,5 @@ public class SaveListener extends AbstractButtonListener {
         Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
         screen.reloadLabel();
     }
+
 }

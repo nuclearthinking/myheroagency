@@ -7,6 +7,7 @@ import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener
 import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
+import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +18,10 @@ import java.util.List;
 public class AddStatsListener extends AbstractButtonListener implements Observable {
 
     private final ObjectManager objectManager;
-    private final List<Observer> subscribers;
 
     public AddStatsListener(final TextButton button, final ObjectManager objectManager) {
         super(button);
         this.objectManager = objectManager;
-        this.subscribers = new ArrayList<Observer>();
     }
 
     @Override
@@ -30,31 +29,18 @@ public class AddStatsListener extends AbstractButtonListener implements Observab
         if(event.getListenerActor() == button){
             if(objectManager.getPlayer().getCON() <= 98){
                 objectManager.getPlayer().setCon((byte)1);
-                notifyLayer();
+                notifyObservers();
             }
         }
-
     }
 
     @Override
-    public void subscribe(Observer stats) {
-        subscribers.add(stats);
-    }
-
-    @Override
-    public void unsubscribe(Observer stats) {
-        int index = subscribers.indexOf(stats);
-
-        if(index >= 0){
-            subscribers.remove(index);
-        }
-    }
-
-    @Override
-    public void notifyLayer() {
-        for(Observer observerStats : subscribers){
+    public void notifyObservers() {
+        for(Observer observerStats : observers){
             if(observerStats instanceof ObserverCon)
                 ((ObserverCon) observerStats).updateHp();
+            if(observerStats instanceof ObserverMen)
+                ((ObserverMen)observerStats).updateMp();
             else
                 observerStats.update();
         }

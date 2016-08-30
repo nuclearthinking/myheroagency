@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.ObjectManager;
+import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
@@ -22,8 +23,7 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
     private TextButton minus;
     private Label con;
     private final ObjectManager objectManager;
-    private final AddStatsListener listenerPlus;
-    private final RemoveStatsListener listenerMinus;
+    private final AbstractButtonListener listenerPlus, listenerMinus;
 
     public PlayerStatLayer(final UiFactory factory) {
         super(factory);
@@ -34,7 +34,6 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
         this.objectManager = new ObjectManager();
         this.listenerPlus = new AddStatsListener(plus, objectManager);
         this.listenerMinus = new RemoveStatsListener(minus, objectManager);
-
     }
 
     @Override
@@ -74,11 +73,11 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
     }
 
-    public AddStatsListener getObservable(){
+    public AbstractButtonListener getObservable(){
         return listenerPlus;
     }
 
-    public RemoveStatsListener getObs(){
+    public AbstractButtonListener getObs(){
         return listenerMinus;
     }
 
@@ -86,4 +85,5 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
     public void update() {
         con.setText(Integer.toString(objectManager.getPlayer().getCON()));
     }
+
 }

@@ -19,4 +19,5 @@ public class PlayListener extends AbstractButtonListener {
     public void clicked(InputEvent event, float x, float y) {
         ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
     }
+
 }

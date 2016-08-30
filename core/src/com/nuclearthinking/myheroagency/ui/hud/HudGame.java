@@ -16,7 +16,7 @@ import com.nuclearthinking.myheroagency.utils.Constants;
  * есть идея разделить таблицы на отдельные классы, но пока непонятно как выглядит интерфейс это избыточно.
  *
  */
-public class HudGame{
+public final class HudGame{
 
     private static final UiFactory uiFactory = new UiFactory();
 
@@ -49,11 +49,11 @@ public class HudGame{
         buildHud(settings);
 
         //TODO: Пока не придумал как лучше сделать
-        playerStatLayer.getObservable().subscribe(playerLayer);
-        playerStatLayer.getObservable().subscribe(playerStatLayer);
+        playerStatLayer.getObservable().register(playerLayer);
+        playerStatLayer.getObservable().register(playerStatLayer);
         //TODO: Для проверки убрать после тестов
-        playerStatLayer.getObs().subscribe(playerLayer);
-        playerStatLayer.getObs().subscribe(playerStatLayer);
+        playerStatLayer.getObs().register(playerLayer);
+        playerStatLayer.getObs().register(playerStatLayer);
     }
 
     /**

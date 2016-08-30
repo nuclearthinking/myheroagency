@@ -56,8 +56,7 @@ public class CharTemplate {
        return SingletonHolder._instance;
     }
 
-    private static class SingletonHolder
-    {
+    private static class SingletonHolder {
         private static final CharTemplate _instance = new CharTemplate();
     }
 

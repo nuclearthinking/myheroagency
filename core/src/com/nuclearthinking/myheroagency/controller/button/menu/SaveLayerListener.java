@@ -21,7 +21,7 @@ public class SaveLayerListener extends AbstractButtonListener {
     }
 
     @Override
-    public void clicked (InputEvent event, float x, float y) {
+    public void clicked(InputEvent event, float x, float y) {
         final Settings settings = new Settings();
         settings.setHeight(Integer.parseInt(layer.getHeight().getText()));
         settings.setWidth(Integer.parseInt(layer.getWidth().getText()));

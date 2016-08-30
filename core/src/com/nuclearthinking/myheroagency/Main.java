@@ -8,7 +8,7 @@ import com.nuclearthinking.myheroagency.utils.Constants;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends Game {
+public final class Main extends Game {
 
     private final static String LOG_FILE_NAME = "myheroagency.log";
 

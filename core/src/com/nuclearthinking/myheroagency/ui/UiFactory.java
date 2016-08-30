@@ -12,7 +12,8 @@ import java.util.HashMap;
 /**
  * Created by Izonami on 20.05.2016.
  */
-public class UiFactory {
+public final class UiFactory {
+
     //TODO: Можно сделать единую карту для всех элементов, но существует риск словить одинаковые названия
     private static final HashMap<String, TextButton> textButtonHashMap = new HashMap<String, TextButton>();
     private static final HashMap<String, TextField> textFieldHashMap = new HashMap<String, TextField>();
