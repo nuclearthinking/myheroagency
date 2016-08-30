@@ -4,10 +4,12 @@ import com.badlogic.gdx.Game;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public final class Main extends Game {
 
     private final static String LOG_FILE_NAME = "myheroagency.log";
@@ -27,7 +29,7 @@ public final class Main extends Game {
             if (new File(LOG_FILE_NAME).exists()) {
                 System.setProperty("org.slf4j.simpleLogger.logFile", LOG_FILE_NAME);
             } else if (createLogFile()) {
-                System.err.println(String.format("Can't create logfile %s", LOG_FILE_NAME));
+                log.debug(String.format("Can't create logfile %s", LOG_FILE_NAME));
                 System.setProperty("org.slf4j.simpleLogger.logFile", LOG_FILE_NAME);
             }
         }
@@ -40,14 +42,14 @@ public final class Main extends Game {
     private boolean createLogFile() {
         File file;
         try {
-            file = new File("myheroagency.log");
+            file = new File(LOG_FILE_NAME);
             if (!file.exists()) {
                 return file.createNewFile();
             } else {
                 return true;
             }
         } catch (IOException ex) {
-            System.err.println("Can't create logfile in log directory");
+            log.debug("Can't create logfile in log directory");
             return false;
         }
     }

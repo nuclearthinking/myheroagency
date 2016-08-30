@@ -9,6 +9,7 @@ import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
+import lombok.val;
 
 
 /**
@@ -45,7 +46,7 @@ public class HomeScreen extends AbstractScreen {
         SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
 
         // Мультиконтроллер. Все новые контроллеры добавлять чере addProcessor
-        multi.addProcessor(hudGame.getHudStage());
+        multi.addProcessor(hudGame.getStage());
         multi.addProcessor(playerController);
     }
 
@@ -63,7 +64,7 @@ public class HomeScreen extends AbstractScreen {
 
         manager.getRenderer().render();
         manager.getBatch().begin();
-        for(final GameObject object : SpriteManager.getAllObjects()) {
+        for(val object : SpriteManager.getSpriteObject()) {
             object.draw(manager.getRenderer().getBatch());
         }
         manager.getBatch().end();

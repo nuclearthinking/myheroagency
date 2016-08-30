@@ -11,25 +11,29 @@ import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Synchronized;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 22.06.2016.
  */
+@Slf4j
 public abstract class GameObject extends Sprite {
 
-    protected final Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
-
     protected float animationTimer = 0;
-    protected Animation idleAnimation, leftAnimation, rightAnimation;
+    protected @Setter Animation idleAnimation, leftAnimation, rightAnimation;
     protected CharTemplate template;
 
     private int curHp;
     private int curMp;
     private byte level = 1;
 
-    private final TiledMapTileLayer collisionLayer;
+    private final @Getter TiledMapTileLayer collisionLayer;
     private final Calculator[] _calculators;
 
     /**
@@ -64,23 +68,23 @@ public abstract class GameObject extends Sprite {
         if(f == null)
             return;
 
-        final int stat = f._stat.ordinal();
+        val stat = f.getStat().ordinal();
         synchronized (_calculators) {
             if(_calculators[stat] == null)
-                _calculators[stat] = new Calculator(f._stat, this);
+                _calculators[stat] = new Calculator(f.getStat(), this);
 
             _calculators[stat].addFunc(f);
         }
     }
 
     public final double calcStat(final Stats stat, final double init, final GameObject target){
-        final int id = stat.ordinal();
-        final Calculator calculator = _calculators[id];
+        val id = stat.ordinal();
+        val calculator = _calculators[id];
 
         if(calculator == null || calculator.size() == 0)
             return init;
 
-        final Env env = new Env(this, target);
+        val env = new Env(this);
         env.setValue(init);
 
         calculator.calculate(env);
@@ -98,13 +102,13 @@ public abstract class GameObject extends Sprite {
     }
 
     public void setCurHpDamage(final int damage){
-        int tmpCurHp = curHp - damage;
-        logger.debug("Damage: " + damage + " "
+        val tmpCurHp = curHp - damage;
+        log.debug("Damage: " + damage + " "
         + "curHp: " + curHp + " "
         + "curHp - damage: " + tmpCurHp);
         if(tmpCurHp <= 0){
             curHp = 0;
-            logger.debug("You dead");
+            log.debug("You dead");
             return;
         }
         else
@@ -112,13 +116,13 @@ public abstract class GameObject extends Sprite {
     }
 
     public void setCurHpRegen(final int regen){
-        int tmpCurHp = curHp + regen;
-        logger.debug("Regen: " + regen + " "
+        val tmpCurHp = curHp + regen;
+        log.debug("Regen: " + regen + " "
                 + "curHp: " + curHp + " "
                 + "curHp + regen: " + tmpCurHp);
         if(tmpCurHp >= getBaseHp()){
             curHp = getBaseHp();
-            logger.debug("Hp is full");
+            log.debug("Hp is full");
             return;
         }
         else
@@ -134,13 +138,13 @@ public abstract class GameObject extends Sprite {
     }
 
     public void setCurMpDamage(final int damage){
-        int tmpCurMp = curMp - damage;
-        logger.debug("Damage: " + damage + " "
+        val tmpCurMp = curMp - damage;
+        log.debug("Damage: " + damage + " "
                 + "curMp: " + curMp + " "
                 + "curMp - damage: " + tmpCurMp);
         if(tmpCurMp <= 0){
             curMp = 0;
-            logger.debug("Your manna is over");
+            log.debug("Your manna is over");
             return;
         }
         else
@@ -207,31 +211,6 @@ public abstract class GameObject extends Sprite {
         return (int) calcStat(Stats.RUN_SPEED, template.baseRunSpd, null);
     }
 
-    // Отрисовка
-    public TiledMapTileLayer getCollisionLayer(){
-        return collisionLayer;
-    }
-
-    public void setObjectSizeHeight(final int height){
-        setSize(getWidth(), height);
-    }
-
-    public void setObjectSizeWidth(final int width){
-        setSize(width, getHeight());
-    }
-
-    public void setIdleAnimation(final Animation idleAnimation){
-        this.idleAnimation = idleAnimation;
-    }
-
-    public void setRightAnimation(final Animation rightAnimation){
-        this.rightAnimation = rightAnimation;
-    }
-
-    public void setLeftAnimation(final Animation leftAnimation){
-        this.leftAnimation = leftAnimation;
-    }
-
     // Методы, опредяляют к какому типу относится объект.
     // Нужно переопределять в классах наследниках
     public boolean isPlayer(){
@@ -245,4 +224,5 @@ public abstract class GameObject extends Sprite {
     public boolean isNpc(){
         return false;
     }
+
 }

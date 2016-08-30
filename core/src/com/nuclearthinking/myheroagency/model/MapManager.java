@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import lombok.Getter;
 
 /**
  * Created by Izonami on 30.05.2016.
@@ -11,7 +12,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 public class MapManager {
 
     private final TiledMap tiledMap;
-    private final OrthogonalTiledMapRenderer renderer;
+    private @Getter final OrthogonalTiledMapRenderer renderer;
 
     public MapManager(){
         tiledMap = Asset.getInstance().get("map/testMap.tmx", TiledMap.class);
@@ -29,10 +30,6 @@ public class MapManager {
         tiledMap = Asset.getInstance().get("map/"+map, TiledMap.class);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
         tiledMap.dispose();
-    }
-
-    public OrthogonalTiledMapRenderer getRenderer(){
-        return renderer;
     }
 
     public Batch getBatch(){

@@ -12,8 +12,6 @@ import org.slf4j.impl.SimpleLoggerFactory;
  */
 public abstract class AbstractLayer {
 
-    protected final Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
-
     protected final UiFactory factory;
     protected final Localization locale = new Localization(this.getClass());
     protected final Table table;

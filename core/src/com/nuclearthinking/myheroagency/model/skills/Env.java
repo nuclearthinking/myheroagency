@@ -1,45 +1,17 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
+import lombok.*;
 
 /**
  * Created by Izonami on 03.08.2016.
  */
+@RequiredArgsConstructor
+@NoArgsConstructor
 public final class Env {
 
-    private GameObject character;
-    private GameObject target;
+    @NonNull private @Getter @Setter GameObject character;
+    private @Getter @Setter GameObject target;
+    private @Getter @Setter double value;
 
-    private double value;
-
-    public Env(){}
-
-    public Env(final GameObject player, final GameObject target){
-        this.character = player;
-        this.target = target;
-    }
-
-    public GameObject getCharacter(){
-        return character;
-    }
-
-    public void setCharacter(final GameObject character){
-        this.character = character;
-    }
-
-    public GameObject getTarget(){
-        return target;
-    }
-
-    public void setTarget(final GameObject target){
-        this.target = target;
-    }
-
-    public double getValue(){
-        return value;
-    }
-
-    public void setValue(final double value){
-        this.value = value;
-    }
 }

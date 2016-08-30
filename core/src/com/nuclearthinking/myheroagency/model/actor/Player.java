@@ -3,13 +3,15 @@ package com.nuclearthinking.myheroagency.model.actor;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
+import lombok.Getter;
+import lombok.val;
 
 import java.io.Serializable;
 
 public class Player extends GameObject implements Serializable {
 
-    private final Vector3 velocity = new Vector3();
-    private int exp = 0;
+    private @Getter final Vector3 velocity;
+    private @Getter int exp = 0;
 
     /**
      * @param collisionLayer - коллизия объекта
@@ -18,6 +20,8 @@ public class Player extends GameObject implements Serializable {
      */
     public Player(final TiledMapTileLayer collisionLayer, final int sizeHeight, final int sizeWidth, final CharTemplate template) {
         super(collisionLayer, sizeHeight, sizeWidth, template);
+
+        this.velocity = new Vector3();
     }
 
     @Override
@@ -29,21 +33,13 @@ public class Player extends GameObject implements Serializable {
         setRegion(velocity.x < 0 ? leftAnimation.getKeyFrame(animationTimer) : velocity.x > 0 ? rightAnimation.getKeyFrame(animationTimer) : idleAnimation.getKeyFrame(animationTimer));
     }
 
-    public int getExp() {
-        return exp;
-    }
-
     public void setExp(final int exp) {
-        int tmpExp = this.exp + exp;
+        val tmpExp = this.exp + exp;
 
         if(checkLvlUp(tmpExp)){
             setLevel((byte)1);
             this.exp = tmpExp;
         }
-    }
-
-    public Vector3 getVelocity(){
-        return velocity;
     }
 
     public void resetVelocity() {

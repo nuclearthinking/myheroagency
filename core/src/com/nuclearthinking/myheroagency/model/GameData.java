@@ -3,48 +3,47 @@ package com.nuclearthinking.myheroagency.model;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
+import com.nuclearthinking.myheroagency.model.actor.Player;
 import com.nuclearthinking.myheroagency.utils.Constants;
-import org.slf4j.impl.SimpleLoggerFactory;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
+@Slf4j
 public class GameData implements Serializable {
-    private com.nuclearthinking.myheroagency.model.actor.Player player;
 
-    public static void save(GameData gameData) {
-        final Kryo kryo = new Kryo();
-        try (Output output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
+    private @Getter @Setter Player player;
+
+    public static void save(final GameData gameData) {
+        val kryo = new Kryo();
+        try (val output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
             kryo.writeObject(output, gameData);
         } catch (FileNotFoundException ex) {
-            new SimpleLoggerFactory().getLogger("GameData").info("Can't save game to file {}", Constants.SAVE_NAME);
+            log.debug("Can't save game to file {}", Constants.SAVE_NAME);
         }
     }
 
     public static GameData load() {
-        final Kryo kryo = new Kryo();
+        val kryo = new Kryo();
         GameData gameData = null;
-        try (Input input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
+        try (val input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
             gameData = kryo.readObject(input, GameData.class);
         } catch (FileNotFoundException ex) {
-            new SimpleLoggerFactory().getLogger("GameData").info("Can't load game from file {}", Constants.SAVE_NAME);
+            log.debug("Can't load game from file {}", Constants.SAVE_NAME);
         }
         if (gameData == null) {
-            new SimpleLoggerFactory().getLogger("GameData").info("Loading game is failed, create new one");
+            log.debug("Loading game is failed, create new one");
             return new GameData();
         } else {
-            new SimpleLoggerFactory().getLogger("GameData").info("Loading success");
+            log.debug("Loading success");
             return gameData;
         }
     }
 
-    public com.nuclearthinking.myheroagency.model.actor.Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(com.nuclearthinking.myheroagency.model.actor.Player player) {
-        this.player = player;
-    }
 }

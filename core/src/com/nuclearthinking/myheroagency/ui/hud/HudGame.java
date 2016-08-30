@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import lombok.Getter;
 
 /**
  * Created by Izonami on 18.05.2016.
@@ -20,11 +21,11 @@ public final class HudGame{
 
     private static final UiFactory uiFactory = new UiFactory();
 
-    private final Stage stage;
-    private final PlayerLayer playerLayer;
-    private final PlayerStatLayer playerStatLayer;
-    private final QuestLayer questLayer;
-    private final SettingsLayer settings;
+    private @Getter final Stage stage;
+    private @Getter final PlayerLayer playerLayer;
+    private @Getter final PlayerStatLayer playerStatLayer;
+    private @Getter final QuestLayer questLayer;
+    private @Getter final SettingsLayer settings;
 
     private UtilsLayer utilsLayer;
 
@@ -48,12 +49,7 @@ public final class HudGame{
         buildHud(questLayer);
         buildHud(settings);
 
-        //TODO: Пока не придумал как лучше сделать
-        playerStatLayer.getObservable().register(playerLayer);
-        playerStatLayer.getObservable().register(playerStatLayer);
-        //TODO: Для проверки убрать после тестов
-        playerStatLayer.getObs().register(playerLayer);
-        playerStatLayer.getObs().register(playerStatLayer);
+        registerObserver();
     }
 
     /**
@@ -62,6 +58,15 @@ public final class HudGame{
     private void buildHud(final AbstractLayer layer){
         layer.buildLayer();
         stage.addActor(layer.getTable());
+    }
+
+    private void registerObserver(){
+        //TODO: Пока не придумал как лучше сделать
+        playerStatLayer.getObservable().register(playerLayer);
+        playerStatLayer.getObservable().register(playerStatLayer);
+        //TODO: Для проверки убрать после тестов
+        playerStatLayer.getObs().register(playerLayer);
+        playerStatLayer.getObs().register(playerStatLayer);
     }
 
     public void renderHud(final float delta) {
@@ -84,28 +89,8 @@ public final class HudGame{
         if(Constants.DEBUG) utilsLayer.resize(width,height);
     }
 
-    public Stage getHudStage(){
-        return stage;
-    }
-
     public Camera getHudCamera(){
         return stage.getCamera();
-    }
-
-    public SettingsLayer getSettings(){
-        return settings;
-    }
-
-    public PlayerLayer getPlayerLayer(){
-        return playerLayer;
-    }
-
-    public QuestLayer getQuestLayer(){
-        return questLayer;
-    }
-
-    public PlayerStatLayer getPlayerStatLayer(){
-        return playerStatLayer;
     }
 
 }

@@ -10,6 +10,7 @@ import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
+import lombok.val;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -42,7 +43,7 @@ public class SplashScreen extends AbstractScreen {
         actor.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight() / 2 + 32);
         actor.fadeText();
 
-        final Runnable load = new Runnable() {
+        val load = new Runnable() {
             @Override
             public void run() {
                 ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN);

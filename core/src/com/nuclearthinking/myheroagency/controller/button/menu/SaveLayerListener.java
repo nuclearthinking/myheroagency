@@ -7,6 +7,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.hud.layer.SettingsLayer;
+import lombok.val;
 
 /**
  * Created by Izonami on 19.06.2016.
@@ -22,7 +23,7 @@ public class SaveLayerListener extends AbstractButtonListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        final Settings settings = new Settings();
+        val settings = new Settings();
         settings.setHeight(Integer.parseInt(layer.getHeight().getText()));
         settings.setWidth(Integer.parseInt(layer.getWidth().getText()));
         settings.save();

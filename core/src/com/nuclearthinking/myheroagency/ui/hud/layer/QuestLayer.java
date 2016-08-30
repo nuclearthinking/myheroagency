@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
+import lombok.val;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +30,8 @@ public class QuestLayer extends AbstractLayer implements ILayer {
     public QuestLayer(final UiFactory factory){
         super(factory);
 
-        final Texture t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
+        //TODO: Удалить это или переписать если так уж надо картинку
+        val t = Asset.getInstance().get("img/testQuestLayer.jpg", Texture.class);
         i = new Image(t);
     }
 
@@ -45,7 +47,7 @@ public class QuestLayer extends AbstractLayer implements ILayer {
 
         table.addActor(i);
 
-        for(final Map.Entry<String, Actor> a : questsList.entrySet()){
+        for(val a : questsList.entrySet()){
             table.add(a.getValue()).pad(10);
             table.row();
         }
@@ -69,7 +71,7 @@ public class QuestLayer extends AbstractLayer implements ILayer {
      * @param name - является ключом и названием кнопки
      */
     public void addQuestToList(final String name){
-        final Label quest = factory.getLabel(name);
+        val quest = factory.getLabel(name);
 
         quest.setColor(Color.BLACK);
         questsList.put(name, quest);
@@ -77,7 +79,7 @@ public class QuestLayer extends AbstractLayer implements ILayer {
         //TODO: Пока не придумал ничего лучше кроме как сбрасывать и добавлять по новой
         table.reset();
         table.addActor(i);
-        for(final Map.Entry<String, Actor> a : questsList.entrySet()){
+        for(val a : questsList.entrySet()){
             table.add(a.getValue()).pad(10);
             table.row();
         }

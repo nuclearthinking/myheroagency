@@ -121,4 +121,5 @@ public class TextActor extends Actor {
     public void setPositionY(final float y) {
         this.y = y;
     }
+
 }

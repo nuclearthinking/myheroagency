@@ -22,7 +22,7 @@ public class QuestManager {
 
     public static void addQuest(Quest newQuest) {
         _questsByName.put(newQuest.getName(), newQuest);
-        _questsById.put(newQuest.getQuestIntId(), newQuest);
+        _questsById.put(newQuest.getQuestId(), newQuest);
     }
 
 }

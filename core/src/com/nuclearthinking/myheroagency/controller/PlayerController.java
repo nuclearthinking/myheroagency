@@ -3,6 +3,10 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.nuclearthinking.myheroagency.model.actor.Player;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;

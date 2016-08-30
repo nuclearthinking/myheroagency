@@ -1,8 +1,13 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
+import com.esotericsoftware.kryo.NotNull;
+import lombok.*;
+
 /**
  * Created by Izonami on 03.08.2016.
  */
+@AllArgsConstructor
+@ToString
 public enum Stats {
 
     MAX_HP("maxHp"),
@@ -36,19 +41,6 @@ public enum Stats {
 
     public static final int NUM_STATS = values().length;
 
-    private String _value;
-
-    Stats(String s) {
-        _value = s;
-    }
-
-    public String getValue() {
-        return _value;
-    }
-
-    @Override
-    public String toString() {
-        return _value;
-    }
+    private @Getter String value;
 
 }

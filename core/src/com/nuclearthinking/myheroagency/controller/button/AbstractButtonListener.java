@@ -6,9 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +15,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 /**
  * Created by Izonami on 19.06.2016.
  */
+@Slf4j
 public abstract class AbstractButtonListener extends ClickListener implements Observable {
-
-    protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
 
     protected final TextButton button;
     protected final List<Observer> observers;
@@ -58,10 +55,6 @@ public abstract class AbstractButtonListener extends ClickListener implements Ob
         if(index >= 0){
             observers.remove(index);
         }
-    }
-
-    private String getName() {
-        return getClass().getSimpleName();
     }
 
 }

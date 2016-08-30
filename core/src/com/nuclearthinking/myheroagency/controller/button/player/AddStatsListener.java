@@ -8,6 +8,7 @@ import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
+import lombok.val;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AddStatsListener extends AbstractButtonListener implements Observab
 
     @Override
     public void notifyObservers() {
-        for(Observer observerStats : observers){
+        for(val observerStats : observers){
             if(observerStats instanceof ObserverCon)
                 ((ObserverCon) observerStats).updateHp();
             if(observerStats instanceof ObserverMen)
