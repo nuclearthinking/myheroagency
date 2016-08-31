@@ -1,5 +1,8 @@
 package com.nuclearthinking.myheroagency.model.quest;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,19 +12,18 @@ import java.util.Set;
 /**
  * Created by Izonami on 20.06.2016.
  */
+@Slf4j(topic = "Quest")
 public class Quest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Quest.class.getSimpleName());
+    protected @Getter final String name;
+    protected @Getter final int questId;
 
-    protected final String _name;
-    protected final int _questId;
-
-    private Set<Integer> _questItems = new HashSet<Integer>();
+    private Set<Integer> questItems = new HashSet<Integer>();
 
     public Quest(){
-        _name = getClass().getSimpleName();
-        _questId = Integer.parseInt(_name.split("_")[1]);
-        LOG.info("Quest Name: " + _name + " QuestID: " + _questId);
+        name = getClass().getSimpleName();
+        questId = Integer.parseInt(name.split("_")[1]);
+        log.info("Quest Name: " + name + " QuestID: " + questId);
         QuestManager.addQuest(this);
     }
 
@@ -30,9 +32,9 @@ public class Quest {
      * @param ids
      */
     public void addQuestItem(final int... ids) {
-        for(int id : ids){
+        for(val id : ids){
             if (id != 0){
-                _questItems.add(id);
+                questItems.add(id);
             }
         }
     }
@@ -43,15 +45,7 @@ public class Quest {
      * @return
      */
     public boolean isQuestItem(final int id) {
-        return _questItems.contains(id);
-    }
-
-    public String getName() {
-        return _name;
-    }
-
-    public int getQuestIntId() {
-        return _questId;
+        return questItems.contains(id);
     }
 
 }

@@ -4,6 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import lombok.Getter;
+import lombok.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 29.05.2016.
@@ -12,9 +16,9 @@ public abstract class AbstractLayer {
 
     protected final UiFactory factory;
     protected final Localization locale = new Localization(this.getClass());
-    protected final Table table;
+    protected @Getter final Table table;
 
-    AbstractLayer(final UiFactory factory){
+    AbstractLayer(@NonNull final UiFactory factory){
         this.factory = factory;
 
         table = new Table();
@@ -25,10 +29,6 @@ public abstract class AbstractLayer {
 
     public void resize(final int w, final int h){
         table.getStage().getViewport().update(w, h, true);
-    }
-
-    public Table getTable(){
-        return table;
     }
 
 }

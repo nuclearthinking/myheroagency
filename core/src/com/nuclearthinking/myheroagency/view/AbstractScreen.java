@@ -9,17 +9,21 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.model.GameData;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
+@Slf4j(topic = "AbstractScreen")
 public abstract class AbstractScreen implements Screen {
-    protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+
     protected final Localization locale = new Localization(this.getClass());
     protected final InputMultiplexer multi = new InputMultiplexer();
 
     protected final Stage stage;
 
-    protected GameData gameData;
+    protected @Getter @Setter GameData gameData;
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));
@@ -29,7 +33,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void show() {
-        logger.info("Show screen: {}", getName());
+        log.info("Show screen: {}", getName());
 
         multi.addProcessor(stage);
         Gdx.input.setInputProcessor(multi);
@@ -46,39 +50,32 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        logger.info("Resizing screen: {} to: y = {} x = {}", getName(), width, height);
+        log.info("Resizing screen: {} to: y = {} x = {}", getName(), width, height);
         stage.getViewport().update(width, height, true);
     }
 
     @Override
     public void pause() {
-        logger.info("Pausing screen: {}", getName());
+        log.info("Pausing screen: {}", getName());
     }
 
     @Override
     public void resume() {
-        logger.info("Resuming screen: {}", getName());
+        log.info("Resuming screen: {}", getName());
     }
 
     @Override
     public void hide() {
-        logger.info("Hiding screen: {}", getName());
+        log.info("Hiding screen: {}", getName());
     }
 
     @Override
     public void dispose() {
-        logger.info("Disposing screen: {}", getName());
+        log.info("Disposing screen: {}", getName());
     }
 
     private String getName() {
         return getClass().getSimpleName();
     }
 
-    public GameData getGameData() {
-        return gameData;
-    }
-
-    public void setGameData(final GameData gameData) {
-        this.gameData = gameData;
-    }
 }

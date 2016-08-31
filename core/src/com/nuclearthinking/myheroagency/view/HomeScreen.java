@@ -6,9 +6,11 @@ import com.nuclearthinking.myheroagency.controller.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.SpriteManager;
 import com.nuclearthinking.myheroagency.model.GameData;
-import com.nuclearthinking.myheroagency.model.GameObject;
+import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
+import lombok.NonNull;
+import lombok.val;
 
 
 /**
@@ -29,23 +31,23 @@ public class HomeScreen extends AbstractScreen {
         this(new GameData());
     }
 
-    public HomeScreen(final GameData gameData) {
+    public HomeScreen(@NonNull final GameData gameData) {
         this.gameData = gameData;
+
         object = new ObjectManager();
+        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
+        manager = new MapManager(); // Создаем карту
+        layerController = new LayerController(hudGame); // Добоавляем слои
+        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
     }
 
     @Override
     public void buildStage() {
-        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
-        hudGame.buildHud(); // Строим слои
-        manager = new MapManager(); // Создаем карту
-        layerController = new LayerController(hudGame); // Добоавляем слои
-        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
         object.getPlayer().setPosition(1000,3000); // Устанавливаем начальную позицию для игрока
         SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
 
         // Мультиконтроллер. Все новые контроллеры добавлять чере addProcessor
-        multi.addProcessor(hudGame.getHudStage());
+        multi.addProcessor(hudGame.getStage());
         multi.addProcessor(playerController);
     }
 
@@ -63,7 +65,7 @@ public class HomeScreen extends AbstractScreen {
 
         manager.getRenderer().render();
         manager.getBatch().begin();
-        for(final GameObject object : SpriteManager.getAllObjects()) {
+        for(val object : SpriteManager.getSpriteObject()) {
             object.draw(manager.getRenderer().getBatch());
         }
         manager.getBatch().end();

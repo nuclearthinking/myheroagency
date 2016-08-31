@@ -7,7 +7,10 @@ import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.scripts.QuestLoader;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
+@Slf4j(topic = "LoadingScreen")
 public class LoadingScreen extends AbstractScreen {
 
     static {
@@ -37,19 +40,19 @@ public class LoadingScreen extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
 
-        loadingPercent = loading();
+        loading();
 
         stage.getBatch().begin();
         fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Settings.getWidth() - 150, 35);
         stage.getBatch().end();
     }
 
-    private float loading() {
-        final float loadingProgress = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
+    private void loading() {
+        loadingPercent = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
-            logger.info("Assets loading done");
+            log.info("Assets loading done");
             ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);
         }
-        return loadingProgress;
+
     }
 }

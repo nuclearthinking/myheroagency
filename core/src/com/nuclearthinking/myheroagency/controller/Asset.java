@@ -17,17 +17,18 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.*;
 import com.nuclearthinking.myheroagency.model.Settings;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
 import java.util.Locale;
 
+@Slf4j(topic = "Asset")
 public class Asset implements Disposable, AssetErrorListener {
 
     private static Asset instance;
-
-    private final Logger logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
-
     private AssetManager manager;
     private ObjectMap<String, Array<Assets>> groups;
     private Locale locale;
@@ -39,12 +40,12 @@ public class Asset implements Disposable, AssetErrorListener {
         return instance;
     }
 
-    public void init(final String assetFile) {
+    public void init(@NonNull final String assetFile) {
         manager = new AssetManager(); // Инициализируем менеджер ассетов
         manager.setErrorListener(this); // Ставим листнера ошибок
         Settings.loadSettings(); // Загружаем настройки
 
-        logger.info("Loading assets");
+        log.info("Loading assets");
         locale = new Locale(Settings.getLanguage()); // Получаем локаль из пропертей
         Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight()); // Получаем разрешение из пропертей
 
@@ -64,13 +65,13 @@ public class Asset implements Disposable, AssetErrorListener {
      * Перезагрузка локализаций
      */
     public void reloadLocale(){
-        logger.debug("Start reloading localization");
+        log.info("Start reloading localization");
         unloadGroup("localization");
         locale = new Locale(Settings.getLanguage());
         manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         loadGroup("localization");
         finishLoading();
-        logger.debug("Finish reloading localization");
+        log.info("Finish reloading localization");
     }
 
     /**
@@ -78,47 +79,47 @@ public class Asset implements Disposable, AssetErrorListener {
      * @param fileName
      * @return - Возвращает результат проверки наличия файла в ассет менеджере
      */
-    public boolean isLoaded(final String fileName) {
+    public boolean isLoaded(@NonNull final String fileName) {
         return manager != null && manager.isLoaded(fileName);
     }
 
-    public void loadGroup(final String groupName) {
-        logger.info("Loading group of assets {}", groupName);
+    public void loadGroup(@NonNull final String groupName) {
+        log.info("Loading group of assets {}", groupName);
 
-        final Array<Assets> assets = groups.get(groupName, null);
+        val assets = groups.get(groupName, null);
 
         if (assets != null) {
-            for (final Assets asset : assets) {
+            for (val asset : assets) {
                 manager.load(asset.path, asset.type);
-                logger.debug("Asset {} added to loading queue", asset.path);
+                log.debug("Asset {} added to loading queue", asset.path);
             }
         } else {
-            logger.error("Error loading group {}, not found ", groupName);
+            log.error("Error loading group {}, not found ", groupName);
         }
     }
 
-    public void unloadGroup(final String groupName) {
-        logger.info("Unloading group of assets {}", groupName);
+    public void unloadGroup(@NonNull final String groupName) {
+        log.info("Unloading group of assets {}", groupName);
 
-        final Array<Assets> assets = groups.get(groupName, null);
+        val assets = groups.get(groupName, null);
 
         if (assets != null) {
-            for (final Assets asset : assets) {
+            for (val asset : assets) {
                 if (manager.isLoaded(asset.path, asset.type)) {
                     manager.unload(asset.path);
-                    logger.debug("Asset {} added to unload queue", asset.path);
+                    log.debug("Asset {} added to unload queue", asset.path);
                 }
             }
         } else {
-            logger.error("Error unloading group {}, not found", groupName);
+            log.error("Error unloading group {}, not found", groupName);
         }
     }
 
-    public synchronized <T> T get(final String fileName) {
+    public synchronized <T> T get(@NonNull final String fileName) {
         return manager.get(fileName);
     }
 
-    public synchronized <T> T get(final String fileName, final Class<T> type) {
+    public synchronized <T> T get(@NonNull final String fileName, @NonNull final Class<T> type) {
         return manager.get(fileName, type);
     }
 
@@ -136,44 +137,44 @@ public class Asset implements Disposable, AssetErrorListener {
 
     @Override
     public void dispose() {
-        logger.info("Dispose");
+        log.info("Dispose");
         manager.dispose();
     }
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
-        logger.error("Error loading {}", asset);
+        log.error("Error loading {}", asset);
     }
 
-    private void loadGroups(final String assetFile) {
+    private void loadGroups(@NonNull final String assetFile) {
         groups = new ObjectMap<String, Array<Assets>>();
 
-        logger.info("Loading file {}", assetFile);
+        log.info("Loading file {}", assetFile);
 
         try {
-            final XmlReader reader = new XmlReader();
-            final XmlReader.Element root = reader.parse(Gdx.files.internal(assetFile));
+            val reader = new XmlReader();
+            val root = reader.parse(Gdx.files.internal(assetFile));
 
-            for (final XmlReader.Element groupElement : root.getChildrenByName("group")) {
-                final String groupName = groupElement.getAttribute("name", "");
+            for (val groupElement : root.getChildrenByName("group")) {
+                val groupName = groupElement.getAttribute("name", "");
 
                 if (groups.containsKey(groupName)) {
-                    logger.error("Group {} already exists, skipping", groupName);
+                    log.error("Group {} already exists, skipping", groupName);
                     continue;
                 }
 
-                final Array<Assets> assets = new Array<Assets>();
+                val assets = new Array<Assets>();
 
-                for (final XmlReader.Element assetElement : groupElement.getChildrenByName("asset")) {
+                for (val assetElement : groupElement.getChildrenByName("asset")) {
                     assets.add(new Assets(assetElement.getAttribute("type", ""),
                             assetElement.getAttribute("path", "")));
                 }
 
                 groups.put(groupName, assets);
-                logger.info("Registering group {}", groupName);
+                log.info("Registering group {}", groupName);
             }
         } catch (Exception e) {
-            logger.error("Error loading file {} {}", assetFile, e.getMessage());
+            log.error("Error loading file {} {}", assetFile, e.getMessage());
         }
     }
 
@@ -181,12 +182,12 @@ public class Asset implements Disposable, AssetErrorListener {
         public Class<?> type;
         public String path;
 
-        public Assets(final String type, final String path) {
+        public Assets(@NonNull final String type, @NonNull final String path) {
             try {
                 this.type = Class.forName(type);
                 this.path = path;
             } catch (ClassNotFoundException e) {
-                logger.error("Asset type {} not found", type);
+                log.error("Asset type {} not found", type);
             }
         }
     }

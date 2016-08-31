@@ -2,6 +2,8 @@ package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.utils.I18NBundle;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
@@ -14,23 +16,22 @@ import java.util.MissingResourceException;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
+@Slf4j(topic = "Localization")
 public class Localization {
 
-    private final Logger logger;
     private I18NBundle localisationBundle;
 
     public Localization(final Class initiatorClass) {
-        logger = new SimpleLoggerFactory().getLogger(getClass().getSimpleName());
         loadBundle(initiatorClass);
     }
 
     public void loadBundle(final Class bundleClass) {
-        final String bundleName = "i18n/" + bundleClass.getSimpleName();
+        val bundleName = "i18n/" + bundleClass.getSimpleName();
         if (Asset.getInstance().isLoaded(bundleName)) {
             localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
-            logger.info("Loaded I18NBundle with name {}", bundleName);
+            log.info("Loaded I18NBundle with name {}", bundleName);
         } else {
-            logger.error("I18NBundle {} is not loaded yet", bundleName);
+            log.error("I18NBundle {} is not loaded yet", bundleName);
         }
     }
 
@@ -39,7 +40,7 @@ public class Localization {
             try {
                 return localisationBundle.get(key);
             } catch (MissingResourceException ex) {
-                logger.error("Can't load key with name {}", key);
+                log.error("Can't load key with name {}", key);
                 return null;
             }
         } else {

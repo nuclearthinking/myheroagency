@@ -4,22 +4,27 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
+import com.nuclearthinking.myheroagency.controller.observer.Observable;
+import com.nuclearthinking.myheroagency.controller.observer.Observer;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 /**
  * Created by Izonami on 19.06.2016.
  */
-public abstract class AbstractButtonListener extends ClickListener {
+@Slf4j
+public abstract class AbstractButtonListener extends ClickListener implements Observable {
 
-    protected final Logger logger = new SimpleLoggerFactory().getLogger(getName());
+    protected final TextButton button;
+    protected final List<Observer> observers;
 
-    private final TextButton button;
-
-    protected AbstractButtonListener(final TextButton button){
+    public AbstractButtonListener(@NonNull final TextButton button){
         this.button = button;
+        this.observers = new ArrayList<Observer>();
     }
 
     @Override
@@ -30,8 +35,27 @@ public abstract class AbstractButtonListener extends ClickListener {
         button.addAction(sequence(alpha(0), parallel(fadeIn(.4f))));
     }
 
-    private String getName() {
-        return getClass().getSimpleName();
+    @Override
+    public void register(Observer observer) {
+        if(observer == null)
+            throw new NullPointerException("Null observer" );
+
+        if(!observers.contains(observer))
+            observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(){
+
+    }
+
+    @Override
+    public void unregister(Observer stats) {
+        int index = observers.indexOf(stats);
+
+        if(index >= 0){
+            observers.remove(index);
+        }
     }
 
 }

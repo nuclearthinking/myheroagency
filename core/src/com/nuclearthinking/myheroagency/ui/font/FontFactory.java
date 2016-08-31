@@ -3,12 +3,14 @@ package com.nuclearthinking.myheroagency.ui.font;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import lombok.val;
 
 import java.util.HashMap;
 
 import static com.nuclearthinking.myheroagency.utils.Constants.ALL_CHARACTERS;
 
 public class FontFactory {
+
     private static final HashMap<Integer, BitmapFont> robotoLightMap = new HashMap<Integer, BitmapFont>();
     private static final HashMap<Integer, BitmapFont> robotoBoldMap = new HashMap<Integer, BitmapFont>();
 
@@ -18,7 +20,7 @@ public class FontFactory {
     public final BitmapFont getRobotoLight(final int size) {
         BitmapFont font = robotoLightMap.get(size);
         if (font == null) {
-            final FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            val parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.characters = ALL_CHARACTERS;
             parameter.size = size;
             font = getRobotoLightGenerator().generateFont(parameter);
@@ -30,7 +32,7 @@ public class FontFactory {
     public final BitmapFont getRobotoBold(final int size) {
         BitmapFont font = robotoBoldMap.get(size);
         if (font == null) {
-            final FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            val parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.characters = ALL_CHARACTERS;
             parameter.size = size;
             font = getRobotoBoldGenerator().generateFont(parameter);

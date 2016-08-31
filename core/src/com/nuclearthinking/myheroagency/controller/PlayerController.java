@@ -2,7 +2,8 @@ package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.Player;
+import com.nuclearthinking.myheroagency.model.actor.Player;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +11,10 @@ import java.util.Map;
 /**
  * Created by Izonami on 23.06.2016.
  */
+@RequiredArgsConstructor
 public class PlayerController implements InputProcessor {
 
-    private final Player player;
+    @NonNull private final Player player;
 
     enum Keys {
         LEFT,
@@ -28,10 +30,6 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.RIGHT, false);
         keys.put(Keys.UP, false);
         keys.put(Keys.DOWN, false);
-    }
-
-    public PlayerController(final Player player){
-        this.player = player;
     }
 
     private void leftPressed() {
@@ -80,11 +78,13 @@ public class PlayerController implements InputProcessor {
         if (keys.get(Keys.RIGHT))
             player.getVelocity().x = player.getSpeed();
 
-        if (keys.get(Keys.UP))
-        {}
+        if (keys.get(Keys.UP)) {
+            player.getVelocity().y = player.getSpeed();
+        }
 
-        if (keys.get(Keys.DOWN))
-        {}
+        if (keys.get(Keys.DOWN)) {
+            player.getVelocity().y =- player.getSpeed();
+        }
 
         if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)) ||
                 (!keys.get(Keys.UP) && (!keys.get(Keys.DOWN))))
@@ -102,6 +102,10 @@ public class PlayerController implements InputProcessor {
                 break;
             case Input.Keys.RIGHT:rightPressed();
                 break;
+            case Input.Keys.UP:upPressed();
+                break;
+            case Input.Keys.DOWN:downPressed();
+                break;
         }
         return true;
     }
@@ -112,6 +116,10 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.LEFT:leftReleased();
                 break;
             case Input.Keys.RIGHT:rightReleased();
+                break;
+            case Input.Keys.UP:upReleased();
+                break;
+            case Input.Keys.DOWN:downReleased();
                 break;
         }
         return true;

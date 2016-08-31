@@ -1,6 +1,9 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.nuclearthinking.myheroagency.model.GameObject;
+import com.nuclearthinking.myheroagency.model.actor.GameObject;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.val;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,23 +13,17 @@ import java.util.Iterator;
  */
 public class SpriteManager {
 
-    private static final ArrayList<GameObject> spriteObject = new ArrayList<GameObject>();
+    private static final @Getter ArrayList<GameObject> spriteObject = new ArrayList<GameObject>();
 
-    public static void addGameObject(final GameObject object){
+    public static void addGameObject(@NonNull final GameObject object){
         spriteObject.add(object);
     }
 
-    public static ArrayList<GameObject> getAllObjects(){
-        return spriteObject;
-    }
+    public static void removeObject(@NonNull final GameObject gameObject) {
+        val iterator = spriteObject.iterator();
 
-    public static void removeObject(final GameObject gameObject)
-    {
-        final Iterator<GameObject> iterator = spriteObject.iterator();
-
-        while (iterator.hasNext())
-        {
-            final GameObject tmp = iterator.next();
+        while (iterator.hasNext()) {
+            val tmp = iterator.next();
             if (tmp.equals(gameObject))
                 iterator.remove();
         }

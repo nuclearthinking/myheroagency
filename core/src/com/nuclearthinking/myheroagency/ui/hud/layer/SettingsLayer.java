@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.nuclearthinking.myheroagency.controller.button.ExitListener;
-import com.nuclearthinking.myheroagency.controller.button.SaveLayerListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
+import lombok.Getter;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -18,7 +19,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class SettingsLayer extends AbstractLayer implements ILayer{
 
     private Label titleLabel, widthLabel, heightLabel;
-    private TextField height, width;
+    private @Getter TextField height, width;
     private TextButton exit, save;
     private boolean isShowTable = false;
 
@@ -87,14 +88,6 @@ public class SettingsLayer extends AbstractLayer implements ILayer{
 
         table.setPosition(-Gdx.graphics.getWidth(), 0);
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
-    public TextField getHeight(){
-        return height;
-    }
-
-    public TextField getWidth(){
-        return width;
     }
 
 }

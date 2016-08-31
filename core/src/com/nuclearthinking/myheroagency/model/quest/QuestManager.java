@@ -1,5 +1,7 @@
 package com.nuclearthinking.myheroagency.model.quest;
 
+import lombok.NonNull;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,9 +22,9 @@ public class QuestManager {
         return _questsById.get(questId);
     }
 
-    public static void addQuest(Quest newQuest) {
+    public static void addQuest(@NonNull final Quest newQuest) {
         _questsByName.put(newQuest.getName(), newQuest);
-        _questsById.put(newQuest.getQuestIntId(), newQuest);
+        _questsById.put(newQuest.getQuestId(), newQuest);
     }
 
 }
