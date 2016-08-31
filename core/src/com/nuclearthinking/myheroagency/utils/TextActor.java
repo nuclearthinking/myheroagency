@@ -7,26 +7,31 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
+import com.badlogic.gdx.utils.Disposable;
+import lombok.NonNull;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 /**
  * Created by Izonami on 09.05.2016.
  */
-public class TextActor extends Actor {
+public class TextActor extends Actor implements Disposable{
     private final TextButton[] listchar;
     private final TextButton.TextButtonStyle style;
     private final String text;
     private float x, y;
+    private final BitmapFont bitmapFont;
 
-    public TextActor(final BitmapFont bitmapFont, final String text, final Stage stage) {
+    public TextActor(@NonNull final BitmapFont bitmapFont, final String text, @NonNull final Stage stage) {
         this.text = text;
 
-        bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        this.bitmapFont = bitmapFont;
+        this.bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         listchar = new TextButton[text.length()];
         style = new TextButton.TextButtonStyle();
-        style.font = bitmapFont;
+        style.font = this.bitmapFont;
 
         for (int i = 0; i < text.length(); i++) {
             listchar[i] = new TextButton(String.valueOf(text.charAt(i)), style);
@@ -122,4 +127,8 @@ public class TextActor extends Actor {
         this.y = y;
     }
 
+    @Override
+    public void dispose() {
+        bitmapFont.dispose();
+    }
 }

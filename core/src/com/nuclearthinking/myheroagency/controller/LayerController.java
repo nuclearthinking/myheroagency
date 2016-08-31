@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
+import lombok.NonNull;
 
 /**
  * Created by Izonami on 30.05.2016.
@@ -11,7 +12,7 @@ public class LayerController {
 
     private final HudGame layer;
 
-    public LayerController(final HudGame layer){
+    public LayerController(@NonNull final HudGame layer){
         this.layer = layer;
     }
 

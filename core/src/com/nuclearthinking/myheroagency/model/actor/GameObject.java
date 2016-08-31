@@ -11,27 +11,24 @@ import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Synchronized;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 22.06.2016.
  */
-@Slf4j
+@Slf4j(topic = "GameObject")
 public abstract class GameObject extends Sprite {
 
     protected float animationTimer = 0;
     protected @Setter Animation idleAnimation, leftAnimation, rightAnimation;
     protected CharTemplate template;
 
-    private int curHp;
-    private int curMp;
-    private byte level = 1;
+    private @Getter int curHp;
+    private @Getter int curMp;
+    private @Getter @Setter byte level = 1;
 
     private final @Getter TiledMapTileLayer collisionLayer;
     private final Calculator[] _calculators;
@@ -41,7 +38,7 @@ public abstract class GameObject extends Sprite {
      * @param sizeHeight        - высота спрайта
      * @param sizeWidth         - ширина спрайта
      */
-    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth, final CharTemplate template){
+    public GameObject(final TiledMapTileLayer collisionLayer, int sizeHeight, int sizeWidth, @NonNull final CharTemplate template){
         this.collisionLayer = collisionLayer;
         setSize(sizeWidth, sizeHeight);
 
@@ -64,10 +61,7 @@ public abstract class GameObject extends Sprite {
     // Все действия над объектом производить в этом методе
     protected abstract void update(final float delta);
 
-    public final void addStatFunc(final Func f) {
-        if(f == null)
-            return;
-
+    public final void addStatFunc(@NonNull final Func f) {
         val stat = f.getStat().ordinal();
         synchronized (_calculators) {
             if(_calculators[stat] == null)
@@ -77,7 +71,7 @@ public abstract class GameObject extends Sprite {
         }
     }
 
-    public final double calcStat(final Stats stat, final double init, final GameObject target){
+    public final double calcStat(@NonNull final Stats stat, final double init){
         val id = stat.ordinal();
         val calculator = _calculators[id];
 
@@ -94,11 +88,7 @@ public abstract class GameObject extends Sprite {
 
     // Характеристики
     public int getBaseHp(){
-        return (int) calcStat(Stats.MAX_HP, template.baseHpMax, null);
-    }
-
-    public int getCurHp(){
-        return curHp;
+        return (int) calcStat(Stats.MAX_HP, template.baseHpMax);
     }
 
     public void setCurHpDamage(final int damage){
@@ -130,11 +120,7 @@ public abstract class GameObject extends Sprite {
     }
 
     public int getBaseMp(){
-        return (int) calcStat(Stats.MAX_MP, template.baseMpMax, null);
-    }
-
-    public int getCurMp(){
-        return curMp;
+        return (int) calcStat(Stats.MAX_MP, template.baseMpMax);
     }
 
     public void setCurMpDamage(final int damage){
@@ -151,64 +137,56 @@ public abstract class GameObject extends Sprite {
             this.curMp = tmpCurMp;
     }
 
-    public byte getLevel() {
-        return level;
-    }
-
-    public void setLevel(final byte level) {
-        this.level = level;
-    }
-
-    public byte getSTR() {
+    public int getSTR() {
         return template.baseSTR;
     }
 
-    public void setSTR(final byte str){
+    public void setSTR(final int str){
         template.baseDEX = str;
     }
 
-    public byte getCON(){
+    public int getCON(){
         return template.baseCON;
     }
 
-    public void setCon(final byte con){
-        template.baseCON += con;
+    public void setCon(final int con){
+        template.baseCON = con;
     }
 
-    public byte getDEX(){
+    public int getDEX(){
         return template.baseDEX;
     }
 
-    public void setDEX(final byte dex){
+    public void setDEX(final int dex){
         template.baseDEX = dex;
     }
 
-    public byte getINT(){
+    public int getINT(){
         return template.baseINT;
     }
 
-    public void setINT(final byte intellegent){
-        template.baseINT = intellegent;
+    public void setINT(final int intelligent){
+        template.baseINT = intelligent;
     }
 
-    public byte getWIT(){
+    public int getWIT(){
         return template.baseWIT;
     }
 
-    public void setWIT(final byte wit){
+    public void setWIT(final int wit){
         template.baseWIT = wit;
     }
 
-    public byte getMEN(){
+    public int getMEN(){
         return template.baseMEN;
     }
 
-    public void setMEN(final byte men){
+    public void setMEN(final int men){
         template.baseMEN = men;
     }
 
     public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, template.baseRunSpd, null);
+        return (int) calcStat(Stats.RUN_SPEED, template.baseRunSpd);
     }
 
     // Методы, опредяляют к какому типу относится объект.

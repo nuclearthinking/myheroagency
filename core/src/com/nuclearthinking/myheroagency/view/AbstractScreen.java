@@ -9,11 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import com.nuclearthinking.myheroagency.model.GameData;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 
-@Slf4j
+@Slf4j(topic = "AbstractScreen")
 public abstract class AbstractScreen implements Screen {
 
     protected final Localization locale = new Localization(this.getClass());
@@ -21,7 +23,7 @@ public abstract class AbstractScreen implements Screen {
 
     protected final Stage stage;
 
-    protected GameData gameData;
+    protected @Getter @Setter GameData gameData;
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));
@@ -76,11 +78,4 @@ public abstract class AbstractScreen implements Screen {
         return getClass().getSimpleName();
     }
 
-    public GameData getGameData() {
-        return gameData;
-    }
-
-    public void setGameData(final GameData gameData) {
-        this.gameData = gameData;
-    }
 }

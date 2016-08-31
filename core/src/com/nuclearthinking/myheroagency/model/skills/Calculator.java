@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.skills;
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public final class Calculator {
     private @Getter final Stats stat;
     private @Getter final GameObject character;
 
-    public Calculator(final Stats stat, final GameObject character) {
+    public Calculator(@NonNull final Stats stat, @NonNull final GameObject character) {
         this.stat = stat;
         this.character = character;
         this.functions = new ArrayList<Func>();
@@ -27,11 +28,11 @@ public final class Calculator {
         return functions.size();
     }
 
-    public void addFunc(final Func f) {
+    public void addFunc(@NonNull final Func f) {
         functions.add(f);
     }
 
-    public void removeFunc(final Func f) {
+    public void removeFunc(@NonNull final Func f) {
         int index = functions.indexOf(f);
 
         if(index >= 0){
@@ -39,13 +40,13 @@ public final class Calculator {
         }
     }
 
-    public void removeOwner(final Object owner) {
+    public void removeOwner(@NonNull final Object owner) {
         for(val element : functions)
             if(element.getFuncOwner() == owner)
                 removeFunc(element);
     }
 
-    public void calculate(final Env env) {
+    public void calculate(@NonNull final Env env) {
         for(val func : functions)
             func.calc(env);
     }

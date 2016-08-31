@@ -6,6 +6,7 @@ import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.model.GameData;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoadListener extends AbstractButtonListener {
 
-    public LoadListener(final TextButton button) {
+    public LoadListener(@NonNull final TextButton button) {
         super(button);
     }
 

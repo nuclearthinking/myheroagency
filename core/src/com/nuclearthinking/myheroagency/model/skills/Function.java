@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model.skills;
 
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -48,7 +49,7 @@ public class Function {
         }
 
         @Override
-        public void calc(final Env env) {
+        public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("STR: "+env.getCharacter().getSTR());
             log.debug("ConBonus: "+STRbonus[env.getCharacter().getSTR()]);
@@ -66,7 +67,7 @@ public class Function {
         }
 
         @Override
-        public void calc(Env env) {
+        public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("INT: "+env.getCharacter().getINT());
             log.debug("IntBonus: "+INTbonus[env.getCharacter().getINT()]);
@@ -84,7 +85,7 @@ public class Function {
         }
 
         @Override
-        public void calc(Env env) {
+        public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("CON: "+env.getCharacter().getCON());
             log.debug("ConBonus: "+CONbonus[env.getCharacter().getCON()]);
@@ -102,7 +103,7 @@ public class Function {
         }
 
         @Override
-        public void calc(Env env) {
+        public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("MEN: "+env.getCharacter().getMEN());
             log.debug("MenBonus: "+MENbonus[env.getCharacter().getMEN()]);
@@ -120,7 +121,7 @@ public class Function {
         }
 
         @Override
-        public void calc(Env env){
+        public void calc(@NonNull final Env env){
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("WIT: "+env.getCharacter().getWIT());
             log.debug("WitBonus: "+WITbonus[env.getCharacter().getWIT()]);
@@ -138,7 +139,7 @@ public class Function {
         }
 
         @Override
-        public void calc(Env env){
+        public void calc(@NonNull final Env env){
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
             log.debug("DEX: "+env.getCharacter().getDEX());
             log.debug("DexBonus: "+DEXbonus[env.getCharacter().getDEX()]);
@@ -147,7 +148,7 @@ public class Function {
         }
     }
 
-    public static void addFuncToChar(final GameObject character){
+    public static void addFuncToChar(@NonNull final GameObject character){
         if(character.isPlayer()){
             character.addStatFunc(FuncPAtkMod.func);
             character.addStatFunc(FuncMAtkMod.func);

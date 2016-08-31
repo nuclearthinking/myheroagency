@@ -12,7 +12,7 @@ import org.slf4j.impl.SimpleLoggerFactory;
 
 import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
 
-@Slf4j
+@Slf4j(topic = "Settings")
 public class Settings {
 
     private static final String LANGUAGE_KEY = "language";

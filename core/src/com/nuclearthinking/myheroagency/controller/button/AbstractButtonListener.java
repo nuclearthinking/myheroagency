@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public abstract class AbstractButtonListener extends ClickListener implements Ob
     protected final TextButton button;
     protected final List<Observer> observers;
 
-    public AbstractButtonListener(final TextButton button){
+    public AbstractButtonListener(@NonNull final TextButton button){
         this.button = button;
         this.observers = new ArrayList<Observer>();
     }

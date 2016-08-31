@@ -37,7 +37,6 @@ public class QuestLayer extends AbstractLayer implements ILayer {
 
     @Override
     public void buildLayer() {
-
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
 
         i.setFillParent(true);

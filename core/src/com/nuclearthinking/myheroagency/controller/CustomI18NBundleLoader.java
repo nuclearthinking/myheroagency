@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
+import lombok.NonNull;
 import lombok.val;
 
 import java.util.Locale;
@@ -20,13 +21,13 @@ public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, 
     private I18NBundleParameter parameter;
     private I18NBundle bundle;
 
-    public CustomI18NBundleLoader(final FileHandleResolver resolver, final I18NBundleParameter parameter) {
+    public CustomI18NBundleLoader(@NonNull final FileHandleResolver resolver, @NonNull final I18NBundleParameter parameter) {
         super(resolver);
         this.parameter = parameter;
     }
 
     @Override
-    public void loadAsync (AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
+    public void loadAsync (final AssetManager manager, String fileName, FileHandle file, I18NBundleParameter parameter) {
         this.bundle = null;
         Locale locale;
         String encoding;
@@ -60,11 +61,7 @@ public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, 
         public final Locale locale;
         public final String encoding;
 
-        public I18NBundleParameter () {
-            this(null, null);
-        }
-
-        public I18NBundleParameter (final Locale locale) {
+        public I18NBundleParameter (@NonNull final Locale locale) {
             this(locale, null);
         }
 

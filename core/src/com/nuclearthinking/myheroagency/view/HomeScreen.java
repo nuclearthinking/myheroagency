@@ -9,6 +9,7 @@ import com.nuclearthinking.myheroagency.model.GameData;
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.MapManager;
 import com.nuclearthinking.myheroagency.ui.hud.HudGame;
+import lombok.NonNull;
 import lombok.val;
 
 
@@ -30,7 +31,7 @@ public class HomeScreen extends AbstractScreen {
         this(new GameData());
     }
 
-    public HomeScreen(final GameData gameData) {
+    public HomeScreen(@NonNull final GameData gameData) {
         this.gameData = gameData;
 
         object = new ObjectManager();

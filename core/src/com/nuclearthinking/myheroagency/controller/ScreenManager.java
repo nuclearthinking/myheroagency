@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.nuclearthinking.myheroagency.view.AbstractScreen;
+import lombok.NonNull;
 import lombok.val;
 
 /**
@@ -25,11 +26,11 @@ public class ScreenManager {
         return instance;
     }
 
-    public void initialize(final Game game) {
+    public void initialize(@NonNull final Game game) {
         this.game = game;
     }
 
-    public void showScreen(final ScreenEnum screenEnum, final Object... params) {
+    public void showScreen(@NonNull final ScreenEnum screenEnum, final Object... params) {
         val currentScreen = game.getScreen();
 
         val newScreen = screenEnum.getScreen(params);

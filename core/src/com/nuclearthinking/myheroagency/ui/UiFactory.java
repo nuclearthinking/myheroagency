@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import lombok.Getter;
 
 import java.util.HashMap;
 
@@ -18,7 +19,8 @@ public final class UiFactory {
     private static final HashMap<String, TextButton> textButtonHashMap = new HashMap<String, TextButton>();
     private static final HashMap<String, TextField> textFieldHashMap = new HashMap<String, TextField>();
     private static final HashMap<String, Label> labelHashMap = new HashMap<String, Label>();
-    private static Skin skin;
+    //TODO: Пока побудет затычкой для SelectBox, так как для его создание не нужно имя
+    private @Getter static Skin skin;
 
     public UiFactory(){
         if(skin == null){
@@ -55,11 +57,6 @@ public final class UiFactory {
             textFieldHashMap.put(name, textField);
         }
         return textField;
-    }
-
-    //TODO: Пока побудет затычкой для SelectBox, так как для его создание не нужно имя
-    public Skin getSkin(){
-        return skin;
     }
 
 }

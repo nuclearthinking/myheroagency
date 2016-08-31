@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by Izonami on 20.06.2016.
  */
-@Slf4j
+@Slf4j(topic = "Quest")
 public class Quest {
 
     protected @Getter final String name;

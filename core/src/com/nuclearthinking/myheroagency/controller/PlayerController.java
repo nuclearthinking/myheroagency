@@ -3,10 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.nuclearthinking.myheroagency.model.actor.Player;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +11,10 @@ import java.util.Map;
 /**
  * Created by Izonami on 23.06.2016.
  */
+@RequiredArgsConstructor
 public class PlayerController implements InputProcessor {
 
-    private final Player player;
+    @NonNull private final Player player;
 
     enum Keys {
         LEFT,
@@ -32,10 +30,6 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.RIGHT, false);
         keys.put(Keys.UP, false);
         keys.put(Keys.DOWN, false);
-    }
-
-    public PlayerController(final Player player){
-        this.player = player;
     }
 
     private void leftPressed() {

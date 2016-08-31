@@ -9,6 +9,7 @@ import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * Created by Izonami on 18.05.2016.
@@ -29,7 +30,7 @@ public final class HudGame{
 
     private UtilsLayer utilsLayer;
 
-    public HudGame(final Batch batch){
+    public HudGame(@NonNull final Batch batch){
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
 
         //Инициализация слоёв
@@ -55,7 +56,7 @@ public final class HudGame{
     /**
      * Нужно обязательно билдить слои
      */
-    private void buildHud(final AbstractLayer layer){
+    private void buildHud(@NonNull final AbstractLayer layer){
         layer.buildLayer();
         stage.addActor(layer.getTable());
     }

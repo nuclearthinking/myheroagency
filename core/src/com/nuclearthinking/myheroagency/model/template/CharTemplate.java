@@ -6,11 +6,11 @@ package com.nuclearthinking.myheroagency.model.template;
 public class CharTemplate {
 
     public final byte baseSTR;
-    public byte baseCON;
-    public byte baseDEX;
-    public byte baseINT;
-    public byte baseWIT;
-    public byte baseMEN;
+    public int baseCON;
+    public int baseDEX;
+    public int baseINT;
+    public int baseWIT;
+    public int baseMEN;
 
     public final int baseHpMax;
     public final int baseMpMax;

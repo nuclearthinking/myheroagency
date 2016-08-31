@@ -6,6 +6,7 @@ import com.esotericsoftware.kryo.io.Output;
 import com.nuclearthinking.myheroagency.model.actor.Player;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -15,12 +16,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
-@Slf4j
+@Slf4j(topic = "GameData")
 public class GameData implements Serializable {
 
     private @Getter @Setter Player player;
 
-    public static void save(final GameData gameData) {
+    public static void save(@NonNull final GameData gameData) {
         val kryo = new Kryo();
         try (val output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
             kryo.writeObject(output, gameData);

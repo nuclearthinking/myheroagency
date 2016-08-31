@@ -8,6 +8,7 @@ import com.nuclearthinking.myheroagency.controller.observer.Observable;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
+import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class AddStatsListener extends AbstractButtonListener implements Observab
 
     private final ObjectManager objectManager;
 
-    public AddStatsListener(final TextButton button, final ObjectManager objectManager) {
+    public AddStatsListener(@NonNull final TextButton button, @NonNull final ObjectManager objectManager) {
         super(button);
         this.objectManager = objectManager;
     }
@@ -29,7 +30,7 @@ public class AddStatsListener extends AbstractButtonListener implements Observab
     public void clicked(InputEvent event, float x, float y) {
         if(event.getListenerActor() == button){
             if(objectManager.getPlayer().getCON() <= 98){
-                objectManager.getPlayer().setCon((byte)1);
+                objectManager.getPlayer().setCon(objectManager.getPlayer().getCON() + 1);
                 notifyObservers();
             }
         }

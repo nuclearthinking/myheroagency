@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -10,6 +11,7 @@ import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
+import lombok.NonNull;
 import lombok.val;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -38,9 +40,12 @@ public class SplashScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         fontFactory = new FontFactory();
-        actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", stage); //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
-        actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
-        actor.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight() / 2 + 32);
+        //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
+        actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", stage);
+        splashImage = new Image(texture);
+
+        actor.setPosition(Settings.getWidth() / 2 - splashImage.getWidth(),
+                Settings.getHeight() / 2 + splashImage.getHeight());
         actor.fadeText();
 
         val load = new Runnable() {
@@ -50,9 +55,8 @@ public class SplashScreen extends AbstractScreen {
             }
         };
 
-        splashImage = new Image(texture);
-        splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-        splashImage.setPosition(Settings.getWidth() / 2 - 32, Settings.getHeight()  + 32);
+        splashImage.setPosition(Gdx.graphics.getWidth() / 2 - splashImage.getWidth(),
+                Gdx.graphics.getHeight() + splashImage.getHeight());
         splashImage.addAction(
                 //Секвенция задаёт порядок действий
                 sequence(
@@ -63,7 +67,9 @@ public class SplashScreen extends AbstractScreen {
                                 (
                                         fadeIn(2f, Interpolation.pow2), //Появление
                                         scaleTo(2f, 2f, 2.5f, Interpolation.pow5), //Изменение размера
-                                        moveTo(Settings.getWidth() / 2 - 32, Settings.getHeight()  / 2 - 32, 2f, Interpolation.swing)), //Положение на экране
+                                        moveTo(Gdx.graphics.getWidth() / 2 - splashImage.getWidth(),
+                                                Gdx.graphics.getHeight()  / 2 - splashImage.getHeight(), 2f,
+                                                Interpolation.swing)), //Положение на экране
                         delay(1.5f), //Задержка
                         fadeOut(1.25f), //Исчезновение
                         run(load))); //Запуск сцены
@@ -76,6 +82,24 @@ public class SplashScreen extends AbstractScreen {
         super.render(delta);
 
         controller.splashUpdate();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width,height);
+
+        actor.setPosition(width / 2 - splashImage.getWidth(),
+                height / 2 + splashImage.getHeight());
+        splashImage.setPosition(width / 2 - splashImage.getWidth(),
+                height  + splashImage.getHeight());
+    }
+
+    @Override
+    public void dispose(){
+        super.dispose();
+
+        texture.dispose();
+        actor.dispose();
     }
 
 }

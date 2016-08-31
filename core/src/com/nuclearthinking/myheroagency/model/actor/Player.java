@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.val;
 
 import java.io.Serializable;
