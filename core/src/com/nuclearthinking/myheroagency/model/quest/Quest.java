@@ -48,4 +48,9 @@ public class Quest {
         return questItems.contains(id);
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
+
 }

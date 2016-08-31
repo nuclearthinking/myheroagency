@@ -11,20 +11,20 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class QuestManager {
 
-    private static Map<String, Quest> _questsByName = new ConcurrentHashMap<String, Quest>();
-    private static Map<Integer, Quest> _questsById = new ConcurrentHashMap<Integer, Quest>();
+    private static Map<String, Quest> questsByName = new ConcurrentHashMap<String, Quest>();
+    private static Map<Integer, Quest> questsById = new ConcurrentHashMap<Integer, Quest>();
 
     public static Quest getQuestByName(final String name) {
-        return _questsByName.get(name);
+        return questsByName.get(name);
     }
 
     public static Quest getQuestById(final int questId) {
-        return _questsById.get(questId);
+        return questsById.get(questId);
     }
 
     public static void addQuest(@NonNull final Quest newQuest) {
-        _questsByName.put(newQuest.getName(), newQuest);
-        _questsById.put(newQuest.getQuestId(), newQuest);
+        questsByName.put(newQuest.getName(), newQuest);
+        questsById.put(newQuest.getQuestId(), newQuest);
     }
 
 }

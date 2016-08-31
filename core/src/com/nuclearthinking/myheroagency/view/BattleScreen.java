@@ -12,6 +12,7 @@ import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 public class BattleScreen extends AbstractScreen {
 
     private static FontFactory fontFactory;
+    private String name;
 
     public BattleScreen() {
         fontFactory = new FontFactory();
@@ -19,7 +20,7 @@ public class BattleScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-
+        name = "This is " + getClass().getSimpleName();
     }
 
     @Override
@@ -27,7 +28,10 @@ public class BattleScreen extends AbstractScreen {
         super.render(delta);
 
         stage.getBatch().begin();
-        fontFactory.getRobotoLight(18).draw(stage.getBatch(), "HELLO !", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        fontFactory.getRobotoLight(18).draw(stage.getBatch(),
+                name,
+                Gdx.graphics.getWidth() / name.length(),
+                Gdx.graphics.getHeight() / 2);
         stage.getBatch().end();
     }
 }
