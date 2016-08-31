@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.button.menu.QuestTestListener;
 import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import lombok.val;
@@ -70,8 +71,9 @@ public class QuestLayer extends AbstractLayer implements ILayer {
      * @param name - является ключом и названием кнопки
      */
     public void addQuestToList(final String name){
-        val quest = factory.getLabel(name);
+        val quest = factory.getTextButton(name);
 
+        quest.addListener(new QuestTestListener(quest));
         quest.setColor(Color.BLACK);
         questsList.put(name, quest);
 

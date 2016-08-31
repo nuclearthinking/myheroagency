@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.nuclearthinking.myheroagency.model.GameData;
+import com.badlogic.gdx.Gdx;
+import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 
 /**
  * Date: 05.05.2016
@@ -10,12 +11,27 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class BattleScreen extends AbstractScreen {
 
-    public BattleScreen(final GameData gameData) {
-        this.gameData = gameData;
+    private static FontFactory fontFactory;
+    private String name;
+
+    public BattleScreen() {
+        fontFactory = new FontFactory();
     }
 
     @Override
     public void buildStage() {
+        name = "This is " + getClass().getSimpleName();
+    }
 
+    @Override
+    public void render(float delta){
+        super.render(delta);
+
+        stage.getBatch().begin();
+        fontFactory.getRobotoLight(18).draw(stage.getBatch(),
+                name,
+                Gdx.graphics.getWidth() / name.length(),
+                Gdx.graphics.getHeight() / 2);
+        stage.getBatch().end();
     }
 }
