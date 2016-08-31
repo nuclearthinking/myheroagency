@@ -48,7 +48,7 @@ public enum ScreenEnum {
 
     BATTLE_SCREEN {
         public AbstractScreen getScreen(Object... params) {
-            return new BattleScreen((GameData) params[0]);
+            return new BattleScreen();
         }
     },
 
