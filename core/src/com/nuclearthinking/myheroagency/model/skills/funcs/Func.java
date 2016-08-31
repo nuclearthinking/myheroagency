@@ -18,7 +18,7 @@ public abstract class Func implements Comparable<Func>{
     private @Getter final int order;
     private @Getter final Object funcOwner;
 
-    public Func(@NonNull final Stats stat, final int order, @NonNull final Object funcOwner) {
+    public Func(@NonNull final Stats stat, final int order, final Object funcOwner) {
         this.stat = stat;
         this.order = order;
         this.funcOwner = funcOwner;
