@@ -10,6 +10,6 @@ import lombok.Getter;
  */
 public class TransformComponent implements Component {
     private @Getter final Vector3 pos = new Vector3();
-    private @Getter final Vector2 scale = new Vector2(1.0f, 1.0f);
+    private @Getter final Vector2 scale = new Vector2(70.0f, 70.0f);
     private @Getter float rotation = 0.0f;
 }

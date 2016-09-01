@@ -14,7 +14,7 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class World {
-    public static final float WORLD_WIDTH = 10;
+    public static final float WORLD_WIDTH = 400;
 
     private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
@@ -30,6 +30,7 @@ public class World {
     public void create(){
         val player = createPlayer();
         createCamera(player);
+        createBackground();
     }
 
     private Entity createPlayer(){
@@ -46,7 +47,7 @@ public class World {
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
         animation.getAnimations().put(AnimationState.LEFT.getValue(), left);
 
-        position.getPos().set(5.0f, 1.0f, 0.0f);
+        position.getPos().set(15.0f, 3000.0f, 0.0f);
 
         state.set(AnimationState.IDLE.getValue());
 
@@ -62,7 +63,7 @@ public class World {
         return entity;
     }
 
-    private void createCamera(Entity target) {
+    private void createCamera(@NonNull final Entity target) {
         val entity = engine.createEntity();
 
         val camera = new CameraComponent();
@@ -70,6 +71,19 @@ public class World {
         camera.setTarget(target);
 
         entity.add(camera);
+
+        engine.addEntity(entity);
+    }
+
+    private void createBackground() {
+        val entity = engine.createEntity();
+        val background = engine.createComponent(MapComponent.class);
+        val position = engine.createComponent(TransformComponent.class);
+        val texture = engine.createComponent(TextureComponent.class);
+
+        entity.add(background);
+        entity.add(position);
+        entity.add(texture);
 
         engine.addEntity(entity);
     }

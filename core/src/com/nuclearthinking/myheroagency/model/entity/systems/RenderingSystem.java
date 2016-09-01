@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
@@ -19,11 +20,11 @@ import java.util.Comparator;
  * Created by mkuksin on 01.09.2016.
  */
 public class RenderingSystem extends IteratingSystem {
-    static final float FRUSTUM_WIDTH = 10;
-    static final float FRUSTUM_HEIGHT = 15;
+    static final float FRUSTUM_WIDTH = 400;
+    static final float FRUSTUM_HEIGHT = 600;
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
-    private Batch batch;
+    private OrthogonalTiledMapRenderer renderer;
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
     private @Getter OrthographicCamera camera;
@@ -31,7 +32,7 @@ public class RenderingSystem extends IteratingSystem {
     private ComponentMapper<TextureComponent> textureM;
     private ComponentMapper<TransformComponent> transformM;
 
-    public RenderingSystem(Batch batch) {
+    public RenderingSystem(OrthogonalTiledMapRenderer renderer) {
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
 
         textureM = ComponentMapper.getFor(TextureComponent.class);
@@ -47,7 +48,7 @@ public class RenderingSystem extends IteratingSystem {
             }
         };
 
-        this.batch = batch;
+        this.renderer = renderer;
 
         camera = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
         camera.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
@@ -60,10 +61,11 @@ public class RenderingSystem extends IteratingSystem {
         renderQueue.sort(comparator);
 
         camera.update();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
 
-        for (Entity entity : renderQueue) {
+        renderer.getBatch().setProjectionMatrix(camera.combined);
+        renderer.getBatch().begin();
+
+        for (val entity : renderQueue) {
             val tex = textureM.get(entity);
 
             if (tex.getRegion() == null) {
@@ -72,12 +74,12 @@ public class RenderingSystem extends IteratingSystem {
 
             val t = transformM.get(entity);
 
-            float width = tex.getRegion().getRegionWidth();
-            float height = tex.getRegion().getRegionHeight();
-            float originX = width * 0.5f;
-            float originY = height * 0.5f;
+            val width = tex.getRegion().getRegionWidth();
+            val height = tex.getRegion().getRegionHeight();
+            val originX = width * 0.5f;
+            val originY = height * 0.5f;
 
-            batch.draw(tex.getRegion(),
+            renderer.getBatch().draw(tex.getRegion(),
                     t.getPos().x - originX, t.getPos().y - originY,
                     originX, originY,
                     width, height,
@@ -85,7 +87,7 @@ public class RenderingSystem extends IteratingSystem {
                     MathUtils.radiansToDegrees * t.getRotation());
         }
 
-        batch.end();
+        renderer.getBatch().end();
         renderQueue.clear();
     }
 

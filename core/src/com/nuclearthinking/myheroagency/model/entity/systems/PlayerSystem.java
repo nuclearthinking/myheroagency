@@ -67,12 +67,12 @@ public class PlayerSystem extends IteratingSystem {
             state.set(AnimationState.LEFT.getValue());
         }
 
-        if (t.getPos().x < 0) {
-            t.getPos().x = World.WORLD_WIDTH;
+        if (t.getPos().x <= 3) {
+            t.getPos().x = 3;
         }
 
-        if (t.getPos().x > World.WORLD_WIDTH) {
+        /*if (t.getPos().x > World.WORLD_WIDTH) {
             t.getPos().x = 0;
-        }
+        }*/
     }
 }

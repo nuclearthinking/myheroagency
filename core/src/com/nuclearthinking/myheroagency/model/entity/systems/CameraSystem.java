@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.nuclearthinking.myheroagency.model.entity.World;
 import com.nuclearthinking.myheroagency.model.entity.components.CameraComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.val;
@@ -36,6 +37,8 @@ public class CameraSystem extends IteratingSystem{
             return;
         }
 
+        cam.getCamera().position.x = Math.max(cam.getCamera().position.x, target.getPos().x);
         cam.getCamera().position.y = Math.max(cam.getCamera().position.y, target.getPos().y);
+
     }
 }
