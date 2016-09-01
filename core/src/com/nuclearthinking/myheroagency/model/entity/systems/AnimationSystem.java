@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.nuclearthinking.myheroagency.model.entity.components.AnimationComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.StateComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
+import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
@@ -29,16 +30,16 @@ public class AnimationSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        TextureComponent tex = tm.get(entity);
-        AnimationComponent anim = am.get(entity);
-        StateComponent state = sm.get(entity);
+        val tex = tm.get(entity);
+        val anim = am.get(entity);
+        val state = sm.get(entity);
 
-        Animation animation = anim.animations.get(state.get());
+        val animation = anim.getAnimations().get(state.getState());
 
         if (animation != null) {
-            tex.region = animation.getKeyFrame(state.time);
+            tex.setRegion(animation.getKeyFrame(state.getTime()));
         }
 
-        state.time += deltaTime;
+        state.setTime(state.getTime() + deltaTime);
     }
 }

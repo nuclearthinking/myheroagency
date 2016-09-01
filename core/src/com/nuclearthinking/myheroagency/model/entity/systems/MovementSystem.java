@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.nuclearthinking.myheroagency.model.entity.components.MovementComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
+import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
@@ -26,13 +27,13 @@ public class MovementSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        TransformComponent pos = tm.get(entity);
-        MovementComponent mov = mm.get(entity);;
+        val pos = tm.get(entity);
+        val mov = mm.get(entity);
 
-        tmp.set(mov.accel).scl(deltaTime);
-        mov.velocity.add(tmp);
+        tmp.set(mov.getAccel()).scl(deltaTime);
+        mov.getVelocity().add(tmp);
 
-        tmp.set(mov.velocity).scl(deltaTime);
-        pos.pos.add(tmp.x, tmp.y, 0.0f);
+        tmp.set(mov.getVelocity()).scl(deltaTime);
+        pos.getPos().add(tmp.x, tmp.y, 0.0f);
     }
 }

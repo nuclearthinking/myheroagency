@@ -1,17 +1,15 @@
 package com.nuclearthinking.myheroagency.model.entity.components;
 
 import com.badlogic.ashley.core.Component;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
 public class StateComponent implements Component {
-    private int state = 0;
-    public float time = 0.0f;
-
-    public int get() {
-        return state;
-    }
+    private @Getter int state = 0;
+    private @Getter @Setter float time = 0.0f;
 
     public void set(int newState) {
         state = newState;

@@ -2,50 +2,53 @@ package com.nuclearthinking.myheroagency.model.entity;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.nuclearthinking.myheroagency.controller.ObjectManager;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
-
-import java.util.Random;
+import lombok.NonNull;
+import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
 public class World {
     public static final float WORLD_WIDTH = 10;
-    public static final float WORLD_HEIGHT = 15 * 20;
+
+    private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
+    private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
+    private final Animation left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
+    private final Animation right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
 
     private PooledEngine engine;
-    public final Random rand;
 
-    public World (PooledEngine engine) {
+    public World (@NonNull final PooledEngine engine) {
         this.engine = engine;
-        this.rand = new Random();
     }
 
     public void create(){
-        Entity player = createPlayer();
+        val player = createPlayer();
         createCamera(player);
     }
 
     private Entity createPlayer(){
-        Entity entity = engine.createEntity();
-        ObjectManager o = new ObjectManager();
+        val entity = engine.createEntity();
 
-        AnimationComponent animation = engine.createComponent(AnimationComponent.class);
-        PlayerComponent player = engine.createComponent(PlayerComponent.class);
-        MovementComponent movement = engine.createComponent(MovementComponent.class);
-        TransformComponent position = engine.createComponent(TransformComponent.class);
-        StateComponent state = engine.createComponent(StateComponent.class);
-        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        val animation = engine.createComponent(AnimationComponent.class);
+        val player = engine.createComponent(PlayerComponent.class);
+        val movement = engine.createComponent(MovementComponent.class);
+        val position = engine.createComponent(TransformComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val texture = engine.createComponent(TextureComponent.class);
 
-        animation.animations.put(PlayerComponent.IDLE, o.idle);
-        animation.animations.put(PlayerComponent.MOVE_R, o.right);
-        animation.animations.put(PlayerComponent.MOVE_L, o.left);
+        animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
+        animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
+        animation.getAnimations().put(AnimationState.LEFT.getValue(), left);
 
-        position.pos.set(5.0f, 1.0f, 0.0f);
+        position.getPos().set(5.0f, 1.0f, 0.0f);
 
-        state.set(PlayerComponent.IDLE);
+        state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
         entity.add(player);
@@ -60,11 +63,11 @@ public class World {
     }
 
     private void createCamera(Entity target) {
-        Entity entity = engine.createEntity();
+        val entity = engine.createEntity();
 
-        CameraComponent camera = new CameraComponent();
-        camera.camera = engine.getSystem(RenderingSystem.class).getCamera();
-        camera.target = target;
+        val camera = new CameraComponent();
+        camera.setCamera(engine.getSystem(RenderingSystem.class).getCamera());
+        camera.setTarget(target);
 
         entity.add(camera);
 

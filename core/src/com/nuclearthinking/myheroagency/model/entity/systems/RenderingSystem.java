@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
+import lombok.Getter;
+import lombok.val;
 
 import java.util.Comparator;
 
@@ -24,7 +26,7 @@ public class RenderingSystem extends IteratingSystem {
     private Batch batch;
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
-    private OrthographicCamera cam;
+    private @Getter OrthographicCamera camera;
 
     private ComponentMapper<TextureComponent> textureM;
     private ComponentMapper<TransformComponent> transformM;
@@ -40,15 +42,15 @@ public class RenderingSystem extends IteratingSystem {
         comparator = new Comparator<Entity>() {
             @Override
             public int compare(Entity entityA, Entity entityB) {
-                return (int)Math.signum(transformM.get(entityB).pos.z -
-                        transformM.get(entityA).pos.z);
+                return (int)Math.signum(transformM.get(entityB).getPos().z -
+                        transformM.get(entityA).getPos().z);
             }
         };
 
         this.batch = batch;
 
-        cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-        cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
+        camera = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        camera.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
     }
 
     @Override
@@ -57,30 +59,30 @@ public class RenderingSystem extends IteratingSystem {
 
         renderQueue.sort(comparator);
 
-        cam.update();
-        batch.setProjectionMatrix(cam.combined);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
         for (Entity entity : renderQueue) {
-            TextureComponent tex = textureM.get(entity);
+            val tex = textureM.get(entity);
 
-            if (tex.region == null) {
+            if (tex.getRegion() == null) {
                 continue;
             }
 
-            TransformComponent t = transformM.get(entity);
+            val t = transformM.get(entity);
 
-            float width = tex.region.getRegionWidth();
-            float height = tex.region.getRegionHeight();
+            float width = tex.getRegion().getRegionWidth();
+            float height = tex.getRegion().getRegionHeight();
             float originX = width * 0.5f;
             float originY = height * 0.5f;
 
-            batch.draw(tex.region,
-                    t.pos.x - originX, t.pos.y - originY,
+            batch.draw(tex.getRegion(),
+                    t.getPos().x - originX, t.getPos().y - originY,
                     originX, originY,
                     width, height,
-                    t.scale.x * PIXELS_TO_METRES, t.scale.y * PIXELS_TO_METRES,
-                    MathUtils.radiansToDegrees * t.rotation);
+                    t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
+                    MathUtils.radiansToDegrees * t.getRotation());
         }
 
         batch.end();
@@ -92,7 +94,4 @@ public class RenderingSystem extends IteratingSystem {
         renderQueue.add(entity);
     }
 
-    public OrthographicCamera getCamera() {
-        return cam;
-    }
 }

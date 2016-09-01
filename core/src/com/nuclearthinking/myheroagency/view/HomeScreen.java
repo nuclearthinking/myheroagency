@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.nuclearthinking.myheroagency.model.entity.World;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
+import lombok.val;
 
 /**
  * Date: 05.05.2016
@@ -15,8 +16,8 @@ import com.nuclearthinking.myheroagency.model.entity.systems.*;
  */
 public class HomeScreen extends AbstractScreen {
 
-    World world;
-    PooledEngine engine;
+    private final World world;
+    private final PooledEngine engine;
 
     public HomeScreen() {
         engine = new PooledEngine();
@@ -44,15 +45,15 @@ public class HomeScreen extends AbstractScreen {
     }
 
     private void updateRunning () {
-        Application.ApplicationType appType = Gdx.app.getType();
+        val appType = Gdx.app.getType();
 
         float accelX = 0.0f;
 
         if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
             accelX = Gdx.input.getAccelerometerX();
         } else {
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) accelX = 5f;
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) accelX = -5f;
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) accelX = 5f;
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) accelX = -5f;
         }
 
         engine.getSystem(PlayerSystem.class).setAccelX(accelX);

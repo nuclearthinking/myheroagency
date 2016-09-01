@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.esotericsoftware.kryo.NotNull;
 import lombok.*;
 
 /**
