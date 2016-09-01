@@ -11,14 +11,14 @@ import com.nuclearthinking.myheroagency.model.template.CharTemplate;
 public class ObjectManager {
 
     private static Player player;
-    private Animation idle, left,right;
-    private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
+    private static final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
+    public static final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
+    public static final Animation left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
+    public static final Animation right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
+
 
     public Player getPlayer(){
         if(player == null){
-            idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
-            left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
-            right = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
             player = new Player(null, 40, 35, CharTemplate.getInstance().getTemplate());
             player.setIdleAnimation(idle);
             player.setLeftAnimation(left);

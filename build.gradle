@@ -91,6 +91,7 @@ project(":core") {
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.2"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "org.projectlombok:lombok:1.16.10"
+        compile "com.badlogicgames.ashley:ashley:1.7.0"
     }
 }
 

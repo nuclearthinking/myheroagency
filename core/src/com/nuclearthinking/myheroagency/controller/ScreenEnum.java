@@ -40,9 +40,7 @@ public enum ScreenEnum {
 
     HOME_SCREEN {
         public AbstractScreen getScreen(Object... params) {
-            if (params.length > 0) {
-                return new HomeScreen((GameData) params[0]);
-            } else return new HomeScreen();
+            return new HomeScreen();
         }
     },
 
