@@ -46,7 +46,7 @@ public abstract class GameObject extends Sprite {
 
         _calculators = new Calculator[Stats.NUM_STATS];
 
-        Function.addFuncToChar(this);
+        //Function.addFuncToChar(this);
 
         curHp = getBaseHp();
         curMp = getBaseMp();
@@ -65,14 +65,14 @@ public abstract class GameObject extends Sprite {
         val stat = f.getStat().ordinal();
         synchronized (_calculators) {
             if(_calculators[stat] == null)
-                _calculators[stat] = new Calculator(f.getStat(), this);
+               // _calculators[stat] = new Calculator(f.getStat(), this);
 
             _calculators[stat].addFunc(f);
         }
     }
 
     public final double calcStat(@NonNull final Stats stat, final double init){
-        val id = stat.ordinal();
+        /*val id = stat.ordinal();
         val calculator = _calculators[id];
 
         if(calculator == null || calculator.size() == 0)
@@ -83,7 +83,9 @@ public abstract class GameObject extends Sprite {
 
         calculator.calculate(env);
 
-        return env.getValue();
+        return env.getValue();*/
+
+        return 0;
     }
 
     // Характеристики

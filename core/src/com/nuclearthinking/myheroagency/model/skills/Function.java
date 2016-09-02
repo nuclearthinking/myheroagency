@@ -1,6 +1,8 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
+import com.nuclearthinking.myheroagency.model.entity.components.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,7 @@ public class Function {
     private static final double MAX_MP_MOD = 1.5;
     private static final double M_ATK_MOD = 1.5;
     private static final double M_ATK_SPEED_MOD = 0.4;
-    private static final double RUN_SPEED_MOD = 0.2;
+    private static final double RUN_SPEED_MOD = 0.5;
 
     //TODO: Это полностью переделать, желательно брать из файла или придумать формулу, сейчас просто затычка для проверки
     static {
@@ -39,7 +41,7 @@ public class Function {
         }
     }
 
-    private static class FuncPAtkMod extends Func {
+    /*private static class FuncPAtkMod extends Func {
 
         private static final FuncPAtkMod func = new FuncPAtkMod();
 
@@ -74,7 +76,7 @@ public class Function {
             log.debug("All Env :"+env.getValue() * INTbonus[env.getCharacter().getINT()] * M_ATK_MOD);
             env.setValue(env.getValue() * INTbonus[env.getCharacter().getINT()] * env.getCharacter().getLevel() * M_ATK_MOD);
         }
-    }
+    }*/
 
     private static class FuncMaxHpMod extends Func {
 
@@ -112,7 +114,7 @@ public class Function {
         }
     }
 
-    private static class FuncCastSpeedMod extends Func{
+    /*private static class FuncCastSpeedMod extends Func{
 
         private static final FuncCastSpeedMod func = new FuncCastSpeedMod();
 
@@ -128,7 +130,7 @@ public class Function {
             log.debug("All Env :"+env.getValue() * WITbonus[env.getCharacter().getWIT()] * M_ATK_SPEED_MOD);
             env.setValue(env.getValue() * WITbonus[env.getCharacter().getWIT()] * M_ATK_SPEED_MOD);
         }
-    }
+    }*/
 
     private static class FuncRunSpeedMod extends Func{
 
@@ -140,21 +142,21 @@ public class Function {
 
         @Override
         public void calc(@NonNull final Env env){
-            log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("DEX: "+env.getCharacter().getDEX());
-            log.debug("DexBonus: "+DEXbonus[env.getCharacter().getDEX()]);
-            log.debug("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getDEX()] * RUN_SPEED_MOD);
+            log.info("Base Value "+getClass().getSimpleName()+": "+env.getValue());
+            log.info("DEX: "+env.getCharacter().getDEX());
+            log.info("DexBonus: "+DEXbonus[env.getCharacter().getDEX()]);
+            log.info("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getDEX()] * RUN_SPEED_MOD);
             env.setValue(env.getValue() * DEXbonus[env.getCharacter().getDEX()] * RUN_SPEED_MOD);
         }
     }
 
-    public static void addFuncToChar(@NonNull final GameObject character){
+    public static void addFuncToChar(@NonNull final PlayerSystem character){
         if(character.isPlayer()){
-            character.addStatFunc(FuncPAtkMod.func);
-            character.addStatFunc(FuncMAtkMod.func);
+            //character.addStatFunc(FuncPAtkMod.func);
+            //character.addStatFunc(FuncMAtkMod.func);
             character.addStatFunc(FuncMaxHpMod.func);
             character.addStatFunc(FuncMaxMpMod.func);
-            character.addStatFunc(FuncCastSpeedMod.func);
+            //character.addStatFunc(FuncCastSpeedMod.func);
             character.addStatFunc(FuncRunSpeedMod.func);
         }
     }

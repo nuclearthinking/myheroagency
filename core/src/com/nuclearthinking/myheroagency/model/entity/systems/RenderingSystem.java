@@ -1,17 +1,17 @@
 package com.nuclearthinking.myheroagency.model.entity.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.val;
 
 import java.util.Comparator;
@@ -29,22 +29,16 @@ public class RenderingSystem extends IteratingSystem {
     private Comparator<Entity> comparator;
     private @Getter OrthographicCamera camera;
 
-    private ComponentMapper<TextureComponent> textureM;
-    private ComponentMapper<TransformComponent> transformM;
-
     public RenderingSystem(OrthogonalTiledMapRenderer renderer) {
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
-
-        textureM = ComponentMapper.getFor(TextureComponent.class);
-        transformM = ComponentMapper.getFor(TransformComponent.class);
 
         renderQueue = new Array<Entity>();
 
         comparator = new Comparator<Entity>() {
             @Override
             public int compare(Entity entityA, Entity entityB) {
-                return (int)Math.signum(transformM.get(entityB).getPos().z -
-                        transformM.get(entityA).getPos().z);
+                return (int)Math.signum(Components.TRANSFORM.get(entityB).getPos().z -
+                        Components.TRANSFORM.get(entityA).getPos().z);
             }
         };
 
@@ -66,13 +60,13 @@ public class RenderingSystem extends IteratingSystem {
         renderer.getBatch().begin();
 
         for (val entity : renderQueue) {
-            val tex = textureM.get(entity);
+            val tex = Components.TEXTURE.get(entity);
 
             if (tex.getRegion() == null) {
                 continue;
             }
 
-            val t = transformM.get(entity);
+            @NonNull val t = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();

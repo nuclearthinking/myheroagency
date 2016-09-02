@@ -27,7 +27,7 @@ public class HomeScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         engine.addSystem(new MapSystem());
-        engine.addSystem(new PlayerSystem(world));
+        engine.addSystem(new PlayerSystem());
         engine.addSystem(new CameraSystem());
         engine.addSystem(new GravitySystem());
         engine.addSystem(new MovementSystem());
