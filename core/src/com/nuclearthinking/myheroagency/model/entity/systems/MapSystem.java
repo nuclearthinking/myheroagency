@@ -1,15 +1,17 @@
 package com.nuclearthinking.myheroagency.model.entity.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.MapComponent;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 
 /**
@@ -17,18 +19,19 @@ import lombok.Getter;
  */
 public class MapSystem extends IteratingSystem {
     private OrthographicCamera camera;
-    private final TiledMap tiledMap;
-    private @Getter final OrthogonalTiledMapRenderer renderer;
+    private @Getter @Setter TiledMap tiledMap = null;
+    private @Getter @Setter OrthogonalTiledMapRenderer renderer = null;
 
     public MapSystem() {
-        super(Family.all(MapComponent.class).get());
-        tiledMap = Asset.getInstance().get("map/testMap.tmx",TiledMap.class);
-        renderer = new OrthogonalTiledMapRenderer(tiledMap);
-        tiledMap.dispose();
+        this("map/testMap.tmx");
     }
 
-    public OrthogonalTiledMapRenderer getRenderer(){
-        return renderer;
+    public MapSystem(@NonNull String mapName){
+        super(Family.all(MapComponent.class).get());
+
+        tiledMap = Asset.getInstance().get(mapName,TiledMap.class);
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        tiledMap.dispose();
     }
 
     public void setCamera(OrthographicCamera camera) {
@@ -40,4 +43,9 @@ public class MapSystem extends IteratingSystem {
         renderer.setView(camera);
         renderer.render();
     }
+
+    public Batch getBatch(){
+        return renderer.getBatch();
+    }
+
 }

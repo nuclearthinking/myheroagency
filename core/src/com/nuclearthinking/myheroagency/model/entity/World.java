@@ -40,12 +40,8 @@ public class World {
         val entity = engine.createEntity();
 
         val animation = engine.createComponent(AnimationComponent.class);
-        val player = engine.createComponent(PlayerComponent.class);
-        val movement = engine.createComponent(MovementComponent.class);
-        val gravity = engine.createComponent(GravityComponent.class);
         val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
-        val texture = engine.createComponent(TextureComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
@@ -56,12 +52,13 @@ public class World {
         state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
-        entity.add(player);
-        entity.add(movement);
-        entity.add(gravity);
         entity.add(position);
         entity.add(state);
-        entity.add(texture);
+        entity.add(new LightComponent());
+        entity.add(new PlayerComponent());
+        entity.add(new MovementComponent());
+        entity.add(new GravityComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
 
@@ -72,6 +69,7 @@ public class World {
         val entity = engine.createEntity();
 
         val camera = new CameraComponent();
+
         camera.setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         camera.setTarget(target);
 
@@ -82,13 +80,10 @@ public class World {
 
     private void createBackground() {
         val entity = engine.createEntity();
-        val background = engine.createComponent(MapComponent.class);
-        val position = engine.createComponent(TransformComponent.class);
-        val texture = engine.createComponent(TextureComponent.class);
 
-        entity.add(background);
-        entity.add(position);
-        entity.add(texture);
+        entity.add(new MapComponent());
+        entity.add(new TransformComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
     }

@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
@@ -24,12 +24,12 @@ public class RenderingSystem extends IteratingSystem {
     static final float FRUSTUM_HEIGHT = 600;
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
-    private OrthogonalTiledMapRenderer renderer;
+    private Batch batch;
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
     private @Getter OrthographicCamera camera;
 
-    public RenderingSystem(OrthogonalTiledMapRenderer renderer) {
+    public RenderingSystem(Batch batch) {
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
 
         renderQueue = new Array<Entity>();
@@ -42,7 +42,7 @@ public class RenderingSystem extends IteratingSystem {
             }
         };
 
-        this.renderer = renderer;
+        this.batch = batch;
 
         camera = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
         camera.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
@@ -56,8 +56,7 @@ public class RenderingSystem extends IteratingSystem {
 
         camera.update();
 
-        renderer.getBatch().setProjectionMatrix(camera.combined);
-        renderer.getBatch().begin();
+        batch.begin();
 
         for (val entity : renderQueue) {
             val tex = Components.TEXTURE.get(entity);
@@ -73,7 +72,7 @@ public class RenderingSystem extends IteratingSystem {
             val originX = width * 0.5f;
             val originY = height * 0.5f;
 
-            renderer.getBatch().draw(tex.getRegion(),
+            batch.draw(tex.getRegion(),
                     t.getPos().x - originX, t.getPos().y - originY,
                     originX, originY,
                     width, height,
@@ -81,7 +80,7 @@ public class RenderingSystem extends IteratingSystem {
                     MathUtils.radiansToDegrees * t.getRotation());
         }
 
-        renderer.getBatch().end();
+        batch.end();
         renderQueue.clear();
     }
 

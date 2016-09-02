@@ -1,14 +1,10 @@
 package com.nuclearthinking.myheroagency.model.entity.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.MathUtils;
-import com.nuclearthinking.myheroagency.model.entity.World;
 import com.nuclearthinking.myheroagency.model.entity.components.CameraComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
-import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.NonNull;
 import lombok.val;
 

@@ -16,4 +16,5 @@ public final class Components {
     public static final ComponentMapper<StateComponent> STATE = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<TransformComponent> TRANSFORM = ComponentMapper.getFor(TransformComponent.class);
+    public static final ComponentMapper<LightComponent> LIGHT = ComponentMapper.getFor(LightComponent.class);
 }

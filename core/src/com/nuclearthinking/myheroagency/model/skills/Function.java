@@ -1,8 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import com.nuclearthinking.myheroagency.model.entity.components.PlayerComponent;
-import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +39,7 @@ public class Function {
         }
     }
 
-    /*private static class FuncPAtkMod extends Func {
+    private static class FuncPAtkMod extends Func {
 
         private static final FuncPAtkMod func = new FuncPAtkMod();
 
@@ -53,10 +51,10 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("STR: "+env.getCharacter().getSTR());
-            log.debug("ConBonus: "+STRbonus[env.getCharacter().getSTR()]);
-            log.debug("All Env :"+env.getValue() * STRbonus[env.getCharacter().getSTR()] * P_ATK_MOD);
-            env.setValue(env.getValue() * STRbonus[env.getCharacter().getSTR()] * env.getCharacter().getLevel() * P_ATK_MOD);
+            log.debug("STR: "+env.getCharacter().getBaseSTR());
+            log.debug("ConBonus: "+STRbonus[env.getCharacter().getBaseSTR()]);
+            log.debug("All Env :"+env.getValue() * STRbonus[env.getCharacter().getBaseSTR()] * P_ATK_MOD);
+            env.setValue(env.getValue() * STRbonus[env.getCharacter().getBaseSTR()] * env.getCharacter().getLevel() * P_ATK_MOD);
         }
     }
 
@@ -71,12 +69,12 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("INT: "+env.getCharacter().getINT());
-            log.debug("IntBonus: "+INTbonus[env.getCharacter().getINT()]);
-            log.debug("All Env :"+env.getValue() * INTbonus[env.getCharacter().getINT()] * M_ATK_MOD);
-            env.setValue(env.getValue() * INTbonus[env.getCharacter().getINT()] * env.getCharacter().getLevel() * M_ATK_MOD);
+            log.debug("INT: "+env.getCharacter().getBaseINT());
+            log.debug("IntBonus: "+INTbonus[env.getCharacter().getBaseINT()]);
+            log.debug("All Env :"+env.getValue() * INTbonus[env.getCharacter().getBaseINT()] * M_ATK_MOD);
+            env.setValue(env.getValue() * INTbonus[env.getCharacter().getBaseINT()] * env.getCharacter().getLevel() * M_ATK_MOD);
         }
-    }*/
+    }
 
     private static class FuncMaxHpMod extends Func {
 
@@ -89,10 +87,10 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("CON: "+env.getCharacter().getCON());
-            log.debug("ConBonus: "+CONbonus[env.getCharacter().getCON()]);
-            log.debug("All Env :"+env.getValue() * CONbonus[env.getCharacter().getCON()] * MAX_HP_MOD);
-            env.setValue(env.getValue() * CONbonus[env.getCharacter().getCON()] * MAX_HP_MOD);
+            log.debug("CON: "+env.getCharacter().getBaseCON());
+            log.debug("ConBonus: "+CONbonus[env.getCharacter().getBaseCON()]);
+            log.debug("All Env :"+env.getValue() * CONbonus[env.getCharacter().getBaseCON()] * MAX_HP_MOD);
+            env.setValue(env.getValue() * CONbonus[env.getCharacter().getBaseCON()] * MAX_HP_MOD);
         }
     }
 
@@ -107,14 +105,14 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env) {
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("MEN: "+env.getCharacter().getMEN());
-            log.debug("MenBonus: "+MENbonus[env.getCharacter().getMEN()]);
-            log.debug("All Env :"+env.getValue() * MENbonus[env.getCharacter().getMEN()] * MAX_MP_MOD);
-            env.setValue(env.getValue() * MENbonus[env.getCharacter().getMEN()] * MAX_MP_MOD);
+            log.debug("MEN: "+env.getCharacter().getBaseMEN());
+            log.debug("MenBonus: "+MENbonus[env.getCharacter().getBaseMEN()]);
+            log.debug("All Env :"+env.getValue() * MENbonus[env.getCharacter().getBaseMEN()] * MAX_MP_MOD);
+            env.setValue(env.getValue() * MENbonus[env.getCharacter().getBaseMEN()] * MAX_MP_MOD);
         }
     }
 
-    /*private static class FuncCastSpeedMod extends Func{
+    private static class FuncCastSpeedMod extends Func{
 
         private static final FuncCastSpeedMod func = new FuncCastSpeedMod();
 
@@ -125,12 +123,12 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env){
             log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("WIT: "+env.getCharacter().getWIT());
-            log.debug("WitBonus: "+WITbonus[env.getCharacter().getWIT()]);
-            log.debug("All Env :"+env.getValue() * WITbonus[env.getCharacter().getWIT()] * M_ATK_SPEED_MOD);
-            env.setValue(env.getValue() * WITbonus[env.getCharacter().getWIT()] * M_ATK_SPEED_MOD);
+            log.debug("WIT: "+env.getCharacter().getBaseWIT());
+            log.debug("WitBonus: "+WITbonus[env.getCharacter().getBaseWIT()]);
+            log.debug("All Env :"+env.getValue() * WITbonus[env.getCharacter().getBaseWIT()] * M_ATK_SPEED_MOD);
+            env.setValue(env.getValue() * WITbonus[env.getCharacter().getBaseWIT()] * M_ATK_SPEED_MOD);
         }
-    }*/
+    }
 
     private static class FuncRunSpeedMod extends Func{
 
@@ -143,20 +141,20 @@ public class Function {
         @Override
         public void calc(@NonNull final Env env){
             log.info("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.info("DEX: "+env.getCharacter().getDEX());
-            log.info("DexBonus: "+DEXbonus[env.getCharacter().getDEX()]);
-            log.info("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getDEX()] * RUN_SPEED_MOD);
-            env.setValue(env.getValue() * DEXbonus[env.getCharacter().getDEX()] * RUN_SPEED_MOD);
+            log.info("DEX: "+env.getCharacter().getBaseDEX());
+            log.info("DexBonus: "+DEXbonus[env.getCharacter().getBaseDEX()]);
+            log.info("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getBaseDEX()] * RUN_SPEED_MOD);
+            env.setValue(env.getValue() * DEXbonus[env.getCharacter().getBaseDEX()] * RUN_SPEED_MOD);
         }
     }
 
-    public static void addFuncToChar(@NonNull final PlayerSystem character){
+    public static void addFuncToChar(@NonNull final PlayerComponent character){
         if(character.isPlayer()){
-            //character.addStatFunc(FuncPAtkMod.func);
-            //character.addStatFunc(FuncMAtkMod.func);
+            character.addStatFunc(FuncPAtkMod.func);
+            character.addStatFunc(FuncMAtkMod.func);
             character.addStatFunc(FuncMaxHpMod.func);
             character.addStatFunc(FuncMaxMpMod.func);
-            //character.addStatFunc(FuncCastSpeedMod.func);
+            character.addStatFunc(FuncCastSpeedMod.func);
             character.addStatFunc(FuncRunSpeedMod.func);
         }
     }
