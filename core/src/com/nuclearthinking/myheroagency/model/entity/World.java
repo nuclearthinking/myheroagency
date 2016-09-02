@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
@@ -14,7 +15,9 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class World {
-    public static final float WORLD_WIDTH = 400;
+    public static final int WORLD_BORDER_L = 5;
+    public static final int WORLD_BORDER_R = 895;
+    public static final Vector2 GRAVITY = new Vector2(0, -12);
 
     private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
@@ -39,6 +42,7 @@ public class World {
         val animation = engine.createComponent(AnimationComponent.class);
         val player = engine.createComponent(PlayerComponent.class);
         val movement = engine.createComponent(MovementComponent.class);
+        val gravity = engine.createComponent(GravityComponent.class);
         val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val texture = engine.createComponent(TextureComponent.class);
@@ -54,6 +58,7 @@ public class World {
         entity.add(animation);
         entity.add(player);
         entity.add(movement);
+        entity.add(gravity);
         entity.add(position);
         entity.add(state);
         entity.add(texture);
