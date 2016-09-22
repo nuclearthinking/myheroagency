@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.controller.manager.GameDataManager;
 
 /**
  * Date: 05.05.2016
@@ -10,8 +10,8 @@ import com.nuclearthinking.myheroagency.model.GameData;
  */
 public class TaskScreen extends AbstractScreen {
 
-    public TaskScreen(GameData gameData){
-        this.gameData = gameData;
+    public TaskScreen(GameDataManager gameDataManager){
+        this.gameDataManager = gameDataManager;
     }
 
     @Override

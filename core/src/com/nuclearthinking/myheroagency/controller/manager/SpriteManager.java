@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.controller;
+package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.nuclearthinking.myheroagency.model.actor.GameObject;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Izonami on 22.06.2016.

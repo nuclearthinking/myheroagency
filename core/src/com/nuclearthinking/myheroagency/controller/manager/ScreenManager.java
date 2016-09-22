@@ -1,8 +1,7 @@
-package com.nuclearthinking.myheroagency.controller;
+package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
-import com.nuclearthinking.myheroagency.view.AbstractScreen;
+import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import lombok.NonNull;
 import lombok.val;
 

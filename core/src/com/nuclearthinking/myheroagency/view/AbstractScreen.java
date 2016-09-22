@@ -7,13 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.nuclearthinking.myheroagency.controller.manager.GameDataManager;
 import com.nuclearthinking.myheroagency.i18n.Localization;
-import com.nuclearthinking.myheroagency.model.GameData;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 @Slf4j(topic = "AbstractScreen")
 public abstract class AbstractScreen implements Screen {
@@ -23,7 +21,8 @@ public abstract class AbstractScreen implements Screen {
 
     protected final Stage stage;
 
-    protected @Getter @Setter GameData gameData;
+    protected @Getter @Setter
+    GameDataManager gameDataManager;
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));

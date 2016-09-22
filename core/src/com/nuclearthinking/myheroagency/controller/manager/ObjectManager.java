@@ -1,7 +1,8 @@
-package com.nuclearthinking.myheroagency.controller;
+package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.actor.Player;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
 

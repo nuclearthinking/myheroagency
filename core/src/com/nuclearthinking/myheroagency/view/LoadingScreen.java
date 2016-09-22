@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.math.Interpolation;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.scripts.QuestLoader;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;

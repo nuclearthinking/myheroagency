@@ -2,17 +2,12 @@ package com.nuclearthinking.myheroagency.controller.button.player;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.nuclearthinking.myheroagency.controller.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
-import com.nuclearthinking.myheroagency.controller.observer.Observable;
-import com.nuclearthinking.myheroagency.controller.observer.Observer;
+import com.nuclearthinking.myheroagency.controller.manager.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverCon;
 import com.nuclearthinking.myheroagency.controller.observer.ObserverMen;
 import lombok.NonNull;
 import lombok.val;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Izonami on 10.08.2016.

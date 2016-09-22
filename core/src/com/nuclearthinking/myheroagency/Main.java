@@ -2,8 +2,7 @@ package com.nuclearthinking.myheroagency;
 
 import com.badlogic.gdx.Game;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
-import com.nuclearthinking.myheroagency.utils.Constants;
+import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;

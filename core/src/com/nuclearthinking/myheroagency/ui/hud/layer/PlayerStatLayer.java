@@ -3,10 +3,10 @@ package com.nuclearthinking.myheroagency.ui.hud.layer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.nuclearthinking.myheroagency.controller.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
+import com.nuclearthinking.myheroagency.controller.manager.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 

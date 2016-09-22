@@ -9,7 +9,7 @@ public class ScreenController {
 
     public void splashUpdate(){
         if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(66) || Gdx.input.isKeyPressed(131)) {
-            ScreenManager.getInstance().showScreen( ScreenEnum.MAIN_MENU_SCREEN );
+            com.nuclearthinking.myheroagency.controller.manager.ScreenManager.getInstance().showScreen( ScreenEnum.MAIN_MENU_SCREEN );
         }
     }
 }

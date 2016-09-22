@@ -3,9 +3,9 @@ package com.nuclearthinking.myheroagency.controller.button.menu;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
-import com.nuclearthinking.myheroagency.model.GameData;
+import com.nuclearthinking.myheroagency.controller.manager.GameDataManager;
+import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ public class LoadListener extends AbstractButtonListener {
     public void clicked(InputEvent event, float x, float y) {
         log.info("Loading game from save");
 
-        ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, GameData.load());
+        ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN, GameDataManager.load());
     }
 
 }
