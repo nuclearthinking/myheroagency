@@ -9,7 +9,7 @@ import lombok.Getter;
  * Created by mkuksin on 01.09.2016.
  */
 public class TransformComponent implements Component {
-    private @Getter final Vector3 pos = new Vector3();
-    private @Getter final Vector2 scale = new Vector2(70.0f, 70.0f);
-    private @Getter float rotation = 0.0f;
+    public @Getter final Vector3 pos = new Vector3();
+    public @Getter final Vector2 scale = new Vector2(35.0f, 35.0f);
+    public @Getter float rotation = 0.0f;
 }

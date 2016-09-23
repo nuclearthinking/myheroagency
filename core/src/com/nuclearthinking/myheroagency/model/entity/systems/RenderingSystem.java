@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -20,8 +21,8 @@ import java.util.Comparator;
  * Created by mkuksin on 01.09.2016.
  */
 public class RenderingSystem extends IteratingSystem {
-    static final float FRUSTUM_WIDTH = 400;
-    static final float FRUSTUM_HEIGHT = 600;
+    static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
+    static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private Batch batch;
@@ -44,8 +45,8 @@ public class RenderingSystem extends IteratingSystem {
 
         this.batch = batch;
 
-        camera = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-        camera.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
     }
 
     @Override
@@ -65,6 +66,10 @@ public class RenderingSystem extends IteratingSystem {
                 continue;
             }
 
+            /*val light = Components.LIGHT.get(entity);
+            light.getRayHandler().setCombinedMatrix(camera);
+            light.getRayHandler().updateAndRender();*/
+
             @NonNull val t = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
@@ -78,6 +83,7 @@ public class RenderingSystem extends IteratingSystem {
                     width, height,
                     t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * t.getRotation());
+            //batch.draw(tex.getRegion(), t.getPos().x, t.getPos().y, width, height);
         }
 
         batch.end();

@@ -25,6 +25,7 @@ public class GravitySystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         @NonNull val mov = Components.MOVEMENT.get(entity);
 
+        //Накладывает постоянное давление на объекты с MovementComponent
         mov.getVelocity().add(World.GRAVITY.x * deltaTime, World.GRAVITY.y * deltaTime);
     }
 }

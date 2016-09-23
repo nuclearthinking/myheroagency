@@ -3,8 +3,10 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.entity.components.CameraComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.components.MapComponent;
 import lombok.NonNull;
 import lombok.val;
 
@@ -12,10 +14,10 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class CameraSystem extends IteratingSystem{
+    private static final Family family = Family.all(CameraComponent.class).get();
 
     public CameraSystem() {
-        super(Family.all(CameraComponent.class).get());
-
+        super(family);
     }
 
     @Override
@@ -23,22 +25,11 @@ public class CameraSystem extends IteratingSystem{
         @NonNull val cam = Components.CAMERA.get(entity);
         @NonNull val target = Components.TRANSFORM.get(cam.getTarget());
 
-        //val maxCamX = Math.max(cam.getCamera().position.x, target.getPos().x);
-        //val maxCamY = Math.max(cam.getCamera().position.y, target.getPos().y);
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
 
-        //System.out.println("Player: " + target.getPos().x);
-        //System.out.println("Camera: " + cam.getCamera().position.x);
-        //System.out.println("Half: " + cam.getCamera().position.x / 2);
-
-        cam.getCamera().position.set(target.getPos().x, target.getPos().y, 0);
-
-        if(cam.getCamera().position.x < 200)
-            cam.getCamera().position.x = 200;
-        if(cam.getCamera().position.x > 735)
-            cam.getCamera().position.x = 735;
-
-        //cam.getCamera().position.x = maxCamX;
-        //cam.getCamera().position.y = maxCamY;
-
+        //Камера следует за игроком без каких либо условий
+        cam.getCamera().position.x = Math.min(Math.max(target.getPos().x, width / 2), MapComponent.getLevelPixelWidth() - (width / 2));
+        cam.getCamera().position.y = Math.min(Math.max(target.getPos().y, height / 2), MapComponent.getLevelPixelHeight() - (height / 2));
     }
 }

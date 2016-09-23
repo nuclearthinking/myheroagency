@@ -42,6 +42,7 @@ public class World {
         val animation = engine.createComponent(AnimationComponent.class);
         val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
+        val light = engine.createComponent(LightComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
@@ -50,11 +51,12 @@ public class World {
         position.getPos().set(15.0f, 3000.0f, 0.0f);
 
         state.set(AnimationState.IDLE.getValue());
+        light.setTarget(entity);
 
         entity.add(animation);
         entity.add(position);
         entity.add(state);
-        entity.add(new LightComponent());
+        entity.add(light);
         entity.add(new PlayerComponent());
         entity.add(new MovementComponent());
         entity.add(new GravityComponent());

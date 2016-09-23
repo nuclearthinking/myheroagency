@@ -12,6 +12,7 @@ import com.nuclearthinking.myheroagency.model.entity.components.MapComponent;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.val;
 
 
 /**
@@ -31,6 +32,14 @@ public class MapSystem extends IteratingSystem {
 
         tiledMap = Asset.getInstance().get(mapName,TiledMap.class);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        val properties = tiledMap.getProperties();
+        int levelWidth = properties.get("width", Integer.class);
+        int levelHeight = properties.get("height", Integer.class);
+        int tiledPixelWidth = properties.get("tilewidth", Integer.class);
+        int tiledPixelHeight = properties.get("tileheight", Integer.class);
+        MapComponent.setLevelPixelWidth(levelWidth*tiledPixelWidth);
+        MapComponent.setLevelPixelHeight(levelHeight*tiledPixelHeight);
+
         tiledMap.dispose();
     }
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.LightComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
 
@@ -26,15 +27,11 @@ public class LightSystem extends IteratingSystem{
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        val player = Components.TRANSFORM.get(entity);
-        val light = Components.LIGHT.get(entity);
+        @NonNull val light = Components.LIGHT.get(entity);
+        @NonNull val target = Components.TRANSFORM.get(light.getTarget());
 
         light.setAmbient(getLight());
-        light.lightOff();
-
-        light.getPlayerLight().setPosition(player.getPos().x, player.getPos().y);
-        light.getRayHandler().setCombinedMatrix(camera);
-        light.getRayHandler().updateAndRender();
+        light.getPlayerLight().setPosition(target.getPos().x, target.getPos().y);
     }
 
     private Color getLight(){

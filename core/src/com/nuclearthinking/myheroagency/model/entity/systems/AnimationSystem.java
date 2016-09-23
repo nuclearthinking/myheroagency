@@ -14,11 +14,12 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class AnimationSystem extends IteratingSystem {
+    private static final Family family = Family.all(TextureComponent.class,
+            AnimationComponent.class,
+            StateComponent.class).get();
 
     public AnimationSystem() {
-        super(Family.all(TextureComponent.class,
-                AnimationComponent.class,
-                StateComponent.class).get());
+        super(family);
     }
 
     @Override

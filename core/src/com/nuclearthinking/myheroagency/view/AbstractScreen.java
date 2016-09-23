@@ -49,7 +49,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        log.info("Resizing screen: {} to: y = {} x = {}", getName(), width, height);
+        log.info("Resizing screen: {} to: x = {} y = {}", getName(), width, height);
         stage.getViewport().update(width, height, true);
     }
 
