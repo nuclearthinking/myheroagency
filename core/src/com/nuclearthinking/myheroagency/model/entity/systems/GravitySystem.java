@@ -3,7 +3,6 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.nuclearthinking.myheroagency.model.entity.World;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.GravityComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.MovementComponent;
@@ -24,8 +23,9 @@ public class GravitySystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         @NonNull val mov = Components.MOVEMENT.get(entity);
+        @NonNull val gc = Components.GRAVITY.get(entity);
 
-        //Накладывает постоянное давление на объекты с MovementComponent
-        mov.getVelocity().add(World.GRAVITY.x * deltaTime, World.GRAVITY.y * deltaTime);
+        //Накладывает постоянное давление на объекты с GravityComponent
+        mov.getVelocity().add(gc.getGravity().x * deltaTime, gc.getGravity().y * deltaTime);
     }
 }

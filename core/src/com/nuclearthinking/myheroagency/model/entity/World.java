@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
@@ -17,7 +16,6 @@ import lombok.val;
 public class World {
     public static final int WORLD_BORDER_L = 5;
     public static final int WORLD_BORDER_R = 895;
-    public static final Vector2 GRAVITY = new Vector2(0, -12);
 
     private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
