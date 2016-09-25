@@ -20,9 +20,12 @@ public class LightSystem extends IteratingSystem{
             LightComponent.class).get();
 
     private @Setter OrthographicCamera camera;
+    private final Color color;
 
     public LightSystem(){
         super(family);
+
+        color = new Color();
     }
 
     @Override
@@ -35,8 +38,7 @@ public class LightSystem extends IteratingSystem{
     }
 
     private Color getLight(){
-        int hour = this.getHour();
-        val color = new Color();
+        int hour = getHour();
 
         if(hour > 8 && hour <= 9) {
             color.set(0.15f,0.15f,0.15f,1f);

@@ -28,7 +28,7 @@ public class CameraSystem extends IteratingSystem{
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
 
-        //Камера следует за игроком без каких либо условий
+        //Камера следует за игроком, границы камеры, равны границам карты
         cam.getCamera().position.x = Math.min(Math.max(target.getPos().x, width / 2), MapComponent.getLevelPixelWidth() - (width / 2));
         cam.getCamera().position.y = Math.min(Math.max(target.getPos().y, height / 2), MapComponent.getLevelPixelHeight() - (height / 2));
     }
