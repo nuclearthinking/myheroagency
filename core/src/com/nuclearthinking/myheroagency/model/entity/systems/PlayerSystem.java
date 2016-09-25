@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
-import com.nuclearthinking.myheroagency.model.entity.World;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import lombok.Setter;
 import lombok.val;
@@ -53,12 +52,29 @@ public class PlayerSystem extends IteratingSystem {
             state.set(AnimationState.LEFT.getValue());
         }
 
-        if (t.getPos().x <= World.WORLD_BORDER_L) {
-            t.getPos().x = World.WORLD_BORDER_L;
+        checkBorderWorld(t);
+    }
+
+    private void checkBorderWorld(final TransformComponent t){
+        final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
+        final int borderRight = MapComponent.getLevelPixelWidth();
+        final int borderUp = MapComponent.getLevelPixelHeight();
+        final int borderDown = MapComponent.getLevelPixelHeight() - MapComponent.getLevelPixelHeight();
+
+        if (t.getPos().x <= borderLeft) {
+            t.getPos().x = borderLeft;
         }
 
-        if (t.getPos().x > World.WORLD_BORDER_R) {
-            t.getPos().x = World.WORLD_BORDER_R;
+        if (t.getPos().x > borderRight) {
+            t.getPos().x = borderRight;
+        }
+
+        if(t.getPos().y > borderUp){
+            t.getPos().y = borderUp;
+        }
+
+        if(t.getPos().y <= borderDown){
+            t.getPos().y = borderDown;
         }
     }
 
