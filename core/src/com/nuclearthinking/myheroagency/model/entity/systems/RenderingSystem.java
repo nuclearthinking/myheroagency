@@ -65,11 +65,6 @@ public class RenderingSystem extends IteratingSystem {
             if (tex.getRegion() == null) {
                 continue;
             }
-
-            /*val light = Components.LIGHT.get(entity);
-            light.getRayHandler().setCombinedMatrix(camera);
-            light.getRayHandler().updateAndRender();*/
-
             @NonNull val t = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
@@ -83,7 +78,6 @@ public class RenderingSystem extends IteratingSystem {
                     width, height,
                     t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * t.getRotation());
-            //batch.draw(tex.getRegion(), t.getPos().x, t.getPos().y, width, height);
         }
 
         batch.end();

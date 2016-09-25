@@ -14,9 +14,6 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class World {
-    public static final int WORLD_BORDER_L = 5;
-    public static final int WORLD_BORDER_R = 895;
-
     private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
     private final Animation left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
@@ -32,6 +29,31 @@ public class World {
         val player = createPlayer();
         createCamera(player);
         createBackground();
+        createObject();//TODO: Удалить тестовый объект
+    }
+
+    //TODO: УДАЛИТЬ!
+    private void createObject(){
+        val entity = engine.createEntity();
+
+        val animation = engine.createComponent(AnimationComponent.class);
+        val pos = engine.createComponent(TransformComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val light = engine.createComponent(LightComponent.class);
+
+        animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
+
+        pos.getPos().set(300.0f, 2860.0f, 0.0f);
+        light.setTarget(entity);
+
+        entity.add(animation);
+        entity.add(pos);
+        entity.add(state);
+        entity.add(light);
+        entity.add(new PlayerComponent());
+        entity.add(new TextureComponent());
+
+        engine.addEntity(entity);
     }
 
     private Entity createPlayer(){

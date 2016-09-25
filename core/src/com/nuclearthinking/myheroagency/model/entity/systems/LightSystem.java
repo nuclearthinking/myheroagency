@@ -35,6 +35,9 @@ public class LightSystem extends IteratingSystem{
 
         light.setAmbient(getLight());
         light.getPlayerLight().setPosition(target.getPos().x, target.getPos().y);
+
+        light.getRayHandler().setCombinedMatrix(camera);
+        light.getRayHandler().updateAndRender();
     }
 
     private Color getLight(){
