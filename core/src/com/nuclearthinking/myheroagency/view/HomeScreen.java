@@ -32,6 +32,8 @@ public class HomeScreen extends AbstractScreen {
         engine.addSystem(new NpcSystem());
         engine.addSystem(new CameraSystem());
         engine.addSystem(new GravitySystem());
+        engine.addSystem(new BoundsSystem());
+        engine.addSystem(new CollisionSystem(world));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new StateSystem());
         engine.addSystem(new AnimationSystem());

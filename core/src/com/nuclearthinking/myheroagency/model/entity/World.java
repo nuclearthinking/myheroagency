@@ -40,10 +40,14 @@ public class World {
         val pos = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
+        val bounds = engine.createComponent(BoundComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
 
         pos.getPos().set(300.0f, 2860.0f, 0.0f);
+        bounds.getBounds().width = 30;
+        bounds.getBounds().height = 30;
+
         light.setTarget(entity);
 
         entity.add(animation);
@@ -51,6 +55,7 @@ public class World {
         entity.add(state);
         entity.add(light);
         entity.add(new NpcComponent());
+        entity.add(bounds);
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
@@ -63,12 +68,16 @@ public class World {
         val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
+        val bounds = engine.createComponent(BoundComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
         animation.getAnimations().put(AnimationState.LEFT.getValue(), left);
 
-        position.getPos().set(15.0f, 3000.0f, 0.0f);
+        position.getPos().set(15.0f, 2860.0f, 0.0f);
+
+        bounds.getBounds().width = 30;
+        bounds.getBounds().height = 30;
 
         state.set(AnimationState.IDLE.getValue());
         light.setTarget(entity);
@@ -80,7 +89,8 @@ public class World {
         entity.add(new PlayerComponent());
         entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
-        entity.add(new GravityComponent());
+        entity.add(bounds);
+        //entity.add(new GravityComponent());
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);

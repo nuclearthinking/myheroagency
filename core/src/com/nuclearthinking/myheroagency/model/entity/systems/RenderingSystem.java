@@ -58,6 +58,7 @@ public class RenderingSystem extends IteratingSystem {
         camera.update();
 
         batch.begin();
+        batch.setProjectionMatrix(camera.combined);
 
         for (val entity : renderQueue) {
             val tex = Components.TEXTURE.get(entity);

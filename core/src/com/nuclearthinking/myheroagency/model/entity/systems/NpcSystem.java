@@ -26,6 +26,10 @@ public class NpcSystem extends ObjectSystem {
         state.set(AnimationState.IDLE.getValue());
     }
 
+    public void dialog(){
+        System.out.println("F**k you");
+    }
+
     @Override
     public int getLevel(){
         return NpcComponent.getLevel();
