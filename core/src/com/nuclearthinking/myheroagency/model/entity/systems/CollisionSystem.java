@@ -39,22 +39,15 @@ public class CollisionSystem extends EntitySystem {
 
         for (int i = 0; i < players.size(); ++i) {
             val player = players.get(i);
-
             val playerBounds = Components.BOUND.get(player);
-            val playerPos = Components.TRANSFORM.get(player);
 
             for (int j = 0; j < npc.size(); ++j) {
                 val _npc = npc.get(j);
-                val npcPos = Components.TRANSFORM.get(_npc);
+                val npcBounds = Components.BOUND.get(_npc);
 
-                if (playerPos.getPos().x + 5 > npcPos.getPos().x) {
-                    val npcBounds = Components.BOUND.get(_npc);
-
-                    if (playerBounds.getBounds().overlaps(npcBounds.getBounds())) {
-                        npcSystem.dialog();
-                        playerSystem.setAccelX(0.0f);
-                        break;
-                    }
+                if (playerBounds.getBounds().overlaps(npcBounds.getBounds())) {
+                    npcSystem.dialog();
+                    break;
                 }
             }
         }

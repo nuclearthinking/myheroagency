@@ -45,8 +45,8 @@ public class World {
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
 
         pos.getPos().set(300.0f, 2860.0f, 0.0f);
-        bounds.getBounds().width = 30;
-        bounds.getBounds().height = 30;
+        bounds.getBounds().width = pos.getScale().x;
+        bounds.getBounds().height = pos.getScale().y;
 
         light.setTarget(entity);
 
@@ -76,8 +76,8 @@ public class World {
 
         position.getPos().set(15.0f, 2860.0f, 0.0f);
 
-        bounds.getBounds().width = 30;
-        bounds.getBounds().height = 30;
+        bounds.getBounds().width = position.getScale().x;
+        bounds.getBounds().height = position.getScale().y;
 
         state.set(AnimationState.IDLE.getValue());
         light.setTarget(entity);

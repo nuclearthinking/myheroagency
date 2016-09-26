@@ -4,13 +4,17 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -24,6 +28,16 @@ public class RenderingSystem extends IteratingSystem {
     static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
+
+    private Texture texture;
+
+    private void createTexture(int width, int height, Color color) {
+        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(color);
+        pixmap.fillRectangle(0, 0, width, height);
+        texture = new Texture(pixmap);
+        pixmap.dispose();
+    }
 
     private Batch batch;
     private Array<Entity> renderQueue;
@@ -47,6 +61,8 @@ public class RenderingSystem extends IteratingSystem {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+
+        if(Constants.DEBUG) createTexture(35, 35, Color.RED);
     }
 
     @Override
@@ -67,6 +83,11 @@ public class RenderingSystem extends IteratingSystem {
                 continue;
             }
             @NonNull val t = Components.TRANSFORM.get(entity);
+
+            if(Constants.DEBUG){
+                val rec = new Components().BOUND.get(entity);
+                batch.draw(texture, rec.getBounds().x, rec.getBounds().y, rec.getBounds().width, rec.getBounds().height);
+            }
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
