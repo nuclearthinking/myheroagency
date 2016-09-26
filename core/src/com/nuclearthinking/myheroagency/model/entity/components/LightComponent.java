@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
 
@@ -20,18 +21,19 @@ public class LightComponent implements Component {
     private @Getter @Setter Entity target;
 
     private final Color lightOff = new Color(1f,1f,1f,0f);
-    private final Color lightOn = new Color(1f,1f,1f,1f);
+    private final Color lightOn = new Color(1f,1f,1f,15f);
 
     public LightComponent() {
         val lightWorld = new World(new Vector2(), true);
 
+        RayHandler.setGammaCorrection(true);
         RayHandler.useDiffuseLight(true);
         this.rayHandler = new RayHandler(lightWorld);
 
-        playerLight = new PointLight(rayHandler, 128, new Color(lightOn), 200, 0, 0);
+        playerLight = new PointLight(rayHandler, 128, lightOn, 256, 0, 0);
     }
 
-    public void setAmbient(Color color) {
+    public void setAmbient(@NonNull final Color color) {
         this.rayHandler.setAmbientLight(color);
     }
 

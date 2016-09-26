@@ -50,6 +50,8 @@ public class World {
 
         light.setTarget(entity);
 
+        state.set(AnimationState.IDLE.getValue());
+
         entity.add(animation);
         entity.add(pos);
         entity.add(state);

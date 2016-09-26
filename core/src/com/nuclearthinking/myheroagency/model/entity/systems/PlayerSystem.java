@@ -36,7 +36,7 @@ public class PlayerSystem extends ObjectSystem {
         val state = Components.STATE.get(entity);
         val mov = Components.MOVEMENT.get(entity);
 
-        if(accelX == 0.0f){
+        if(accelX == 0.0f && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;
             state.set(AnimationState.IDLE.getValue());
         }
