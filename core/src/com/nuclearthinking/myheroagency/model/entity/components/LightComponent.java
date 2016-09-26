@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
 
@@ -16,37 +15,24 @@ import lombok.val;
  * Created by mkuksin on 02.09.2016.
  */
 public class LightComponent implements Component {
-    private @Getter RayHandler rayHandler;
-    private @Getter PointLight playerLight;
+    private @Getter static RayHandler rayHandler;
+    private @Getter static PointLight playerLight;
     private @Getter @Setter Entity target;
 
-    private final Color lightOff = new Color(1f,1f,1f,0f);
-    private final Color lightOn = new Color(1f,1f,1f,15f);
+    private @Getter final static Color lightOff = new Color(1f,1f,1f,0f);
+    private @Getter final static Color lightOn = new Color(1f, 1f, 1f, 1f);
 
-    public LightComponent() {
+    public LightComponent(){
         val lightWorld = new World(new Vector2(), true);
+
+        rayHandler = new RayHandler(lightWorld);
+        rayHandler.setCulling(true);
 
         RayHandler.setGammaCorrection(true);
         RayHandler.useDiffuseLight(true);
-        this.rayHandler = new RayHandler(lightWorld);
 
-        playerLight = new PointLight(rayHandler, 128, lightOn, 256, 0, 0);
-    }
-
-    public void setAmbient(@NonNull final Color color) {
-        this.rayHandler.setAmbientLight(color);
-    }
-
-    public void lightOff(){
-        if(checkOffLight()){
-            playerLight.setColor(lightOff);
-        }
-    }
-
-    public boolean checkOffLight(){
-        if(playerLight.getColor().equals(lightOff)){
-            return false;
-        }
-        return true;
+        playerLight = new PointLight(rayHandler, 50);
+        playerLight.setDistance(250);
+        playerLight.setColor(lightOn);
     }
 }

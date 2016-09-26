@@ -1,5 +1,7 @@
 package com.nuclearthinking.myheroagency.model.entity.systems;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -33,7 +35,7 @@ public class LightSystem extends IteratingSystem{
         @NonNull val light = Components.LIGHT.get(entity);
         @NonNull val target = Components.TRANSFORM.get(light.getTarget());
 
-        light.setAmbient(getLight());
+        setAmbient(light.getRayHandler(), getLight());
         light.getPlayerLight().setPosition(target.getPos().x, target.getPos().y);
 
         light.getRayHandler().setCombinedMatrix(camera);
@@ -58,6 +60,23 @@ public class LightSystem extends IteratingSystem{
 
     private int getHour(){
         return 9;
+    }
+
+    public void setAmbient(@NonNull final RayHandler rayHandler, @NonNull final Color color) {
+        rayHandler.setAmbientLight(color);
+    }
+
+    public void lightOff(@NonNull final PointLight pointLight){
+        if(checkOffLight(pointLight)){
+            pointLight.setColor(LightComponent.getLightOff());
+        }
+    }
+
+    public boolean checkOffLight(@NonNull final PointLight pointLight){
+        if(pointLight.getColor().equals(LightComponent.getLightOff())){
+            return false;
+        }
+        return true;
     }
 
 }
