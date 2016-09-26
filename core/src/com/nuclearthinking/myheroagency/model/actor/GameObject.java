@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.nuclearthinking.myheroagency.model.skills.Calculator;
-import com.nuclearthinking.myheroagency.model.skills.Env;
-import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import com.nuclearthinking.myheroagency.model.template.CharTemplate;
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
+import lombok.val;
 
 /**
  * Created by Izonami on 22.06.2016.

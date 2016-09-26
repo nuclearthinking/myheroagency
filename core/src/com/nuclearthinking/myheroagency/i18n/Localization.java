@@ -4,8 +4,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 import java.util.MissingResourceException;
 
