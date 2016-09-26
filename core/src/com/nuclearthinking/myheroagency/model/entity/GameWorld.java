@@ -4,16 +4,18 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class World {
+public class GameWorld {
     private final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     private final Animation idle = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
     private final Animation left = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
@@ -21,14 +23,17 @@ public class World {
 
     private PooledEngine engine;
 
-    public World (@NonNull final PooledEngine engine) {
+    private @Getter World world;
+
+    public GameWorld(@NonNull final PooledEngine engine) {
         this.engine = engine;
+        this.world = new World(GravityComponent.getGravity(), false);
     }
 
     public void create(){
+        createWorld();
         val player = createPlayer();
         createCamera(player);
-        createBackground();
         createObject();//TODO: Удалить тестовый объект
     }
 
@@ -113,7 +118,7 @@ public class World {
         engine.addEntity(entity);
     }
 
-    private void createBackground() {
+    private void createWorld() {
         val entity = engine.createEntity();
 
         entity.add(new MapComponent());

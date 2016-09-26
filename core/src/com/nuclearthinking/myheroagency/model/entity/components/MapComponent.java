@@ -10,4 +10,6 @@ import lombok.Setter;
 public class MapComponent implements Component {
     private @Getter @Setter static int levelPixelWidth;
     private @Getter @Setter static int levelPixelHeight;
+    // Пиксели на тайл. Если тайл 32х32, установить в значение 32f
+    private @Getter static final float ppt = 32f;
 }

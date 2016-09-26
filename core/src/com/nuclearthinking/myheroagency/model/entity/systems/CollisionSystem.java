@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.nuclearthinking.myheroagency.model.entity.World;
+import com.nuclearthinking.myheroagency.model.entity.GameWorld;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import lombok.NonNull;
 import lombok.val;
@@ -15,13 +15,13 @@ import lombok.val;
  */
 public class CollisionSystem extends EntitySystem {
     private Engine engine;
-    private World world;
+    private GameWorld gameWorld;
 
     private ImmutableArray<Entity> players;
     private ImmutableArray<Entity> npc;
 
-    public CollisionSystem(@NonNull final World world){
-        this.world = world;
+    public CollisionSystem(@NonNull final GameWorld gameWorld){
+        this.gameWorld = gameWorld;
     }
 
     @Override

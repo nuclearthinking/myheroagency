@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.nuclearthinking.myheroagency.model.entity.World;
+import com.nuclearthinking.myheroagency.model.entity.GameWorld;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
 import lombok.val;
 
@@ -16,24 +16,24 @@ import lombok.val;
  */
 public class HomeScreen extends AbstractScreen {
 
-    private final World world;
+    private final GameWorld gameWorld;
     private final PooledEngine engine;
 
     public HomeScreen() {
         engine = new PooledEngine();
-        world = new World(engine);
+        gameWorld = new GameWorld(engine);
     }
 
     @Override
     public void buildStage() {
-        engine.addSystem(new MapSystem());
+        engine.addSystem(new MapSystem(gameWorld.getWorld()));
         engine.addSystem(new LightSystem());
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new NpcSystem());
         engine.addSystem(new CameraSystem());
         engine.addSystem(new GravitySystem());
         engine.addSystem(new BoundsSystem());
-        engine.addSystem(new CollisionSystem(world));
+        engine.addSystem(new CollisionSystem(gameWorld));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new StateSystem());
         engine.addSystem(new AnimationSystem());
@@ -42,7 +42,7 @@ public class HomeScreen extends AbstractScreen {
         engine.getSystem(MapSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         engine.getSystem(LightSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
-        world.create();
+        gameWorld.create();
     }
 
     public void update (float deltaTime) {
