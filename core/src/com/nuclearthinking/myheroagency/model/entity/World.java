@@ -50,7 +50,7 @@ public class World {
         entity.add(pos);
         entity.add(state);
         entity.add(light);
-        entity.add(new PlayerComponent());
+        entity.add(new NpcComponent());
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
@@ -78,6 +78,7 @@ public class World {
         entity.add(state);
         entity.add(light);
         entity.add(new PlayerComponent());
+        entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(new GravityComponent());
         entity.add(new TextureComponent());
