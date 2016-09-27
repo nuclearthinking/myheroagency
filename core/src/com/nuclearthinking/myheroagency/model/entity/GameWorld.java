@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.model.entity;
 
+import box2dLight.PointLight;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -53,6 +54,9 @@ public class GameWorld {
         bounds.getBounds().width = pos.getScale().x;
         bounds.getBounds().height = pos.getScale().y;
 
+        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.getPlayerLight().setDistance(250);
+        light.getPlayerLight().setColor(light.getLightOn());
         light.setTarget(entity);
 
         state.set(AnimationState.IDLE.getValue());
@@ -86,8 +90,12 @@ public class GameWorld {
         bounds.getBounds().width = position.getScale().x;
         bounds.getBounds().height = position.getScale().y;
 
-        state.set(AnimationState.IDLE.getValue());
+        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.getPlayerLight().setDistance(250);
+        light.getPlayerLight().setColor(light.getLightOn());
         light.setTarget(entity);
+
+        state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
         entity.add(position);

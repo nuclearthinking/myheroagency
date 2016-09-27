@@ -27,7 +27,7 @@ public class HomeScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         engine.addSystem(new MapSystem(gameWorld.getWorld()));
-        engine.addSystem(new LightSystem());
+        engine.addSystem(new LightSystem(gameWorld.getWorld()));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new NpcSystem());
         engine.addSystem(new CameraSystem());
@@ -49,6 +49,8 @@ public class HomeScreen extends AbstractScreen {
         if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         engine.update(deltaTime);
+
+        gameWorld.getWorld().step(Gdx.graphics.getDeltaTime(), 0, 0);
 
         updateRunning();
     }
