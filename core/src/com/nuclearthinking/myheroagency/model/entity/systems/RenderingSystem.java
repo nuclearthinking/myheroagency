@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
@@ -43,8 +45,10 @@ public class RenderingSystem extends IteratingSystem {
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
     private @Getter OrthographicCamera camera;
+    private World world;
+    private Box2DDebugRenderer renderer;
 
-    public RenderingSystem(Batch batch) {
+    public RenderingSystem(@NonNull final Batch batch, @NonNull World world) {
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
 
         renderQueue = new Array<Entity>();
@@ -58,9 +62,12 @@ public class RenderingSystem extends IteratingSystem {
         };
 
         this.batch = batch;
+        this.world = world;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+
+        renderer = new Box2DDebugRenderer();
 
         if(Constants.DEBUG) createTexture(35, 35, Color.RED);
     }
@@ -73,6 +80,8 @@ public class RenderingSystem extends IteratingSystem {
 
         camera.update();
 
+        world.step(Gdx.graphics.getDeltaTime(), 0, 0);
+
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
@@ -84,10 +93,10 @@ public class RenderingSystem extends IteratingSystem {
             }
             @NonNull val t = Components.TRANSFORM.get(entity);
 
-            if(Constants.DEBUG){
+            /*if(Constants.DEBUG){
                 val rec = new Components().BOUND.get(entity);
                 batch.draw(texture, rec.getBounds().x, rec.getBounds().y, rec.getBounds().width, rec.getBounds().height);
-            }
+            }*/
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
@@ -103,6 +112,8 @@ public class RenderingSystem extends IteratingSystem {
         }
 
         batch.end();
+
+        renderer.render(world, camera.combined);
 
         renderQueue.clear();
     }

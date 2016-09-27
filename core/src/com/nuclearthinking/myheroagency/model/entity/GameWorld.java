@@ -105,7 +105,8 @@ public class GameWorld {
         entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(bounds);
-        //entity.add(new GravityComponent());
+        entity.add(new BodyComponent());
+        entity.add(new GravityComponent());
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);

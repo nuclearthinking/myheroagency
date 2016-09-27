@@ -33,11 +33,12 @@ public class HomeScreen extends AbstractScreen {
         engine.addSystem(new CameraSystem());
         engine.addSystem(new GravitySystem());
         engine.addSystem(new BoundsSystem());
+        engine.addSystem(new BodySystem(gameWorld.getWorld()));
         engine.addSystem(new CollisionSystem(gameWorld));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new StateSystem());
         engine.addSystem(new AnimationSystem());
-        engine.addSystem(new RenderingSystem(engine.getSystem(MapSystem.class).getBatch()));
+        engine.addSystem(new RenderingSystem(engine.getSystem(MapSystem.class).getBatch(), gameWorld.getWorld()));
 
         engine.getSystem(MapSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         engine.getSystem(LightSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
@@ -49,9 +50,6 @@ public class HomeScreen extends AbstractScreen {
         if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         engine.update(deltaTime);
-
-        gameWorld.getWorld().step(Gdx.graphics.getDeltaTime(), 0, 0);
-
         updateRunning();
     }
 
