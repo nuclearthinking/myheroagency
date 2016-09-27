@@ -8,7 +8,7 @@ import lombok.Getter;
  * Created by mkuksin on 02.09.2016.
  */
 public class GravityComponent implements Component {
-    public @Getter static Vector2 gravity = new Vector2(0, -12);
+    private @Getter static final Vector2 gravity = new Vector2(0, -12);
 
     public void setGravity(int x, int y){
         gravity.set(x, y);

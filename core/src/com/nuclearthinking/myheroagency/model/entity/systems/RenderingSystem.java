@@ -25,14 +25,14 @@ import java.util.Comparator;
  * Created by mkuksin on 01.09.2016.
  */
 public class RenderingSystem extends IteratingSystem {
-    static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
-    static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
-    static final float PIXELS_TO_METRES = 1.0f / 32.0f;
+    private static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
+    private static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
+    private static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private Texture texture;
 
     private void createTexture(int width, int height, Color color) {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        @NonNull val pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);
         pixmap.fillRectangle(0, 0, width, height);
         texture = new Texture(pixmap);

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
+import lombok.NonNull;
 import lombok.val;
 
 /**
@@ -21,7 +22,7 @@ public class NpcSystem extends ObjectSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        val state = Components.STATE.get(entity);
+        @NonNull val state = Components.STATE.get(entity);
 
         state.set(AnimationState.IDLE.getValue());
     }

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
 
@@ -32,9 +33,9 @@ public class PlayerSystem extends ObjectSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        val t = Components.TRANSFORM.get(entity);
-        val state = Components.STATE.get(entity);
-        val mov = Components.MOVEMENT.get(entity);
+        @NonNull val t = Components.TRANSFORM.get(entity);
+        @NonNull val state = Components.STATE.get(entity);
+        @NonNull val mov = Components.MOVEMENT.get(entity);
 
         if(accelX == 0.0f && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;

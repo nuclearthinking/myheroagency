@@ -34,16 +34,15 @@ public class CollisionSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        val playerSystem = engine.getSystem(PlayerSystem.class);
-        val npcSystem = engine.getSystem(NpcSystem.class);
+        @NonNull val npcSystem = engine.getSystem(NpcSystem.class);
 
         for (int i = 0; i < players.size(); ++i) {
-            val player = players.get(i);
-            val playerBounds = Components.BOUND.get(player);
+            @NonNull val player = players.get(i);
+            @NonNull val playerBounds = Components.BOUND.get(player);
 
             for (int j = 0; j < npc.size(); ++j) {
-                val _npc = npc.get(j);
-                val npcBounds = Components.BOUND.get(_npc);
+                @NonNull val _npc = npc.get(j);
+                @NonNull val npcBounds = Components.BOUND.get(_npc);
 
                 if (playerBounds.getBounds().overlaps(npcBounds.getBounds())) {
                     npcSystem.dialog();

@@ -14,7 +14,7 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class MovementSystem extends IteratingSystem {
-    private Vector2 tmp = new Vector2();
+    private final Vector2 tmp = new Vector2();
 
     public MovementSystem() {
         super(Family.all(TransformComponent.class, MovementComponent.class).get());

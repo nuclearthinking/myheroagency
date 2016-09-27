@@ -27,8 +27,7 @@ public class AnimationSystem extends IteratingSystem {
         @NonNull val tex = Components.TEXTURE.get(entity);
         @NonNull val anim = Components.ANIMATION.get(entity);
         @NonNull val state = Components.STATE.get(entity);
-
-        val animation = anim.getAnimations().get(state.getState());
+        @NonNull val animation = anim.getAnimations().get(state.getState());
 
         if (animation != null) {
             tex.setRegion(animation.getKeyFrame(state.getTime()));

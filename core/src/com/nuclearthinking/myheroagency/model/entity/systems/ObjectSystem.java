@@ -29,8 +29,8 @@ public abstract class ObjectSystem extends IteratingSystem {
     }
 
     public final void addStatFunc(@NonNull final Func f) {
-        val stat = f.getStat().ordinal();
-        val calculators = FunctionComponent.getCalculators();
+        @NonNull val stat = f.getStat().ordinal();
+        @NonNull val calculators = FunctionComponent.getCalculators();
         synchronized (calculators) {
             if(calculators[stat] == null)
                 calculators[stat] = new Calculator(f.getStat(), this);
@@ -40,13 +40,13 @@ public abstract class ObjectSystem extends IteratingSystem {
     }
 
     public final double calcStat(@NonNull final Stats stat, final double init){
-        val id = stat.ordinal();
-        val calculator = FunctionComponent.getCalculators()[id];
+        @NonNull val id = stat.ordinal();
+        @NonNull val calculator = FunctionComponent.getCalculators()[id];
 
         if(calculator == null || calculator.size() == 0)
             return init;
 
-        val env = new Env(this);
+        @NonNull val env = new Env(this);
         env.setValue(init);
 
         calculator.calculate(env);

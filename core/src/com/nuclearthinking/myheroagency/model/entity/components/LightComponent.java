@@ -12,12 +12,12 @@ import lombok.Setter;
  * Created by mkuksin on 02.09.2016.
  */
 public class LightComponent implements Component {
-    private @Getter @Setter static RayHandler rayHandler = null;
-    private @Getter @Setter PointLight playerLight = null;
-    private @Getter @Setter Entity target = null;
+    private @Getter @Setter static RayHandler rayHandler;
+    private @Getter @Setter PointLight playerLight;
+    private @Getter @Setter Entity target;
 
-    private @Getter final static Color lightOff = new Color(1f,1f,1f,0f);
-    private @Getter final static Color lightOn = new Color(1f,1f,1f,1.f);
+    private @Getter static final Color lightOff = new Color(1f,1f,1f,0f);
+    private @Getter static final Color lightOn = new Color(1f,1f,1f,1.f);
 
     public LightComponent(){
         RayHandler.setGammaCorrection(true);     // enable or disable gamma correction
