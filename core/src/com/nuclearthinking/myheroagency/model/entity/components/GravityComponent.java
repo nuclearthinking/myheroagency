@@ -9,8 +9,4 @@ import lombok.Getter;
  */
 public class GravityComponent implements Component {
     private @Getter static final Vector2 gravity = new Vector2(0, -12);
-
-    public void setGravity(int x, int y){
-        gravity.set(x, y);
-    }
 }

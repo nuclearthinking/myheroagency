@@ -40,10 +40,10 @@ public class LightSystem extends IteratingSystem{
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         @NonNull val light = Components.LIGHT.get(entity);
-        @NonNull val target = Components.TRANSFORM.get(light.getTarget());
+        @NonNull val target = Components.BODY.get(light.getTarget());
 
         setAmbient(light.getRayHandler(), getLight());
-        light.getPlayerLight().setPosition(target.getPos().x, target.getPos().y);
+        light.getPlayerLight().setPosition(target.getBody().getPosition().x, target.getBody().getPosition().y);
 
         light.getRayHandler().setCombinedMatrix(camera);
         light.getRayHandler().updateAndRender();

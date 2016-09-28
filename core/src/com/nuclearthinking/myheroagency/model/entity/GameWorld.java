@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
@@ -46,13 +48,23 @@ public class GameWorld {
         val pos = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
-        val bounds = engine.createComponent(BoundComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
 
-        pos.getPos().set(300.0f, 2860.0f, 0.0f);
-        bounds.getBounds().width = pos.getScale().x;
-        bounds.getBounds().height = pos.getScale().y;
+        bodyCom.getBodyDef().type = BodyDef.BodyType.StaticBody;
+        bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
+        val bodyPolygon = new PolygonShape();
+        bodyPolygon.setAsBox(12,12);
+        bodyCom.getFixtureDef().shape = bodyPolygon;
+        bodyCom.getFixtureDef().friction = 0.3f;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyPolygon.dispose();
+
+        bodyCom.getBody().setFixedRotation(true);
+        bodyCom.getBody().setTransform(300.0f, 2860.0f, 0.0f);
+
+        //pos.getPos().set(300.0f, 2860.0f, 0.0f);
 
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
@@ -66,7 +78,7 @@ public class GameWorld {
         entity.add(state);
         entity.add(light);
         entity.add(new NpcComponent());
-        entity.add(bounds);
+        entity.add(bodyCom);
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
@@ -79,16 +91,25 @@ public class GameWorld {
         val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
-        val bounds = engine.createComponent(BoundComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
         animation.getAnimations().put(AnimationState.LEFT.getValue(), left);
 
-        position.getPos().set(15.0f, 2860.0f, 0.0f);
+        bodyCom.getBodyDef().type = BodyDef.BodyType.DynamicBody;
+        bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
+        val bodyPolygon = new PolygonShape();
+        bodyPolygon.setAsBox(12,12);
+        bodyCom.getFixtureDef().shape = bodyPolygon;
+        bodyCom.getFixtureDef().friction = 0.3f;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyPolygon.dispose();
 
-        bounds.getBounds().width = position.getScale().x;
-        bounds.getBounds().height = position.getScale().y;
+        bodyCom.getBody().setFixedRotation(true);
+        bodyCom.getBody().setTransform(15.0f, 2860.0f, 0.0f);
+
+        position.getPos().set(15.0f, 2860.0f, 0.0f);
 
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
@@ -104,9 +125,7 @@ public class GameWorld {
         entity.add(new PlayerComponent());
         entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
-        entity.add(bounds);
-        entity.add(new BodyComponent());
-        entity.add(new GravityComponent());
+        entity.add(bodyCom);
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);

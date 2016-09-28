@@ -33,9 +33,9 @@ public class PlayerSystem extends ObjectSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        @NonNull val t = Components.TRANSFORM.get(entity);
         @NonNull val state = Components.STATE.get(entity);
         @NonNull val mov = Components.MOVEMENT.get(entity);
+        @NonNull val body = Components.BODY.get(entity);
 
         if(accelX == 0.0f && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;
@@ -52,29 +52,29 @@ public class PlayerSystem extends ObjectSystem {
             state.set(AnimationState.LEFT.getValue());
         }
 
-        checkBorderWorld(t);
+        checkBorderWorld(body);
     }
 
-    private void checkBorderWorld(final TransformComponent t){
+    private void checkBorderWorld(final BodyComponent t){
         final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
         final int borderRight = MapComponent.getLevelPixelWidth();
         final int borderUp = MapComponent.getLevelPixelHeight();
         final int borderDown = MapComponent.getLevelPixelHeight() - MapComponent.getLevelPixelHeight();
 
-        if (t.getPos().x <= borderLeft) {
-            t.getPos().x = borderLeft;
+        if (t.getBody().getPosition().x <= borderLeft) {
+            t.getBody().setTransform(borderLeft, t.getBody().getPosition().y, 0.0f);
         }
 
-        if (t.getPos().x > borderRight) {
-            t.getPos().x = borderRight;
+        if (t.getBody().getPosition().x > borderRight) {
+            t.getBody().setTransform(borderRight, t.getBody().getPosition().y, 0.0f);
         }
 
-        if(t.getPos().y > borderUp){
-            t.getPos().y = borderUp;
+        if(t.getBody().getPosition().y > borderUp){
+            t.getBody().setTransform(t.getBody().getPosition().x, borderUp, 0.0f);
         }
 
-        if(t.getPos().y <= borderDown){
-            t.getPos().y = borderDown;
+        if(t.getBody().getPosition().y <= borderDown){
+            t.getBody().setTransform(t.getBody().getPosition().x, borderDown, 0.0f);
         }
     }
 

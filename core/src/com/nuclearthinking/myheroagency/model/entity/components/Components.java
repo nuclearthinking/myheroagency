@@ -13,6 +13,7 @@ public final class Components {
     public static final ComponentMapper<MapComponent> MAP = ComponentMapper.getFor(MapComponent.class);
     public static final ComponentMapper<MovementComponent> MOVEMENT = ComponentMapper.getFor(MovementComponent.class);
     public static final ComponentMapper<PlayerComponent> PLAYER = ComponentMapper.getFor(PlayerComponent.class);
+    public static final ComponentMapper<BodyComponent> BODY = ComponentMapper.getFor(BodyComponent.class);
     public static final ComponentMapper<StateComponent> STATE = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<TransformComponent> TRANSFORM = ComponentMapper.getFor(TransformComponent.class);

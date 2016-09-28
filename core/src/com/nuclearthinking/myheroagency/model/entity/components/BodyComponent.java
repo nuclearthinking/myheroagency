@@ -1,23 +1,17 @@
 package com.nuclearthinking.myheroagency.model.entity.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import lombok.val;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by mkuksin on 27.09.2016.
  */
 public class BodyComponent implements Component {
-    public static BodyDef getBodyDinamic(){
-        val body = new BodyDef();
-        body.type = BodyDef.BodyType.DynamicBody;
-
-        return body;
-    }
-
-    public static FixtureDef getFixture(){
-        val fix = new FixtureDef();
-        return fix;
-    }
+    private @Getter @Setter Body body = null;
+    private @Getter BodyDef bodyDef = new BodyDef();
+    private @Getter FixtureDef fixtureDef = new FixtureDef();
 }

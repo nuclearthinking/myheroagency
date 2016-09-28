@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -16,7 +13,6 @@ import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.components.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
-import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -30,16 +26,6 @@ public class RenderingSystem extends IteratingSystem {
     private static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     private static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
     private static final float PIXELS_TO_METRES = 1.0f / 32.0f;
-
-    private Texture texture;
-
-    private void createTexture(int width, int height, Color color) {
-        @NonNull val pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(color);
-        pixmap.fillRectangle(0, 0, width, height);
-        texture = new Texture(pixmap);
-        pixmap.dispose();
-    }
 
     private Batch batch;
     private Array<Entity> renderQueue;
@@ -68,8 +54,6 @@ public class RenderingSystem extends IteratingSystem {
         camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 
         renderer = new Box2DDebugRenderer();
-
-        if(Constants.DEBUG) createTexture(35, 35, Color.RED);
     }
 
     @Override
@@ -91,12 +75,8 @@ public class RenderingSystem extends IteratingSystem {
             if (tex.getRegion() == null) {
                 continue;
             }
-            @NonNull val t = Components.TRANSFORM.get(entity);
-
-            /*if(Constants.DEBUG){
-                val rec = new Components().BOUND.get(entity);
-                batch.draw(texture, rec.getBounds().x, rec.getBounds().y, rec.getBounds().width, rec.getBounds().height);
-            }*/
+            @NonNull val t = Components.BODY.get(entity);
+            @NonNull val t2 = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
@@ -104,11 +84,11 @@ public class RenderingSystem extends IteratingSystem {
             val originY = height * 0.5f;
 
             batch.draw(tex.getRegion(),
-                    t.getPos().x - originX, t.getPos().y - originY,
+                    t.getBody().getPosition().x - originX, t.getBody().getPosition().y - originY,
                     originX, originY,
                     width, height,
-                    t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
-                    MathUtils.radiansToDegrees * t.getRotation());
+                    t2.getScale().x * PIXELS_TO_METRES, t2.getScale().y * PIXELS_TO_METRES,
+                    MathUtils.radiansToDegrees * t2.getRotation());
         }
 
         batch.end();
