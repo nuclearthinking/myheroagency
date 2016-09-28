@@ -3,7 +3,6 @@ package com.nuclearthinking.myheroagency;
 import com.badlogic.gdx.Game;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.ScreenManager;
-import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -17,7 +16,6 @@ public final class Main extends Game {
     @Override
     public void create() {
         Thread.currentThread().setName("My Hero Agency");
-        //initLogging(Constants.DEBUG);
         ScreenManager.getInstance().initialize(this);
         ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
     }
