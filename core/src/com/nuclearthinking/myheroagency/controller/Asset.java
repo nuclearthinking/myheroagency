@@ -20,8 +20,6 @@ import com.nuclearthinking.myheroagency.model.Settings;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 import java.util.Locale;
 

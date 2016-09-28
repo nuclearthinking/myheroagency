@@ -5,8 +5,6 @@ import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 03.08.2016.

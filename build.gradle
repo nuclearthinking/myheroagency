@@ -80,7 +80,7 @@ project(":core") {
 
     dependencies {
         compile "com.esotericsoftware:kryo:3.0.3"
-        compile "org.slf4j:slf4j-simple:1.7.21"
+        compile "org.slf4j:slf4j-log4j12:1.7.21"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
@@ -91,6 +91,7 @@ project(":core") {
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.2"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "org.projectlombok:lombok:1.16.10"
+        compile "com.badlogicgames.ashley:ashley:1.7.0"
     }
 }
 

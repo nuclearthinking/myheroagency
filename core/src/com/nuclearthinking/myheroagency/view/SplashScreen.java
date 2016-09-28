@@ -7,11 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenController;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
-import com.nuclearthinking.myheroagency.controller.ScreenManager;
+import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
-import lombok.NonNull;
 import lombok.val;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;

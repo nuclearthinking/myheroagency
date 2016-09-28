@@ -1,9 +1,9 @@
-package com.nuclearthinking.myheroagency.model;
+package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.nuclearthinking.myheroagency.model.actor.Player;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -17,33 +17,33 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 
 @Slf4j(topic = "GameData")
-public class GameData implements Serializable {
+public class GameDataManager implements Serializable {
 
-    private @Getter @Setter Player player;
+    private @Getter @Setter PlayerSystem player;
 
-    public static void save(@NonNull final GameData gameData) {
+    public static void save(@NonNull final GameDataManager gameDataManager) {
         val kryo = new Kryo();
         try (val output = new Output(new FileOutputStream(Constants.SAVE_NAME))) {
-            kryo.writeObject(output, gameData);
+            kryo.writeObject(output, gameDataManager);
         } catch (FileNotFoundException ex) {
             log.debug("Can't save game to file {}", Constants.SAVE_NAME);
         }
     }
 
-    public static GameData load() {
+    public static GameDataManager load() {
         val kryo = new Kryo();
-        GameData gameData = null;
+        GameDataManager gameDataManager = null;
         try (val input = new Input(new FileInputStream(Constants.SAVE_NAME))) {
-            gameData = kryo.readObject(input, GameData.class);
+            gameDataManager = kryo.readObject(input, GameDataManager.class);
         } catch (FileNotFoundException ex) {
             log.debug("Can't load game from file {}", Constants.SAVE_NAME);
         }
-        if (gameData == null) {
+        if (gameDataManager == null) {
             log.debug("Loading game is failed, create new one");
-            return new GameData();
+            return new GameDataManager();
         } else {
             log.debug("Loading success");
-            return gameData;
+            return gameDataManager;
         }
     }
 

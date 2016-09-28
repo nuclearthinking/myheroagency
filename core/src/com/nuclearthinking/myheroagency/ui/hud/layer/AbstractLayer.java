@@ -6,8 +6,6 @@ import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 /**
  * Created by Izonami on 29.05.2016.

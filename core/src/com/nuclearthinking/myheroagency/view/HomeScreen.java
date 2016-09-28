@@ -1,17 +1,9 @@
 package com.nuclearthinking.myheroagency.view;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.nuclearthinking.myheroagency.controller.LayerController;
-import com.nuclearthinking.myheroagency.controller.ObjectManager;
+import com.badlogic.ashley.core.PooledEngine;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
-import com.nuclearthinking.myheroagency.controller.SpriteManager;
-import com.nuclearthinking.myheroagency.model.GameData;
-import com.nuclearthinking.myheroagency.model.actor.GameObject;
-import com.nuclearthinking.myheroagency.model.MapManager;
-import com.nuclearthinking.myheroagency.ui.hud.HudGame;
-import lombok.NonNull;
-import lombok.val;
-
+import com.nuclearthinking.myheroagency.model.entity.GameWorld;
+import com.nuclearthinking.myheroagency.model.entity.systems.*;
 
 /**
  * Date: 05.05.2016
@@ -21,63 +13,54 @@ import lombok.val;
  */
 public class HomeScreen extends AbstractScreen {
 
-    private HudGame hudGame;
-    private MapManager manager;
-    private LayerController layerController;
-    private PlayerController playerController;
-    private ObjectManager object;
+    private final GameWorld gameWorld;
+    private final PlayerController pc;
+    private final PooledEngine engine;
 
     public HomeScreen() {
-        this(new GameData());
-    }
-
-    public HomeScreen(@NonNull final GameData gameData) {
-        this.gameData = gameData;
-
-        object = new ObjectManager();
-        hudGame = new HudGame(stage.getBatch()); //Инициализируем худ
-        manager = new MapManager(); // Создаем карту
-        layerController = new LayerController(hudGame); // Добоавляем слои
-        playerController = new PlayerController(object.getPlayer()); // Создаем контроллер для игрока
+        engine = new PooledEngine();
+        gameWorld = new GameWorld(engine);
+        pc = new PlayerController(engine);
     }
 
     @Override
     public void buildStage() {
-        object.getPlayer().setPosition(1000,3000); // Устанавливаем начальную позицию для игрока
-        SpriteManager.addGameObject(object.getPlayer()); // Добавляем игрока в менеджер спрайтов
+        engine.addSystem(new MapSystem(gameWorld.getWorld()));
+        engine.addSystem(new LightSystem(gameWorld.getWorld()));
+        engine.addSystem(new PlayerSystem());
+        engine.addSystem(new NpcSystem());
+        engine.addSystem(new CameraSystem());
+        engine.addSystem(new MovementSystem());
+        engine.addSystem(new StateSystem());
+        engine.addSystem(new AnimationSystem());
+        engine.addSystem(new RenderingSystem(engine.getSystem(MapSystem.class).getBatch(), gameWorld.getWorld()));
 
-        // Мультиконтроллер. Все новые контроллеры добавлять чере addProcessor
-        multi.addProcessor(hudGame.getStage());
-        multi.addProcessor(playerController);
+        engine.getSystem(MapSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
+        engine.getSystem(LightSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
+
+        gameWorld.create();
+
+        multi.addProcessor(pc);
     }
+
+    public void update (float deltaTime) {
+        if (deltaTime > 0.1f) deltaTime = 0.1f;
+
+        engine.update(deltaTime);
+        pc.update();
+    }
+
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        manager.getRenderer().setView((OrthographicCamera) stage.getCamera()); // Рендерим карту
-        stage.getCamera().position.set(object.getPlayer().getX(), object.getPlayer().getY(), 0); // Привязываем позицию камеры к персонажу
-        stage.getBatch().setProjectionMatrix(hudGame.getHudCamera().combined); // Накладываем худ
-
-        // Обновляем контроллеры
-        layerController.update();
-        playerController.update();
-
-        manager.getRenderer().render();
-        manager.getBatch().begin();
-        for(val object : SpriteManager.getSpriteObject()) {
-            object.draw(manager.getRenderer().getBatch());
-        }
-        manager.getBatch().end();
-
-        hudGame.renderHud(delta);
+        update(delta);
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-
-        hudGame.resizeHud(width, height);
     }
 
 }

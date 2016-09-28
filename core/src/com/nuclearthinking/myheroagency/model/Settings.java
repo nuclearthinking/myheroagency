@@ -1,14 +1,10 @@
 package com.nuclearthinking.myheroagency.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.nuclearthinking.myheroagency.utils.Constants;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.impl.SimpleLoggerFactory;
 
 import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
 

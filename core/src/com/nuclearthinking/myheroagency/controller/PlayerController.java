@@ -1,9 +1,11 @@
 package com.nuclearthinking.myheroagency.controller;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.actor.Player;
-import lombok.*;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PlayerController implements InputProcessor {
 
-    @NonNull private final Player player;
+    @NonNull private final Engine engine;
 
     enum Keys {
         LEFT,
@@ -70,29 +72,27 @@ public class PlayerController implements InputProcessor {
     }
 
     private void processInput() {
-        player.resetVelocity();
+        float accelX = 0.0f;
 
         if (keys.get(Keys.LEFT))
-            player.getVelocity().x =- player.getSpeed();
+            accelX = -5f;
 
         if (keys.get(Keys.RIGHT))
-            player.getVelocity().x = player.getSpeed();
+            accelX = 5f;
 
-        if (keys.get(Keys.UP)) {
-            player.getVelocity().y = player.getSpeed();
-        }
+        if (keys.get(Keys.UP))
+            System.out.println("Up");
 
-        if (keys.get(Keys.DOWN)) {
-            player.getVelocity().y =- player.getSpeed();
-        }
+        if (keys.get(Keys.DOWN))
+            System.out.println("Down");
 
-        if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)) ||
-                (!keys.get(Keys.UP) && (!keys.get(Keys.DOWN))))
-            player.getVelocity().y = 0;
+        if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
+            System.out.println("1");
 
-        if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)) ||
-                (!keys.get(Keys.LEFT) && (!keys.get(Keys.RIGHT))))
-            player.getVelocity().x = 0;
+        if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
+            System.out.println("2");
+
+        engine.getSystem(PlayerSystem.class).setAccelX(accelX);
     }
 
     @Override
