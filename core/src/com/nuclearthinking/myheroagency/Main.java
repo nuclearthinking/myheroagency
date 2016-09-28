@@ -10,7 +10,6 @@ import org.apache.log4j.PropertyConfigurator;
 public final class Main extends Game {
     @Override
     public void create() {
-        Thread.currentThread().setName("My Hero Agency");
         PropertyConfigurator.configure("log4j.properties");
         ScreenManager.getInstance().initialize(this);
         ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
