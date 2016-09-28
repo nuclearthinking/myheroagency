@@ -98,6 +98,10 @@ public class PlayerSystem extends ObjectSystem {
         return PlayerComponent.getBaseCON();
     }
 
+    public void setCon(final int con){
+        PlayerComponent.setBaseCON(con);
+    }
+
     @Override
     public int getBaseMEN(){
         return PlayerComponent.getBaseMEN();

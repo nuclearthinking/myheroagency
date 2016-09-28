@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.controller.manager;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.nuclearthinking.myheroagency.model.actor.Player;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Slf4j(topic = "GameData")
 public class GameDataManager implements Serializable {
 
-    private @Getter @Setter Player player;
+    private @Getter @Setter PlayerSystem player;
 
     public static void save(@NonNull final GameDataManager gameDataManager) {
         val kryo = new Kryo();

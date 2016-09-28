@@ -1,14 +1,16 @@
 package com.nuclearthinking.myheroagency.ui.hud.layer;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
 import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
-import com.nuclearthinking.myheroagency.controller.manager.ObjectManager;
 import com.nuclearthinking.myheroagency.controller.observer.Observer;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
+import lombok.NonNull;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -22,18 +24,18 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
     private TextButton plus;
     private TextButton minus;
     private Label con;
-    private final ObjectManager objectManager;
+    private final PlayerSystem player;
     private final AbstractButtonListener listenerPlus, listenerMinus;
 
-    public PlayerStatLayer(final UiFactory factory) {
+    public PlayerStatLayer(final UiFactory factory, @NonNull final Engine engine) {
         super(factory);
 
+        player = engine.getSystem(PlayerSystem.class);
         this.con = factory.getLabel("con");
         this.plus = factory.getTextButton("+");
         this.minus = factory.getTextButton("-");
-        this.objectManager = new ObjectManager();
-        this.listenerPlus = new AddStatsListener(plus, objectManager);
-        this.listenerMinus = new RemoveStatsListener(minus, objectManager);
+        this.listenerPlus = new AddStatsListener(plus, player);
+        this.listenerMinus = new RemoveStatsListener(minus, player);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
         table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         table.setPosition(60, Gdx.graphics.getHeight()-60);
 
-        con.setText(Integer.toString(objectManager.getPlayer().getCON()));
+        con.setText(Integer.toString(player.getBaseCON()));
         plus.addListener(listenerPlus);
         minus.addListener(listenerMinus);
 
@@ -83,7 +85,7 @@ public class PlayerStatLayer extends AbstractLayer implements ILayer, Observer {
 
     @Override
     public void update() {
-        con.setText(Integer.toString(objectManager.getPlayer().getCON()));
+        con.setText(Integer.toString(player.getBaseCON()));
     }
 
 }

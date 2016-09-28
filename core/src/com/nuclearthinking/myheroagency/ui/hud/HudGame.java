@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.ui.hud;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -30,12 +31,12 @@ public final class HudGame{
 
     private UtilsLayer utilsLayer;
 
-    public HudGame(@NonNull final Batch batch){
+    public HudGame(@NonNull final Batch batch, @NonNull final Engine engine){
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
 
         //Инициализация слоёв
-        playerLayer = new PlayerLayer(uiFactory);
-        playerStatLayer = new PlayerStatLayer(uiFactory);
+        playerLayer = new PlayerLayer(uiFactory, engine);
+        playerStatLayer = new PlayerStatLayer(uiFactory, engine);
         questLayer = new QuestLayer(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
         settings = new SettingsLayer(uiFactory);
 
