@@ -1,9 +1,11 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.model.entity.GameWorld;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
+import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
 /**
  * Date: 05.05.2016
@@ -16,6 +18,8 @@ public class HomeScreen extends AbstractScreen {
     private final GameWorld gameWorld;
     private final PlayerController pc;
     private final PooledEngine engine;
+    private HudGame hudGame;
+    private LayerController lc;
 
     public HomeScreen() {
         engine = new PooledEngine();
@@ -40,6 +44,9 @@ public class HomeScreen extends AbstractScreen {
 
         gameWorld.create();
 
+        hudGame = new HudGame(stage.getBatch(), engine);
+        lc = new LayerController(hudGame);
+
         multi.addProcessor(pc);
     }
 
@@ -48,6 +55,8 @@ public class HomeScreen extends AbstractScreen {
 
         engine.update(deltaTime);
         pc.update();
+        lc.update();
+        hudGame.renderHud(deltaTime);
     }
 
 
