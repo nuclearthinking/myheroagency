@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.Getter;

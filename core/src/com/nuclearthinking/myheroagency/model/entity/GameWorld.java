@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
+import com.nuclearthinking.myheroagency.model.entity.systems.NpcSystem;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
 import lombok.Getter;
 import lombok.NonNull;
@@ -49,6 +51,8 @@ public class GameWorld {
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
+        val npc = engine.createComponent(NpcComponent.class);
+        engine.getSystem(NpcSystem.class).setActor(npc);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
 
@@ -77,7 +81,7 @@ public class GameWorld {
         entity.add(pos);
         entity.add(state);
         entity.add(light);
-        entity.add(new NpcComponent());
+        entity.add(npc);
         entity.add(bodyCom);
         entity.add(new TextureComponent());
 
@@ -92,6 +96,8 @@ public class GameWorld {
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
+        val player = engine.createComponent(PlayerComponent.class);
+        engine.getSystem(PlayerSystem.class).setActor(player);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
@@ -122,7 +128,7 @@ public class GameWorld {
         entity.add(position);
         entity.add(state);
         entity.add(light);
-        entity.add(new PlayerComponent());
+        entity.add(player);
         entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(bodyCom);
