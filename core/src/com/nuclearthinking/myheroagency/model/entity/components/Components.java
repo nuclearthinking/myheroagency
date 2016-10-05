@@ -1,6 +1,9 @@
 package com.nuclearthinking.myheroagency.model.entity.components;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
 
 /**
  * Created by mkuksin on 02.09.2016.
@@ -18,4 +21,7 @@ public final class Components {
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<TransformComponent> TRANSFORM = ComponentMapper.getFor(TransformComponent.class);
     public static final ComponentMapper<LightComponent> LIGHT = ComponentMapper.getFor(LightComponent.class);
+    public static final ComponentMapper<HudComponent> HUD = ComponentMapper.getFor(HudComponent.class);
+    public static final ComponentMapper<UtilsHudComponent> UHC = ComponentMapper.getFor(UtilsHudComponent.class);
+    public static final ComponentMapper<PlayerHudComponent> PHC = ComponentMapper.getFor(PlayerHudComponent.class);
 }

@@ -1,11 +1,9 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.ashley.core.PooledEngine;
-import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.model.entity.GameWorld;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
-import com.nuclearthinking.myheroagency.ui.hud.HudGame;
 
 /**
  * Date: 05.05.2016
@@ -18,12 +16,10 @@ public class HomeScreen extends AbstractScreen {
     private final GameWorld gameWorld;
     private final PlayerController pc;
     private final PooledEngine engine;
-    private HudGame hudGame;
-    private LayerController lc;
 
     public HomeScreen() {
         engine = new PooledEngine();
-        gameWorld = new GameWorld(engine);
+        gameWorld = new GameWorld(engine, stage.getBatch());
         pc = new PlayerController(engine);
     }
 
@@ -37,15 +33,13 @@ public class HomeScreen extends AbstractScreen {
         engine.addSystem(new MovementSystem());
         engine.addSystem(new StateSystem());
         engine.addSystem(new AnimationSystem());
+        engine.addSystem(new HudSystem());
         engine.addSystem(new RenderingSystem(engine.getSystem(MapSystem.class).getBatch(), gameWorld.getWorld()));
 
         engine.getSystem(MapSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         engine.getSystem(LightSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
         gameWorld.create();
-
-        hudGame = new HudGame(stage.getBatch(), engine);
-        lc = new LayerController(hudGame);
 
         multi.addProcessor(pc);
     }
@@ -55,8 +49,6 @@ public class HomeScreen extends AbstractScreen {
 
         engine.update(deltaTime);
         pc.update();
-        lc.update();
-        hudGame.renderHud(deltaTime);
     }
 
 
