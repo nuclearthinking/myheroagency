@@ -80,47 +80,8 @@ public class PlayerSystem extends ActorSystem {
         }
     }
 
-    @Override
-    public int getLevel(){
-        return actor.getLevel();
-    }
-
     public int getSpeed(){
         return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
-    }
-
-    @Override
-    public int getBaseSTR(){
-        return actor.getBaseSTR();
-    }
-
-    @Override
-    public int getBaseINT(){
-        return actor.getBaseINT();
-    }
-
-    @Override
-    public int getBaseCON(){
-        return actor.getBaseCON();
-    }
-
-    public void setCon(final int con){
-        actor.setBaseCON(con);
-    }
-
-    @Override
-    public int getBaseMEN(){
-        return actor.getBaseMEN();
-    }
-
-    @Override
-    public int getBaseWIT(){
-        return actor.getBaseWIT();
-    }
-
-    @Override
-    public int getBaseDEX(){
-        return actor.getBaseDEX();
     }
 
     @Override

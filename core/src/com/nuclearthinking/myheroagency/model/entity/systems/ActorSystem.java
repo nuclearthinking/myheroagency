@@ -61,31 +61,35 @@ public abstract class ActorSystem extends IteratingSystem {
     }
 
     public int getLevel(){
-        return 1;
+        return actor.getLevel();
     }
 
     public int getBaseSTR(){
-        return 1;
+        return actor.getBaseSTR();
     }
 
     public int getBaseINT(){
-        return 1;
+        return actor.getBaseINT();
     }
 
     public int getBaseCON(){
-        return 1;
+        return actor.getBaseCON();
+    }
+
+    public void setCon(final int con){
+        actor.setBaseCON(con);
     }
 
     public int getBaseMEN(){
-        return 1;
+        return actor.getBaseMEN();
     }
 
     public int getBaseWIT(){
-        return 1;
+        return actor.getBaseWIT();
     }
 
     public int getBaseDEX(){
-        return 1;
+        return actor.getBaseDEX();
     }
 
     public boolean isNpc(){

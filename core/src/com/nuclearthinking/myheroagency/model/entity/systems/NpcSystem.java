@@ -36,16 +36,6 @@ public class NpcSystem extends ActorSystem {
     }
 
     @Override
-    public int getLevel(){
-        return actor.getLevel();
-    }
-
-    @Override
-    public int getBaseCON(){
-        return actor.getBaseCON();
-    }
-
-    @Override
     public boolean isNpc(){
         return true;
     }
