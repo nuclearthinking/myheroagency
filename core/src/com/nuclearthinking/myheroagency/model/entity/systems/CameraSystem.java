@@ -23,13 +23,13 @@ public class CameraSystem extends IteratingSystem{
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         @NonNull val cam = Components.CAMERA.get(entity);
-        @NonNull val target = Components.TRANSFORM.get(cam.getTarget());
+        @NonNull val target = Components.BODY.get(cam.getTarget());
 
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
 
         //Камера следует за игроком, границы камеры, равны границам карты
-        cam.getCamera().position.x = Math.min(Math.max(target.getPos().x, width / 2), MapComponent.getLevelPixelWidth() - (width / 2));
-        cam.getCamera().position.y = Math.min(Math.max(target.getPos().y, height / 2), MapComponent.getLevelPixelHeight() - (height / 2));
+        cam.getCamera().position.x = Math.min(Math.max(target.getBody().getPosition().x, width / 2), MapComponent.getLevelPixelWidth() - (width / 2));
+        cam.getCamera().position.y = Math.min(Math.max(target.getBody().getPosition().y, height / 2), MapComponent.getLevelPixelHeight() - (height / 2));
     }
 }

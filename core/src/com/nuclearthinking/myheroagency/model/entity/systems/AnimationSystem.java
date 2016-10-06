@@ -15,8 +15,8 @@ import lombok.val;
  */
 public class AnimationSystem extends IteratingSystem {
     private static final Family family = Family.all(TextureComponent.class,
-            AnimationComponent.class,
-            StateComponent.class).get();
+                                                    AnimationComponent.class,
+                                                    StateComponent.class).get();
 
     public AnimationSystem() {
         super(family);

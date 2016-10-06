@@ -4,10 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
 import com.nuclearthinking.myheroagency.model.entity.Components;
+import com.nuclearthinking.myheroagency.model.entity.components.BodyComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.FunctionComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.NpcComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.StateComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.NonNull;
 import lombok.val;
 
@@ -17,7 +17,7 @@ import lombok.val;
 public class NpcSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     NpcComponent.class,
-                                                    TransformComponent.class,
+                                                    BodyComponent.class,
                                                     FunctionComponent.class).get();
 
     public NpcSystem() {

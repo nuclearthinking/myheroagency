@@ -59,7 +59,6 @@ public class GameWorld {
         val entity = engine.createEntity();
 
         val animation = engine.createComponent(AnimationComponent.class);
-        val pos = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
         val monster = engine.createComponent(MonsterComponent.class);
@@ -83,12 +82,9 @@ public class GameWorld {
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(600.0f, 2860.0f, 0.0f);
 
-        pos.getPos().set(600.0f, 2860.0f, 0.0f);
-
         state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
-        entity.add(pos);
         entity.add(state);
         entity.add(monster);
         entity.add(bodyCom);
@@ -105,7 +101,6 @@ public class GameWorld {
         val entity = engine.createEntity();
 
         val animation = engine.createComponent(AnimationComponent.class);
-        val pos = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
@@ -126,8 +121,6 @@ public class GameWorld {
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(300.0f, 2860.0f, 0.0f);
 
-        //pos.getPos().set(300.0f, 2860.0f, 0.0f);
-
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
         light.getPlayerLight().setColor(light.getLightOn());
@@ -136,7 +129,6 @@ public class GameWorld {
         state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
-        entity.add(pos);
         entity.add(state);
         entity.add(light);
         entity.add(npc);
@@ -150,7 +142,6 @@ public class GameWorld {
         val entity = engine.createEntity();
 
         val animation = engine.createComponent(AnimationComponent.class);
-        val position = engine.createComponent(TransformComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
@@ -173,8 +164,6 @@ public class GameWorld {
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(15.0f, 2860.0f, 0.0f);
 
-        position.getPos().set(15.0f, 2860.0f, 0.0f);
-
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
         light.getPlayerLight().setColor(light.getLightOn());
@@ -183,7 +172,6 @@ public class GameWorld {
         state.set(AnimationState.IDLE.getValue());
 
         entity.add(animation);
-        entity.add(position);
         entity.add(state);
         entity.add(light);
         entity.add(player);
@@ -214,7 +202,6 @@ public class GameWorld {
         val entity = engine.createEntity();
 
         entity.add(new MapComponent());
-        entity.add(new TransformComponent());
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
