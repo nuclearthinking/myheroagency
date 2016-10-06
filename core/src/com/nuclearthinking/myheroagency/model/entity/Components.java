@@ -11,7 +11,6 @@ import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComp
  */
 public final class Components {
     public static final ComponentMapper<AnimationComponent> ANIMATION = ComponentMapper.getFor(AnimationComponent.class);
-    public static final ComponentMapper<BoundComponent> BOUND = ComponentMapper.getFor(BoundComponent.class);
     public static final ComponentMapper<CameraComponent> CAMERA = ComponentMapper.getFor(CameraComponent.class);
     public static final ComponentMapper<GravityComponent> GRAVITY = ComponentMapper.getFor(GravityComponent.class);
     public static final ComponentMapper<MapComponent> MAP = ComponentMapper.getFor(MapComponent.class);
