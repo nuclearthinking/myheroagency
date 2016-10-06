@@ -1,10 +1,10 @@
-package com.nuclearthinking.myheroagency.model.entity.components;
+package com.nuclearthinking.myheroagency.model.entity;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.*;
 
 /**
  * Created by mkuksin on 02.09.2016.

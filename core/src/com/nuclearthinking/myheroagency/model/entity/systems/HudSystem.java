@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
