@@ -20,7 +20,7 @@ public class PlayerSystem extends ActorSystem {
                                                     MovementComponent.class,
                                                     FunctionComponent.class).get();
 
-    private @Setter float accelX = 0.0f;
+    private @Setter byte accelX = 0;
 
     public PlayerSystem() {
         super(family);
@@ -29,8 +29,6 @@ public class PlayerSystem extends ActorSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-
-        accelX = 0.0f;
     }
 
     @Override
@@ -39,17 +37,17 @@ public class PlayerSystem extends ActorSystem {
         @NonNull val mov = Components.MOVEMENT.get(entity);
         @NonNull val body = Components.BODY.get(entity);
 
-        if(accelX == 0.0f && state.getState() != AnimationState.IDLE.getValue()){
+        if(accelX == 0 && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;
             state.set(AnimationState.IDLE.getValue());
         }
 
-        if (accelX > 0.0f && state.getState() != AnimationState.RIGHT.getValue()) {
+        if (accelX > 0 && state.getState() != AnimationState.RIGHT.getValue()) {
             mov.getVelocity().x = getSpeed();
             state.set(AnimationState.RIGHT.getValue());
         }
 
-        if (accelX < 0.0f && state.getState() != AnimationState.LEFT.getValue()) {
+        if (accelX < 0 && state.getState() != AnimationState.LEFT.getValue()) {
             mov.getVelocity().x = -getSpeed();
             state.set(AnimationState.LEFT.getValue());
         }
