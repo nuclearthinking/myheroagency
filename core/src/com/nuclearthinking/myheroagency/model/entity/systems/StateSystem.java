@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.StateComponent;
 import lombok.NonNull;
 import lombok.val;

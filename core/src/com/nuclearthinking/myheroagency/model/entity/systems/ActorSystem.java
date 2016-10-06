@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.entity.components.FunctionComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.GameActor;
 import com.nuclearthinking.myheroagency.model.skills.Calculator;
 import com.nuclearthinking.myheroagency.model.skills.Env;
 import com.nuclearthinking.myheroagency.model.skills.Function;
@@ -16,9 +16,11 @@ import lombok.val;
 /**
  * Created by mkuksin on 26.09.2016.
  */
-public abstract class ObjectSystem extends IteratingSystem {
+public abstract class ActorSystem extends IteratingSystem {
 
-    public ObjectSystem(@NonNull final Family family){
+    protected GameActor actor;
+
+    public ActorSystem(@NonNull final Family family){
         super(family);
         Function.addFuncToChar(this);
     }
@@ -54,36 +56,40 @@ public abstract class ObjectSystem extends IteratingSystem {
         return env.getValue();
     }
 
+    public void setActor(@NonNull final GameActor actor){
+        this.actor = actor;
+    }
+
     public int getLevel(){
-        return 1;
+        return actor.getLevel();
     }
 
     public int getBaseSTR(){
-        return 1;
+        return actor.getBaseSTR();
     }
 
     public int getBaseINT(){
-        return 1;
+        return actor.getBaseINT();
     }
 
     public int getBaseCON(){
-        return 1;
+        return actor.getBaseCON();
+    }
+
+    public void setCon(final int con){
+        actor.setBaseCON(con);
     }
 
     public int getBaseMEN(){
-        return 1;
+        return actor.getBaseMEN();
     }
 
     public int getBaseWIT(){
-        return 1;
+        return actor.getBaseWIT();
     }
 
     public int getBaseDEX(){
-        return 1;
-    }
-
-    public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
+        return actor.getBaseDEX();
     }
 
     public boolean isNpc(){

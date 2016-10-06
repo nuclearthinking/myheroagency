@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.model.entity.systems.ObjectSystem;
+import com.nuclearthinking.myheroagency.model.entity.systems.ActorSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -148,7 +148,7 @@ public class Function {
         }
     }
 
-    public static void addFuncToChar(@NonNull final ObjectSystem character){
+    public static void addFuncToChar(@NonNull final ActorSystem character){
         if(character.isPlayer()){
             character.addStatFunc(FuncPAtkMod.func);
             character.addStatFunc(FuncMAtkMod.func);

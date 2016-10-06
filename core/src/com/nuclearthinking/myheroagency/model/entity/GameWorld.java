@@ -10,6 +10,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
+import com.nuclearthinking.myheroagency.model.entity.systems.MonsterSystem;
+import com.nuclearthinking.myheroagency.model.entity.systems.NpcSystem;
+import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
 import lombok.Getter;
 import lombok.NonNull;
@@ -38,6 +41,51 @@ public class GameWorld {
         val player = createPlayer();
         createCamera(player);
         createObject();//TODO: Удалить тестовый объект
+        createMonster(player);
+    }
+
+    private void createMonster(@NonNull final Entity target){
+        val entity = engine.createEntity();
+
+        val animation = engine.createComponent(AnimationComponent.class);
+        val pos = engine.createComponent(TransformComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
+        val monster = engine.createComponent(MonsterComponent.class);
+        engine.getSystem(MonsterSystem.class).setActor(monster);
+
+        monster.setTarget(target);
+
+        animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
+        animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
+        animation.getAnimations().put(AnimationState.LEFT.getValue(), left);
+
+        bodyCom.getBodyDef().type = BodyDef.BodyType.DynamicBody;
+        bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
+        val bodyPolygon = new PolygonShape();
+        bodyPolygon.setAsBox(12,12);
+        bodyCom.getFixtureDef().shape = bodyPolygon;
+        bodyCom.getFixtureDef().friction = 0.3f;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyPolygon.dispose();
+
+        bodyCom.getBody().setFixedRotation(true);
+        bodyCom.getBody().setTransform(600.0f, 2860.0f, 0.0f);
+
+        pos.getPos().set(600.0f, 2860.0f, 0.0f);
+
+        state.set(AnimationState.IDLE.getValue());
+
+        entity.add(animation);
+        entity.add(pos);
+        entity.add(state);
+        entity.add(monster);
+        entity.add(bodyCom);
+        entity.add(new FunctionComponent());
+        entity.add(new MovementComponent());
+        entity.add(new TextureComponent());
+
+        engine.addEntity(entity);
     }
 
     //TODO: УДАЛИТЬ!
@@ -49,6 +97,8 @@ public class GameWorld {
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
+        val npc = engine.createComponent(NpcComponent.class);
+        engine.getSystem(NpcSystem.class).setActor(npc);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
 
@@ -77,7 +127,7 @@ public class GameWorld {
         entity.add(pos);
         entity.add(state);
         entity.add(light);
-        entity.add(new NpcComponent());
+        entity.add(npc);
         entity.add(bodyCom);
         entity.add(new TextureComponent());
 
@@ -92,6 +142,8 @@ public class GameWorld {
         val state = engine.createComponent(StateComponent.class);
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
+        val player = engine.createComponent(PlayerComponent.class);
+        engine.getSystem(PlayerSystem.class).setActor(player);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), idle);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), right);
@@ -122,7 +174,7 @@ public class GameWorld {
         entity.add(position);
         entity.add(state);
         entity.add(light);
-        entity.add(new PlayerComponent());
+        entity.add(player);
         entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(bodyCom);
@@ -136,7 +188,7 @@ public class GameWorld {
     private void createCamera(@NonNull final Entity target) {
         val entity = engine.createEntity();
 
-        val camera = new CameraComponent();
+        val camera = engine.createComponent(CameraComponent.class);
 
         camera.setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         camera.setTarget(target);

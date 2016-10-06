@@ -1,6 +1,7 @@
-package com.nuclearthinking.myheroagency.model.entity.components;
+package com.nuclearthinking.myheroagency.model.entity;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.nuclearthinking.myheroagency.model.entity.components.*;
 
 /**
  * Created by mkuksin on 02.09.2016.
@@ -13,6 +14,8 @@ public final class Components {
     public static final ComponentMapper<MapComponent> MAP = ComponentMapper.getFor(MapComponent.class);
     public static final ComponentMapper<MovementComponent> MOVEMENT = ComponentMapper.getFor(MovementComponent.class);
     public static final ComponentMapper<PlayerComponent> PLAYER = ComponentMapper.getFor(PlayerComponent.class);
+    public static final ComponentMapper<NpcComponent> NPC = ComponentMapper.getFor(NpcComponent.class);
+    public static final ComponentMapper<MonsterComponent> MONSTER = ComponentMapper.getFor(MonsterComponent.class);
     public static final ComponentMapper<BodyComponent> BODY = ComponentMapper.getFor(BodyComponent.class);
     public static final ComponentMapper<StateComponent> STATE = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);

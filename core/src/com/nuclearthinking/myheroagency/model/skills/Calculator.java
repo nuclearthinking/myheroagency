@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.model.entity.systems.ObjectSystem;
+import com.nuclearthinking.myheroagency.model.entity.systems.ActorSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.Getter;
 import lombok.NonNull;
@@ -16,9 +16,9 @@ public final class Calculator {
     private ArrayList<Func> functions;
 
     private @Getter final Stats stat;
-    private @Getter final ObjectSystem character;
+    private @Getter final ActorSystem character;
 
-    public Calculator(@NonNull final Stats stat, @NonNull final ObjectSystem character) {
+    public Calculator(@NonNull final Stats stat, @NonNull final ActorSystem character) {
         this.stat = stat;
         this.character = character;
         this.functions = new ArrayList<Func>();

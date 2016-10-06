@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.Getter;
@@ -75,8 +75,9 @@ public class RenderingSystem extends IteratingSystem {
             if (tex.getRegion() == null) {
                 continue;
             }
-            @NonNull val t = Components.BODY.get(entity);
-            @NonNull val t2 = Components.TRANSFORM.get(entity);
+
+            @NonNull val b = Components.BODY.get(entity);
+            @NonNull val t = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
@@ -84,11 +85,11 @@ public class RenderingSystem extends IteratingSystem {
             val originY = height * 0.5f;
 
             batch.draw(tex.getRegion(),
-                    t.getBody().getPosition().x - originX, t.getBody().getPosition().y - originY,
+                    b.getBody().getPosition().x - originX, b.getBody().getPosition().y - originY,
                     originX, originY,
                     width, height,
-                    t2.getScale().x * PIXELS_TO_METRES, t2.getScale().y * PIXELS_TO_METRES,
-                    MathUtils.radiansToDegrees * t2.getRotation());
+                    t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
+                    MathUtils.radiansToDegrees * t.getRotation());
         }
 
         batch.end();

@@ -3,7 +3,9 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
+import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
@@ -11,7 +13,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class PlayerSystem extends ObjectSystem {
+public class PlayerSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     TransformComponent.class,
@@ -78,43 +80,8 @@ public class PlayerSystem extends ObjectSystem {
         }
     }
 
-    @Override
-    public int getLevel(){
-        return PlayerComponent.getLevel();
-    }
-
-    @Override
-    public int getBaseSTR(){
-        return PlayerComponent.getBaseSTR();
-    }
-
-    @Override
-    public int getBaseINT(){
-        return PlayerComponent.getBaseINT();
-    }
-
-    @Override
-    public int getBaseCON(){
-        return PlayerComponent.getBaseCON();
-    }
-
-    public void setCon(final int con){
-        PlayerComponent.setBaseCON(con);
-    }
-
-    @Override
-    public int getBaseMEN(){
-        return PlayerComponent.getBaseMEN();
-    }
-
-    @Override
-    public int getBaseWIT(){
-        return PlayerComponent.getBaseWIT();
-    }
-
-    @Override
-    public int getBaseDEX(){
-        return PlayerComponent.getBaseDEX();
+    public int getSpeed(){
+        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
     }
 
     @Override

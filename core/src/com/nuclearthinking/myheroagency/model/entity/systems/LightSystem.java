@@ -8,7 +8,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nuclearthinking.myheroagency.model.entity.components.Components;
+import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.LightComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.NonNull;
