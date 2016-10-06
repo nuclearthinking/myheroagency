@@ -93,4 +93,8 @@ public class RenderingSystem extends IteratingSystem {
         renderQueue.add(entity);
     }
 
+    public void resize(int w, int h){
+        camera.setToOrtho(false, w, h);
+    }
+
 }

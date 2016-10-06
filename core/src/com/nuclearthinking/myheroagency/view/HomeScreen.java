@@ -63,6 +63,9 @@ public class HomeScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+
+        engine.getSystem(RenderingSystem.class).resize(width, height);
+        engine.getSystem(HudSystem.class).resize(width,height);
     }
 
 }

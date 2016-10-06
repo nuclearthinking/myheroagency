@@ -217,11 +217,11 @@ public class GameWorld {
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
         utils.setFps(hud.getUiFactory().getLabel("fps"));
-        utils.getTable().setPosition(Gdx.graphics.getWidth() - 60, Gdx.graphics.getHeight() - 30);
+        utils.getTable().setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
         utils.getTable().add(utils.getFps());
 
         player.setPlayerLvl(hud.getUiFactory().getLabel("playerLvl"));
-        player.getTable().setPosition(40, Gdx.graphics.getHeight()-30);
+        player.getTable().setPosition(Gdx.graphics.getWidth()*.1f, Gdx.graphics.getHeight()*.95f);
         player.getTable().add(player.getPlayerLvl());
 
         hud.getStage().addActor(utils.getTable());
