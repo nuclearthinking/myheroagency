@@ -16,7 +16,7 @@ import lombok.val;
 public class PlayerSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
-                                                    TransformComponent.class,
+                                                    BodyComponent.class,
                                                     MovementComponent.class,
                                                     FunctionComponent.class).get();
 

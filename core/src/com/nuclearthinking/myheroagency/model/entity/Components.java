@@ -11,7 +11,6 @@ import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComp
  */
 public final class Components {
     public static final ComponentMapper<AnimationComponent> ANIMATION = ComponentMapper.getFor(AnimationComponent.class);
-    public static final ComponentMapper<BoundComponent> BOUND = ComponentMapper.getFor(BoundComponent.class);
     public static final ComponentMapper<CameraComponent> CAMERA = ComponentMapper.getFor(CameraComponent.class);
     public static final ComponentMapper<GravityComponent> GRAVITY = ComponentMapper.getFor(GravityComponent.class);
     public static final ComponentMapper<MapComponent> MAP = ComponentMapper.getFor(MapComponent.class);
@@ -22,7 +21,6 @@ public final class Components {
     public static final ComponentMapper<BodyComponent> BODY = ComponentMapper.getFor(BodyComponent.class);
     public static final ComponentMapper<StateComponent> STATE = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
-    public static final ComponentMapper<TransformComponent> TRANSFORM = ComponentMapper.getFor(TransformComponent.class);
     public static final ComponentMapper<LightComponent> LIGHT = ComponentMapper.getFor(LightComponent.class);
     public static final ComponentMapper<HudComponent> HUD = ComponentMapper.getFor(HudComponent.class);
     public static final ComponentMapper<UtilsHudComponent> UHC = ComponentMapper.getFor(UtilsHudComponent.class);

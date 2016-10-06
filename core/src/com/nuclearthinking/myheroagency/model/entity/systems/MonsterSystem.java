@@ -16,7 +16,7 @@ public class MonsterSystem extends ActorSystem {
 
     private static final Family family = Family.all(MonsterComponent.class,
                                                     StateComponent.class,
-                                                    TransformComponent.class,
+                                                    BodyComponent.class,
                                                     MovementComponent.class,
                                                     FunctionComponent.class).get();
 
@@ -29,12 +29,12 @@ public class MonsterSystem extends ActorSystem {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         @NonNull val monster = Components.MONSTER.get(entity);
-        @NonNull val pos = Components.TRANSFORM.get(entity);
-        @NonNull val target = Components.TRANSFORM.get(monster.getTarget());
+        @NonNull val pos = Components.BODY.get(entity);
+        @NonNull val target = Components.BODY.get(monster.getTarget());
         @NonNull val mov = Components.MOVEMENT.get(entity);
         @NonNull val state = Components.STATE.get(entity);
 
-        accelX = target.getPos().x - pos.getPos().x;
+        accelX = target.getBody().getPosition().x - pos.getBody().getPosition().x;
 
         if(accelX == 10.0f && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;

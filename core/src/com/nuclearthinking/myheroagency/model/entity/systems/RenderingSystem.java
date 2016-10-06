@@ -11,41 +11,33 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.entity.Components;
+import com.nuclearthinking.myheroagency.model.entity.components.BodyComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
-
-import java.util.Comparator;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
 public class RenderingSystem extends IteratingSystem {
+
+    private static final Family family = Family.all(TextureComponent.class,
+            BodyComponent.class).get();
     private static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     private static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
     private static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private Batch batch;
     private Array<Entity> renderQueue;
-    private Comparator<Entity> comparator;
     private @Getter OrthographicCamera camera;
     private World world;
     private Box2DDebugRenderer renderer;
 
     public RenderingSystem(@NonNull final Batch batch, @NonNull World world) {
-        super(Family.all(TransformComponent.class, TextureComponent.class).get());
+        super(family);
 
         renderQueue = new Array<Entity>();
-
-        comparator = new Comparator<Entity>() {
-            @Override
-            public int compare(Entity entityA, Entity entityB) {
-                return (int)Math.signum(Components.TRANSFORM.get(entityB).getPos().z -
-                        Components.TRANSFORM.get(entityA).getPos().z);
-            }
-        };
 
         this.batch = batch;
         this.world = world;
@@ -59,8 +51,6 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-
-        renderQueue.sort(comparator);
 
         camera.update();
 
@@ -77,7 +67,6 @@ public class RenderingSystem extends IteratingSystem {
             }
 
             @NonNull val b = Components.BODY.get(entity);
-            @NonNull val t = Components.TRANSFORM.get(entity);
 
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
@@ -88,8 +77,8 @@ public class RenderingSystem extends IteratingSystem {
                     b.getBody().getPosition().x - originX, b.getBody().getPosition().y - originY,
                     originX, originY,
                     width, height,
-                    t.getScale().x * PIXELS_TO_METRES, t.getScale().y * PIXELS_TO_METRES,
-                    MathUtils.radiansToDegrees * t.getRotation());
+                    b.getScale().x * PIXELS_TO_METRES, b.getScale().y * PIXELS_TO_METRES,
+                    MathUtils.radiansToDegrees * b.getRotation());
         }
 
         batch.end();

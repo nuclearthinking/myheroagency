@@ -24,6 +24,9 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class MapSystem extends IteratingSystem {
+
+    private static final Family family = Family.all(MapComponent.class).get();
+
     private OrthographicCamera camera;
     private @Getter @Setter TiledMap tiledMap = null;
     private @Getter @Setter OrthogonalTiledMapRenderer renderer = null;
@@ -33,7 +36,7 @@ public class MapSystem extends IteratingSystem {
     }
 
     public MapSystem(@NonNull String mapName, @NonNull World world){
-        super(Family.all(MapComponent.class).get());
+        super(family);
 
         tiledMap = Asset.getInstance().get(mapName,TiledMap.class);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);

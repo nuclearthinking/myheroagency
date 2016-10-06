@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.LightComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.TransformComponent;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
@@ -19,8 +18,7 @@ import lombok.val;
  * Created by mkuksin on 02.09.2016.
  */
 public class LightSystem extends IteratingSystem{
-    private static final Family family = Family.all(TransformComponent.class,
-            LightComponent.class).get();
+    private static final Family family = Family.all(LightComponent.class).get();
 
     private final Color color;
     private @Setter OrthographicCamera camera;
