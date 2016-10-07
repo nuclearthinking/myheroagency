@@ -160,5 +160,13 @@ public class Function {
         if(character.isNpc()){
             character.addStatFunc(FuncMaxHpMod.func);
         }
+        if(character.isMonster()){
+            character.addStatFunc(FuncPAtkMod.func);
+            character.addStatFunc(FuncMAtkMod.func);
+            character.addStatFunc(FuncMaxHpMod.func);
+            character.addStatFunc(FuncMaxMpMod.func);
+            character.addStatFunc(FuncCastSpeedMod.func);
+            character.addStatFunc(FuncRunSpeedMod.func);
+        }
     }
 }

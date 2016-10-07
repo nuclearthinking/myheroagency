@@ -3,7 +3,6 @@ package com.nuclearthinking.myheroagency.model.entity.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.nuclearthinking.myheroagency.model.entity.components.FunctionComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.GameActor;
 import com.nuclearthinking.myheroagency.model.skills.Calculator;
 import com.nuclearthinking.myheroagency.model.skills.Env;
@@ -18,10 +17,13 @@ import lombok.val;
  */
 public abstract class ActorSystem extends IteratingSystem {
 
+    private Calculator[] calc;
+
     protected GameActor actor;
 
     public ActorSystem(@NonNull final Family family){
         super(family);
+        calc = new Calculator[Stats.NUM_STATS];
         Function.addFuncToChar(this);
     }
 
@@ -32,18 +34,18 @@ public abstract class ActorSystem extends IteratingSystem {
 
     public final void addStatFunc(@NonNull final Func f) {
         @NonNull val stat = f.getStat().ordinal();
-        @NonNull val calculators = FunctionComponent.getCalculators();
-        synchronized (calculators) {
-            if(calculators[stat] == null)
-                calculators[stat] = new Calculator(f.getStat(), this);
+        @NonNull val calculator = calc;
+        synchronized (calculator) {
+            if(calculator[stat] == null)
+                calculator[stat] = new Calculator(f.getStat(), this);
 
-            calculators[stat].addFunc(f);
+            calculator[stat].addFunc(f);
         }
     }
 
     public final double calcStat(@NonNull final Stats stat, final double init){
         @NonNull val id = stat.ordinal();
-        @NonNull val calculator = FunctionComponent.getCalculators()[id];
+        @NonNull val calculator = calc[id];
 
         if(calculator == null || calculator.size() == 0)
             return init;

@@ -4,7 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.entity.AnimationState;
 import com.nuclearthinking.myheroagency.model.entity.Components;
-import com.nuclearthinking.myheroagency.model.entity.components.*;
+import com.nuclearthinking.myheroagency.model.entity.components.BodyComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.MonsterComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.MovementComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.StateComponent;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.NonNull;
 import lombok.val;
@@ -17,8 +20,7 @@ public class MonsterSystem extends ActorSystem {
     private static final Family family = Family.all(MonsterComponent.class,
                                                     StateComponent.class,
                                                     BodyComponent.class,
-                                                    MovementComponent.class,
-                                                    FunctionComponent.class).get();
+                                                    MovementComponent.class).get();
 
     private float accelX = 0.0f;
 

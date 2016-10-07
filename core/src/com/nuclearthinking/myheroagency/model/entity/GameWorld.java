@@ -95,7 +95,6 @@ public class GameWorld {
         entity.add(light);
         entity.add(monster);
         entity.add(bodyCom);
-        entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(new TextureComponent());
 
@@ -183,7 +182,6 @@ public class GameWorld {
         entity.add(state);
         entity.add(light);
         entity.add(player);
-        entity.add(new FunctionComponent());
         entity.add(new MovementComponent());
         entity.add(bodyCom);
         entity.add(new TextureComponent());
@@ -228,9 +226,13 @@ public class GameWorld {
         utils.getTable().setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
         utils.getTable().add(utils.getFps());
 
+        player.setPlayerHp(hud.getUiFactory().getLabel("playerHp"));
         player.setPlayerLvl(hud.getUiFactory().getLabel("playerLvl"));
-        player.getTable().setPosition(Gdx.graphics.getWidth()*.1f, Gdx.graphics.getHeight()*.95f);
-        player.getTable().add(player.getPlayerLvl());
+        player.getTable().setPosition(Gdx.graphics.getWidth()*.1f, Gdx.graphics.getHeight()*.90f);
+        player.getTable().setDebug(true);
+        player.getTable().add(player.getPlayerLvl()).left();
+        player.getTable().row();
+        player.getTable().add(player.getPlayerHp()).left();
 
         hud.getStage().addActor(utils.getTable());
         hud.getStage().addActor(player.getTable());

@@ -36,12 +36,13 @@ public class HudSystem extends IteratingSystem {
         hud.getStage().act(deltaTime);
 
         uhc.getFps().setText("FPS: " + Gdx.graphics.getFramesPerSecond());
-        phc.getPlayerLvl().setText("Lvl " + player.getLevel());
+        phc.getPlayerLvl().setText("Lvl: " + player.getLevel());
+        phc.getPlayerHp().setText("Hp: " + getEngine().getSystem(PlayerSystem.class).getMaxHp());
     }
 
     public void resize(int w, int h){
         HudComponent.getStage().getViewport().update(w, h, true);
         UtilsHudComponent.getTable().setPosition(w*0.85f, h*0.95f);
-        PlayerHudComponent.getTable().setPosition(w*.1f, h*0.95f);
+        PlayerHudComponent.getTable().setPosition(w*.1f, h*0.90f);
     }
 }

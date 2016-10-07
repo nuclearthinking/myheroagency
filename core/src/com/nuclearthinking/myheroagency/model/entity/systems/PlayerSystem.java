@@ -17,8 +17,7 @@ public class PlayerSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,
-                                                    MovementComponent.class,
-                                                    FunctionComponent.class).get();
+                                                    MovementComponent.class).get();
 
     private @Setter byte accelX = 0;
 
@@ -75,6 +74,10 @@ public class PlayerSystem extends ActorSystem {
 
     public int getSpeed(){
         return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
+    }
+
+    public int getMaxHp(){
+        return (int) calcStat(Stats.MAX_HP, PlayerComponent.BASE_HP_MAX);
     }
 
     @Override
