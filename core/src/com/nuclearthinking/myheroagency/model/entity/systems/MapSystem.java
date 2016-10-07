@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -54,6 +53,11 @@ public class MapSystem extends IteratingSystem {
         buildShapes(renderer.getMap(), "Collision", MapComponent.getPpt(), world);
     }
 
+    @Override
+    public void processEntity(Entity entity, float deltaTime) {
+        renderer.setView(camera);
+    }
+
     public static Array<Body> buildShapes(@NonNull final Map map, final String layer, float pixels, World world){
         @NonNull val objects = map.getLayers().get(layer).getObjects();
         @NonNull val bodies = new Array<Body>();
@@ -99,14 +103,8 @@ public class MapSystem extends IteratingSystem {
         this.camera = camera;
     }
 
-    @Override
-    public void processEntity(Entity entity, float deltaTime) {
-        renderer.setView(camera);
-        renderer.render();
-    }
-
-    public Batch getBatch(){
-        return renderer.getBatch();
+    public OrthogonalTiledMapRenderer getBatch(){
+        return renderer;
     }
 
     private static PolygonShape getRectangle(@NonNull final RectangleMapObject rectangleObject, final float ppt) {

@@ -29,8 +29,8 @@ public class LightSystem extends IteratingSystem{
         color = new Color();
         LightComponent.setRayHandler(new RayHandler(world));
 
-        LightComponent.getRayHandler().setBlur(true);           // enabled or disable blur
-        LightComponent.getRayHandler().setBlurNum(1);           // set number of gaussian blur passes
+        //LightComponent.getRayHandler().setBlur(true);           // enabled or disable blur
+        //LightComponent.getRayHandler().setBlurNum(1);           // set number of gaussian blur passes
         LightComponent.getRayHandler().setShadows(true);        // enable or disable shadow
         LightComponent.getRayHandler().setCulling(true);        // enable or disable culling
     }
@@ -42,6 +42,7 @@ public class LightSystem extends IteratingSystem{
 
         setAmbient(light.getRayHandler(), getLight());
         light.getPlayerLight().setPosition(target.getBody().getPosition().x, target.getBody().getPosition().y);
+        //light.getDirectionalLight().setPosition(target.getBody().getPosition().x, target.getBody().getPosition().y);
 
         light.getRayHandler().setCombinedMatrix(camera);
         light.getRayHandler().updateAndRender();

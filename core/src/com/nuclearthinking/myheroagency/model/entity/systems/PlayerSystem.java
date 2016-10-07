@@ -27,11 +27,6 @@ public class PlayerSystem extends ActorSystem {
     }
 
     @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-    }
-
-    @Override
     protected void processEntity(Entity entity, float deltaTime) {
         @NonNull val state = Components.STATE.get(entity);
         @NonNull val mov = Components.MOVEMENT.get(entity);

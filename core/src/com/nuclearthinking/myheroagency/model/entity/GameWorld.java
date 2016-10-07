@@ -61,6 +61,7 @@ public class GameWorld {
         val animation = engine.createComponent(AnimationComponent.class);
         val state = engine.createComponent(StateComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
+        val light = engine.createComponent(LightComponent.class);
         val monster = engine.createComponent(MonsterComponent.class);
         engine.getSystem(MonsterSystem.class).setActor(monster);
 
@@ -73,7 +74,7 @@ public class GameWorld {
         bodyCom.getBodyDef().type = BodyDef.BodyType.DynamicBody;
         bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
         val bodyPolygon = new PolygonShape();
-        bodyPolygon.setAsBox(12,12);
+        bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
         bodyCom.getFixtureDef().friction = 0.3f;
         bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
@@ -84,8 +85,14 @@ public class GameWorld {
 
         state.set(AnimationState.IDLE.getValue());
 
+        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.getPlayerLight().setDistance(50);
+        light.getPlayerLight().setColor(light.getLightOn());
+        light.setTarget(entity);
+
         entity.add(animation);
         entity.add(state);
+        entity.add(light);
         entity.add(monster);
         entity.add(bodyCom);
         entity.add(new FunctionComponent());
@@ -112,7 +119,7 @@ public class GameWorld {
         bodyCom.getBodyDef().type = BodyDef.BodyType.StaticBody;
         bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
         val bodyPolygon = new PolygonShape();
-        bodyPolygon.setAsBox(12,12);
+        bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
         bodyCom.getFixtureDef().friction = 0.3f;
         bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
@@ -122,7 +129,7 @@ public class GameWorld {
         bodyCom.getBody().setTransform(300.0f, 2860.0f, 0.0f);
 
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
-        light.getPlayerLight().setDistance(250);
+        light.getPlayerLight().setDistance(100);
         light.getPlayerLight().setColor(light.getLightOn());
         light.setTarget(entity);
 
@@ -155,7 +162,7 @@ public class GameWorld {
         bodyCom.getBodyDef().type = BodyDef.BodyType.DynamicBody;
         bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
         val bodyPolygon = new PolygonShape();
-        bodyPolygon.setAsBox(12,12);
+        bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
         bodyCom.getFixtureDef().friction = 0.3f;
         bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
@@ -163,6 +170,7 @@ public class GameWorld {
 
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(15.0f, 2860.0f, 0.0f);
+
 
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);

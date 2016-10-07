@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -31,15 +32,19 @@ public class RenderingSystem extends IteratingSystem {
     private Batch batch;
     private Array<Entity> renderQueue;
     private @Getter OrthographicCamera camera;
+    private OrthogonalTiledMapRenderer renderMap;
     private World world;
     private Box2DDebugRenderer renderer;
+    private int[] layer = {0};
+    private int[] layer1 = {1};
 
-    public RenderingSystem(@NonNull final Batch batch, @NonNull World world) {
+    public RenderingSystem(@NonNull final OrthogonalTiledMapRenderer renderMap, @NonNull World world) {
         super(family);
 
         renderQueue = new Array<Entity>();
 
-        this.batch = batch;
+        this.renderMap = renderMap;
+        this.batch = renderMap.getBatch();
         this.world = world;
 
         camera = new OrthographicCamera();
@@ -56,9 +61,10 @@ public class RenderingSystem extends IteratingSystem {
 
         world.step(Gdx.graphics.getDeltaTime(), 0, 0);
 
+        renderMap.render();
+
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-
         for (val entity : renderQueue) {
             val tex = Components.TEXTURE.get(entity);
 
@@ -67,7 +73,6 @@ public class RenderingSystem extends IteratingSystem {
             }
 
             @NonNull val b = Components.BODY.get(entity);
-
             val width = tex.getRegion().getRegionWidth();
             val height = tex.getRegion().getRegionHeight();
             val originX = width * 0.5f;
