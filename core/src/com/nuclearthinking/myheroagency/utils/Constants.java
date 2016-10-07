@@ -6,8 +6,9 @@ package com.nuclearthinking.myheroagency.utils;
 public final class Constants {
 
     public static final String GAME_TITLE = "My Hero Agency";
-    public static final int GAME_W = 800;
-    public static final int GAME_H = 600;
+    public static final int GAME_W = 480;
+    public static final int GAME_H = 320;
+    public static final float ASPECT_RATIO = GAME_W / GAME_H;
     public static final String ALL_CHARACTERS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
             + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

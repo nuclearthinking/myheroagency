@@ -20,7 +20,7 @@ public class Settings {
     private @Setter static int height;
     private @Setter static int width;
 
-    private static Settings defaultSettings() {
+    private Settings defaultSettings() {
         log.info("Loading default settings");
 
         val settings = new Settings();
@@ -39,7 +39,7 @@ public class Settings {
 
         if (preferences == null) {
             log.error("Can't load preferences {}", PREFERENCES_NAME);
-            return defaultSettings();
+            return settings.defaultSettings();
         }
         settings.setLanguage(preferences.getString(LANGUAGE_KEY, DEFAULT_LANGUAGE));
         settings.setHeight(preferences.getInteger(HEIGHT_KEY, Constants.GAME_H));

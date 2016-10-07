@@ -99,7 +99,6 @@ public class GameWorld {
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
-        createHud();
     }
 
     //TODO: УДАЛИТЬ!
@@ -170,7 +169,6 @@ public class GameWorld {
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(15.0f, 2860.0f, 0.0f);
 
-
         light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
         light.getPlayerLight().setColor(light.getLightOn());
@@ -224,11 +222,12 @@ public class GameWorld {
 
         utils.setFps(hud.getUiFactory().getLabel("fps"));
         utils.getTable().setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
+        utils.getTable().setDebug(true);
         utils.getTable().add(utils.getFps());
 
         player.setPlayerHp(hud.getUiFactory().getLabel("playerHp"));
         player.setPlayerLvl(hud.getUiFactory().getLabel("playerLvl"));
-        player.getTable().setPosition(Gdx.graphics.getWidth()*.1f, Gdx.graphics.getHeight()*.90f);
+        player.getTable().setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
         player.getTable().setDebug(true);
         player.getTable().add(player.getPlayerLvl()).left();
         player.getTable().row();

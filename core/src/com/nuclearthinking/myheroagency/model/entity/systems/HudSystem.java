@@ -43,6 +43,6 @@ public class HudSystem extends IteratingSystem {
     public void resize(int w, int h){
         HudComponent.getStage().getViewport().update(w, h, true);
         UtilsHudComponent.getTable().setPosition(w*0.85f, h*0.95f);
-        PlayerHudComponent.getTable().setPosition(w*.1f, h*0.90f);
+        PlayerHudComponent.getTable().setPosition(w*.10f, h*0.90f);
     }
 }

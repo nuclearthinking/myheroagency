@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.BodyComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.TextureComponent;
@@ -25,8 +26,7 @@ public class RenderingSystem extends IteratingSystem {
 
     private static final Family family = Family.all(TextureComponent.class,
             BodyComponent.class).get();
-    private static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
-    private static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
+
     private static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private Batch batch;
@@ -48,7 +48,7 @@ public class RenderingSystem extends IteratingSystem {
         this.world = world;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        camera.setToOrtho(false, Settings.getWidth(), Settings.getHeight());
 
         renderer = new Box2DDebugRenderer();
     }
