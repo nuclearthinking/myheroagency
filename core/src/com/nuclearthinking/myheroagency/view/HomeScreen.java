@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.model.entity.GameWorld;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
 
 /**
@@ -47,6 +48,7 @@ public class HomeScreen extends AbstractScreen {
 
         multi.addProcessor(pc);
         multi.addProcessor(lc);
+        multi.addProcessor(HudComponent.getStage());
     }
 
     public void update (float deltaTime) {

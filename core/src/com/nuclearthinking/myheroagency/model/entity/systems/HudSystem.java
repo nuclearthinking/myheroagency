@@ -22,7 +22,8 @@ public class HudSystem extends IteratingSystem {
                                                     PlayerHudComponent.class,
                                                     PlayerComponent.class,
                                                     SettingHudComponent.class,
-                                                    QuestHudComponent.class).get();
+                                                    QuestHudComponent.class,
+                                                    StatHudComponent.class).get();
 
     public HudSystem() {
         super(family);
@@ -34,12 +35,14 @@ public class HudSystem extends IteratingSystem {
         val uhc = Components.UHC.get(entity);
         val phc = Components.PHC.get(entity);
         val player = Components.PLAYER.get(entity);
+        val sthc = Components.SHC.get(entity);
 
         hud.getStage().draw();
         hud.getStage().act(deltaTime);
 
         uhc.getFps().setText("FPS: " + Gdx.graphics.getFramesPerSecond());
         phc.getPlayerLvl().setText("Lvl: " + player.getLevel());
+        sthc.getCon().setText(Integer.toString(player.getBaseCON()));
         phc.getPlayerHp().setText("Hp: " + getEngine().getSystem(PlayerSystem.class).getMaxHp());
     }
 
@@ -49,6 +52,7 @@ public class HudSystem extends IteratingSystem {
         PlayerHudComponent.table.setPosition(w*.10f, h*0.90f);
         SettingHudComponent.table.setSize(w, h);
         QuestHudComponent.table.setSize(w/2, h);
+        StatHudComponent.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
     }
 
     public void tableVisible(){
@@ -71,7 +75,17 @@ public class HudSystem extends IteratingSystem {
             QuestHudComponent.table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
             QuestHudComponent.isShowTable = true;
         }
+    }
 
+    public void statMenu(){
+        if (StatHudComponent.isShowTable){
+            StatHudComponent.table.addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            StatHudComponent.isShowTable = false;
+        }
+        else{
+            StatHudComponent.table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
+            StatHudComponent.isShowTable = true;
+        }
     }
 
 

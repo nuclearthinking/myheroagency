@@ -14,6 +14,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
+import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.MonsterSystem;
@@ -218,6 +220,7 @@ public class GameWorld {
         val player = engine.createComponent(PlayerHudComponent.class);
         val settings = engine.createComponent(SettingHudComponent.class);
         val quest = engine.createComponent(QuestHudComponent.class);
+        val stat = engine.createComponent(StatHudComponent.class);
 
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
@@ -233,6 +236,21 @@ public class GameWorld {
         player.table.add(player.getPlayerLvl()).left();
         player.table.row();
         player.table.add(player.getPlayerHp()).left();
+
+        stat.setCon(hud.uiFactory.getLabel("con"));
+        stat.setPlus(hud.uiFactory.getTextButton("+"));
+        stat.setMinus(hud.uiFactory.getTextButton("-"));
+        stat.setAddStatsListener(new AddStatsListener(stat.getPlus(), engine.getSystem(PlayerSystem.class)));
+        stat.setRemoveStatsListener(new RemoveStatsListener(stat.getMinus(), engine.getSystem(PlayerSystem.class)));
+        stat.getPlus().addListener(stat.getAddStatsListener());
+        stat.getMinus().addListener(stat.getRemoveStatsListener());
+        stat.table.setSkin(hud.uiFactory.getSkin());
+        stat.table.setBackground("default-window");
+        stat.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+        stat.table.setPosition(60, Gdx.graphics.getHeight()-60);
+        stat.table.add(stat.getCon()).center();
+        stat.table.add(stat.getPlus());
+        stat.table.add(stat.getMinus());
 
         quest.setFactory(hud.uiFactory);
         quest.addQuestToList(QuestManager.getQuestById(1).getName());
@@ -268,6 +286,7 @@ public class GameWorld {
         hud.getStage().addActor(player.table);
         hud.getStage().addActor(settings.table);
         hud.getStage().addActor(quest.table);
+        hud.getStage().addActor(stat.table);
 
         entity.add(hud);
         entity.add(utils);
@@ -275,6 +294,7 @@ public class GameWorld {
         entity.add(new PlayerComponent());
         entity.add(settings);
         entity.add(quest);
+        entity.add(stat);
 
         engine.addEntity(entity);
     }

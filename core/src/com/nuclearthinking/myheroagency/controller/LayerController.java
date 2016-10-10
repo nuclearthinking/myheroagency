@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.QuestHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.StatHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.systems.HudSystem;
 import lombok.NonNull;
 
@@ -37,12 +38,23 @@ public class LayerController implements InputProcessor {
         }
     }
 
+    private void statList(){
+        if(StatHudComponent.isShowTable && SettingHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).statMenu();
+        }
+        else if (!StatHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).statMenu();
+        }
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode){
             case Input.Keys.ESCAPE:settingsMenu();
                 break;
             case Input.Keys.J:questList();
+                break;
+            case Input.Keys.L:statList();
                 break;
         }
         return false;
