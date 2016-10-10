@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.QuestHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.systems.HudSystem;
 import lombok.NonNull;
@@ -27,10 +28,21 @@ public class LayerController implements InputProcessor {
         }
     }
 
+    private void questList(){
+        if(QuestHudComponent.isShowTable && SettingHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).questList();
+        }
+        else if (!QuestHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).questList();
+        }
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode){
             case Input.Keys.ESCAPE:settingsMenu();
+                break;
+            case Input.Keys.J:questList();
                 break;
         }
         return false;
@@ -70,22 +82,4 @@ public class LayerController implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
-
-    /*private void questLayer(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.J) && !layer.getQuestLayer().isShowTable()){
-            layer.getQuestLayer().setTableVisible(true);
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.J) && layer.getQuestLayer().isShowTable()){
-            layer.getQuestLayer().setTableVisible(false);
-        }
-    }
-
-    private void playerStatsLayer(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L) && !layer.getPlayerStatLayer().isShowTable()){
-            layer.getPlayerStatLayer().setTableVisible(true);
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.L) && layer.getPlayerStatLayer().isShowTable()){
-            layer.getPlayerStatLayer().setTableVisible(false);
-        }
-    }*/
 }

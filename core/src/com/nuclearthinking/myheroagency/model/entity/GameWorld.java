@@ -15,14 +15,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.*;
 import com.nuclearthinking.myheroagency.model.entity.systems.MonsterSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
+import com.nuclearthinking.myheroagency.model.quest.QuestManager;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -219,6 +217,7 @@ public class GameWorld {
         val utils = engine.createComponent(UtilsHudComponent.class);
         val player = engine.createComponent(PlayerHudComponent.class);
         val settings = engine.createComponent(SettingHudComponent.class);
+        val quest = engine.createComponent(QuestHudComponent.class);
 
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
@@ -234,6 +233,13 @@ public class GameWorld {
         player.table.add(player.getPlayerLvl()).left();
         player.table.row();
         player.table.add(player.getPlayerHp()).left();
+
+        quest.setFactory(hud.uiFactory);
+        quest.addQuestToList(QuestManager.getQuestById(1).getName());
+        quest.table.setSkin(hud.uiFactory.getSkin());
+        quest.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+        quest.table.setPosition(-Gdx.graphics.getWidth(), 0);
+        quest.table.setBackground("default-window");
 
         settings.setTitleLabel(hud.uiFactory.getLabel(settings.getLocale().get("mainTitle")));
         settings.setWidthLabel(hud.uiFactory.getLabel(settings.getLocale().get("widthLabel")));
@@ -261,12 +267,14 @@ public class GameWorld {
         hud.getStage().addActor(utils.table);
         hud.getStage().addActor(player.table);
         hud.getStage().addActor(settings.table);
+        hud.getStage().addActor(quest.table);
 
         entity.add(hud);
         entity.add(utils);
         entity.add(player);
         entity.add(new PlayerComponent());
         entity.add(settings);
+        entity.add(quest);
 
         engine.addEntity(entity);
     }

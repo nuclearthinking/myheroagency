@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.ui.UiFactory;
 import com.nuclearthinking.myheroagency.ui.hud.layer.AbstractLayer;
 import com.nuclearthinking.myheroagency.ui.hud.layer.PlayerStatLayer;
-import com.nuclearthinking.myheroagency.ui.hud.layer.QuestLayer;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -26,17 +25,14 @@ public final class HudGame{
 
     private @Getter final Stage stage;
     private @Getter final PlayerStatLayer playerStatLayer;
-    private @Getter final QuestLayer questLayer;
 
     public HudGame(@NonNull final Batch batch, @NonNull final Engine engine){
         stage = new Stage(new ScreenViewport(new OrthographicCamera()), batch);
 
         //Инициализация слоёв
         playerStatLayer = new PlayerStatLayer(uiFactory, engine);
-        questLayer = new QuestLayer(uiFactory); // Передаю uiFactory что бы не плодить лишние объекты
 
         buildHud(playerStatLayer);
-        buildHud(questLayer);
 
         registerObserver();
     }
@@ -65,7 +61,6 @@ public final class HudGame{
         stage.getViewport().update(width, height);
 
         playerStatLayer.resize(width,height);
-        questLayer.resize(width,height);
     }
 
     public Camera getHudCamera(){

@@ -6,10 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.entity.Components;
 import com.nuclearthinking.myheroagency.model.entity.components.PlayerComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.*;
 import lombok.val;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -24,7 +21,8 @@ public class HudSystem extends IteratingSystem {
                                                     UtilsHudComponent.class,
                                                     PlayerHudComponent.class,
                                                     PlayerComponent.class,
-                                                    SettingHudComponent.class).get();
+                                                    SettingHudComponent.class,
+                                                    QuestHudComponent.class).get();
 
     public HudSystem() {
         super(family);
@@ -50,6 +48,7 @@ public class HudSystem extends IteratingSystem {
         UtilsHudComponent.table.setPosition(w*0.85f, h*0.95f);
         PlayerHudComponent.table.setPosition(w*.10f, h*0.90f);
         SettingHudComponent.table.setSize(w, h);
+        QuestHudComponent.table.setSize(w/2, h);
     }
 
     public void tableVisible(){
@@ -61,6 +60,19 @@ public class HudSystem extends IteratingSystem {
             SettingHudComponent.table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
             SettingHudComponent.isShowTable = true;
         }
+    }
+
+    public void questList(){
+        if (QuestHudComponent.isShowTable){
+            QuestHudComponent.table.addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            QuestHudComponent.isShowTable = false;
+        }
+        else{
+            QuestHudComponent.table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
+            QuestHudComponent.isShowTable = true;
+        }
 
     }
+
+
 }
