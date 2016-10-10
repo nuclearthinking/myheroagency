@@ -46,6 +46,7 @@ public class HomeScreen extends AbstractScreen {
         gameWorld.create();
 
         multi.addProcessor(pc);
+        multi.addProcessor(lc);
     }
 
     public void update (float deltaTime) {
@@ -61,7 +62,6 @@ public class HomeScreen extends AbstractScreen {
         super.render(delta);
 
         update(delta);
-        lc.update();
     }
 
     @Override

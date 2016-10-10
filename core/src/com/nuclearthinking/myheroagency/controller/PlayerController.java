@@ -107,7 +107,7 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.DOWN:downPressed();
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -122,7 +122,7 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.DOWN:downReleased();
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override
