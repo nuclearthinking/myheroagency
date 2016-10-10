@@ -10,6 +10,6 @@ import lombok.Setter;
  * Created by mkuksin on 03.10.2016.
  */
 public class HudComponent implements Component {
-    private @Getter static final UiFactory uiFactory = new UiFactory();
+    public static final UiFactory uiFactory = new UiFactory();
     private @Getter @Setter static Stage stage;
 }

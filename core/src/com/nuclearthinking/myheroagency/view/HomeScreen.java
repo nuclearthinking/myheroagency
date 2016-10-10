@@ -1,6 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.model.entity.GameWorld;
 import com.nuclearthinking.myheroagency.model.entity.systems.*;
@@ -16,11 +17,13 @@ public class HomeScreen extends AbstractScreen {
     private final GameWorld gameWorld;
     private final PlayerController pc;
     private final PooledEngine engine;
+    private final LayerController lc;
 
     public HomeScreen() {
         engine = new PooledEngine();
         gameWorld = new GameWorld(engine, stage.getBatch());
         pc = new PlayerController(engine);
+        lc = new LayerController(engine);
     }
 
     @Override
@@ -58,6 +61,7 @@ public class HomeScreen extends AbstractScreen {
         super.render(delta);
 
         update(delta);
+        lc.update();
     }
 
     @Override

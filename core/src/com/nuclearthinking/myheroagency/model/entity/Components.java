@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
 
 /**
@@ -25,4 +26,5 @@ public final class Components {
     public static final ComponentMapper<HudComponent> HUD = ComponentMapper.getFor(HudComponent.class);
     public static final ComponentMapper<UtilsHudComponent> UHC = ComponentMapper.getFor(UtilsHudComponent.class);
     public static final ComponentMapper<PlayerHudComponent> PHC = ComponentMapper.getFor(PlayerHudComponent.class);
+    public static final ComponentMapper<SettingHudComponent> SHC = ComponentMapper.getFor(SettingHudComponent.class);
 }

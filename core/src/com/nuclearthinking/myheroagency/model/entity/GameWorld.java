@@ -17,6 +17,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.entity.components.*;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.HudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.PlayerHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.components.hud.UtilsHudComponent;
 import com.nuclearthinking.myheroagency.model.entity.systems.MonsterSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.NpcSystem;
@@ -217,29 +218,55 @@ public class GameWorld {
         val hud = engine.createComponent(HudComponent.class);
         val utils = engine.createComponent(UtilsHudComponent.class);
         val player = engine.createComponent(PlayerHudComponent.class);
+        val settings = engine.createComponent(SettingHudComponent.class);
 
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
-        utils.setFps(hud.getUiFactory().getLabel("fps"));
-        utils.getTable().setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
-        utils.getTable().setDebug(true);
-        utils.getTable().add(utils.getFps());
+        utils.setFps(hud.uiFactory.getLabel("fps"));
+        utils.table.setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
+        utils.table.setDebug(true);
+        utils.table.add(utils.getFps());
 
-        player.setPlayerHp(hud.getUiFactory().getLabel("playerHp"));
-        player.setPlayerLvl(hud.getUiFactory().getLabel("playerLvl"));
-        player.getTable().setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
-        player.getTable().setDebug(true);
-        player.getTable().add(player.getPlayerLvl()).left();
-        player.getTable().row();
-        player.getTable().add(player.getPlayerHp()).left();
+        player.setPlayerHp(hud.uiFactory.getLabel("playerHp"));
+        player.setPlayerLvl(hud.uiFactory.getLabel("playerLvl"));
+        player.table.setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
+        player.table.setDebug(true);
+        player.table.add(player.getPlayerLvl()).left();
+        player.table.row();
+        player.table.add(player.getPlayerHp()).left();
 
-        hud.getStage().addActor(utils.getTable());
-        hud.getStage().addActor(player.getTable());
+        settings.setTitleLabel(hud.uiFactory.getLabel(settings.getLocale().get("mainTitle")));
+        settings.setWidthLabel(hud.uiFactory.getLabel(settings.getLocale().get("widthLabel")));
+        settings.setHeightLabel(hud.uiFactory.getLabel(settings.getLocale().get("heightLabel")));
+        settings.setExit(hud.uiFactory.getTextButton(settings.getLocale().get("buttonExit")));
+        settings.setSave(hud.uiFactory.getTextButton(settings.getLocale().get("buttonSave")));
+        settings.setWidth(hud.uiFactory.getTextField("800"));
+        settings.setHeight(hud.uiFactory.getTextField("600"));
+        settings.table.setSkin(hud.uiFactory.getSkin());
+        settings.table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        settings.table.setPosition(-Gdx.graphics.getWidth(), 0);
+        settings.table.setBackground("default-window");
+
+        settings.table.add(settings.getTitleLabel()).spaceBottom(50).colspan(3).expandX().row();
+        settings.table.row();
+        settings.table.add(settings.getWidthLabel()).height(80).right();
+        settings.table.add(settings.getWidth()).top().center().left();
+        settings.table.add().row();
+        settings.table.add(settings.getHeightLabel()).height(80).right();
+        settings.table.add(settings.getHeight()).top().center().left();
+        settings.table.row();
+        settings.table.add(settings.getSave()).right().expandX().width(100).height(40);
+        settings.table.add(settings.getExit()).left().expandX().width(100).height(40);
+
+        hud.getStage().addActor(utils.table);
+        hud.getStage().addActor(player.table);
+        hud.getStage().addActor(settings.table);
 
         entity.add(hud);
         entity.add(utils);
         entity.add(player);
         entity.add(new PlayerComponent());
+        entity.add(settings);
 
         engine.addEntity(entity);
     }

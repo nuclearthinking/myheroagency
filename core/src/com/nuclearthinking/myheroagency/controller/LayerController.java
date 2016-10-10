@@ -1,8 +1,10 @@
 package com.nuclearthinking.myheroagency.controller;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.nuclearthinking.myheroagency.ui.hud.HudGame;
+import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
+import com.nuclearthinking.myheroagency.model.entity.systems.HudSystem;
 import lombok.NonNull;
 
 /**
@@ -10,28 +12,28 @@ import lombok.NonNull;
  */
 public class LayerController {
 
-    private final HudGame layer;
+    private final Engine layer;
 
-    public LayerController(@NonNull final HudGame layer){
+    public LayerController(@NonNull final Engine layer){
         this.layer = layer;
     }
 
     public void update(){
         settingsUpdate();
-        questLayer();
-        playerStatsLayer();
+        //questLayer();
+        //playerStatsLayer();
     }
 
     private void settingsUpdate(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && !layer.getSettings().isShowTable()){
-            layer.getSettings().setTableVisible(true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && SettingHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).tableVisible();
         }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && layer.getSettings().isShowTable()){
-            layer.getSettings().setTableVisible(false);
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && !SettingHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).tableVisible();
         }
     }
 
-    private void questLayer(){
+    /*private void questLayer(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.J) && !layer.getQuestLayer().isShowTable()){
             layer.getQuestLayer().setTableVisible(true);
         }
@@ -47,5 +49,5 @@ public class LayerController {
         else if (Gdx.input.isKeyJustPressed(Input.Keys.L) && layer.getPlayerStatLayer().isShowTable()){
             layer.getPlayerStatLayer().setTableVisible(false);
         }
-    }
+    }*/
 }
