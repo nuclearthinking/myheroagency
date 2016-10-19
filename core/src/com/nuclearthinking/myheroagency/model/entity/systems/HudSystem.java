@@ -42,7 +42,7 @@ public class HudSystem extends IteratingSystem {
 
         uhc.getFps().setText("FPS: " + Gdx.graphics.getFramesPerSecond());
         phc.getPlayerLvl().setText("Lvl: " + player.getLevel());
-        sthc.getCon().setText(Integer.toString(player.getBaseCON()));
+        sthc.getCon().setText(Integer.toString(getEngine().getSystem(PlayerSystem.class).getBaseCON()));
         phc.getPlayerHp().setText("Hp: " + getEngine().getSystem(PlayerSystem.class).getMaxHp());
     }
 
