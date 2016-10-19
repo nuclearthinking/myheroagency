@@ -292,7 +292,6 @@ public class GameWorld {
         entity.add(hud);
         entity.add(utils);
         entity.add(player);
-        entity.add(new PlayerComponent());
         entity.add(settings);
         entity.add(quest);
         entity.add(stat);
