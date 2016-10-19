@@ -23,6 +23,7 @@ import com.nuclearthinking.myheroagency.model.entity.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.entity.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.quest.QuestManager;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -226,13 +227,13 @@ public class GameWorld {
 
         utils.setFps(hud.uiFactory.getLabel("fps"));
         utils.table.setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
-        utils.table.setDebug(true);
+        utils.table.setDebug(Constants.DEBUG);
         utils.table.add(utils.getFps());
 
         player.setPlayerHp(hud.uiFactory.getLabel("playerHp"));
         player.setPlayerLvl(hud.uiFactory.getLabel("playerLvl"));
         player.table.setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
-        player.table.setDebug(true);
+        player.table.setDebug(Constants.DEBUG);
         player.table.add(player.getPlayerLvl()).left();
         player.table.row();
         player.table.add(player.getPlayerHp()).left();
