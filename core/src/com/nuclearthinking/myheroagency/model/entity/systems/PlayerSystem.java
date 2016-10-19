@@ -20,6 +20,7 @@ public class PlayerSystem extends ActorSystem {
                                                     MovementComponent.class).get();
 
     private @Setter byte accelX = 0;
+    private @Setter byte accelY = 0;
 
     public PlayerSystem() {
         super(family);
@@ -44,6 +45,13 @@ public class PlayerSystem extends ActorSystem {
         if (accelX < 0 && state.getState() != AnimationState.LEFT.getValue()) {
             mov.getVelocity().x = -getSpeed();
             state.set(AnimationState.LEFT.getValue());
+        }
+
+        //TODO: Включить когда появится гравитация
+        if (accelY > 0 && state.getState() != AnimationState.LEFT.getValue() ||
+                            state.getState() != AnimationState.RIGHT.getValue()){
+            //mov.setJump(true);
+            //state.set(AnimationState.IDLE.getValue());
         }
 
         checkBorderWorld(body);

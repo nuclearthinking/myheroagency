@@ -50,7 +50,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
             log.info("Assets loading done");
-            ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+            ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);
         }
 
     }

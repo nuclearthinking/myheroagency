@@ -73,6 +73,7 @@ public class PlayerController implements InputProcessor {
 
     private void processInput() {
         byte accelX = 0;
+        byte accelY = 0;
 
         if (keys.get(Keys.LEFT))
             accelX = -1;
@@ -81,7 +82,7 @@ public class PlayerController implements InputProcessor {
             accelX = 1;
 
         if (keys.get(Keys.UP))
-            System.out.println("Up");
+            accelY = 1;
 
         if (keys.get(Keys.DOWN))
             System.out.println("Down");
@@ -93,6 +94,7 @@ public class PlayerController implements InputProcessor {
             System.out.println("2");
 
         engine.getSystem(PlayerSystem.class).setAccelX(accelX);
+        engine.getSystem(PlayerSystem.class).setAccelY(accelY);
     }
 
     @Override

@@ -26,7 +26,11 @@ public class MovementSystem extends IteratingSystem {
         @NonNull val body = Components.BODY.get(entity);
 
         mov.getVelocity().y = body.getBody().getLinearVelocity().y;
-
         body.getBody().setLinearVelocity(mov.getVelocity());
+
+        if(mov.isJump()) {
+            body.getBody().applyLinearImpulse(0, 0.4f, body.getBody().getPosition().x, body.getBody().getPosition().y, true);
+            mov.setJump(false);
+        }
     }
 }

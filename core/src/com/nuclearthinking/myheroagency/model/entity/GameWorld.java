@@ -120,7 +120,7 @@ public class GameWorld {
         val bodyPolygon = new PolygonShape();
         bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
-        bodyCom.getFixtureDef().friction = 0.3f;
+        bodyCom.getFixtureDef().isSensor = true; //TODO: Вместо этого настроить фильтры
         bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
         bodyPolygon.dispose();
 
@@ -245,7 +245,7 @@ public class GameWorld {
         stat.getPlus().addListener(stat.getAddStatsListener());
         stat.getMinus().addListener(stat.getRemoveStatsListener());
         stat.table.setSkin(hud.uiFactory.getSkin());
-        stat.table.setBackground("default-window");
+        //stat.table.setBackground("default-window");
         stat.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         stat.table.setPosition(60, Gdx.graphics.getHeight()-60);
         stat.table.add(stat.getCon()).center();
