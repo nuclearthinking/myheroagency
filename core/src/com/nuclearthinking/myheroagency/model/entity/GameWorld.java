@@ -29,14 +29,12 @@ public class GameWorld {
     private PooledEngine engine;
 
     private @Getter World world;
-    private Batch batch;
 
     private final BuildHud buildHud;
     private final BuildNpc buildNpc;
 
     public GameWorld(@NonNull final PooledEngine engine, @NonNull final Batch batch) {
         this.engine = engine;
-        this.batch = batch;
 
         this.world = new World(GravityComponent.getGravity(), false);
         this.buildHud = new BuildHud(engine, batch);
