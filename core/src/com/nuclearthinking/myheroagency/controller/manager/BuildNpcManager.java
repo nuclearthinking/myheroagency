@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.systems.MonsterSystem;
 import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
+import com.nuclearthinking.myheroagency.model.components.*;
 import lombok.NonNull;
 import lombok.val;
 
@@ -33,11 +34,11 @@ public final class BuildNpcManager {
     public void createNpc() {
         val entity = engine.createEntity();
 
-        val animation = engine.createComponent(com.nuclearthinking.myheroagency.model.components.AnimationComponent.class);
-        val state = engine.createComponent(com.nuclearthinking.myheroagency.model.components.StateComponent.class);
-        val light = engine.createComponent(com.nuclearthinking.myheroagency.model.components.LightComponent.class);
-        val bodyCom = engine.createComponent(com.nuclearthinking.myheroagency.model.components.BodyComponent.class);
-        val npc = engine.createComponent(com.nuclearthinking.myheroagency.model.components.NpcComponent.class);
+        val animation = engine.createComponent(AnimationComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val light = engine.createComponent(LightComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
+        val npc = engine.createComponent(NpcComponent.class);
         engine.getSystem(NpcSystem.class).setActor(npc);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
@@ -65,7 +66,7 @@ public final class BuildNpcManager {
         entity.add(light);
         entity.add(npc);
         entity.add(bodyCom);
-        entity.add(new com.nuclearthinking.myheroagency.model.components.TextureComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
 
@@ -75,11 +76,11 @@ public final class BuildNpcManager {
     public void createMonster(@NonNull final Entity target){
         val entity = engine.createEntity();
 
-        val animation = engine.createComponent(com.nuclearthinking.myheroagency.model.components.AnimationComponent.class);
-        val state = engine.createComponent(com.nuclearthinking.myheroagency.model.components.StateComponent.class);
-        val bodyCom = engine.createComponent(com.nuclearthinking.myheroagency.model.components.BodyComponent.class);
-        val light = engine.createComponent(com.nuclearthinking.myheroagency.model.components.LightComponent.class);
-        val monster = engine.createComponent(com.nuclearthinking.myheroagency.model.components.MonsterComponent.class);
+        val animation = engine.createComponent(AnimationComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
+        val light = engine.createComponent(LightComponent.class);
+        val monster = engine.createComponent(MonsterComponent.class);
         engine.getSystem(MonsterSystem.class).setActor(monster);
 
         monster.setTarget(target);
@@ -111,8 +112,8 @@ public final class BuildNpcManager {
         entity.add(light);
         entity.add(monster);
         entity.add(bodyCom);
-        entity.add(new com.nuclearthinking.myheroagency.model.components.MovementComponent());
-        entity.add(new com.nuclearthinking.myheroagency.model.components.TextureComponent());
+        entity.add(new MovementComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
 
@@ -121,13 +122,13 @@ public final class BuildNpcManager {
 
     public void spawnNpc(final float x, final float y){
         for(val npc : npsList){
-            npc.getComponent(com.nuclearthinking.myheroagency.model.components.BodyComponent.class).getBody().setTransform(x, y, 0);
+            npc.getComponent(BodyComponent.class).getBody().setTransform(x, y, 0);
         }
     }
 
     public void spawnMonster(final float x, final float y){
         for(val monster : monsterList){
-            monster.getComponent(com.nuclearthinking.myheroagency.model.components.BodyComponent.class).getBody().setTransform(x, y, 0);
+            monster.getComponent(BodyComponent.class).getBody().setTransform(x, y, 0);
         }
     }
 }

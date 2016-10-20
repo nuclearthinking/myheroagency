@@ -13,6 +13,7 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
+import com.nuclearthinking.myheroagency.model.components.*;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -36,7 +37,7 @@ public class GameWorldManager {
     public GameWorldManager(@NonNull final PooledEngine engine, @NonNull final Batch batch) {
         this.engine = engine;
 
-        this.world = new World(com.nuclearthinking.myheroagency.model.components.GravityComponent.getGravity(), false);
+        this.world = new World(GravityComponent.getGravity(), false);
         this.buildHudManager = new BuildHudManager(engine, batch);
         this.buildNpcManager = new BuildNpcManager(engine,world);
     }
@@ -55,11 +56,11 @@ public class GameWorldManager {
     private Entity createPlayer(){
         val entity = engine.createEntity();
 
-        val animation = engine.createComponent(com.nuclearthinking.myheroagency.model.components.AnimationComponent.class);
-        val state = engine.createComponent(com.nuclearthinking.myheroagency.model.components.StateComponent.class);
-        val light = engine.createComponent(com.nuclearthinking.myheroagency.model.components.LightComponent.class);
-        val bodyCom = engine.createComponent(com.nuclearthinking.myheroagency.model.components.BodyComponent.class);
-        val player = engine.createComponent(com.nuclearthinking.myheroagency.model.components.PlayerComponent.class);
+        val animation = engine.createComponent(AnimationComponent.class);
+        val state = engine.createComponent(StateComponent.class);
+        val light = engine.createComponent(LightComponent.class);
+        val bodyCom = engine.createComponent(BodyComponent.class);
+        val player = engine.createComponent(PlayerComponent.class);
         engine.getSystem(PlayerSystem.class).setActor(player);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), IDLE);
@@ -89,9 +90,9 @@ public class GameWorldManager {
         entity.add(state);
         entity.add(light);
         entity.add(player);
-        entity.add(new com.nuclearthinking.myheroagency.model.components.MovementComponent());
+        entity.add(new MovementComponent());
         entity.add(bodyCom);
-        entity.add(new com.nuclearthinking.myheroagency.model.components.TextureComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
 
@@ -101,7 +102,7 @@ public class GameWorldManager {
     private void createCamera(@NonNull final Entity target) {
         val entity = engine.createEntity();
 
-        val camera = engine.createComponent(com.nuclearthinking.myheroagency.model.components.CameraComponent.class);
+        val camera = engine.createComponent(CameraComponent.class);
 
         camera.setCamera(engine.getSystem(RenderingSystem.class).getCamera());
         camera.setTarget(target);
@@ -114,8 +115,8 @@ public class GameWorldManager {
     private void createWorld() {
         val entity = engine.createEntity();
 
-        entity.add(new com.nuclearthinking.myheroagency.model.components.MapComponent());
-        entity.add(new com.nuclearthinking.myheroagency.model.components.TextureComponent());
+        entity.add(new MapComponent());
+        entity.add(new TextureComponent());
 
         engine.addEntity(entity);
     }

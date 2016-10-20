@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.Components;
+import com.nuclearthinking.myheroagency.model.components.*;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.NonNull;
 import lombok.Setter;
@@ -13,10 +14,10 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public class PlayerSystem extends ActorSystem {
-    private static final Family family = Family.all(com.nuclearthinking.myheroagency.model.components.StateComponent.class,
-                                                    com.nuclearthinking.myheroagency.model.components.PlayerComponent.class,
-                                                    com.nuclearthinking.myheroagency.model.components.BodyComponent.class,
-                                                    com.nuclearthinking.myheroagency.model.components.MovementComponent.class).get();
+    private static final Family family = Family.all(StateComponent.class,
+                                                    PlayerComponent.class,
+                                                    BodyComponent.class,
+                                                    MovementComponent.class).get();
 
     private @Setter byte accelX = 0;
     private @Setter byte accelY = 0;
@@ -56,11 +57,11 @@ public class PlayerSystem extends ActorSystem {
         checkBorderWorld(body);
     }
 
-    private void checkBorderWorld(final com.nuclearthinking.myheroagency.model.components.BodyComponent t){
-        final int borderLeft = com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelWidth() - com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelHeight();
-        final int borderRight = com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelWidth();
-        final int borderUp = com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelHeight();
-        final int borderDown = com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelHeight() - com.nuclearthinking.myheroagency.model.components.MapComponent.getLevelPixelHeight();
+    private void checkBorderWorld(final BodyComponent t){
+        final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
+        final int borderRight = MapComponent.getLevelPixelWidth();
+        final int borderUp = MapComponent.getLevelPixelHeight();
+        final int borderDown = MapComponent.getLevelPixelHeight() - MapComponent.getLevelPixelHeight();
 
         if (t.getBody().getPosition().x <= borderLeft) {
             t.getBody().setTransform(borderLeft, t.getBody().getPosition().y, 0.0f);
@@ -80,11 +81,11 @@ public class PlayerSystem extends ActorSystem {
     }
 
     public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, com.nuclearthinking.myheroagency.model.components.PlayerComponent.BASE_RUN_SPD);
+        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
     }
 
     public int getMaxHp(){
-        return (int) calcStat(Stats.MAX_HP, com.nuclearthinking.myheroagency.model.components.PlayerComponent.BASE_HP_MAX);
+        return (int) calcStat(Stats.MAX_HP, PlayerComponent.BASE_HP_MAX);
     }
 
     @Override

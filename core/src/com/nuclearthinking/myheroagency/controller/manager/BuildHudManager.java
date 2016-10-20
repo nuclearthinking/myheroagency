@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.model.components.hud.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
 import lombok.val;
@@ -29,17 +30,17 @@ public final class BuildHudManager {
     public void createHud(){
         val entity = engine.createEntity();
 
-        val hud = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.HudComponent.class);
+        val hud = engine.createComponent(HudComponent.class);
 
         //Инициализируем Stage
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
         //Билдим слои
-        com.nuclearthinking.myheroagency.model.components.hud.UtilsHudComponent utils = buildUtils(hud);
-        com.nuclearthinking.myheroagency.model.components.hud.PlayerHudComponent player = buildPlayer(hud);
-        com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent stat = buildStat(hud);
-        com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent settings = buildSettings(hud);
-        com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent quest = buildQuest(hud);
+        UtilsHudComponent utils = buildUtils(hud);
+        PlayerHudComponent player = buildPlayer(hud);
+        StatHudComponent stat = buildStat(hud);
+        SettingHudComponent settings = buildSettings(hud);
+        QuestHudComponent quest = buildQuest(hud);
 
         //Добавляем их на в Stage
         hud.getStage().addActor(utils.table);
@@ -59,8 +60,8 @@ public final class BuildHudManager {
         engine.addEntity(entity);
     }
 
-    private com.nuclearthinking.myheroagency.model.components.hud.UtilsHudComponent buildUtils(@NonNull final com.nuclearthinking.myheroagency.model.components.hud.HudComponent hud){
-        val utils = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.UtilsHudComponent.class);
+    private UtilsHudComponent buildUtils(@NonNull final HudComponent hud){
+        val utils = engine.createComponent(UtilsHudComponent.class);
         utils.setFps(hud.uiFactory.getLabel("fps"));
         utils.table.setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
         utils.table.setDebug(Constants.DEBUG);
@@ -69,8 +70,8 @@ public final class BuildHudManager {
         return utils;
     }
 
-    private com.nuclearthinking.myheroagency.model.components.hud.PlayerHudComponent buildPlayer(@NonNull final com.nuclearthinking.myheroagency.model.components.hud.HudComponent hud){
-        val player = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.PlayerHudComponent.class);
+    private PlayerHudComponent buildPlayer(@NonNull final HudComponent hud){
+        val player = engine.createComponent(PlayerHudComponent.class);
 
         player.setPlayerHp(hud.uiFactory.getLabel("playerHp"));
         player.setPlayerLvl(hud.uiFactory.getLabel("playerLvl"));
@@ -83,8 +84,8 @@ public final class BuildHudManager {
         return player;
     }
 
-    private com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent buildStat(@NonNull final com.nuclearthinking.myheroagency.model.components.hud.HudComponent hud){
-        val stat = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent.class);
+    private StatHudComponent buildStat(@NonNull final HudComponent hud){
+        val stat = engine.createComponent(StatHudComponent.class);
 
         stat.setCon(hud.uiFactory.getLabel("con"));
         stat.setPlus(hud.uiFactory.getTextButton("+"));
@@ -104,8 +105,8 @@ public final class BuildHudManager {
         return stat;
     }
 
-    private com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent buildSettings(@NonNull final com.nuclearthinking.myheroagency.model.components.hud.HudComponent hud){
-        val settings = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent.class);
+    private SettingHudComponent buildSettings(@NonNull final HudComponent hud){
+        val settings = engine.createComponent(SettingHudComponent.class);
 
         settings.setTitleLabel(hud.uiFactory.getLabel(settings.getLocale().get("mainTitle")));
         settings.setWidthLabel(hud.uiFactory.getLabel(settings.getLocale().get("widthLabel")));
@@ -133,8 +134,8 @@ public final class BuildHudManager {
         return settings;
     }
 
-    private com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent buildQuest(@NonNull final com.nuclearthinking.myheroagency.model.components.hud.HudComponent hud){
-        val quest = engine.createComponent(com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent.class);
+    private QuestHudComponent buildQuest(@NonNull final HudComponent hud){
+        val quest = engine.createComponent(QuestHudComponent.class);
 
         quest.setFactory(hud.uiFactory);
         quest.addQuestToList(QuestManager.getQuestById(1).getName());

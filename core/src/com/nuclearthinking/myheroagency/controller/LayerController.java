@@ -22,28 +22,34 @@ public class LayerController implements InputProcessor {
 
     private void settingsMenu(){
         if(SettingHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).tableVisible();
+            layer.getSystem(HudSystem.class).table(SettingHudComponent.table, SettingHudComponent.isShowTable);
+            SettingHudComponent.isShowTable = false;
         }
-        else if (!SettingHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).tableVisible();
+        else{
+            layer.getSystem(HudSystem.class).table(SettingHudComponent.table, SettingHudComponent.isShowTable);
+            SettingHudComponent.isShowTable = true;
         }
     }
 
     private void questList(){
-        if(QuestHudComponent.isShowTable && SettingHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).questList();
+        if(QuestHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).table(QuestHudComponent.table, QuestHudComponent.isShowTable);
+            QuestHudComponent.isShowTable = false;
         }
-        else if (!QuestHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).questList();
+        else{
+            layer.getSystem(HudSystem.class).table(QuestHudComponent.table, QuestHudComponent.isShowTable);
+            QuestHudComponent.isShowTable = true;
         }
     }
 
     private void statList(){
-        if(StatHudComponent.isShowTable && SettingHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).statMenu();
+        if(StatHudComponent.isShowTable){
+            layer.getSystem(HudSystem.class).table(StatHudComponent.table, StatHudComponent.isShowTable);
+            StatHudComponent.isShowTable = false;
         }
-        else if (!StatHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).statMenu();
+        else{
+            layer.getSystem(HudSystem.class).table(StatHudComponent.table, StatHudComponent.isShowTable);
+            StatHudComponent.isShowTable = true;
         }
     }
 
