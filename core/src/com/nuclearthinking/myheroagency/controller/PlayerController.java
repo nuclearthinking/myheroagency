@@ -1,11 +1,9 @@
 package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +17,6 @@ import java.util.Map;
 public class PlayerController implements InputProcessor {
 
     @NonNull private final Engine engine;
-    private static final Application.ApplicationType appType = Gdx.app.getType();
 
     enum Keys {
         LEFT,
@@ -75,32 +72,29 @@ public class PlayerController implements InputProcessor {
     }
 
     private void processInput() {
-        float accelX = 0.0f;
+        byte accelX = 0;
+        byte accelY = 0;
 
-        if (appType == Application.ApplicationType.Android || appType == Application.ApplicationType.iOS) {
-            accelX = Gdx.input.getAccelerometerX();
-        }
-        else{
-            if (keys.get(Keys.LEFT))
-                accelX = -5f;
+        if (keys.get(Keys.LEFT))
+            accelX = -1;
 
-            if (keys.get(Keys.RIGHT))
-                accelX = 5f;
+        if (keys.get(Keys.RIGHT))
+            accelX = 1;
 
-            if (keys.get(Keys.UP))
-                System.out.println("Up");
+        if (keys.get(Keys.UP))
+            accelY = 1;
 
-            if (keys.get(Keys.DOWN))
-                System.out.println("Down");
+        if (keys.get(Keys.DOWN))
+            System.out.println("Down");
 
-            if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
-                System.out.println("1");
+        if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
+            System.out.println("1");
 
-            if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
-                System.out.println("2");
-        }
+        if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
+            System.out.println("2");
 
         engine.getSystem(PlayerSystem.class).setAccelX(accelX);
+        engine.getSystem(PlayerSystem.class).setAccelY(accelY);
     }
 
     @Override
@@ -115,7 +109,7 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.DOWN:downPressed();
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -130,7 +124,7 @@ public class PlayerController implements InputProcessor {
             case Input.Keys.DOWN:downReleased();
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override

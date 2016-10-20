@@ -5,8 +5,8 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
+import com.nuclearthinking.myheroagency.model.ui.FontFactory;
 import com.nuclearthinking.myheroagency.scripts.QuestLoader;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "LoadingScreen")
@@ -50,7 +50,7 @@ public class LoadingScreen extends AbstractScreen {
         loadingPercent = Interpolation.linear.apply(loadingPercent, Asset.getInstance().getProgress(), 0.1f);
         if (Asset.getInstance().update() && loadingPercent >= Asset.getInstance().getProgress() - .001f) {
             log.info("Assets loading done");
-            ScreenManager.getInstance().showScreen(ScreenEnum.HOME_SCREEN);
+            ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH_SCREEN);
         }
 
     }

@@ -9,7 +9,7 @@ import com.nuclearthinking.myheroagency.controller.ScreenController;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
+import com.nuclearthinking.myheroagency.model.ui.FontFactory;
 import com.nuclearthinking.myheroagency.utils.TextActor;
 import lombok.val;
 

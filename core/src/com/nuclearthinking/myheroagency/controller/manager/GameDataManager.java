@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.controller.manager;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;

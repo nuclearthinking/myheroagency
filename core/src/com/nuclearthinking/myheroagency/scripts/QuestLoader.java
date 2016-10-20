@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.scripts;
 
-import com.nuclearthinking.myheroagency.model.quest.QuestManager;
+import com.nuclearthinking.myheroagency.controller.manager.QuestManager;
 
 /**
  * Created by Izonami on 20.06.2016.

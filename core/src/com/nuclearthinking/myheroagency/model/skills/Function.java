@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.model.entity.systems.ActorSystem;
+import com.nuclearthinking.myheroagency.controller.systems.ActorSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -159,6 +159,14 @@ public class Function {
         }
         if(character.isNpc()){
             character.addStatFunc(FuncMaxHpMod.func);
+        }
+        if(character.isMonster()){
+            character.addStatFunc(FuncPAtkMod.func);
+            character.addStatFunc(FuncMAtkMod.func);
+            character.addStatFunc(FuncMaxHpMod.func);
+            character.addStatFunc(FuncMaxMpMod.func);
+            character.addStatFunc(FuncCastSpeedMod.func);
+            character.addStatFunc(FuncRunSpeedMod.func);
         }
     }
 }

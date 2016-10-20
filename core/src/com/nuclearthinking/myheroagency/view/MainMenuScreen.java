@@ -7,7 +7,7 @@ import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.LoadListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.PlayListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.SettingListener;
-import com.nuclearthinking.myheroagency.ui.UiFactory;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
