@@ -3,8 +3,6 @@ package com.nuclearthinking.myheroagency.model.quest;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +22,7 @@ public class Quest {
         name = getClass().getSimpleName();
         questId = Integer.parseInt(name.split("_")[1]);
         log.info("Quest Name: " + name + " QuestID: " + questId);
-        QuestManager.addQuest(this);
+        com.nuclearthinking.myheroagency.controller.manager.QuestManager.addQuest(this);
     }
 
     /**

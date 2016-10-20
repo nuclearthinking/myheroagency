@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.entity.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 

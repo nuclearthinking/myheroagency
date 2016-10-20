@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import com.nuclearthinking.myheroagency.controller.button.menu.BackListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.SaveListener;
 import com.nuclearthinking.myheroagency.model.Settings;
-import com.nuclearthinking.myheroagency.ui.UiFactory;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
 /**

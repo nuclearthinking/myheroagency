@@ -1,7 +1,7 @@
 package com.nuclearthinking.myheroagency.view;
 
 import com.badlogic.gdx.Gdx;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
+import com.nuclearthinking.myheroagency.model.ui.FontFactory;
 
 /**
  * Date: 05.05.2016

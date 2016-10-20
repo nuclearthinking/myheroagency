@@ -3,10 +3,10 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.QuestHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.SettingHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.components.hud.StatHudComponent;
-import com.nuclearthinking.myheroagency.model.entity.systems.HudSystem;
+import com.nuclearthinking.myheroagency.controller.systems.HudSystem;
+import com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent;
+import com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent;
+import com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent;
 import lombok.NonNull;
 
 /**

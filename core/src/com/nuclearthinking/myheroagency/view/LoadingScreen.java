@@ -5,8 +5,8 @@ import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
+import com.nuclearthinking.myheroagency.model.ui.FontFactory;
 import com.nuclearthinking.myheroagency.scripts.QuestLoader;
-import com.nuclearthinking.myheroagency.ui.font.FontFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "LoadingScreen")

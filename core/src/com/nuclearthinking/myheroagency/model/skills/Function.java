@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.model.entity.systems.ActorSystem;
+import com.nuclearthinking.myheroagency.controller.systems.ActorSystem;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

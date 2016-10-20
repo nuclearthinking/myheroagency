@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.controller.button.player;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener;
-import com.nuclearthinking.myheroagency.model.entity.systems.ActorSystem;
+import com.nuclearthinking.myheroagency.controller.systems.ActorSystem;
 import lombok.NonNull;
 
 /**
