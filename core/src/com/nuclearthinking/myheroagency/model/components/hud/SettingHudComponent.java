@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +27,6 @@ public class SettingHudComponent implements Component {
     private @Getter @Setter TextButton save;
     private @Getter @Setter TextField height;
     private @Getter @Setter TextField width;
+    private @Getter @Setter ExitListener exitListener;
+    private @Getter @Setter SaveLayerListener saveLayerListener;
 }
