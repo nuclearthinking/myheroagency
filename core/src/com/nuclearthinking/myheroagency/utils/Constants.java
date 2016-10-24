@@ -1,5 +1,7 @@
 package com.nuclearthinking.myheroagency.utils;
 
+import com.badlogic.gdx.Preferences;
+
 /**
  * Created by Izonami on 05.05.2016.
  */
@@ -15,7 +17,8 @@ public final class Constants {
             + "abcdefghijklmnopqrstuvwxyz"
             + "1234567890.,:;_¡!¿?\"'+-*/()[]={}%";
     public static final String SAVE_NAME = "myheroagency.bin";
-    public static final String PREFERENCES_NAME = "MyHeroAgency Settings";
+    /**Что бы избежать коллизии лучше задавать такое имя. Так советуют в {@link Preferences}**/
+    public static final String PREFERENCES_NAME = "com.nuclearthinking.myheroagency.myheroagency.settings";
     public static boolean DEBUG = true; //TODO: Выключить в самом конце
 
 }

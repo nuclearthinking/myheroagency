@@ -20,32 +20,29 @@ public class Settings {
     private @Setter static int height;
     private @Setter static int width;
 
-    private Settings defaultSettings() {
+    private static void defaultSettings() {
         log.info("Loading default settings");
 
-        val settings = new Settings();
-
-        settings.setLanguage(DEFAULT_LANGUAGE);
-        settings.setWidth(Constants.GAME_W);
-        settings.setHeight(Constants.GAME_H);
-        return settings;
+        setLanguage(DEFAULT_LANGUAGE);
+        setWidth(Constants.GAME_W);
+        setHeight(Constants.GAME_H);
     }
 
-    public static Settings loadSettings() {
+    public static void loadSettings() {
         log.info("Loading settings {} from preferences", PREFERENCES_NAME);
 
-        val settings = new Settings();
         val preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
 
-        if (preferences == null) {
+        if (preferences.get().isEmpty()) {
             log.error("Can't load preferences {}", PREFERENCES_NAME);
-            return settings.defaultSettings();
+            defaultSettings();
         }
-        settings.setLanguage(preferences.getString(LANGUAGE_KEY, DEFAULT_LANGUAGE));
-        settings.setHeight(preferences.getInteger(HEIGHT_KEY, Constants.GAME_H));
-        settings.setWidth(preferences.getInteger(WIDTH_KEY, Constants.GAME_W));
-
-        return settings;
+        else{
+            log.info("Loading settings from preferences {}", PREFERENCES_NAME);
+            setLanguage(preferences.getString(LANGUAGE_KEY, language));
+            setHeight(preferences.getInteger(HEIGHT_KEY, height));
+            setWidth(preferences.getInteger(WIDTH_KEY, width));
+        }
     }
 
     public void save() {
