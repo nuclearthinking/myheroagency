@@ -2,8 +2,8 @@ package com.nuclearthinking.myheroagency.i18n;
 
 import com.badlogic.gdx.utils.I18NBundle;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 
 import java.util.MissingResourceException;
 
@@ -18,13 +18,13 @@ import java.util.MissingResourceException;
 public final class Localization {
 
     private I18NBundle localisationBundle;
+    private final String bundleName;
 
-    public Localization(final Class initiatorClass) {
-        loadBundle(initiatorClass);
+    public Localization(@NonNull final Class initiatorClass) {
+        this.bundleName = "i18n/" + initiatorClass.getSimpleName();
     }
 
-    public void loadBundle(final Class bundleClass) {
-        val bundleName = "i18n/" + bundleClass.getSimpleName();
+    public void loadBundle() {
         if (Asset.getInstance().isLoaded(bundleName)) {
             localisationBundle = Asset.getInstance().get(bundleName, I18NBundle.class);
             log.info("Loaded I18NBundle with name {}", bundleName);
@@ -47,7 +47,7 @@ public final class Localization {
     }
 
     public String format(final String key, final Object... args) {
-        if (localisationBundle != null) {
+        if (localisationBundle != null || key != null || key.trim().length() != 0 || args.length != 0) {
             return localisationBundle.format(key, args);
         } else {
             return null;

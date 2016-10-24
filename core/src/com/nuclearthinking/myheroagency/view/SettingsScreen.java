@@ -84,7 +84,7 @@ public final class SettingsScreen extends AbstractScreen {
     }
 
     public void reloadLabel(){
-        locale.loadBundle(this.getClass());
+        locale.loadBundle();
 
         titleLabel.setText(locale.get("mainTitle"));
         languageLabel.setText(locale.get("languageLabel"));
