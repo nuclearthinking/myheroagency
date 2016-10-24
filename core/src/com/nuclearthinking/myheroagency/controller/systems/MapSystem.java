@@ -50,7 +50,7 @@ public final class MapSystem extends IteratingSystem {
 
         tiledMap.dispose();
 
-        buildShapes(renderer.getMap(), "Collision", MapComponent.getPpt(), world);
+        buildShapes(renderer.getMap(), world, "Collision", MapComponent.getPpt());
     }
 
     @Override
@@ -58,7 +58,7 @@ public final class MapSystem extends IteratingSystem {
         renderer.setView(camera);
     }
 
-    public static Array<Body> buildShapes(@NonNull final Map map, final String layer, float pixels, World world){
+    private static Array<Body> buildShapes(@NonNull final Map map, @NonNull final World world, final String layer, float pixels){
         @NonNull val objects = map.getLayers().get(layer).getObjects();
         @NonNull val bodies = new Array<Body>();
 
