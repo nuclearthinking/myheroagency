@@ -11,7 +11,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 02.09.2016.
  */
-public class LightComponent implements Component {
+public final class LightComponent implements Component {
     private @Getter @Setter static RayHandler rayHandler;
     private @Getter @Setter PointLight playerLight;
     private @Getter @Setter Entity target;

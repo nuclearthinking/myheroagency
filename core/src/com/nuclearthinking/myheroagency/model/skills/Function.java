@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Created by Izonami on 03.08.2016.
  */
-@Slf4j
-public class Function {
+@Slf4j(topic = "Function")
+public final class Function {
 
     public static final int MAX_STAT_VALUE = 100;
 

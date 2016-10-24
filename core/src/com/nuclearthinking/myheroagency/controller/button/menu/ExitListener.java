@@ -9,7 +9,7 @@ import lombok.NonNull;
 /**
  * Created by Izonami on 19.06.2016.
  */
-public class ExitListener extends AbstractButtonListener {
+public final class ExitListener extends AbstractButtonListener {
 
     public ExitListener(@NonNull final TextButton button) {
         super(button);

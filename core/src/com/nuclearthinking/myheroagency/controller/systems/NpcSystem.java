@@ -9,7 +9,7 @@ import com.nuclearthinking.myheroagency.model.components.StateComponent;
 /**
  * Created by mkuksin on 26.09.2016.
  */
-public class NpcSystem extends ActorSystem {
+public final class NpcSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     NpcComponent.class,
                                                     BodyComponent.class).get();

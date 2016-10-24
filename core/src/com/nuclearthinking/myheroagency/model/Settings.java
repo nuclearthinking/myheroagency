@@ -9,7 +9,7 @@ import lombok.val;
 import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
 
 @Slf4j(topic = "Settings")
-public class Settings {
+public final class Settings {
 
     private static final String LANGUAGE_KEY = "language";
     private static final String HEIGHT_KEY = "height";

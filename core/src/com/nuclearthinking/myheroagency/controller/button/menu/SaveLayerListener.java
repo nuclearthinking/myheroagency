@@ -13,7 +13,7 @@ import lombok.val;
 /**
  * Created by Izonami on 19.06.2016.
  */
-public class SaveLayerListener extends AbstractButtonListener {
+public final class SaveLayerListener extends AbstractButtonListener {
 
     private final SettingHudComponent layer;
 

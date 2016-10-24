@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Общее хранилище для всех квестов. Предоставляет доступ ко всем квестам
  * Created by Izonami on 20.06.2016.
  */
-public class QuestManager {
+public final class QuestManager {
 
     private static Map<String, Quest> questsByName = new ConcurrentHashMap<String, Quest>();
     private static Map<Integer, Quest> questsById = new ConcurrentHashMap<Integer, Quest>();

@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 10.10.2016.
  */
-public class StatHudComponent implements Component {
+public final class StatHudComponent implements Component {
     public static final Table table = new Table();
     public static boolean isShowTable = true;
 

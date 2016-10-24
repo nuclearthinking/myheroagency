@@ -15,7 +15,7 @@ import java.util.MissingResourceException;
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
 @Slf4j(topic = "Localization")
-public class Localization {
+public final class Localization {
 
     private I18NBundle localisationBundle;
 

@@ -8,6 +8,6 @@ import lombok.Getter;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class AnimationComponent implements Component {
+public final class AnimationComponent implements Component {
     private @Getter final IntMap<Animation> animations = new IntMap<Animation>();
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 05.10.2016.
  */
-public class PlayerHudComponent implements Component {
+public final class PlayerHudComponent implements Component {
     public  static final Table table = new Table();
     private @Getter @Setter Label playerLvl;
     private @Getter @Setter Label playerHp;

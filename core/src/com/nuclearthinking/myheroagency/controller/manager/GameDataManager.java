@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 
 @Slf4j(topic = "GameData")
-public class GameDataManager implements Serializable {
+public final class GameDataManager implements Serializable {
 
     private @Getter @Setter PlayerSystem player;
 

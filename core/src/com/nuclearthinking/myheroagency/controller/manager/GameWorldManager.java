@@ -21,7 +21,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class GameWorldManager {
+public final class GameWorldManager {
     public static final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
     public static final Animation IDLE = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
     public static final Animation LEFT = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);

@@ -1,6 +1,8 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * Created by Izonami on 03.08.2016.
@@ -41,5 +43,4 @@ public enum Stats {
     public static final int NUM_STATS = values().length;
 
     private @Getter String value;
-
 }

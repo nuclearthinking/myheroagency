@@ -12,7 +12,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class MovementSystem extends IteratingSystem {
+public final class MovementSystem extends IteratingSystem {
     private static final Family family = Family.all(BodyComponent.class,
                                                     MovementComponent.class).get();
 

@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.nuclearthinking.myheroagency.controller.manager.GameDataManager;
 import com.nuclearthinking.myheroagency.view.*;
 
 /**
@@ -47,12 +46,6 @@ public enum ScreenEnum {
     BATTLE_SCREEN {
         public AbstractScreen getScreen(Object... params) {
             return new BattleScreen();
-        }
-    },
-
-    TASK_SCREEN {
-        public AbstractScreen getScreen(Object... params) {
-            return new TaskScreen((GameDataManager) params[0]);
         }
     };
 

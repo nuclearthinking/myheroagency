@@ -15,7 +15,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public class MonsterSystem extends ActorSystem {
+public final class MonsterSystem extends ActorSystem {
 
     private static final Family family = Family.all(MonsterComponent.class,
                                                     StateComponent.class,

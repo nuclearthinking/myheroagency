@@ -7,7 +7,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public class MonsterComponent extends GameActor {
+public final class MonsterComponent extends GameActor {
 
     public static final float BASE_HP_REG = 10;
     public static final float BASE_MP_REG = 10;

@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.model.components;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class PlayerComponent extends GameActor {
+public final class PlayerComponent extends GameActor {
 
     public static final float BASE_HP_REG = 10;
     public static final float BASE_MP_REG = 10;

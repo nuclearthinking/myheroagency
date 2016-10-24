@@ -21,7 +21,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class SplashScreen extends AbstractScreen {
+public final class SplashScreen extends AbstractScreen {
 
     private final Texture texture;
     private static Image splashImage;

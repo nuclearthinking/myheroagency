@@ -12,7 +12,7 @@ import lombok.NonNull;
 /**
  * Created by Izonami on 30.05.2016.
  */
-public class LayerController implements InputProcessor {
+public final class LayerController implements InputProcessor {
 
     private final Engine layer;
 

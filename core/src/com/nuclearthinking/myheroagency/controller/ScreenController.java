@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 /**
  * Created by Izonami on 19.06.2016.
  */
-public class ScreenController {
+public final class ScreenController {
 
     public void splashUpdate(){
         if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(66) || Gdx.input.isKeyPressed(131)) {

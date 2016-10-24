@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public class UtilsHudComponent implements Component {
+public final class UtilsHudComponent implements Component {
     public static final Table table = new Table();
     private @Getter @Setter Label fps;
 }

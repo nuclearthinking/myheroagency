@@ -9,7 +9,7 @@ import com.nuclearthinking.myheroagency.model.ui.FontFactory;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class BattleScreen extends AbstractScreen {
+public final class BattleScreen extends AbstractScreen {
 
     private static FontFactory fontFactory;
     private String name;

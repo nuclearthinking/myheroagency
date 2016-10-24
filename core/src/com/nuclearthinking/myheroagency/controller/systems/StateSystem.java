@@ -11,7 +11,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class StateSystem extends IteratingSystem {
+public final class StateSystem extends IteratingSystem {
     public StateSystem() {
         super(Family.all(StateComponent.class).get());
     }

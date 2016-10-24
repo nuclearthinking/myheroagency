@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by Izonami on 23.06.2016.
  */
 @RequiredArgsConstructor
-public class PlayerController implements InputProcessor {
+public final class PlayerController implements InputProcessor {
 
     @NonNull private final Engine engine;
 

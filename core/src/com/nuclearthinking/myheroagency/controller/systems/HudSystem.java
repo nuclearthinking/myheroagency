@@ -16,7 +16,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public class HudSystem extends IteratingSystem {
+public final class HudSystem extends IteratingSystem {
 
     private static final Family family = Family.all(HudComponent.class,
                                                     UtilsHudComponent.class,

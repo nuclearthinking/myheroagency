@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by mkuksin on 10.10.2016.
  */
-public class QuestHudComponent implements Component {
+public final class QuestHudComponent implements Component {
     public static final Table table = new Table();
     public static final Map<String, Actor> QUEST_LIST = new LinkedHashMap<String, Actor>();
 

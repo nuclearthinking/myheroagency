@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class CameraComponent implements Component {
+public final class CameraComponent implements Component {
     private @Getter @Setter Entity target;
     private @Getter @Setter OrthographicCamera camera;
 }

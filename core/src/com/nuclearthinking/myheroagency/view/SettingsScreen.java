@@ -12,7 +12,7 @@ import com.nuclearthinking.myheroagency.utils.Constants;
 /**
  * Created by Izonami on 13.05.2016.
  */
-public class SettingsScreen extends AbstractScreen {
+public final class SettingsScreen extends AbstractScreen {
 
     private static Table table;
     private static TextButton back, save;

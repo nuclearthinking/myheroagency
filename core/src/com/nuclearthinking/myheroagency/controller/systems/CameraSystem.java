@@ -13,7 +13,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class CameraSystem extends IteratingSystem{
+public final class CameraSystem extends IteratingSystem{
     private static final Family family = Family.all(CameraComponent.class).get();
 
     public CameraSystem() {

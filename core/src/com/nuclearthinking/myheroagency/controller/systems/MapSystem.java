@@ -22,7 +22,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class MapSystem extends IteratingSystem {
+public final class MapSystem extends IteratingSystem {
 
     private static final Family family = Family.all(MapComponent.class).get();
 

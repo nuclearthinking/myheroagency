@@ -5,6 +5,7 @@ import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.model.components.hud.HudComponent;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Date: 05.05.2016
@@ -12,7 +13,8 @@ import com.nuclearthinking.myheroagency.model.components.hud.HudComponent;
  *
  * @author Vladislav Radchenko (onfient@gmail.com)
  */
-public class HomeScreen extends AbstractScreen {
+@Slf4j(topic = "HomeScreen")
+public final class HomeScreen extends AbstractScreen {
 
     private final GameWorldManager gameWorldManager;
     private final PlayerController pc;
@@ -28,6 +30,7 @@ public class HomeScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        log.info("Add Entity Systems");
         engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.MapSystem(gameWorldManager.getWorld()));
         engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.RenderingSystem(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.MapSystem.class).getBatch(), gameWorldManager.getWorld()));
         engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.PlayerSystem());
@@ -43,8 +46,10 @@ public class HomeScreen extends AbstractScreen {
         engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.MapSystem.class).setCamera(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.RenderingSystem.class).getCamera());
         engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.LightSystem.class).setCamera(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.RenderingSystem.class).getCamera());
 
+        log.info("Creating World");
         gameWorldManager.create();
 
+        log.info("Add Processor");
         multi.addProcessor(pc);
         multi.addProcessor(lc);
         multi.addProcessor(HudComponent.getStage());

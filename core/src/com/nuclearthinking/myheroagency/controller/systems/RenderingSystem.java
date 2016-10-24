@@ -22,7 +22,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class RenderingSystem extends IteratingSystem {
+public final class RenderingSystem extends IteratingSystem {
 
     private static final Family family = Family.all(TextureComponent.class,
             BodyComponent.class).get();

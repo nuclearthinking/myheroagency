@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import static com.nuclearthinking.myheroagency.utils.Constants.ALL_CHARACTERS;
 
-public class FontFactory {
+public final class FontFactory {
 
     private static final HashMap<Integer, BitmapFont> robotoLightMap = new HashMap<Integer, BitmapFont>();
     private static final HashMap<Integer, BitmapFont> robotoBoldMap = new HashMap<Integer, BitmapFont>();

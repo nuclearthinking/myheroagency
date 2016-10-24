@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Created by Izonami on 19.06.2016.
  */
-@Slf4j
-public class LoadListener extends AbstractButtonListener {
+@Slf4j(topic = "LoadListener")
+public final class LoadListener extends AbstractButtonListener {
 
     public LoadListener(@NonNull final TextButton button) {
         super(button);

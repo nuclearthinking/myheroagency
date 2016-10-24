@@ -16,7 +16,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Izonami on 13.05.2016.
  */
-public class MainMenuScreen extends AbstractScreen {
+public final class MainMenuScreen extends AbstractScreen {
 
     private static Table table;
     private static TextButton play, load, settings, exit;

@@ -10,7 +10,7 @@ import com.nuclearthinking.myheroagency.scripts.QuestLoader;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "LoadingScreen")
-public class LoadingScreen extends AbstractScreen {
+public final class LoadingScreen extends AbstractScreen {
 
     static {
         Asset.getInstance().init("asset/main.xml");

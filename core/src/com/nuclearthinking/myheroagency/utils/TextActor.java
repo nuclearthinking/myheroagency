@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Disposable;
 import lombok.NonNull;
 
@@ -16,7 +15,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 /**
  * Created by Izonami on 09.05.2016.
  */
-public class TextActor extends Actor implements Disposable{
+public final class TextActor extends Actor implements Disposable{
     private final TextButton[] listchar;
     private final TextButton.TextButtonStyle style;
     private final String text;

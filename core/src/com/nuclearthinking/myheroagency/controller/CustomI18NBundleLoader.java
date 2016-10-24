@@ -16,7 +16,7 @@ import java.util.Locale;
 /**
  * Created by Izonami on 16.05.2016.
  */
-public class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, CustomI18NBundleLoader.I18NBundleParameter> {
+public final class CustomI18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, CustomI18NBundleLoader.I18NBundleParameter> {
 
     private I18NBundleParameter parameter;
     private I18NBundle bundle;

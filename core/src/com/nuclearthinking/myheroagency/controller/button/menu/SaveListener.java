@@ -12,7 +12,7 @@ import lombok.NonNull;
 /**
  * Created by Izonami on 19.06.2016.
  */
-public class SaveListener extends AbstractButtonListener {
+public final class SaveListener extends AbstractButtonListener {
 
     private final SettingsScreen screen;
 

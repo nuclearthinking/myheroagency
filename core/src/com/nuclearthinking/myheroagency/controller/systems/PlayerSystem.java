@@ -13,7 +13,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public class PlayerSystem extends ActorSystem {
+public final class PlayerSystem extends ActorSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,

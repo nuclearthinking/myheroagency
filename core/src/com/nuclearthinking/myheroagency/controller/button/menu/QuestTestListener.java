@@ -10,7 +10,7 @@ import lombok.NonNull;
 /**
  * Created by mkuksin on 31.08.2016.
  */
-public class QuestTestListener extends AbstractButtonListener {
+public final class QuestTestListener extends AbstractButtonListener {
 
     public QuestTestListener(@NonNull TextButton button) {
         super(button);

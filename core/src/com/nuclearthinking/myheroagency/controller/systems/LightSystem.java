@@ -17,7 +17,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 02.09.2016.
  */
-public class LightSystem extends IteratingSystem{
+public final class LightSystem extends IteratingSystem{
     private static final Family family = Family.all(LightComponent.class).get();
 
     private final Color color;

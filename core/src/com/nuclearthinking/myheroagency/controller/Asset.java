@@ -24,7 +24,7 @@ import lombok.val;
 import java.util.Locale;
 
 @Slf4j(topic = "Asset")
-public class Asset implements Disposable, AssetErrorListener {
+public final class Asset implements Disposable, AssetErrorListener {
 
     private static Asset instance;
     private AssetManager manager;

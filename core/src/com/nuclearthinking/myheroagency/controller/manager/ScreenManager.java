@@ -8,7 +8,7 @@ import lombok.val;
 /**
  * Created by Izonami on 09.05.2016.
  */
-public class ScreenManager {
+public final class ScreenManager {
 
     private static ScreenManager instance;
 

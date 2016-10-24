@@ -10,7 +10,7 @@ import lombok.NonNull;
 /**
  * Created by Izonami on 19.06.2016.
  */
-public class BackListener extends AbstractButtonListener {
+public final class BackListener extends AbstractButtonListener {
 
     public BackListener(@NonNull final TextButton button){
         super(button);
