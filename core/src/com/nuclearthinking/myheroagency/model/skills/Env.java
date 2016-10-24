@@ -10,10 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 public final class Env {
 
-    @NonNull private @Getter @Setter
-    ActorSystem character;
-    private @Getter @Setter
-    ActorSystem target;
+    @NonNull private @Getter @Setter ActorSystem character;
+    private @Getter @Setter ActorSystem target;
     private @Getter @Setter double value;
 
 }

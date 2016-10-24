@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public final class Calculator {
 
-    private ArrayList<Func> functions;
+    private final ArrayList<Func> functions;
 
     private @Getter final Stats stat;
     private @Getter final ActorSystem character;

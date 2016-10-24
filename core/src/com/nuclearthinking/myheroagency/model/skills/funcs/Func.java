@@ -20,7 +20,7 @@ public abstract class Func implements Comparable<Func>{
         this.funcOwner = funcOwner;
     }
 
-    public abstract void calc(Env env);
+    public abstract void calc(@NonNull final Env env);
 
     @Override
     public int compareTo(@NonNull final Func f){

@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j(topic = "Function")
 public final class Function {
 
-    public static final int MAX_STAT_VALUE = 100;
+    private static final int MAX_STAT_VALUE = 100;
 
     private static final double[] WITbonus = new double[MAX_STAT_VALUE]; //castSpeed, mResist
     private static final double[] MENbonus = new double[MAX_STAT_VALUE]; //mpMax, mDef
