@@ -26,7 +26,6 @@ public abstract class AbstractScreen implements Screen {
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));
-        locale.loadBundle();
     }
 
     public abstract void buildStage();

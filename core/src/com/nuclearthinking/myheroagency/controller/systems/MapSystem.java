@@ -99,7 +99,7 @@ public final class MapSystem extends IteratingSystem {
         return bodies;
     }
 
-    public void setCamera(OrthographicCamera camera) {
+    public void setCamera(@NonNull final OrthographicCamera camera) {
         this.camera = camera;
     }
 

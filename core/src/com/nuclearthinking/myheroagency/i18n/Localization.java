@@ -22,6 +22,7 @@ public final class Localization {
 
     public Localization(@NonNull final Class initiatorClass) {
         this.bundleName = "i18n/" + initiatorClass.getSimpleName();
+        loadBundle();
     }
 
     public void loadBundle() {

@@ -38,11 +38,11 @@ public final class BuildHudManager {
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
 
         //Билдим слои
-        UtilsHudComponent utils = buildUtils(hud);
-        PlayerHudComponent player = buildPlayer(hud);
-        StatHudComponent stat = buildStat(hud);
-        SettingHudComponent settings = buildSettings(hud);
-        QuestHudComponent quest = buildQuest(hud);
+        val utils = buildUtils(hud);
+        val player = buildPlayer(hud);
+        val stat = buildStat(hud);
+        val settings = buildSettings(hud);
+        val quest = buildQuest(hud);
 
         //Добавляем их на в Stage
         hud.getStage().addActor(utils.table);
