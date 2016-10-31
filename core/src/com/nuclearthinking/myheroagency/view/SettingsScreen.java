@@ -58,17 +58,17 @@ public final class SettingsScreen extends AbstractScreen {
     }
 
     private void initButton(){
-        titleLabel = uiFactory.getLabel(locale.get("mainTitle"));
-        languageLabel = uiFactory.getLabel(locale.get("languageLabel"));
-        widthLabel = uiFactory.getLabel(locale.get("widthLabel"));
-        heightLabel = uiFactory.getLabel(locale.get("heightLabel"));
+        titleLabel = uiFactory.getLabel("ss.mainTitle", locale);
+        languageLabel = uiFactory.getLabel("ss.languageLabel", locale);
+        widthLabel = uiFactory.getLabel("ss.widthLabel", locale);
+        heightLabel = uiFactory.getLabel("ss.heightLabel",locale);
 
-        back = uiFactory.getTextButton(locale.get("buttonBack"));
+        back = uiFactory.getTextButton("ss.buttonBack", locale);
         back.getLabel().setFontScale(.9f);
         back.getLabel().setColor(Color.FOREST);
         back.addListener(new BackListener(back)); //Добавляет листнер кнопке
 
-        save = uiFactory.getTextButton(locale.get("buttonSave"));
+        save = uiFactory.getTextButton("ss.buttonSave", locale);
         save.getLabel().setFontScale(.8f);
         save.getLabel().setColor(Color.FOREST);
         save.addListener(new SaveListener(save, this)); //Добавляет листнер кнопке
@@ -86,12 +86,12 @@ public final class SettingsScreen extends AbstractScreen {
     public void reloadLabel(){
         locale.loadBundle();
 
-        titleLabel.setText(locale.get("mainTitle"));
-        languageLabel.setText(locale.get("languageLabel"));
-        widthLabel.setText(locale.get("widthLabel"));
-        heightLabel.setText(locale.get("heightLabel"));
-        back.setText(locale.get("buttonBack"));
-        save.setText(locale.get("buttonSave"));
+        titleLabel.setText(locale.get("ss.mainTitle"));
+        languageLabel.setText(locale.get("ss.languageLabel"));
+        widthLabel.setText(locale.get("ss.widthLabel"));
+        heightLabel.setText(locale.get("ss.heightLabel"));
+        back.setText(locale.get("ss.buttonBack"));
+        save.setText(locale.get("ss.buttonSave"));
     }
 
     public TextField getHeight(){

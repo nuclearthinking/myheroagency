@@ -8,6 +8,7 @@ import com.nuclearthinking.myheroagency.controller.button.AbstractButtonListener
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.view.SettingsScreen;
 import lombok.NonNull;
+import lombok.val;
 
 /**
  * Created by Izonami on 19.06.2016.
@@ -23,7 +24,7 @@ public final class SaveListener extends AbstractButtonListener {
 
     @Override
     public void clicked (InputEvent event, float x, float y) {
-        final Settings settings = new Settings();
+        val settings = new Settings();
         settings.setLanguage(screen.getSelectLanguage().getSelected().toString());
         settings.setHeight(Integer.parseInt(screen.getHeight().getText()));
         settings.setWidth(Integer.parseInt(screen.getWidth().getText()));

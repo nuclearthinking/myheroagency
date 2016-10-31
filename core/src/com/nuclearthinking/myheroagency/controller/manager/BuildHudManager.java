@@ -14,11 +14,13 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.model.components.hud.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 /**
  * Created by mkuksin on 20.10.2016.
  */
+@Slf4j(topic = "BuildHudManager")
 public final class BuildHudManager {
 
     private final PooledEngine engine;
@@ -110,15 +112,13 @@ public final class BuildHudManager {
     private SettingHudComponent buildSettings(@NonNull final HudComponent hud){
         val settings = engine.createComponent(SettingHudComponent.class);
 
-        settings.setTitleLabel(hud.uiFactory.getLabel(settings.getLocale().get("mainTitle")));
-        settings.setWidthLabel(hud.uiFactory.getLabel(settings.getLocale().get("widthLabel")));
-        settings.setHeightLabel(hud.uiFactory.getLabel(settings.getLocale().get("heightLabel")));
-        settings.setExit(hud.uiFactory.getTextButton(settings.getLocale().get("buttonExit")));
-        settings.setSave(hud.uiFactory.getTextButton(settings.getLocale().get("buttonSave")));
-        settings.setExitListener(new ExitListener(settings.getExit()));
-        settings.setSaveLayerListener(new SaveLayerListener(settings.getSave(), settings));
-        settings.getExit().addListener(settings.getExitListener());
-        settings.getSave().addListener(settings.getSaveLayerListener());
+        settings.setTitleLabel(hud.uiFactory.getLabel("shc.mainTitle", settings.getLocale()));
+        settings.setWidthLabel(hud.uiFactory.getLabel("shc.widthLabel", settings.getLocale()));
+        settings.setHeightLabel(hud.uiFactory.getLabel("shc.heightLabel", settings.getLocale()));
+        settings.setExit(hud.uiFactory.getTextButton("shc.buttonExit", settings.getLocale()));
+        settings.setSave(hud.uiFactory.getTextButton("shc.buttonSave", settings.getLocale()));
+        settings.getExit().addListener(new ExitListener(settings.getExit()));
+        settings.getSave().addListener(new SaveLayerListener(settings.getSave(), settings));
         settings.setWidth(hud.uiFactory.getTextField("800"));
         settings.setHeight(hud.uiFactory.getTextField("600"));
         settings.table.setSkin(hud.uiFactory.getSkin());

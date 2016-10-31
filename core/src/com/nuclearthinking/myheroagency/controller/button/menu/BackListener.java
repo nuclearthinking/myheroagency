@@ -20,5 +20,4 @@ public final class BackListener extends AbstractButtonListener {
     public void clicked (InputEvent event, float x, float y) {
         ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU_SCREEN );
     }
-
 }

@@ -6,7 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.i18n.Localization;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.util.HashMap;
 
@@ -31,6 +33,7 @@ public final class UiFactory {
         }
     }
 
+    @Deprecated
     public final TextButton getTextButton(final String name) {
         TextButton textButton = textButtonHashMap.get(name);
         if (textButton == null) {
@@ -40,6 +43,16 @@ public final class UiFactory {
         return textButton;
     }
 
+    public final TextButton getTextButton(final String name, @NonNull final Localization locale) {
+        TextButton textButton = textButtonHashMap.get(name);
+        if (textButton == null) {
+            textButton = new TextButton(locale.get(name), skin, "kramola");
+            textButtonHashMap.put(name, textButton);
+        }
+        return textButton;
+    }
+
+    @Deprecated
     public final Label getLabel(final String name) {
         Label label = labelHashMap.get(name);
         if (label == null) {
@@ -49,11 +62,30 @@ public final class UiFactory {
         return label;
     }
 
+    public final Label getLabel(final String name, @NonNull final Localization locale) {
+        Label label = labelHashMap.get(name);
+        if (label == null) {
+            label = new Label(locale.get(name), skin, "kramola");
+            labelHashMap.put(name, label);
+        }
+        return label;
+    }
+
     //TODO: Для размера экрана вылазит баг, когда высота и ширина совпадают, по хорошему в ползунок разрешение переделать или в селект
+    @Deprecated
     public final TextField getTextField(final String name) {
         TextField textField = textFieldHashMap.get(name);
         if (textField == null) {
             textField = new TextField(name, skin, "kramola");
+            textFieldHashMap.put(name, textField);
+        }
+        return textField;
+    }
+
+    public final TextField getTextField(final String name, @NonNull final Localization locale) {
+        TextField textField = textFieldHashMap.get(name);
+        if (textField == null) {
+            textField = new TextField(locale.get(name), skin, "kramola");
             textFieldHashMap.put(name, textField);
         }
         return textField;

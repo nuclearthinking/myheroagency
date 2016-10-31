@@ -47,20 +47,20 @@ public final class MainMenuScreen extends AbstractScreen {
 
     private void initButton() {
         // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
-        play = uiFactory.getTextButton(locale.get("buttonPlay"));
+        play = uiFactory.getTextButton("mms.buttonPlay", locale);
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
         play.addListener(new PlayListener(play)); //Добавляет листнер кнопке
 
-        load = uiFactory.getTextButton(locale.get("buttonLoad"));
+        load = uiFactory.getTextButton("mms.buttonLoad", locale);
         load.getLabel().setFontScale(.7f);
         load.addListener(new LoadListener(load));
 
-        settings = uiFactory.getTextButton(locale.get("buttonSettings"));
+        settings = uiFactory.getTextButton("mms.buttonSettings", locale);
         settings.getLabel().setFontScale(.7f);
         settings.addListener(new SettingListener(settings));
 
-        exit = uiFactory.getTextButton(locale.get("buttonExit"));
+        exit = uiFactory.getTextButton("mms.buttonExit", locale);
         exit.getLabel().setFontScale(.7f);
         exit.addListener(new ExitListener(exit));
     }
