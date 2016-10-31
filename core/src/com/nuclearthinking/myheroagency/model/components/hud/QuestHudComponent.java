@@ -37,5 +37,4 @@ public final class QuestHudComponent implements Component {
             table.row();
         }
     }
-
 }
