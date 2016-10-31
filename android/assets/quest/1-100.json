@@ -1,13 +1,25 @@
 {
-  "quest":{
-    "id":"1",
-    "name":"Test",
-    "questInfo":{
-      "type":"ONE",
-      "npcId":[{"startNpcId":"1", "nextNpcId":"2", "endNpcId":"1"}],
-      "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
-      "reward":[{"id":"1","count":"1"}]
+  "quest":
+  [
+    {
+      "id":"1",
+      "name":"Test",
+      "questInfo":{
+        "type":"ONE",
+        "npcId":[{"startNpcId":"1", "nextNpcId":"2", "endNpcId":"1"}],
+        "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+        "reward":[{"id":"1","count":"1"}]
+      }
+    },
+    {
+      "id":"2",
+      "name":"Test2",
+      "questInfo":{
+        "type":"ONE",
+        "npcId":[{"startNpcId":"1", "nextNpcId":"2", "endNpcId":"1"}],
+        "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+        "reward":[{"id":"1","count":"1"}]
+      }
     }
-  },
-  "quest":{}
+  ]
 }

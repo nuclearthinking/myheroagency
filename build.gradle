@@ -79,6 +79,7 @@ project(":core") {
     apply plugin: "java"
 
     dependencies {
+        compile "com.fasterxml.jackson.core:jackson-databind:2.8.4"
         compile "com.esotericsoftware:kryo:3.0.3"
         compile "org.slf4j:slf4j-log4j12:1.7.21"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
