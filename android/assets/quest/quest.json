@@ -4,22 +4,24 @@
     {
       "id":"1",
       "name":"Посмотрите я квест!",
-      "questInfo":{
-        "type":"ONES",
-        "npcId":[{"startNpcId":"1", "nextNpcId":"2", "endNpcId":"1"}],
-        "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
-        "reward":[{"id":"1","count":"1"}]
-      }
+      "type":"ONES",
+      "npcId":[1,2,1],
+      "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
     },
     {
       "id":"2",
       "name":"Test2",
-      "questInfo":{
-        "type":"ONES",
-        "npcId":[{"startNpcId":"1", "nextNpcId":"2", "endNpcId":"1"}],
-        "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
-        "reward":[{"id":"1","count":"1"}]
-      }
+      "type":"ONES",
+      "npcId":[1,2,1],
+      "monsterId":[1],
+      "monsterKillCount":[1],
+      "questItemId":[1,2],
+      "questItemCount":[1,2,3],
+      "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
     }
   ]
 }

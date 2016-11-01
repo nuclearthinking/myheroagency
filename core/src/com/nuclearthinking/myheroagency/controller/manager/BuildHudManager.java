@@ -146,6 +146,8 @@ public final class BuildHudManager {
 
         val q = Asset.getInstance().get("quest/quest.json", JsonToQuest.class);
 
+        log.info(q.getQuestParser().getBaseQuest().toString());
+
         quest.setFactory(hud.uiFactory);
         quest.addQuestToList(q.getQuestParser().getBaseQuest().get(0).getName());
         quest.table.setSkin(hud.uiFactory.getSkin());
