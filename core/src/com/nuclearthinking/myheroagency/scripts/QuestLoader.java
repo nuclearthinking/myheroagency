@@ -8,7 +8,7 @@ import com.nuclearthinking.myheroagency.controller.manager.QuestManager;
 public final class QuestLoader {
 
     public static void load(){
-        QuestManager.addQuest(new _001_TestQuest());
+        QuestManager.addQuest(new _000_TestQuest());
     }
 
 }

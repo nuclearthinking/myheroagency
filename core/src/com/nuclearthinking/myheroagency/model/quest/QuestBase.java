@@ -17,6 +17,12 @@ import java.util.Arrays;
 @JsonPropertyOrder({"id","name","type","npcId","monsterId","monsterKillCount","questItemId","questItemCount","text","rewardId","rewardCount"})
 public class QuestBase {
 
+    public enum QuestType{
+        ONES,
+        REPEAT,
+        EPIC
+    }
+
     @JsonProperty("id")
     private @Getter int id;
     @JsonProperty("name")
