@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
 import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
@@ -143,8 +144,10 @@ public final class BuildHudManager {
     private QuestHudComponent buildQuest(@NonNull final HudComponent hud){
         val quest = engine.createComponent(QuestHudComponent.class);
 
+        val q = Asset.getInstance().get("quest/quest.json", JsonToQuest.class);
+
         quest.setFactory(hud.uiFactory);
-        quest.addQuestToList(QuestManager.getQuestById(1).getName());
+        quest.addQuestToList(q.getQuestParser().getBaseQuest().get(0).getName());
         quest.table.setSkin(hud.uiFactory.getSkin());
         quest.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         quest.table.setPosition(-Gdx.graphics.getWidth(), 0);
