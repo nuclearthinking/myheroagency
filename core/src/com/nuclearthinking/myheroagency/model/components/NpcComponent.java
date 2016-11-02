@@ -1,10 +1,13 @@
 package com.nuclearthinking.myheroagency.model.components;
 
+import lombok.Getter;
+
 /**
  * Created by mkuksin on 26.09.2016.
  */
 public final class NpcComponent extends GameActor {
 
+    private @Getter final int id = 1;
     public static final float BASE_HP_REG = 10;
     public static final float BASE_MP_REG = 10;
     public static final int BASE_HP_MAX = 100;

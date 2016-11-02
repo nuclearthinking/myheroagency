@@ -60,6 +60,10 @@ public class Quest {
         return questItems.contains(id);
     }
 
+    public void showDialog(final String text){
+        System.out.println(text);
+    }
+
     @Override
     public String toString() {
         return "Quest{" +

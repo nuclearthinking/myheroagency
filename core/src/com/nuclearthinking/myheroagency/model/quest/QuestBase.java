@@ -42,7 +42,7 @@ public class QuestBase {
     @JsonProperty("type")
     private @Getter QuestType type;
     @JsonProperty("npcId")
-    private @Getter int[] npcId;
+    private @Getter int npcId;
     @JsonProperty("monsterId")
     private @Getter int[] monsterId;
     @JsonProperty("monsterKillCount")
@@ -65,7 +65,7 @@ public class QuestBase {
                 ", name='" + name + '\'' +
                 ", description='" + description +
                 ", type=" + type +
-                ", npcId=" + Arrays.toString(npcId) +
+                ", npcId=" + npcId +
                 ", monsterId=" + Arrays.toString(monsterId) +
                 ", monsterCount=" + Arrays.toString(monsterCount) +
                 ", questItemId=" + Arrays.toString(questItemId) +

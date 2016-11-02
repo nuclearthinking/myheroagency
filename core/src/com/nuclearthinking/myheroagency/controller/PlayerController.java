@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.controller;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -134,6 +135,7 @@ public final class PlayerController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        engine.getSystem(NpcSystem.class).dialog();
         return false;
     }
 
