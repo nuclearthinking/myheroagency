@@ -8,15 +8,15 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.nuclearthinking.myheroagency.controller.manager.JsonToQuest;
+import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
 import lombok.val;
 
 /**
  * Created by mkuksin on 01.11.2016.
  */
-public class QuestLoader extends AsynchronousAssetLoader<JsonToQuest, QuestLoader.QuestParameter> {
+public class JsonLoader extends AsynchronousAssetLoader<JsonToObject, JsonLoader.QuestParameter> {
 
-    public QuestLoader(FileHandleResolver resolver) {
+    public JsonLoader(FileHandleResolver resolver) {
         super(resolver);
     }
 
@@ -25,8 +25,8 @@ public class QuestLoader extends AsynchronousAssetLoader<JsonToQuest, QuestLoade
     }
 
     @Override
-    public JsonToQuest loadSync(AssetManager manager, String fileName, FileHandle file, QuestParameter parameter) {
-        val quest = new JsonToQuest(file);
+    public JsonToObject loadSync(AssetManager manager, String fileName, FileHandle file, QuestParameter parameter) {
+        val quest = new JsonToObject(file);
         return quest;
     }
 
@@ -35,7 +35,7 @@ public class QuestLoader extends AsynchronousAssetLoader<JsonToQuest, QuestLoade
         return null;
     }
 
-    static public class QuestParameter extends AssetLoaderParameters<JsonToQuest> {
+    static public class QuestParameter extends AssetLoaderParameters<JsonToObject> {
         public final String jsonPath;
         public final ObjectMap<String, Object> resources;
 

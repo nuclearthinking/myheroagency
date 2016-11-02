@@ -26,6 +26,6 @@
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="player/player.pack"/>
     </group>
     <group name="quest">
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToQuest" path="quest/quest.json"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="quest/quest.json"/>
     </group>
 </assets>

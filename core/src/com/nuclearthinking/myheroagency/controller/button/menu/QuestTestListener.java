@@ -19,6 +19,6 @@ public final class QuestTestListener extends AbstractButtonListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        log.info(QuestManager.getQuestById(0).toString());
+        log.info(QuestManager.getQuestById(0).getQuest().getDescription());
     }
 }

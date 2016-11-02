@@ -4,6 +4,7 @@
     {
       "id":"1",
       "name":"Посмотрите я квест!",
+      "description":"Поговори с Валерой.",
       "type":"ONES",
       "npcId":[1,2,1],
       "questItemId":[1,2],
@@ -14,6 +15,7 @@
     {
       "id":"2",
       "name":"Test2",
+      "description":"Поговори с Веларией.",
       "type":"EPIC",
       "npcId":[1,2,1],
       "monsterId":[1],

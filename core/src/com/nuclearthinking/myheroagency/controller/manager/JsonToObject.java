@@ -14,12 +14,12 @@ import java.io.IOException;
 /**
  * Created by mkuksin on 01.11.2016.
  */
-@Slf4j(topic = "JsonToQuest")
-public class JsonToQuest {
+@Slf4j(topic = "JsonToObject")
+public class JsonToObject {
 
     private @Getter QuestParser questParser = null;
 
-    public JsonToQuest (@NonNull final FileHandle jsonFile) {
+    public JsonToObject(@NonNull final FileHandle jsonFile) {
         val questFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".json");
 
         if(questFile.exists()){
@@ -27,7 +27,7 @@ public class JsonToQuest {
         }
     }
 
-    public JsonToQuest(){}
+    public JsonToObject(){}
 
     public void load(@NonNull final FileHandle questFile) {
         log.info("File: " + questFile + " loading");

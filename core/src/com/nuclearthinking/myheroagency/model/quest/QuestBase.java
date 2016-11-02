@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.model.quest;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
@@ -13,8 +12,19 @@ import java.util.Arrays;
  * Created by mkuksin on 01.11.2016.
  */
 @Slf4j(topic = "QuestBase")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id","name","type","npcId","monsterId","monsterKillCount","questItemId","questItemCount","text","rewardId","rewardCount"})
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "description",
+        "type",
+        "npcId",
+        "monsterId",
+        "monsterKillCount",
+        "questItemId",
+        "questItemCount",
+        "text",
+        "rewardId",
+        "rewardCount"})
 public class QuestBase {
 
     public enum QuestType{
@@ -27,6 +37,8 @@ public class QuestBase {
     private @Getter int id;
     @JsonProperty("name")
     private @Getter String name;
+    @JsonProperty("description")
+    private @Getter String description;
     @JsonProperty("type")
     private @Getter QuestType type;
     @JsonProperty("npcId")
@@ -51,6 +63,7 @@ public class QuestBase {
         return "QuestInfo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description +
                 ", type=" + type +
                 ", npcId=" + Arrays.toString(npcId) +
                 ", monsterId=" + Arrays.toString(monsterId) +
