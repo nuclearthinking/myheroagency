@@ -7,8 +7,10 @@ import com.nuclearthinking.myheroagency.controller.manager.QuestManager;
  */
 public final class QuestLoader {
 
+    //Сюда добавляются квеста которы нужно загружать
     public static void load(){
-        QuestManager.addQuest(new _001_TestQuest());
+        QuestManager.addQuest(new _000_TestQuest());
+        QuestManager.addQuest(new _001_QuestOfFate());
     }
 
 }

@@ -144,7 +144,7 @@ public final class BuildHudManager {
         val quest = engine.createComponent(QuestHudComponent.class);
 
         quest.setFactory(hud.uiFactory);
-        quest.addQuestToList(QuestManager.getQuestById(1).getName());
+        quest.addQuestToList(QuestManager.getQuestById(0).getName());
         quest.table.setSkin(hud.uiFactory.getSkin());
         quest.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         quest.table.setPosition(-Gdx.graphics.getWidth(), 0);

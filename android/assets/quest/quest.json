@@ -1,0 +1,30 @@
+{
+  "quest_base":
+  [
+    {
+      "id":"1",
+      "name":"Посмотрите я квест!",
+      "description":"Поговори с Валерой.",
+      "type":"ONES",
+      "npcId":[1,2,1],
+      "questItemId":[1,2],
+      "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
+    },
+    {
+      "id":"2",
+      "name":"Test2",
+      "description":"Поговори с Веларией.",
+      "type":"EPIC",
+      "npcId":[1,2,1],
+      "monsterId":[1],
+      "monsterKillCount":[1],
+      "questItemId":[1,2],
+      "questItemCount":[1,2,3],
+      "text":[{"startText":"start_1.html","nextText":"nextNpcId_2.html","endText":"end_1.html"}],
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
+    }
+  ]
+}

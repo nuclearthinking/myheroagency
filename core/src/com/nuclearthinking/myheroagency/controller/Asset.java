@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.*;
+import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
 import com.nuclearthinking.myheroagency.model.Settings;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,7 @@ public final class Asset implements Disposable, AssetErrorListener {
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
         manager.setLoader(Skin.class, new SkinLoader(new InternalFileHandleResolver()));
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        manager.setLoader(JsonToObject.class, new JsonLoader(new InternalFileHandleResolver()));
 
         // Получаем список групп с ресурсами
         loadGroups(assetFile);

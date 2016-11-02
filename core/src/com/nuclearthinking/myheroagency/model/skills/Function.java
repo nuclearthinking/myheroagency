@@ -86,10 +86,10 @@ public final class Function {
 
         @Override
         public void calc(@NonNull final Env env) {
-            log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.debug("CON: "+env.getCharacter().getBaseCON());
-            log.debug("ConBonus: "+CONbonus[env.getCharacter().getBaseCON()]);
-            log.debug("All Env :"+env.getValue() * CONbonus[env.getCharacter().getBaseCON()] * MAX_HP_MOD);
+            //log.debug("Base Value "+getClass().getSimpleName()+": "+env.getValue());
+            //log.debug("CON: "+env.getCharacter().getBaseCON());
+            //log.debug("ConBonus: "+CONbonus[env.getCharacter().getBaseCON()]);
+            //log.debug("All Env :"+env.getValue() * CONbonus[env.getCharacter().getBaseCON()] * MAX_HP_MOD);
             env.setValue(env.getValue() * CONbonus[env.getCharacter().getBaseCON()] * MAX_HP_MOD);
         }
     }
@@ -140,10 +140,10 @@ public final class Function {
 
         @Override
         public void calc(@NonNull final Env env){
-            log.info("Base Value "+getClass().getSimpleName()+": "+env.getValue());
-            log.info("DEX: "+env.getCharacter().getBaseDEX());
-            log.info("DexBonus: "+DEXbonus[env.getCharacter().getBaseDEX()]);
-            log.info("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getBaseDEX()] * RUN_SPEED_MOD);
+            //log.info("Base Value "+getClass().getSimpleName()+": "+env.getValue());
+            //log.info("DEX: "+env.getCharacter().getBaseDEX());
+            //log.info("DexBonus: "+DEXbonus[env.getCharacter().getBaseDEX()]);
+            //log.info("All Env :"+env.getValue() * DEXbonus[env.getCharacter().getBaseDEX()] * RUN_SPEED_MOD);
             env.setValue(env.getValue() * DEXbonus[env.getCharacter().getBaseDEX()] * RUN_SPEED_MOD);
         }
     }
