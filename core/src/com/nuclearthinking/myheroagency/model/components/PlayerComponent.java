@@ -1,8 +1,12 @@
 package com.nuclearthinking.myheroagency.model.components;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by mkuksin on 01.09.2016.
  */
+@Slf4j(topic = "PlayerComponent")
 public final class PlayerComponent extends GameActor {
 
     public static final float BASE_HP_REG = 10;
@@ -19,8 +23,39 @@ public final class PlayerComponent extends GameActor {
     public static final int BASE_MCRIT_RATE = 10;
     public static final int BASE_RUN_SPD = 100;
 
+    private @Getter int lvl = 1;
+    private @Getter int exp = 0;
+
+    private static final int maxLvl = 10;
+
+    private static final int needToLvlUp[] = {0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000}; //TODO: Статичный костыль
+
     public PlayerComponent(){
         super();
     }
 
+    public void setLevel(final int lvl){
+        if(this.lvl + lvl > maxLvl){
+            this.lvl = maxLvl;
+            log.info("You have maximum level");
+            return;
+        }else
+            this.lvl = lvl;
+    }
+
+    public void setExp(final int exp){
+        if(lvl < maxLvl){
+            int tmp = this.exp + exp;
+            for (int i = 0; i < needToLvlUp.length; i++) {
+                if(tmp >= needToLvlUp[i] && lvl < i+1){
+                   setLevel(lvl+1);
+                }
+                else {
+                    this.exp = exp;
+                }
+            }
+        }
+        else
+            log.info("You have maximum level");
+    }
 }
