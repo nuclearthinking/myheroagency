@@ -8,11 +8,11 @@ import org.apache.log4j.PropertyConfigurator;
 
 @Slf4j(topic = "Main")
 public final class Main extends Game {
+
     @Override
     public void create() {
         PropertyConfigurator.configure("log4j.properties");
         ScreenManager.getInstance().initialize(this);
         ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
     }
-
 }

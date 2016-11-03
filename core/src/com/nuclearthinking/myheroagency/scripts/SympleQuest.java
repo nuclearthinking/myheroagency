@@ -8,5 +8,5 @@ import lombok.NonNull;
  */
 public interface SympleQuest {
 
-    void dialog(@NonNull final NpcComponent npc);
+    void onTalk(@NonNull final NpcComponent npc);
 }
