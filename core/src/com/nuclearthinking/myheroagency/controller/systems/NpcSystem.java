@@ -31,13 +31,27 @@ public final class NpcSystem extends ActorSystem {
         try {
             if(command.equalsIgnoreCase("openWindow")){
                 log.info("Player " + player.getLevel() + " use command " + "[" + command + "]");
-                Quest quest = Quest.getQ().get(0);
-                quest.notifyTalk(this);
+            }
+            else if (command.startsWith("quest")){
+                log.info("Player " + player.getLevel() + " use command " + "[" + command + "]");
+                String quest = command.substring(5).trim();
+                if (quest.length() > 0) {
+                    showQuestWindow(player, quest);
+                }
             }
         }
         catch (StringIndexOutOfBoundsException e){
             log.info("Incorrect command: " + "[" + command + "]" + ((NpcComponent)actor).getId());
         }
+    }
+
+    private void showQuestWindow(@NonNull final  PlayerSystem player, final String questId){
+        // TODO: должно быть что то такое
+        //Quest q = ((PlayerComponent)player.getActor()).getQuest(questId);
+        //q.notifyTalk(this);
+
+        Quest quest = Quest.getQ(questId);
+        quest.notifyTalk(this);
     }
 
     @Override

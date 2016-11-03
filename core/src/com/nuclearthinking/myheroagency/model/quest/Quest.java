@@ -8,9 +8,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Izonami on 20.06.2016.
@@ -23,10 +21,13 @@ public abstract class Quest {
     protected @Getter final int questId;
     protected @Getter QuestBase quest;
 
-    private @Getter static ArrayList<Quest> q = new ArrayList<Quest>();
+    //TODO: Костыль
+    private static Map<String, Quest> q = new HashMap<String, Quest>();
+    public static Quest getQ(final String qu){
+        return q.get(qu);
+    }
 
     private Set<Integer> questItems = new HashSet<Integer>();
-
 
     public Quest(){
         final int id = Integer.parseInt(getClass().getSimpleName().split("_")[1]);
@@ -41,7 +42,7 @@ public abstract class Quest {
         }
 
         log.info("Quest Name: " + name + " QuestID: " + questId);
-        q.add(this);
+        q.put(Integer.toString(id), this); //TODO: Костыль
     }
 
     /**
