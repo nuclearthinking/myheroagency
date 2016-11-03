@@ -22,8 +22,7 @@ public class Quest {
     protected @Getter QuestBase quest;
 
     private Set<Integer> questItems = new HashSet<Integer>();
-
-
+    
     public Quest(){
         final int id = Integer.parseInt(getClass().getSimpleName().split("_")[1]);
 
