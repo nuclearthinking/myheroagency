@@ -19,8 +19,6 @@ public final class QuestHudComponent implements Component {
     public static final Table table = new Table();
     public static final Map<String, Actor> QUEST_LIST = new LinkedHashMap<String, Actor>();
 
-    public static boolean isShowTable = true;
-
     private static @Setter UiFactory factory;
 
     public void addQuestToList(final String name){

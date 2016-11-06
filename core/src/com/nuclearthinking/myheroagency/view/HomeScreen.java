@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
+import com.nuclearthinking.myheroagency.controller.systems.*;
 import com.nuclearthinking.myheroagency.model.components.hud.HudComponent;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,26 +26,26 @@ public final class HomeScreen extends AbstractScreen {
         engine = new PooledEngine();
         gameWorldManager = new GameWorldManager(engine, stage.getBatch());
         pc = new PlayerController(engine);
-        lc = new LayerController(engine);
+        lc = new LayerController();
     }
 
     @Override
     public void buildStage() {
         log.info("Add Entity Systems");
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.MapSystem(gameWorldManager.getWorld()));
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.RenderingSystem(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.MapSystem.class).getBatch(), gameWorldManager.getWorld()));
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.PlayerSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.NpcSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.MonsterSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.LightSystem(gameWorldManager.getWorld()));
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.CameraSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.MovementSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.StateSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.AnimationSystem());
-        engine.addSystem(new com.nuclearthinking.myheroagency.controller.systems.HudSystem());
+        engine.addSystem(new MapSystem(gameWorldManager.getWorld()));
+        engine.addSystem(new RenderingSystem(engine.getSystem(MapSystem.class).getBatch(), gameWorldManager.getWorld()));
+        engine.addSystem(new PlayerSystem());
+        engine.addSystem(new NpcSystem());
+        engine.addSystem(new MonsterSystem());
+        engine.addSystem(new LightSystem(gameWorldManager.getWorld()));
+        engine.addSystem(new CameraSystem());
+        engine.addSystem(new MovementSystem());
+        engine.addSystem(new StateSystem());
+        engine.addSystem(new AnimationSystem());
+        engine.addSystem(new HudSystem());
 
-        engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.MapSystem.class).setCamera(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.RenderingSystem.class).getCamera());
-        engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.LightSystem.class).setCamera(engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.RenderingSystem.class).getCamera());
+        engine.getSystem(MapSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
+        engine.getSystem(LightSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
         log.info("Creating World");
         gameWorldManager.create();
@@ -74,8 +75,8 @@ public final class HomeScreen extends AbstractScreen {
     public void resize(int width, int height) {
         super.resize(width, height);
 
-        engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.RenderingSystem.class).resize(width, height);
-        engine.getSystem(com.nuclearthinking.myheroagency.controller.systems.HudSystem.class).resize(width,height);
+        engine.getSystem(RenderingSystem.class).resize(width, height);
+        engine.getSystem(HudSystem.class).resize(width,height);
     }
 
 }

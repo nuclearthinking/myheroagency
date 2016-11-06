@@ -1,66 +1,37 @@
 package com.nuclearthinking.myheroagency.controller;
 
-import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.nuclearthinking.myheroagency.controller.systems.HudSystem;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent;
 import com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent;
 import com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent;
 import lombok.NonNull;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by Izonami on 30.05.2016.
  */
 public final class LayerController implements InputProcessor {
 
-    private final Engine layer;
+    public LayerController(){}
 
-    public LayerController(@NonNull final Engine layer){
-        this.layer = layer;
-    }
-
-    private void settingsMenu(){
-        if(SettingHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).table(SettingHudComponent.table, SettingHudComponent.isShowTable);
-            SettingHudComponent.isShowTable = false;
-        }
-        else{
-            layer.getSystem(HudSystem.class).table(SettingHudComponent.table, SettingHudComponent.isShowTable);
-            SettingHudComponent.isShowTable = true;
-        }
-    }
-
-    private void questList(){
-        if(QuestHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).table(QuestHudComponent.table, QuestHudComponent.isShowTable);
-            QuestHudComponent.isShowTable = false;
-        }
-        else{
-            layer.getSystem(HudSystem.class).table(QuestHudComponent.table, QuestHudComponent.isShowTable);
-            QuestHudComponent.isShowTable = true;
-        }
-    }
-
-    private void statList(){
-        if(StatHudComponent.isShowTable){
-            layer.getSystem(HudSystem.class).table(StatHudComponent.table, StatHudComponent.isShowTable);
-            StatHudComponent.isShowTable = false;
-        }
-        else{
-            layer.getSystem(HudSystem.class).table(StatHudComponent.table, StatHudComponent.isShowTable);
-            StatHudComponent.isShowTable = true;
-        }
+    public void showTable(@NonNull final Table table){
+        if(table.getX() <= -Gdx.graphics.getWidth()) table.addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+        else if(table.getX() == 0) table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
     }
 
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode){
-            case Input.Keys.ESCAPE:settingsMenu();
+            case Input.Keys.ESCAPE:showTable(SettingHudComponent.table);
                 break;
-            case Input.Keys.J:questList();
+            case Input.Keys.J:showTable(QuestHudComponent.table);
                 break;
-            case Input.Keys.L:statList();
+            case Input.Keys.L:showTable(StatHudComponent.table);
                 break;
         }
         return false;

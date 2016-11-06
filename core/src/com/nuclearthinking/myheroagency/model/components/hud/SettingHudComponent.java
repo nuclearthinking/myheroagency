@@ -15,8 +15,6 @@ import lombok.Setter;
 public final class SettingHudComponent implements Component {
     public static final Table table = new Table();
 
-    public static boolean isShowTable = true;
-
     private  @Getter final Localization locale = new Localization(this.getClass());
 
     private @Getter @Setter Label titleLabel;

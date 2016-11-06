@@ -101,7 +101,7 @@ public final class BuildHudManager {
         stat.table.setSkin(hud.uiFactory.getSkin());
         //stat.table.setBackground("default-window");
         stat.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-        stat.table.setPosition(60, Gdx.graphics.getHeight()-60);
+        stat.table.setPosition(-Gdx.graphics.getWidth(), 0);
         stat.table.add(stat.getCon()).center();
         stat.table.add(stat.getPlus());
         stat.table.add(stat.getMinus());

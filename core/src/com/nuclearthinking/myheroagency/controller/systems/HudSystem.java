@@ -4,14 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.model.Components;
 import com.nuclearthinking.myheroagency.model.components.hud.*;
-import lombok.NonNull;
 import lombok.val;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by mkuksin on 03.10.2016.
@@ -47,17 +42,16 @@ public final class HudSystem extends IteratingSystem {
 
     public void resize(int w, int h){
         HudComponent.getStage().getViewport().update(w, h, true);
+
         UtilsHudComponent.table.setPosition(w*0.85f, h*0.95f);
         PlayerHudComponent.table.setPosition(w*.10f, h*0.90f);
+
+        SettingHudComponent.table.setPosition(-w,h);
+        QuestHudComponent.table.setPosition(-w,h);
+        StatHudComponent.table.setPosition(-w,h);
+
         SettingHudComponent.table.setSize(w, h);
         QuestHudComponent.table.setSize(w/2, h);
         StatHudComponent.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-    }
-
-    public void table(@NonNull final Table table, boolean show){
-        if(show)
-        table.addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
-        else
-        table.addAction(sequence(moveTo(0, 0), moveTo(-Gdx.graphics.getWidth(), 0, .5f)));
     }
 }
