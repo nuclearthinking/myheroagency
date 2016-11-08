@@ -2,11 +2,15 @@ package com.nuclearthinking.myheroagency.controller.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.nuclearthinking.myheroagency.model.Components;
 import com.nuclearthinking.myheroagency.model.components.BodyComponent;
 import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.model.components.StateComponent;
+import com.nuclearthinking.myheroagency.model.components.TouchComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
@@ -17,15 +21,26 @@ import lombok.val;
 public final class NpcSystem extends ActorSystem implements Speaker{
     private static final Family family = Family.all(StateComponent.class,
                                                     NpcComponent.class,
-                                                    BodyComponent.class).get();
+                                                    BodyComponent.class,
+                                                    TouchComponent.class).get();
 
     public NpcSystem() {
         super(family);
     }
 
+    private @Getter @Setter boolean touch = false;
+
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        @NonNull val t = Components.TOUCH.get(entity);
 
+        if(touch){
+            t.setTouch(touch);
+            t.setActor(this);
+            touch = false;
+        }
+        else
+            t.setTouch(touch);
     }
 
     @Override

@@ -39,6 +39,7 @@ public final class BuildNpcManager {
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
         val npc = engine.createComponent(NpcComponent.class);
+        val touch = engine.createComponent(TouchComponent.class);
         engine.getSystem(NpcSystem.class).setActor(npc);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
@@ -66,6 +67,7 @@ public final class BuildNpcManager {
         entity.add(light);
         entity.add(npc);
         entity.add(bodyCom);
+        entity.add(touch);
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);

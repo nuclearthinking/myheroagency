@@ -86,13 +86,10 @@ public final class PlayerController implements InputProcessor {
             accelY = 1;
 
         if (keys.get(Keys.DOWN))
-            System.out.println("Down");
 
         if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
-            System.out.println("1");
 
         if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
-            System.out.println("2");
 
         engine.getSystem(PlayerSystem.class).setAccelX(accelX);
         engine.getSystem(PlayerSystem.class).setAccelY(accelY);
@@ -135,7 +132,7 @@ public final class PlayerController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        engine.getSystem(PlayerSystem.class).talkTo(engine.getSystem(NpcSystem.class), null);
+        engine.getSystem(NpcSystem.class).setTouch(true);
         return false;
     }
 

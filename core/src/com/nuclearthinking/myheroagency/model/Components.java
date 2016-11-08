@@ -21,6 +21,7 @@ public final class Components {
     public static final ComponentMapper<GravityComponent> GRAVITY = ComponentMapper.getFor(GravityComponent.class);
     public static final ComponentMapper<MapComponent> MAP = ComponentMapper.getFor(MapComponent.class);
     public static final ComponentMapper<MovementComponent> MOVEMENT = ComponentMapper.getFor(MovementComponent.class);
+    public static final ComponentMapper<TouchComponent> TOUCH = ComponentMapper.getFor(TouchComponent.class);
     public static final ComponentMapper<PlayerComponent> PLAYER = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<NpcComponent> NPC = ComponentMapper.getFor(NpcComponent.class);
     public static final ComponentMapper<MonsterComponent> MONSTER = ComponentMapper.getFor(MonsterComponent.class);
