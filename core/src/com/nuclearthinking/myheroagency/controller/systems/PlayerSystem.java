@@ -57,6 +57,10 @@ public final class PlayerSystem extends ActorSystem {
         checkBorderWorld(body);
     }
 
+    public void talkTo(@NonNull final Speaker object, final String command){
+        object.showDialog(this, command);
+    }
+
     private void checkBorderWorld(final BodyComponent t){
         final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
         final int borderRight = MapComponent.getLevelPixelWidth();

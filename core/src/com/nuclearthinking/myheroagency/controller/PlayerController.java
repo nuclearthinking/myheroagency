@@ -135,7 +135,7 @@ public final class PlayerController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        engine.getSystem(NpcSystem.class).showDialog(engine.getSystem(PlayerSystem.class), "quest0");
+        engine.getSystem(PlayerSystem.class).talkTo(engine.getSystem(NpcSystem.class), null);
         return false;
     }
 
