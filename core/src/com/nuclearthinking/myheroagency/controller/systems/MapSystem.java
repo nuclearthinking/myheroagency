@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.model.components.MapComponent;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public final class MapSystem extends IteratingSystem {
     private @Getter @Setter OrthogonalTiledMapRenderer renderer = null;
 
     public MapSystem(@NonNull World world) {
-        this("map/testMap.tmx", world);
+        this(Constants.MAP, world);
     }
 
     public MapSystem(@NonNull String mapName, @NonNull World world){
@@ -58,7 +59,7 @@ public final class MapSystem extends IteratingSystem {
         renderer.setView(camera);
     }
 
-    private static Array<Body> buildShapes(@NonNull final Map map, @NonNull final World world, final String layer, float pixels){
+    private Array<Body> buildShapes(@NonNull final Map map, @NonNull final World world, final String layer, float pixels){
         @NonNull val objects = map.getLayers().get(layer).getObjects();
         @NonNull val bodies = new Array<Body>();
 
@@ -107,7 +108,7 @@ public final class MapSystem extends IteratingSystem {
         return renderer;
     }
 
-    private static PolygonShape getRectangle(@NonNull final RectangleMapObject rectangleObject, final float ppt) {
+    private PolygonShape getRectangle(@NonNull final RectangleMapObject rectangleObject, final float ppt) {
         @NonNull val rectangle = rectangleObject.getRectangle();
         @NonNull val polygon = new PolygonShape();
         @NonNull val size = new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt,
@@ -119,7 +120,7 @@ public final class MapSystem extends IteratingSystem {
         return polygon;
     }
 
-    private static CircleShape getCircle(@NonNull final CircleMapObject circleObject, final float ppt) {
+    private CircleShape getCircle(@NonNull final CircleMapObject circleObject, final float ppt) {
         @NonNull val circle = circleObject.getCircle();
         @NonNull val circleShape = new CircleShape();
 
@@ -128,7 +129,7 @@ public final class MapSystem extends IteratingSystem {
         return circleShape;
     }
 
-    private static PolygonShape getPolygon(@NonNull final PolygonMapObject polygonObject, final float ppt) {
+    private PolygonShape getPolygon(@NonNull final PolygonMapObject polygonObject, final float ppt) {
         @NonNull val polygon = new PolygonShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
         float[] worldVertices = new float[vertices.length];
@@ -142,7 +143,7 @@ public final class MapSystem extends IteratingSystem {
         return polygon;
     }
 
-    private static ChainShape getPolyline(@NonNull final PolylineMapObject polylineObject, final float ppt) {
+    private ChainShape getPolyline(@NonNull final PolylineMapObject polylineObject, final float ppt) {
         float[] vertices = polylineObject.getPolyline().getTransformedVertices();
         @NonNull val worldVertices = new Vector2[vertices.length / 2];
 
@@ -156,5 +157,4 @@ public final class MapSystem extends IteratingSystem {
         chain.createChain(worldVertices);
         return chain;
     }
-
 }

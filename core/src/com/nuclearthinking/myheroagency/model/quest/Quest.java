@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.quest;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.util.*;
 @Slf4j(topic = "Quest")
 public abstract class Quest {
 
-    protected static final ArrayList<QuestBase> questInfo = Asset.getInstance().get("quest/quest.json", JsonToObject.class).getQuestParser().getBaseQuest();
+    protected static final ArrayList<QuestBase> questInfo = Asset.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
     protected @Getter final String name;
     protected @Getter final int questId;
     protected @Getter QuestBase quest;

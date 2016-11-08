@@ -9,26 +9,32 @@ import com.nuclearthinking.myheroagency.model.ui.FontFactory;
 import com.nuclearthinking.myheroagency.scripts.QuestLoader;
 import lombok.extern.slf4j.Slf4j;
 
+import static com.nuclearthinking.myheroagency.utils.Constants.*;
+
 @Slf4j(topic = "LoadingScreen")
 public final class LoadingScreen extends AbstractScreen {
 
+    //Статический блок, для загрузки ассетов
     static {
-        Asset.getInstance().init("asset/main.xml");
-        Asset.getInstance().loadGroup("loading");
+        Asset.getInstance().init(ASSET_FILE);
+        Asset.getInstance().loadGroup(ASSET_GROUP_LOADING);
         Asset.getInstance().finishLoading();
-        Asset.getInstance().loadGroup("localization");
-        Asset.getInstance().loadGroup("base");
-        Asset.getInstance().loadGroup("quest");
+        Asset.getInstance().loadGroup(ASSET_GROUP_LOCALE);
+        Asset.getInstance().loadGroup(ASSET_GROUP_BASE);
+        Asset.getInstance().loadGroup(ASSET_GROUP_QUEST);
         Asset.getInstance().finishLoading();
         QuestLoader.load();
     }
 
-    private static FontFactory fontFactory;
-    private static float loadingPercent;
+    private FontFactory fontFactory;
+    private float loadingPercent;
+
+    public LoadingScreen(){
+        fontFactory = new FontFactory();
+    }
 
     @Override
     public void buildStage() {
-        fontFactory = new FontFactory();
         loadingPercent = .0f;
     }
 
@@ -44,7 +50,7 @@ public final class LoadingScreen extends AbstractScreen {
         loading();
 
         stage.getBatch().begin();
-        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Settings.getWidth() - 150, 35);
+        fontFactory.getRobotoLight(18).draw(stage.getBatch(), locale.format("loading", loadingPercent), Settings.getInstance().getWidth() - 150, 35);
         stage.getBatch().end();
     }
 

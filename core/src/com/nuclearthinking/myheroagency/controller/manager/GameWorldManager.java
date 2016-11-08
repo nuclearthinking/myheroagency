@@ -14,6 +14,7 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -22,13 +23,13 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public final class GameWorldManager {
-    public static final TextureAtlas playerAtlas = Asset.getInstance().get("player/player.pack");
+
+    public static final TextureAtlas playerAtlas = Asset.getInstance().get(Constants.PLAYER_PACK);
     public static final Animation IDLE = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
     public static final Animation LEFT = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
     public static final Animation RIGHT = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
 
     private PooledEngine engine;
-
     private @Getter World world;
 
     private final BuildHudManager buildHudManager;

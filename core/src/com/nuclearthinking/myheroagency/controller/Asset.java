@@ -32,6 +32,8 @@ public final class Asset implements Disposable, AssetErrorListener {
     private ObjectMap<String, Array<Assets>> groups;
     private Locale locale;
 
+    private Asset(){super();}
+
     public static Asset getInstance() {
         if (instance == null) {
             instance = new Asset();
@@ -40,13 +42,15 @@ public final class Asset implements Disposable, AssetErrorListener {
     }
 
     public void init(@NonNull final String assetFile) {
+        val settings = Settings.getInstance();
+
         manager = new AssetManager(); // Инициализируем менеджер ассетов
-        manager.setErrorListener(this); // Ставим листнера ошибок
-        Settings.loadSettings(); // Загружаем настройки
+        manager.setErrorListener(this); // Устанавливаем листнера ошибок
+        settings.loadSettings(); // Загружаем настройки
 
         log.info("Loading assets");
-        locale = new Locale(Settings.getLanguage()); // Получаем локаль из пропертей
-        Gdx.graphics.setWindowedMode(Settings.getWidth(), Settings.getHeight()); // Получаем разрешение из пропертей
+        locale = new Locale(settings.getLanguage()); // Получаем локаль из пропертей
+        Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight()); // Получаем разрешение из пропертей
 
         //Задаем загрузчики для ресурсов
         manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
@@ -67,7 +71,7 @@ public final class Asset implements Disposable, AssetErrorListener {
     public void reloadLocale(){
         log.info("Start reloading localization");
         unloadGroup("localization");
-        locale = new Locale(Settings.getLanguage());
+        locale = new Locale(Settings.getInstance().getLanguage());
         manager.setLoader(I18NBundle.class, new CustomI18NBundleLoader(new InternalFileHandleResolver(), new CustomI18NBundleLoader.I18NBundleParameter(locale)));
         loadGroup("localization");
         finishLoading();

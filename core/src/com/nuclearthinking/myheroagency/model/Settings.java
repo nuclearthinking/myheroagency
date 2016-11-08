@@ -11,16 +11,27 @@ import static com.nuclearthinking.myheroagency.utils.Constants.PREFERENCES_NAME;
 @Slf4j(topic = "Settings")
 public final class Settings {
 
-    private static final String LANGUAGE_KEY = "language";
-    private static final String HEIGHT_KEY = "height";
-    private static final String WIDTH_KEY = "width";
-    private static final String DEFAULT_LANGUAGE = "en";
+    private final String LANGUAGE_KEY = "language";
+    private final String HEIGHT_KEY = "height";
+    private final String WIDTH_KEY = "width";
+    private final String DEFAULT_LANGUAGE = "en";
 
-    private @Setter static String language;
-    private @Setter static int height;
-    private @Setter static int width;
+    private @Setter String language;
+    private @Setter int height;
+    private @Setter int width;
 
-    private static void defaultSettings() {
+    private static Settings instance;
+
+    private Settings(){defaultSettings();}
+
+    public static Settings getInstance(){
+        if(instance == null){
+            instance = new Settings();
+        }
+        return instance;
+    }
+
+    private void defaultSettings() {
         log.info("Loading default settings");
 
         setLanguage(DEFAULT_LANGUAGE);
@@ -28,7 +39,7 @@ public final class Settings {
         setHeight(Constants.GAME_H);
     }
 
-    public static void loadSettings() {
+    public void loadSettings() {
         log.info("Loading settings {} from preferences", PREFERENCES_NAME);
 
         val preferences = Gdx.app.getPreferences(PREFERENCES_NAME);
@@ -55,16 +66,16 @@ public final class Settings {
         preferences.flush();
     }
 
-    public static String getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public static int getHeight()
+    public int getHeight()
     {
         return height;
     }
 
-    public static int getWidth()
+    public int getWidth()
     {
         return width;
     }

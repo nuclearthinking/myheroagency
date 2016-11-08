@@ -48,7 +48,7 @@ public final class RenderingSystem extends IteratingSystem {
         this.world = world;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Settings.getWidth(), Settings.getHeight());
+        camera.setToOrtho(false, Settings.getInstance().getWidth(), Settings.getInstance().getHeight());
 
         renderer = new Box2DDebugRenderer();
     }

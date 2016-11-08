@@ -18,14 +18,18 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
  */
 public final class MainMenuScreen extends AbstractScreen {
 
-    private static Table table;
-    private static TextButton play, load, settings, exit;
-    private static UiFactory uiFactory;
+    private final Table table;
+    private final UiFactory uiFactory;
+    private final String screenName = getClass().getSimpleName();
+    private TextButton play, load, settings, exit;
+
+    public MainMenuScreen(){
+        uiFactory = new UiFactory();
+        table = new Table(); // Создаем таблицу
+    }
 
     @Override
     public void buildStage() {
-        uiFactory = new UiFactory();
-        table = new Table(); // Создаем таблицу
         table.setDebug(Constants.DEBUG); // Включаем дебаг режим (Разные прямоугольнико вокруг кнопок это оно самое)
         table.setFillParent(true);
 
@@ -46,21 +50,21 @@ public final class MainMenuScreen extends AbstractScreen {
     }
 
     private void initButton() {
-        // При создании нужно передавать название кнопки(лейбл), скин и соответсвующий скину шрифт. Default не поддерживает русский
-        play = uiFactory.getTextButton("mms.buttonPlay", locale);
+
+        play = uiFactory.getTextButton("mms.buttonPlay", screenName, locale);
         play.getLabel().setFontScale(.9f);
         play.getLabel().setColor(Color.FOREST);
         play.addListener(new PlayListener(play)); //Добавляет листнер кнопке
 
-        load = uiFactory.getTextButton("mms.buttonLoad", locale);
+        load = uiFactory.getTextButton("mms.buttonLoad", screenName, locale);
         load.getLabel().setFontScale(.7f);
         load.addListener(new LoadListener(load));
 
-        settings = uiFactory.getTextButton("mms.buttonSettings", locale);
+        settings = uiFactory.getTextButton("mms.buttonSettings", screenName, locale);
         settings.getLabel().setFontScale(.7f);
         settings.addListener(new SettingListener(settings));
 
-        exit = uiFactory.getTextButton("mms.buttonExit", locale);
+        exit = uiFactory.getTextButton("mms.buttonExit", screenName, locale);
         exit.getLabel().setFontScale(.7f);
         exit.addListener(new ExitListener(exit));
     }

@@ -11,8 +11,11 @@ public final class Main extends Game {
 
     @Override
     public void create() {
+        //Загружаем файл с конфигурацией логера
         PropertyConfigurator.configure("log4j.properties");
+        //Инициализируем менеджер экранов
         ScreenManager.getInstance().initialize(this);
+        //Устанавливаем экран
         ScreenManager.getInstance().showScreen(ScreenEnum.LOADING_SCREEN);
     }
 }

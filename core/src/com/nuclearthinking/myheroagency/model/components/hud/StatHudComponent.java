@@ -14,7 +14,6 @@ import lombok.Setter;
  */
 public final class StatHudComponent implements Component {
     public static final Table table = new Table();
-    public static boolean isShowTable = true;
 
     private @Getter @Setter TextButton plus;
     private @Getter @Setter TextButton minus;

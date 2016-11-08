@@ -25,6 +25,7 @@ public final class BuildHudManager {
 
     private final PooledEngine engine;
     private final Batch batch;
+    private final String screenName = getClass().getSimpleName();
 
     public BuildHudManager(@NonNull final PooledEngine engine, @NonNull final Batch batch){
         this.engine = engine;
@@ -101,7 +102,7 @@ public final class BuildHudManager {
         stat.table.setSkin(hud.uiFactory.getSkin());
         //stat.table.setBackground("default-window");
         stat.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-        stat.table.setPosition(60, Gdx.graphics.getHeight()-60);
+        stat.table.setPosition(-Gdx.graphics.getWidth(), 0);
         stat.table.add(stat.getCon()).center();
         stat.table.add(stat.getPlus());
         stat.table.add(stat.getMinus());
@@ -112,11 +113,11 @@ public final class BuildHudManager {
     private SettingHudComponent buildSettings(@NonNull final HudComponent hud){
         val settings = engine.createComponent(SettingHudComponent.class);
 
-        settings.setTitleLabel(hud.uiFactory.getLabel("shc.mainTitle", settings.getLocale()));
-        settings.setWidthLabel(hud.uiFactory.getLabel("shc.widthLabel", settings.getLocale()));
-        settings.setHeightLabel(hud.uiFactory.getLabel("shc.heightLabel", settings.getLocale()));
-        settings.setExit(hud.uiFactory.getTextButton("shc.buttonExit", settings.getLocale()));
-        settings.setSave(hud.uiFactory.getTextButton("shc.buttonSave", settings.getLocale()));
+        settings.setTitleLabel(hud.uiFactory.getLabel("shc.mainTitle", screenName, settings.getLocale()));
+        settings.setWidthLabel(hud.uiFactory.getLabel("shc.widthLabel", screenName, settings.getLocale()));
+        settings.setHeightLabel(hud.uiFactory.getLabel("shc.heightLabel", screenName, settings.getLocale()));
+        settings.setExit(hud.uiFactory.getTextButton("shc.buttonExit", screenName, settings.getLocale()));
+        settings.setSave(hud.uiFactory.getTextButton("shc.buttonSave", screenName, settings.getLocale()));
         settings.getExit().addListener(new ExitListener(settings.getExit()));
         settings.getSave().addListener(new SaveLayerListener(settings.getSave(), settings));
         settings.setWidth(hud.uiFactory.getTextField("800"));
