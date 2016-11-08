@@ -24,7 +24,8 @@ public final class SaveListener extends AbstractButtonListener {
 
     @Override
     public void clicked (InputEvent event, float x, float y) {
-        val settings = new Settings();
+        val settings = Settings.getInstance();
+
         settings.setLanguage(screen.getSelectLanguage().getSelected().toString());
         settings.setHeight(Integer.parseInt(screen.getHeight().getText()));
         settings.setWidth(Integer.parseInt(screen.getWidth().getText()));

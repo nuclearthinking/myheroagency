@@ -21,8 +21,7 @@ public abstract class AbstractScreen implements Screen {
 
     protected final Stage stage;
 
-    protected @Getter @Setter
-    GameDataManager gameDataManager;
+    protected @Getter @Setter GameDataManager gameDataManager;
 
     AbstractScreen() {
         stage = new Stage(new ScreenViewport(new OrthographicCamera()));

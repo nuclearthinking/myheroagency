@@ -9,8 +9,13 @@ import com.nuclearthinking.myheroagency.model.components.hud.UtilsHudComponent;
 
 /**
  * Created by mkuksin on 02.09.2016.
+ *
+ * ComponentMapper - выполняется за O(1)
+ * Одиночный вызов например AnimationComponent velocity = entity.getComponent(AnimationComponent.class);
+ * выполнится за O(log n) что существенно дольше.
  */
 public final class Components {
+
     public static final ComponentMapper<AnimationComponent> ANIMATION = ComponentMapper.getFor(AnimationComponent.class);
     public static final ComponentMapper<CameraComponent> CAMERA = ComponentMapper.getFor(CameraComponent.class);
     public static final ComponentMapper<GravityComponent> GRAVITY = ComponentMapper.getFor(GravityComponent.class);

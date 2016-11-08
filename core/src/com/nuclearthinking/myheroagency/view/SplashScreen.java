@@ -10,6 +10,7 @@ import com.nuclearthinking.myheroagency.controller.ScreenEnum;
 import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.ui.FontFactory;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import com.nuclearthinking.myheroagency.utils.TextActor;
 import lombok.val;
 
@@ -24,27 +25,24 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public final class SplashScreen extends AbstractScreen {
 
     private final Texture texture;
-    private static Image splashImage;
-    private static TextActor actor;
-    private static FontFactory fontFactory;
-    private static ScreenController controller;
+    private final Image splashImage;
+    private final TextActor actor;
+    private final FontFactory fontFactory;
+    private final ScreenController controller;
 
     public SplashScreen() {
-        super();
-
-        texture = Asset.getInstance().get("img/splash.png", Texture.class);
+        texture = Asset.getInstance().get(Constants.SPLASH_IMG, Texture.class);
         controller = new ScreenController();
+        fontFactory = new FontFactory();
+        //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
+        actor = new TextActor(fontFactory.getRobotoLight(26), "   " + Constants.COM_NAME, stage);
+        splashImage = new Image(texture);
     }
 
     @Override
     public void buildStage() {
-        fontFactory = new FontFactory();
-        //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
-        actor = new TextActor(fontFactory.getRobotoLight(26), "   " + "FOG", stage);
-        splashImage = new Image(texture);
-
-        actor.setPosition(Settings.getWidth() / 2 - splashImage.getWidth(),
-                Settings.getHeight() / 2 + splashImage.getHeight());
+        actor.setPosition(Settings.getInstance().getWidth() / 2 - splashImage.getWidth(),
+                Settings.getInstance().getHeight() / 2 + splashImage.getHeight());
         actor.fadeText();
 
         val load = new Runnable() {

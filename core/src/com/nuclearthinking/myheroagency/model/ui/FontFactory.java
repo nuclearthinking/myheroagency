@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.ui;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.val;
 
 import java.util.HashMap;
@@ -43,14 +44,14 @@ public final class FontFactory {
 
     private FreeTypeFontGenerator getRobotoLightGenerator() {
         if (robotoLightGenerator == null) {
-            robotoLightGenerator = Asset.getInstance().get("font/RobotoSlab-Light.ttf");
+            robotoLightGenerator = Asset.getInstance().get(Constants.FONT_ROBO_LIGHT);
         }
         return robotoLightGenerator;
     }
 
     private FreeTypeFontGenerator getRobotoBoldGenerator() {
         if (robotoBoldGenerator == null) {
-            robotoBoldGenerator = Asset.getInstance().get("font/RobotoSlab-Bold.ttf");
+            robotoBoldGenerator = Asset.getInstance().get(Constants.FONT_ROBO_BOLD);
         }
         return robotoBoldGenerator;
     }
