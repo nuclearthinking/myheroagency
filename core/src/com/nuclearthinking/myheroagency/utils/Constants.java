@@ -12,6 +12,7 @@ public final class Constants {
     public static final int GAME_W = 480;
     public static final int GAME_H = 320;
     public static final float ASPECT_RATIO = GAME_W / GAME_H;
+    public static final float PIXELS_TO_METRES = 1.0f / 32.0f;
     public static final String ALL_CHARACTERS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
             + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

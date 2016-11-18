@@ -65,7 +65,7 @@ public final class PlayerSystem extends ActorSystem {
         final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
         final int borderRight = MapComponent.getLevelPixelWidth();
         final int borderUp = MapComponent.getLevelPixelHeight();
-        final int borderDown = MapComponent.getLevelPixelHeight() - MapComponent.getLevelPixelHeight();
+        final int borderDown = 0;
 
         if (t.getBody().getPosition().x <= borderLeft) {
             t.getBody().setTransform(borderLeft, t.getBody().getPosition().y, 0.0f);

@@ -1,12 +1,20 @@
 package com.nuclearthinking.myheroagency.controller;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector3;
 import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
+import com.nuclearthinking.myheroagency.model.components.BodyComponent;
+import com.nuclearthinking.myheroagency.model.components.NpcComponent;
+import com.nuclearthinking.myheroagency.model.components.StateComponent;
+import com.nuclearthinking.myheroagency.model.components.TouchComponent;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +34,7 @@ public final class PlayerController implements InputProcessor {
         DOWN
     }
 
-    static final Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
+    private static final Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
 
     static {
         keys.put(Keys.LEFT, false);
@@ -85,11 +93,9 @@ public final class PlayerController implements InputProcessor {
         if (keys.get(Keys.UP))
             accelY = 1;
 
-        if (keys.get(Keys.DOWN))
-
-        if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
-
-        if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
+        //if (keys.get(Keys.DOWN))
+        //if ((keys.get(Keys.UP) && keys.get(Keys.DOWN)))
+        //if ((keys.get(Keys.LEFT) && keys.get(Keys.RIGHT)))
 
         engine.getSystem(PlayerSystem.class).setAccelX(accelX);
         engine.getSystem(PlayerSystem.class).setAccelY(accelY);
@@ -132,7 +138,20 @@ public final class PlayerController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        engine.getSystem(NpcSystem.class).setTouch(true);
+        val vec = new Vector3(screenX, screenY, 0);
+        engine.getSystem(RenderingSystem.class).getCamera().unproject(vec);
+        val family = Family.all(StateComponent.class,
+                NpcComponent.class,
+                BodyComponent.class,
+                TouchComponent.class).get();
+        val npc = engine.getEntitiesFor(family);
+        for (int i = 0; i < npc.size(); i++) {
+            val b = npc.get(i).getComponent(BodyComponent.class);
+
+            if(vec.dst(b.getBody().getPosition().x, b.getBody().getPosition().y, 0) < b.getScale().x/2){
+                engine.getSystem(NpcSystem.class).setTouch(true);
+            }
+        }
         return false;
     }
 
