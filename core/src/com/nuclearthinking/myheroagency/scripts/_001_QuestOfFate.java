@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.scripts;
 
-import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
+import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
 import lombok.NonNull;
 
@@ -10,7 +10,7 @@ import lombok.NonNull;
 public final class _001_QuestOfFate extends Quest {
     
     @Override
-    public String onTalk(@NonNull NpcSystem npc) {
+    public String onTalk(@NonNull NpcComponent npc) {
         String text = "Test nothing";
         return text;
     }

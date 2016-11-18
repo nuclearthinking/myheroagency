@@ -2,7 +2,7 @@ package com.nuclearthinking.myheroagency.model.quest;
 
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
-import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
+import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -73,7 +73,7 @@ public abstract class Quest {
         return true;
     }
 
-    public boolean notifyTalk(@NonNull final NpcSystem npc) {
+    public boolean notifyTalk(@NonNull final NpcComponent npc) {
         String res;
         try {
             res = onTalk(npc);
@@ -83,7 +83,7 @@ public abstract class Quest {
         return showDialog(res);
     }
 
-    public abstract String onTalk(@NonNull final NpcSystem npc);
+    public abstract String onTalk(@NonNull final NpcComponent npc);
 
     @Override
     public String toString() {

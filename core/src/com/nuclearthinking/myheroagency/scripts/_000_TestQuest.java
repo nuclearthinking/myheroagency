@@ -1,6 +1,5 @@
 package com.nuclearthinking.myheroagency.scripts;
 
-import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
 import lombok.NonNull;
@@ -16,9 +15,9 @@ public final class _000_TestQuest extends Quest {
     }
 
     @Override
-    public String onTalk(@NonNull NpcSystem npc) {
+    public String onTalk(@NonNull NpcComponent npc) {
         String text = "nothing";
-        if(((NpcComponent)npc.getActor()).getId() == quest.getNpcId()){
+        if(npc.getId() == quest.getNpcId()){
             text = quest.getText().get(0).getStartText();
         }
 

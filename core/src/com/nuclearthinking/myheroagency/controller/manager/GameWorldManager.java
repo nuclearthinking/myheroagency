@@ -49,6 +49,7 @@ public final class GameWorldManager {
         buildNpcManager.createMonster(player);
         buildHudManager.createHud();
         buildNpcManager.createNpc();
+        buildNpcManager.createNpc();
         buildNpcManager.spawnNpc(300, 2860);
         buildNpcManager.spawnMonster(600, 2860);
     }

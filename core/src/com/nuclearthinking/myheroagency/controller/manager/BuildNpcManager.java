@@ -14,6 +14,7 @@ import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by mkuksin on 20.10.2016.
@@ -25,6 +26,7 @@ public final class BuildNpcManager {
 
     private final PooledEngine engine;
     private final World world;
+    private Random rnd = new Random();
 
     public BuildNpcManager(@NonNull final PooledEngine engine, @NonNull final World world){
         this.engine = engine;
@@ -39,9 +41,12 @@ public final class BuildNpcManager {
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
         val npc = engine.createComponent(NpcComponent.class);
-        val touch = engine.createComponent(TouchComponent.class);
-        engine.getSystem(NpcSystem.class).setActor(npc);
 
+        //TODO: Костыль, имена и ИД нужно брать из файла
+        npc.setName("TestNpc: "+rnd.nextInt(10));
+        npc.setId(rnd.nextInt(2)+1);
+
+        engine.getSystem(NpcSystem.class).setActor(npc);
         animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
         bodyCom.getBodyDef().type = BodyDef.BodyType.StaticBody;
@@ -67,7 +72,7 @@ public final class BuildNpcManager {
         entity.add(light);
         entity.add(npc);
         entity.add(bodyCom);
-        entity.add(touch);
+        entity.add(new TouchComponent());
         entity.add(new TextureComponent());
 
         engine.addEntity(entity);
@@ -124,7 +129,7 @@ public final class BuildNpcManager {
 
     public void spawnNpc(final float x, final float y){
         for(val npc : npsList){
-            npc.getComponent(BodyComponent.class).getBody().setTransform(x, y, 0);
+            npc.getComponent(BodyComponent.class).getBody().setTransform(rnd.nextInt((int)x), y, 0);
         }
     }
 

@@ -16,7 +16,7 @@ public abstract class GameActor implements Component {
     private @Getter @Setter int baseSTR;
     private @Getter @Setter int baseWIT;
     private @Getter int level;
-    private @Getter String name = "Василий";
+
 
     private @Getter int curHp;
 
