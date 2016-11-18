@@ -39,4 +39,9 @@ public final class Constants {
     public static final String FONT_ROBO_LIGHT = "font/RobotoSlab-Light.ttf";
     public static final String FONT_ROBO_BOLD = "font/RobotoSlab-Bold.ttf";
 
+    //Слои
+    public static final short BIT_PLAYER = 1;
+    public static final short BIT_NPC = 2;
+    public static final short BIT_MONSTER = 4;
+    public static final short BIT_GROUND = 8;
 }
