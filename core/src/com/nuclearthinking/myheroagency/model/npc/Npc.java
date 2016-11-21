@@ -33,7 +33,9 @@ import lombok.extern.slf4j.Slf4j;
         "DEX",
         "INT",
         "WIT",
-        "MEN"
+        "MEN",
+        "skillId",
+        "dropInfo"
 })
 @ToString
 public class Npc {
@@ -85,4 +87,10 @@ public class Npc {
     private @Getter int WIT;
     @JsonProperty("MEN")
     private @Getter int MEN;
+
+    @JsonProperty("skillId")
+    private @Getter int[] skillId;
+
+    @JsonProperty("dropInfo")
+    private @Getter DropInfo dropInfo;
 }
