@@ -9,6 +9,7 @@ import com.nuclearthinking.myheroagency.model.skills.Env;
 import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
 
@@ -19,7 +20,7 @@ public abstract class ActorSystem extends IteratingSystem {
 
     private Calculator[] calc;
 
-    protected GameActor actor;
+    protected @Getter GameActor actor;
 
     public ActorSystem(@NonNull final Family family){
         super(family);

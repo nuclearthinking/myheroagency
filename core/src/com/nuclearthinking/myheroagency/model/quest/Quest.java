@@ -2,28 +2,34 @@ package com.nuclearthinking.myheroagency.model.quest;
 
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
+import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Izonami on 20.06.2016.
  */
 @Slf4j(topic = "Quest")
-public class Quest {
+public abstract class Quest {
 
     protected static final ArrayList<QuestBase> questInfo = Asset.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
     protected @Getter final String name;
     protected @Getter final int questId;
     protected @Getter QuestBase quest;
 
+    //TODO: Костыль
+    private static Map<String, Quest> q = new HashMap<String, Quest>();
+    public static Quest getQ(final String qu){
+        return q.get(qu);
+    }
+
     private Set<Integer> questItems = new HashSet<Integer>();
-    
+
     public Quest(){
         final int id = Integer.parseInt(getClass().getSimpleName().split("_")[1]);
 
@@ -37,6 +43,7 @@ public class Quest {
         }
 
         log.info("Quest Name: " + name + " QuestID: " + questId);
+        q.put(Integer.toString(id), this); //TODO: Костыль
     }
 
     /**
@@ -59,6 +66,24 @@ public class Quest {
     public boolean isQuestItem(final int id) {
         return questItems.contains(id);
     }
+
+    public boolean showDialog(final String text){
+        log.info(text);
+
+        return true;
+    }
+
+    public boolean notifyTalk(@NonNull final NpcComponent npc) {
+        String res;
+        try {
+            res = onTalk(npc);
+        } catch (Exception e) {
+            return true;
+        }
+        return showDialog(res);
+    }
+
+    public abstract String onTalk(@NonNull final NpcComponent npc);
 
     @Override
     public String toString() {

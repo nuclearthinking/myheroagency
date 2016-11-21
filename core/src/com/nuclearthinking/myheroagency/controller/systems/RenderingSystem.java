@@ -19,6 +19,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
 
+import static com.nuclearthinking.myheroagency.utils.Constants.PIXELS_TO_METRES;
+
 /**
  * Created by mkuksin on 01.09.2016.
  */
@@ -26,8 +28,6 @@ public final class RenderingSystem extends IteratingSystem {
 
     private static final Family family = Family.all(TextureComponent.class,
             BodyComponent.class).get();
-
-    private static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private Batch batch;
     private Array<Entity> renderQueue;

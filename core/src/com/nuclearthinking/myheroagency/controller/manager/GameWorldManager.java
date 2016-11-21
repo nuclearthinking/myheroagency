@@ -37,7 +37,6 @@ public final class GameWorldManager {
 
     public GameWorldManager(@NonNull final PooledEngine engine, @NonNull final Batch batch) {
         this.engine = engine;
-
         this.world = new World(GravityComponent.getGravity(), false);
         this.buildHudManager = new BuildHudManager(engine, batch);
         this.buildNpcManager = new BuildNpcManager(engine,world);
@@ -49,6 +48,7 @@ public final class GameWorldManager {
         createCamera(player);
         buildNpcManager.createMonster(player);
         buildHudManager.createHud();
+        buildNpcManager.createNpc();
         buildNpcManager.createNpc();
         buildNpcManager.spawnNpc(300, 2860);
         buildNpcManager.spawnMonster(600, 2860);

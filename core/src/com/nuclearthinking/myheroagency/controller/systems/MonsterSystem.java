@@ -15,7 +15,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public final class MonsterSystem extends ActorSystem {
+public final class MonsterSystem extends ActorSystem implements Speaker{
 
     private static final Family family = Family.all(MonsterComponent.class,
                                                     StateComponent.class,
@@ -64,4 +64,8 @@ public final class MonsterSystem extends ActorSystem {
         return true;
     }
 
+    @Override
+    public void showDialog(@NonNull PlayerSystem player, String command) {
+
+    }
 }

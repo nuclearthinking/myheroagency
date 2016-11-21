@@ -1,7 +1,11 @@
 package com.nuclearthinking.myheroagency.model.components;
 
+import com.nuclearthinking.myheroagency.model.quest.Quest;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mkuksin on 01.09.2016.
@@ -22,6 +26,8 @@ public final class PlayerComponent extends GameActor {
     public static final int BASE_CRIT_RATE = 10;
     public static final int BASE_MCRIT_RATE = 10;
     public static final int BASE_RUN_SPD = 100;
+
+    private Map<String, Quest> quests = new HashMap<String, Quest>();
 
     private @Getter int lvl = 1;
     private @Getter int exp = 0;
@@ -57,5 +63,9 @@ public final class PlayerComponent extends GameActor {
         }
         else
             log.info("You have maximum level");
+    }
+
+    public Quest getQuest(final String questId){
+        return quests.get(questId);
     }
 }
