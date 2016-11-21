@@ -10,6 +10,7 @@ import com.nuclearthinking.myheroagency.controller.systems.MonsterSystem;
 import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
 import lombok.val;
 
@@ -54,15 +55,17 @@ public final class BuildNpcManager {
         val bodyPolygon = new PolygonShape();
         bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
-        bodyCom.getFixtureDef().isSensor = true; //TODO: Вместо этого настроить фильтры
-        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyCom.getFixtureDef().isSensor = true;
+        bodyCom.getFixtureDef().filter.categoryBits = Constants.BIT_NPC;
+        bodyCom.getFixtureDef().filter.maskBits = Constants.BIT_PLAYER;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef()).setUserData("NPC");
         bodyPolygon.dispose();
 
         bodyCom.getBody().setFixedRotation(true);
 
-        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.setPlayerLight(new PointLight(LightComponent.getRayHandler(), 50));
         light.getPlayerLight().setDistance(100);
-        light.getPlayerLight().setColor(light.getLightOn());
+        light.getPlayerLight().setColor(LightComponent.getLightOn());
         light.setTarget(entity);
 
         state.set(AnimationState.IDLE.getValue());
@@ -102,16 +105,18 @@ public final class BuildNpcManager {
         bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
         bodyCom.getFixtureDef().friction = 0.3f;
-        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyCom.getFixtureDef().filter.categoryBits = Constants.BIT_MONSTER;
+        bodyCom.getFixtureDef().filter.maskBits = Constants.BIT_PLAYER;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef()).setUserData("MONSTER");
         bodyPolygon.dispose();
 
         bodyCom.getBody().setFixedRotation(true);
 
         state.set(AnimationState.IDLE.getValue());
 
-        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.setPlayerLight(new PointLight(LightComponent.getRayHandler(), 50));
         light.getPlayerLight().setDistance(50);
-        light.getPlayerLight().setColor(light.getLightOn());
+        light.getPlayerLight().setColor(LightComponent.getLightOn());
         light.setTarget(entity);
 
         entity.add(animation);

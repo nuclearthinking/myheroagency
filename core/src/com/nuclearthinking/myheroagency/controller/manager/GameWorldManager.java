@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.PlayerContact;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
@@ -31,6 +32,7 @@ public final class GameWorldManager {
 
     private PooledEngine engine;
     private @Getter World world;
+    private PlayerContact al;
 
     private final BuildHudManager buildHudManager;
     private final BuildNpcManager buildNpcManager;
@@ -40,6 +42,7 @@ public final class GameWorldManager {
         this.world = new World(GravityComponent.getGravity(), false);
         this.buildHudManager = new BuildHudManager(engine, batch);
         this.buildNpcManager = new BuildNpcManager(engine,world);
+        this.al = new PlayerContact();
     }
 
     public void create(){
@@ -52,6 +55,7 @@ public final class GameWorldManager {
         buildNpcManager.createNpc();
         buildNpcManager.spawnNpc(300, 2860);
         buildNpcManager.spawnMonster(600, 2860);
+        world.setContactListener(al);
     }
 
     private Entity createPlayer(){
@@ -74,15 +78,17 @@ public final class GameWorldManager {
         bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
         bodyCom.getFixtureDef().friction = 0.3f;
-        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyCom.getFixtureDef().filter.categoryBits = Constants.BIT_PLAYER;
+        bodyCom.getFixtureDef().filter.maskBits = Constants.BIT_NPC + Constants.BIT_MONSTER;
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef()).setUserData("player");
         bodyPolygon.dispose();
 
         bodyCom.getBody().setFixedRotation(true);
         bodyCom.getBody().setTransform(15.0f, 2860.0f, 0.0f);
 
-        light.setPlayerLight(new PointLight(light.getRayHandler(), 50));
+        light.setPlayerLight(new PointLight(LightComponent.getRayHandler(), 50));
         light.getPlayerLight().setDistance(250);
-        light.getPlayerLight().setColor(light.getLightOn());
+        light.getPlayerLight().setColor(LightComponent.getLightOn());
         light.setTarget(entity);
 
         state.set(AnimationState.IDLE.getValue());
