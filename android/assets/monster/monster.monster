@@ -4,6 +4,7 @@
     {
       "id":"1",
       "name":"Test",
+      "level":"10",
       "baseHpReg":"10",
       "baseMpReg":"10",
       "baseHpMax":"10",
@@ -18,7 +19,7 @@
       "baseMCritRate":"10",
       "basePCritChance":"10",
       "baseMCritChance":"10",
-      "baseRunSpd":"10",
+      "baseRunSpd":"50",
       "STR":"10",
       "CON":"10",
       "DEX":"10",

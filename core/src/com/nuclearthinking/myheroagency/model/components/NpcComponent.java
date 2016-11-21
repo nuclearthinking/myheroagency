@@ -18,16 +18,31 @@ public final class NpcComponent extends GameActor implements Speaker {
 
     private @Getter @Setter int id;
     private @Getter @Setter String name;
+    private @Setter Npc template;
 
     public NpcComponent(){
         super();
     }
 
-    @Override
-    public void init(@NonNull final Npc template){
-        super.init(template);
+    public void init(){
         id = template.getId();
         name = template.getName();
+        level = template.getLevel();
+        baseHpMax = template.getBaseHpMax();
+        baseMpMax = template.getBaseMpMax();
+        baseHpReg = template.getBaseHpReg();
+        baseMpReg = template.getBaseMpReg();
+        basePAtk = template.getBasePAtk();
+        baseMAtk = template.getBaseMAtk();
+        basePDef = template.getBasePDef();
+        baseMDef = template.getBaseMDef();
+        basePAtkSpd = template.getBasePAtkSpd();
+        baseMAtkSpd = template.getBaseMAtkSpd();
+        basePCritRate = template.getBasePCritRate();
+        baseMCritRate = template.getBaseMCritRate();
+        basePCritChance = template.getBasePCritChance();
+        baseMCritChance = template.getBaseMCritChance();
+        baseRunSpd = template.getBaseRunSpd();
     }
 
     @Override

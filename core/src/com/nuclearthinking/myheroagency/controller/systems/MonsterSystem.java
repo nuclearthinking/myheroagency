@@ -56,7 +56,7 @@ public final class MonsterSystem extends ActorSystem implements Speaker{
     }
 
     public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, MonsterComponent.BASE_RUN_SPD);
+        return (int) calcStat(Stats.RUN_SPEED, actor.getBaseRunSpd());
     }
 
     @Override

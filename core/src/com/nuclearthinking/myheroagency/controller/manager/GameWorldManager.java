@@ -15,6 +15,7 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.monster.MonsterInstance;
 import com.nuclearthinking.myheroagency.model.npc.NpcInstance;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
@@ -44,23 +45,30 @@ public final class GameWorldManager {
         this.engine = engine;
         this.world = new World(GravityComponent.getGravity(), false);
         this.buildHudManager = new BuildHudManager(engine, batch);
-        this.buildNpcManager = new BuildNpcManager(engine,world);
+        this.buildNpcManager = new BuildNpcManager();
         this.al = new PlayerContact();
     }
 
     public void create(){
+        log.info("Create World");
         createWorld();
+        log.info("Create Player");
         val player = createPlayer();
+        log.info("Create Camera");
         createCamera(player);
-        buildNpcManager.createMonster(player);
+        log.info("Build Hud");
         buildHudManager.createHud();
-        //buildNpcManager.createNpc();
-        //buildNpcManager.createNpc();
         log.info("Create Npc");
         NpcInstance.getInstance().initialize(engine, world);
-        buildNpcManager.spawnNpc(NpcInstance.getInstance().getNpsList().get(0), 300, 2860);
-        buildNpcManager.spawnMonster(600, 2860);
+        log.info("Create Monster");
+        MonsterInstance.getInstance().initialize(engine, world);
+        log.info("Create Player Listener");
         world.setContactListener(al);
+
+        //TODO: Затычки для спавна и АИ
+        MonsterInstance.getInstance().getMonsterList().get(0).getComponent(MonsterComponent.class).setTarget(player);
+        buildNpcManager.spawnNpc(NpcInstance.getInstance().getNpsList().get(0), 300, 2860);
+        buildNpcManager.spawnNpc(MonsterInstance.getInstance().getMonsterList().get(0), 600, 2860);
     }
 
     private Entity createPlayer(){

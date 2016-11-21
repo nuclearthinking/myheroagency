@@ -29,12 +29,6 @@ import lombok.extern.slf4j.Slf4j;
         "basePCritChance",
         "baseMCritChance",
         "baseRunSpd",
-        "STR",
-        "CON",
-        "DEX",
-        "INT",
-        "WIT",
-        "MEN",
         "skillId"
 })
 @ToString
@@ -76,19 +70,6 @@ public class Npc {
     private @Getter int baseMCritChance;
     @JsonProperty("baseRunSpd")
     private @Getter int baseRunSpd;
-
-    @JsonProperty("STR")
-    private @Getter int STR;
-    @JsonProperty("CON")
-    private @Getter int CON;
-    @JsonProperty("DEX")
-    private @Getter int DEX;
-    @JsonProperty("INT")
-    private @Getter int INT;
-    @JsonProperty("WIT")
-    private @Getter int WIT;
-    @JsonProperty("MEN")
-    private @Getter int MEN;
 
     @JsonProperty("skillId")
     private @Getter int[] skillId;
