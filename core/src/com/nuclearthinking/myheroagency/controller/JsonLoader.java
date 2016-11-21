@@ -14,44 +14,44 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.11.2016.
  */
-public class JsonLoader extends AsynchronousAssetLoader<JsonToObject, JsonLoader.QuestParameter> {
+public class JsonLoader extends AsynchronousAssetLoader<JsonToObject, JsonLoader.ObjectParameter> {
 
     public JsonLoader(FileHandleResolver resolver) {
         super(resolver);
     }
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file, QuestParameter parameter) {
+    public void loadAsync(AssetManager manager, String fileName, FileHandle file, ObjectParameter parameter) {
     }
 
     @Override
-    public JsonToObject loadSync(AssetManager manager, String fileName, FileHandle file, QuestParameter parameter) {
-        val quest = new JsonToObject(file);
-        return quest;
+    public JsonToObject loadSync(AssetManager manager, String fileName, FileHandle file, ObjectParameter parameter) {
+        val object = new JsonToObject(file);
+        return object;
     }
 
     @Override
-    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, QuestParameter parameter) {
+    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, ObjectParameter parameter) {
         return null;
     }
 
-    static public class QuestParameter extends AssetLoaderParameters<JsonToObject> {
+    static public class ObjectParameter extends AssetLoaderParameters<JsonToObject> {
         public final String jsonPath;
         public final ObjectMap<String, Object> resources;
 
-        public QuestParameter () {
+        public ObjectParameter () {
             this(null, null);
         }
 
-        public QuestParameter(ObjectMap<String, Object> resources){
+        public ObjectParameter(ObjectMap<String, Object> resources){
             this(null, resources);
         }
 
-        public QuestParameter (String jsonPath) {
+        public ObjectParameter (String jsonPath) {
             this(jsonPath, null);
         }
 
-        public QuestParameter (String jsonPath, ObjectMap<String, Object> resources) {
+        public ObjectParameter (String jsonPath, ObjectMap<String, Object> resources) {
             this.jsonPath = jsonPath;
             this.resources = resources;
         }

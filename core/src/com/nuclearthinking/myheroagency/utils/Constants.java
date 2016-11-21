@@ -28,12 +28,12 @@ public final class Constants {
     public static final String ASSET_GROUP_LOADING = "loading";
     public static final String ASSET_GROUP_LOCALE = "localization";
     public static final String ASSET_GROUP_BASE = "base";
-    public static final String ASSET_GROUP_QUEST = "quest";
+    public static final String ASSET_GROUP_OBJECT = "object";
 
     public static final String SPLASH_IMG = "img/splash.png";
     public static final String PLAYER_PACK = "player/player.pack";
     public static final String MAP = "map/testMap.tmx";
-    public static final String QUEST_JSON = "quest/quest.json";
+    public static final String QUEST_JSON = "quest/quest.quest";
     public static final String UI_JSON = "ui/ui.json";
     public static final String UI_ATLAS = "ui/ui.atlas";
     public static final String UI_SKIN_TYPE = "kramola";
