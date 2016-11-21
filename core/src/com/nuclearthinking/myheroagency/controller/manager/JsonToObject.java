@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nuclearthinking.myheroagency.model.npc.NpcParser;
 import com.nuclearthinking.myheroagency.model.quest.QuestParser;
@@ -26,45 +27,37 @@ public class JsonToObject {
         val npcFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".npc");
 
         if(questFile.exists()){
-            loadQuest(questFile);
+            load(questFile, jsonFile.extension());
+            log.info("Loaded: " + questParser.getBaseQuest().size() + " quest(s)");
         }
         if(npcFile.exists()){
-            loadNpc(npcFile);
+            load(npcFile, jsonFile.extension());
+            log.info("Loaded: " + npcParser.getBaseNpc().size() + " npc");
         }
     }
 
-    public JsonToObject(){}
-
-    private void loadQuest(@NonNull final FileHandle questFile) {
-        log.info("File: " + questFile + " loading");
-        readJsonQuestFile(questFile);
-        log.info("Loaded: " + questParser.getBaseQuest().size() + " quest(s)");
+    private void load(@NonNull final FileHandle file, String type){
+        log.info("File: " + file + " loading");
+        readJsonFile(file, type);
     }
 
-    private void loadNpc(@NonNull final FileHandle npcFile){
-        log.info("File: " + npcFile + " loading");
-        readJsonNpcFile(npcFile);
-        log.info("Loaded: " + npcParser.getBaseNpc().size() + " npc");
-    }
-
-    private void readJsonQuestFile(@NonNull final FileHandle jsonFile){
+    private void readJsonFile(@NonNull final FileHandle fileHandle, final String type){
         try {
             val jsonFactory = new JsonFactory();
-            val jsonParser = jsonFactory.createParser(jsonFile.file());
+            val jsonParser = jsonFactory.createParser(fileHandle.file());
             val mapper = new ObjectMapper();
-            val questParserMappingIterator = mapper.readValues(jsonParser, QuestParser.class);
-            questParser = questParserMappingIterator.next();
-        }
-        catch (IOException e){}
-    }
+            MappingIterator<?> parseMapping;
 
-    private void readJsonNpcFile(@NonNull final FileHandle jsonFile){
-        try {
-            val jsonFactory = new JsonFactory();
-            val jsonParser = jsonFactory.createParser(jsonFile.file());
-            val mapper = new ObjectMapper();
-            val questParserMappingIterator = mapper.readValues(jsonParser, NpcParser.class);
-            npcParser = questParserMappingIterator.next();
+            switch (type){
+                case "quest" :
+                    parseMapping = mapper.readValues(jsonParser, QuestParser.class);
+                    questParser = (QuestParser) parseMapping.next();
+                    break;
+                case "npc" :
+                    parseMapping = mapper.readValues(jsonParser, NpcParser.class);
+                    npcParser = (NpcParser) parseMapping.next();
+                    break;
+            }
         }
         catch (IOException e){}
     }
