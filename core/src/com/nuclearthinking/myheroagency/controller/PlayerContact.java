@@ -12,6 +12,7 @@ import lombok.val;
  */
 public class PlayerContact implements ContactListener {
 
+    //Срабатывает, когда два объекта начинают накладываться.
     @Override
     public void beginContact(Contact contact) {
         @NonNull val fa = contact.getFixtureA();
@@ -22,16 +23,21 @@ public class PlayerContact implements ContactListener {
         }
     }
 
+    //Срабатывает, когда два объекта прекращают соприкасаться.
+    //Может быть вызван, когда тело разрушено, таким образом, это событие может иметь место вне временного шага.
     @Override
     public void endContact(Contact contact) {
 
     }
 
+    //Срабатывает после обнаружения столкновения, но перед его обработкой.
+    //Это позволяет нам как-то изменить контакт до его обработки. Например, можно сделать контакт неактивным.
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
 
     }
 
+    //Метод позволяет осуществить логику игры, которая изменяет физику после контакта. Например, деформировать или уничтожить объект после контакта.
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
