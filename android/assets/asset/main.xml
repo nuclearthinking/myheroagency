@@ -28,5 +28,6 @@
     <group name="object">
         <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="quest/quest.quest"/>
         <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="npc/npc.npc"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="monster/monster.monster"/>
     </group>
 </assets>

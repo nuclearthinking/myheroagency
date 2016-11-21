@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.model.npc;
+package com.nuclearthinking.myheroagency.model.monster;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Created by mkuksin on 21.11.2016.
  */
-@Slf4j(topic = "Npc")
+@Slf4j(topic = "Monster")
 @JsonPropertyOrder({
         "id",
         "name",
@@ -34,10 +34,11 @@ import lombok.extern.slf4j.Slf4j;
         "INT",
         "WIT",
         "MEN",
-        "skillId"
+        "skillId",
+        "dropInfo"
 })
 @ToString
-public class Npc {
+public class Monster {
 
     @JsonProperty("id")
     private @Getter int id;
@@ -89,4 +90,7 @@ public class Npc {
 
     @JsonProperty("skillId")
     private @Getter int[] skillId;
+
+    @JsonProperty("dropInfo")
+    private @Getter DropInfo dropInfo;
 }

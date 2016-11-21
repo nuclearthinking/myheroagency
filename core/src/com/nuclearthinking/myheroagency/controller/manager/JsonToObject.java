@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nuclearthinking.myheroagency.model.monster.MonsterParser;
 import com.nuclearthinking.myheroagency.model.npc.NpcParser;
 import com.nuclearthinking.myheroagency.model.quest.QuestParser;
 import lombok.Getter;
@@ -21,10 +22,12 @@ public class JsonToObject {
 
     private @Getter QuestParser questParser = null;
     private @Getter NpcParser npcParser = null;
+    private @Getter MonsterParser monsterParser = null;
 
     public JsonToObject(@NonNull final FileHandle jsonFile) {
         val questFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".quest");
         val npcFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".npc");
+        val monsterFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".monster");
 
         if(questFile.exists()){
             load(questFile, jsonFile.extension());
@@ -33,6 +36,11 @@ public class JsonToObject {
         if(npcFile.exists()){
             load(npcFile, jsonFile.extension());
             log.info("Loaded: " + npcParser.getBaseNpc().size() + " npc");
+        }
+        if(monsterFile.exists()){
+            load(monsterFile, jsonFile.extension());
+            log.info("Loaded: " + monsterParser.getBaseMonster().size() + " monster(s)");
+            log.info(monsterParser.getBaseMonster().get(0).toString());
         }
     }
 
@@ -56,6 +64,10 @@ public class JsonToObject {
                 case "npc" :
                     parseMapping = mapper.readValues(jsonParser, NpcParser.class);
                     npcParser = (NpcParser) parseMapping.next();
+                    break;
+                case "monster" :
+                    parseMapping = mapper.readValues(jsonParser, MonsterParser.class);
+                    monsterParser = (MonsterParser) parseMapping.next();
                     break;
             }
         }

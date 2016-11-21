@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.model.npc;
+package com.nuclearthinking.myheroagency.model.monster;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

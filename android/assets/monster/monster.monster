@@ -1,0 +1,36 @@
+{
+  "monster":
+  [
+    {
+      "id":"1",
+      "name":"Test",
+      "baseHpReg":"10",
+      "baseMpReg":"10",
+      "baseHpMax":"10",
+      "baseMpMax":"10",
+      "basePAtk":"10",
+      "baseMAtk":"10",
+      "basePDef":"10",
+      "baseMDef":"10",
+      "basePAtkSpd":"10",
+      "baseMAtkSpd":"10",
+      "basePCritRate":"10",
+      "baseMCritRate":"10",
+      "basePCritChance":"10",
+      "baseMCritChance":"10",
+      "baseRunSpd":"10",
+      "STR":"10",
+      "CON":"10",
+      "DEX":"10",
+      "INT":"10",
+      "WIT":"10",
+      "MEN":"10",
+      "skillId":[1,2,3,4,5],
+      "dropInfo":{
+        "itemId":[1,2,3,4],
+        "itemCount":[1,1,1,1],
+        "chance":[10,40,30,20]
+      }
+    }
+  ]
+}
