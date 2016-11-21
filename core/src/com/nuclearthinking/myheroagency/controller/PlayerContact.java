@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import lombok.NonNull;
 import lombok.val;
 
 /**
@@ -13,10 +14,11 @@ public class PlayerContact implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        val fa = contact.getFixtureA();
+        @NonNull val fa = contact.getFixtureA();
+        @NonNull val fb = contact.getFixtureB();
 
-        if(fa.getUserData() != null && fa.getUserData().equals("player")) {
-            System.out.println("Player Contact");
+        if(fa.getUserData().equals("player")) {
+            System.out.println(fb.getUserData());
         }
     }
 

@@ -49,9 +49,10 @@ public final class BuildNpcManager {
         val bodyPolygon = new PolygonShape();
         bodyPolygon.setAsBox(10,10);
         bodyCom.getFixtureDef().shape = bodyPolygon;
+        bodyCom.getFixtureDef().isSensor = true;
         bodyCom.getFixtureDef().filter.categoryBits = Constants.BIT_NPC;
         bodyCom.getFixtureDef().filter.maskBits = Constants.BIT_PLAYER;
-        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef()).setUserData("NPC");
         bodyPolygon.dispose();
 
         bodyCom.getBody().setFixedRotation(true);
@@ -99,7 +100,7 @@ public final class BuildNpcManager {
         bodyCom.getFixtureDef().friction = 0.3f;
         bodyCom.getFixtureDef().filter.categoryBits = Constants.BIT_MONSTER;
         bodyCom.getFixtureDef().filter.maskBits = Constants.BIT_PLAYER;
-        bodyCom.getBody().createFixture(bodyCom.getFixtureDef());
+        bodyCom.getBody().createFixture(bodyCom.getFixtureDef()).setUserData("MONSTER");
         bodyPolygon.dispose();
 
         bodyCom.getBody().setFixedRotation(true);
