@@ -40,7 +40,6 @@ public class JsonToObject {
         if(monsterFile.exists()){
             load(monsterFile, jsonFile.extension());
             log.info("Loaded: " + monsterParser.getBaseMonster().size() + " monster(s)");
-            log.info(monsterParser.getBaseMonster().get(0).toString());
         }
     }
 

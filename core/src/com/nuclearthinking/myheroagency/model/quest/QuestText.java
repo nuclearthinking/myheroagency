@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.quest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
         "startText",
         "nextText",
         "endText"})
+@ToString
 public class QuestText {
 
     @JsonProperty("startText")

@@ -6,6 +6,7 @@ import com.nuclearthinking.myheroagency.model.components.NpcComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
@@ -15,12 +16,14 @@ import java.util.*;
  * Created by Izonami on 20.06.2016.
  */
 @Slf4j(topic = "Quest")
+@ToString
 public abstract class Quest {
 
-    protected static final ArrayList<QuestBase> questInfo = Asset.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
     protected @Getter final String name;
     protected @Getter final int questId;
     protected @Getter QuestBase quest;
+
+    private static final ArrayList<QuestBase> questInfo = Asset.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
 
     //TODO: Костыль
     private static Map<String, Quest> q = new HashMap<String, Quest>();
@@ -74,23 +77,8 @@ public abstract class Quest {
     }
 
     public boolean notifyTalk(@NonNull final NpcComponent npc) {
-        String res;
-        try {
-            res = onTalk(npc);
-        } catch (Exception e) {
-            return true;
-        }
-        return showDialog(res);
+        return showDialog(onTalk(npc));
     }
 
     public abstract String onTalk(@NonNull final NpcComponent npc);
-
-    @Override
-    public String toString() {
-        return "Quest{" +
-                "name='" + name + '\'' +
-                ", questId=" + questId +
-                ", questItems=" + questItems +
-                '}';
-    }
 }
