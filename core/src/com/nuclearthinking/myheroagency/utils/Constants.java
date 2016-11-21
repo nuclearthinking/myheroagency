@@ -34,6 +34,8 @@ public final class Constants {
     public static final String PLAYER_PACK = "player/player.pack";
     public static final String MAP = "map/testMap.tmx";
     public static final String QUEST_JSON = "quest/quest.quest";
+    public static final String NPC_JSON = "npc/npc.npc";
+    public static final String MONSTER_JSON = "monster/monster.monster";
     public static final String UI_JSON = "ui/ui.json";
     public static final String UI_ATLAS = "ui/ui.atlas";
     public static final String UI_SKIN_TYPE = "kramola";

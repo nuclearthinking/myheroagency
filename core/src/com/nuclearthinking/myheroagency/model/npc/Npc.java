@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonPropertyOrder({
         "id",
         "name",
+        "level",
         "baseHpReg",
         "baseMpReg",
         "baseHpMax",
@@ -43,6 +44,8 @@ public class Npc {
     private @Getter int id;
     @JsonProperty("name")
     private @Getter String name;
+    @JsonProperty("level")
+    private @Getter int level;
     @JsonProperty("baseHpReg")
     private @Getter int baseHpReg;
     @JsonProperty("baseMpReg")

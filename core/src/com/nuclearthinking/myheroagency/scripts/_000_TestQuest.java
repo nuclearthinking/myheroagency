@@ -17,6 +17,7 @@ public final class _000_TestQuest extends Quest {
     @Override
     public String onTalk(@NonNull NpcComponent npc) {
         String text = "nothing";
+        System.out.println("NPC" + npc.getId() + " Quest" + quest.getNpcId());
         if(npc.getId() == quest.getNpcId()){
             text = quest.getText().getStartText();
         }

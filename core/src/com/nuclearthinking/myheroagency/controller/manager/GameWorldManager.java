@@ -15,14 +15,17 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.npc.NpcInstance;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
+@Slf4j(topic = "GameWorldManager")
 public final class GameWorldManager {
 
     public static final TextureAtlas playerAtlas = Asset.getInstance().get(Constants.PLAYER_PACK);
@@ -51,9 +54,11 @@ public final class GameWorldManager {
         createCamera(player);
         buildNpcManager.createMonster(player);
         buildHudManager.createHud();
-        buildNpcManager.createNpc();
-        buildNpcManager.createNpc();
-        buildNpcManager.spawnNpc(300, 2860);
+        //buildNpcManager.createNpc();
+        //buildNpcManager.createNpc();
+        log.info("Create Npc");
+        NpcInstance.getInstance().initialize(engine, world);
+        buildNpcManager.spawnNpc(NpcInstance.getInstance().getNpsList().get(0), 300, 2860);
         buildNpcManager.spawnMonster(600, 2860);
         world.setContactListener(al);
     }

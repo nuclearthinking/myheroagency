@@ -138,6 +138,10 @@ public final class BuildNpcManager {
         }
     }
 
+    public void spawnNpc(@NonNull final Entity npc, final float x, final float y){
+        npc.getComponent(BodyComponent.class).getBody().setTransform(rnd.nextInt((int)x), y, 0);
+    }
+
     public void spawnMonster(final float x, final float y){
         for(val monster : monsterList){
             monster.getComponent(BodyComponent.class).getBody().setTransform(x, y, 0);
