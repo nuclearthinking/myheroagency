@@ -1,0 +1,18 @@
+{
+  "skills":
+  [
+    {
+      "id":"0",
+      "name":"GMSKILL"
+    },
+    {
+      "id":"1",
+      "name":"Истина",
+      "lvlUp":[30,40,50],
+      "skillType":"PASSIVE",
+      "effectType":"ADDPATK",
+      "level":[1,2,3],
+      "power":[5,6,7]
+    }
+  ]
+}

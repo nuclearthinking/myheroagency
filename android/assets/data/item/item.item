@@ -1,0 +1,18 @@
+{
+  "weapon":
+  [
+    {
+      "id":"0",
+      "name":"GMITEM"
+    },
+    {
+      "id":"1",
+      "name":"Меч тысячи истин",
+      "type":"SWORD",
+      "pAtk":"10",
+      "mAtk":"10",
+      "distance":"1",
+      "skill":[0,1]
+    }
+  ]
+}

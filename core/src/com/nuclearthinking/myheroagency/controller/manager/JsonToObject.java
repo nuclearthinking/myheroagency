@@ -4,9 +4,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nuclearthinking.myheroagency.model.item.ItemParser;
 import com.nuclearthinking.myheroagency.model.monster.MonsterParser;
 import com.nuclearthinking.myheroagency.model.npc.NpcParser;
 import com.nuclearthinking.myheroagency.model.quest.QuestParser;
+import com.nuclearthinking.myheroagency.model.skills.SkillParser;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +25,15 @@ public class JsonToObject {
     private @Getter QuestParser questParser = null;
     private @Getter NpcParser npcParser = null;
     private @Getter MonsterParser monsterParser = null;
+    private @Getter ItemParser itemParser = null;
+    private @Getter SkillParser skillParser = null;
 
     public JsonToObject(@NonNull final FileHandle jsonFile) {
         val questFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".quest");
         val npcFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".npc");
         val monsterFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".monster");
+        val itemFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".item");
+        val skillFile = jsonFile.sibling(jsonFile.nameWithoutExtension() + ".skill");
 
         if(questFile.exists()){
             load(questFile, jsonFile.extension());
@@ -40,6 +46,14 @@ public class JsonToObject {
         if(monsterFile.exists()){
             load(monsterFile, jsonFile.extension());
             log.info("Loaded: " + monsterParser.getBaseMonster().size() + " monster(s)");
+        }
+        if(itemFile.exists()){
+            load(itemFile, jsonFile.extension());
+            log.info("Loaded: " + itemParser.getWeapons().size() + " weapon(s)");
+        }
+        if(skillFile.exists()){
+            load(skillFile, jsonFile.extension());
+            log.info("Loaded: " + skillParser.getSkills().size() + " skill(s)");
         }
     }
 
@@ -67,6 +81,16 @@ public class JsonToObject {
                 case "monster" :
                     parseMapping = mapper.readValues(jsonParser, MonsterParser.class);
                     monsterParser = (MonsterParser) parseMapping.next();
+                    break;
+                case "item" :
+                    parseMapping = mapper.readValues(jsonParser, ItemParser.class);
+                    itemParser = (ItemParser) parseMapping.next();
+                    break;
+                case "skill" :
+                    parseMapping = mapper.readValues(jsonParser, SkillParser.class);
+                    skillParser = (SkillParser) parseMapping.next();
+                    break;
+                default:log.error("WTF! Give me correct file type");
                     break;
             }
         }
