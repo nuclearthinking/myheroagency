@@ -2,12 +2,15 @@ package com.nuclearthinking.myheroagency.model.components;
 
 import com.badlogic.ashley.core.Entity;
 import com.nuclearthinking.myheroagency.model.monster.Monster;
+import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by mkuksin on 03.10.2016.
  */
+@ToString
 public final class MonsterComponent extends GameActor {
 
     private @Getter @Setter Entity target;
@@ -35,16 +38,24 @@ public final class MonsterComponent extends GameActor {
         basePCritChance = template.getBasePCritChance();
         baseMCritChance = template.getBaseMCritChance();
         baseRunSpd = template.getBaseRunSpd();
-        baseSTR = template.getSTR();
-        baseCON = template.getCON();
-        baseDEX = template.getDEX();
-        baseINT = template.getINT();
-        baseWIT = template.getWIT();
-        baseMEN = template.getMEN();
+        STR = template.getSTR();
+        CON = template.getCON();
+        DEX = template.getDEX();
+        INT = template.getINT();
+        WIT = template.getWIT();
+        MEN = template.getMEN();
     }
 
     public MonsterComponent(){
         super();
     }
 
+    public int getSpeed(){
+        return (int) calcStat(Stats.RUN_SPEED, baseRunSpd);
+    }
+
+    @Override
+    public boolean isMonster(){
+        return true;
+    }
 }

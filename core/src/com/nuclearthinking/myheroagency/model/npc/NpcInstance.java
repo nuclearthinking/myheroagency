@@ -9,12 +9,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
-import com.nuclearthinking.myheroagency.controller.systems.NpcSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
@@ -29,33 +27,32 @@ public class NpcInstance {
     private final ArrayList<Npc> npc = Asset.getInstance().get(Constants.NPC_JSON, JsonToObject.class).getNpcParser().getBaseNpc();
 
     private @Getter final ArrayList<Entity> npsList = new ArrayList<Entity>();
-    private PooledEngine engine;
-    private World world;
 
-    public void initialize(@NonNull final PooledEngine engine, @NonNull final World world){
-        this.engine = engine;
-        this.world = world;
-        createNpc();
+    private PooledEngine getEngine(){
+        return GameWorldManager.getEngine();
+    }
+
+    private World getWorld(){
+        return GameWorldManager.getWorld();
     }
 
     private void createNpc() {
         for(val stat : npc){
-            val entity = engine.createEntity();
+            val entity = getEngine().createEntity();
 
-            val animation = engine.createComponent(AnimationComponent.class);
-            val state = engine.createComponent(StateComponent.class);
-            val light = engine.createComponent(LightComponent.class);
-            val bodyCom = engine.createComponent(BodyComponent.class);
-            val npcCom = engine.createComponent(NpcComponent.class);
+            val animation = getEngine().createComponent(AnimationComponent.class);
+            val state = getEngine().createComponent(StateComponent.class);
+            val light = getEngine().createComponent(LightComponent.class);
+            val bodyCom = getEngine().createComponent(BodyComponent.class);
+            val npcCom = getEngine().createComponent(NpcComponent.class);
+
             npcCom.setTemplate(stat);
             npcCom.init();
-
-            engine.getSystem(NpcSystem.class).setActor(npcCom);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
             bodyCom.getBodyDef().type = BodyDef.BodyType.StaticBody;
-            bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
+            bodyCom.setBody(getWorld().createBody(bodyCom.getBodyDef()));
             val bodyPolygon = new PolygonShape();
             bodyPolygon.setAsBox(10,10);
             bodyCom.getFixtureDef().shape = bodyPolygon;
@@ -82,13 +79,15 @@ public class NpcInstance {
             entity.add(new TouchComponent());
             entity.add(new TextureComponent());
 
-            engine.addEntity(entity);
+            getEngine().addEntity(entity);
 
             npsList.add(entity);
         }
     }
 
-    private NpcInstance() {}
+    private NpcInstance() {
+        createNpc();
+    }
 
     public static NpcInstance getInstance() {
         return instance;

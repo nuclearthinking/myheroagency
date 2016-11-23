@@ -2,10 +2,10 @@ package com.nuclearthinking.myheroagency.controller.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.Components;
 import com.nuclearthinking.myheroagency.model.components.*;
-import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
@@ -13,7 +13,7 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public final class PlayerSystem extends ActorSystem {
+public final class PlayerSystem extends IteratingSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,
@@ -31,6 +31,7 @@ public final class PlayerSystem extends ActorSystem {
         @NonNull val state = Components.STATE.get(entity);
         @NonNull val mov = Components.MOVEMENT.get(entity);
         @NonNull val body = Components.BODY.get(entity);
+        @NonNull val player = Components.PLAYER.get(entity);
 
         if(accelX == 0 && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;
@@ -38,12 +39,12 @@ public final class PlayerSystem extends ActorSystem {
         }
 
         if (accelX > 0 && state.getState() != AnimationState.RIGHT.getValue()) {
-            mov.getVelocity().x = getSpeed();
+            mov.getVelocity().x = player.getSpeed();
             state.set(AnimationState.RIGHT.getValue());
         }
 
         if (accelX < 0 && state.getState() != AnimationState.LEFT.getValue()) {
-            mov.getVelocity().x = -getSpeed();
+            mov.getVelocity().x = -player.getSpeed();
             state.set(AnimationState.LEFT.getValue());
         }
 
@@ -55,10 +56,6 @@ public final class PlayerSystem extends ActorSystem {
         }
 
         checkBorderWorld(body);
-    }
-
-    public void talkTo(@NonNull final Speaker object, final String command){
-        object.showDialog(this, command);
     }
 
     private void checkBorderWorld(final BodyComponent t){
@@ -83,18 +80,4 @@ public final class PlayerSystem extends ActorSystem {
             t.getBody().setTransform(t.getBody().getPosition().x, borderDown, 0.0f);
         }
     }
-
-    public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
-    }
-
-    public int getMaxHp(){
-        return (int) calcStat(Stats.MAX_HP, PlayerComponent.BASE_HP_MAX);
-    }
-
-    @Override
-    public boolean isPlayer(){
-        return true;
-    }
-
 }

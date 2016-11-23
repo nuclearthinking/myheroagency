@@ -1,7 +1,11 @@
 package com.nuclearthinking.myheroagency.model.components;
 
+import com.nuclearthinking.myheroagency.controller.systems.Speaker;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
+import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -11,6 +15,7 @@ import java.util.Map;
  * Created by mkuksin on 01.09.2016.
  */
 @Slf4j(topic = "PlayerComponent")
+@ToString
 public final class PlayerComponent extends GameActor {
 
     public static final float BASE_HP_REG = 10;
@@ -70,7 +75,24 @@ public final class PlayerComponent extends GameActor {
             log.info("You have maximum level");
     }
 
+    public void talkTo(@NonNull final Speaker object, final String command){
+        object.showDialog(this, command);
+    }
+
     public Quest getQuest(final String questId){
         return quests.get(questId);
+    }
+
+    public int getSpeed(){
+        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
+    }
+
+    public int getMaxHp(){
+        return (int) calcStat(Stats.MAX_HP, PlayerComponent.BASE_HP_MAX);
+    }
+
+    @Override
+    public boolean isPlayer(){
+        return true;
     }
 }

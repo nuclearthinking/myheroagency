@@ -7,13 +7,13 @@ import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.Components;
 import com.nuclearthinking.myheroagency.model.components.CameraComponent;
 import com.nuclearthinking.myheroagency.model.components.MapComponent;
-import lombok.NonNull;
 import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public final class CameraSystem extends IteratingSystem{
+public final class CameraSystem extends IteratingSystem {
+
     private static final Family family = Family.all(CameraComponent.class).get();
 
     public CameraSystem() {
@@ -22,8 +22,8 @@ public final class CameraSystem extends IteratingSystem{
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        @NonNull val cam = Components.CAMERA.get(entity);
-        @NonNull val target = Components.BODY.get(cam.getTarget());
+        val cam = Components.CAMERA.get(entity);
+        val target = Components.BODY.get(cam.getTarget());
 
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();

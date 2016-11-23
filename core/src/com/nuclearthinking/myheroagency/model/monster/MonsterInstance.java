@@ -9,12 +9,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
-import com.nuclearthinking.myheroagency.controller.systems.MonsterSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.val;
 
 import java.util.ArrayList;
@@ -29,36 +27,34 @@ public class MonsterInstance {
     private final ArrayList<Monster> monster = Asset.getInstance().get(Constants.MONSTER_JSON, JsonToObject.class).getMonsterParser().getBaseMonster();
 
     private @Getter final ArrayList<Entity> monsterList = new ArrayList<Entity>();
-    private PooledEngine engine;
-    private World world;
 
-    public void initialize(@NonNull final PooledEngine engine, @NonNull final World world){
-        this.engine = engine;
-        this.world = world;
-        createMonster();
+    private PooledEngine getEngine(){
+        return GameWorldManager.getEngine();
+    }
+
+    private World getWorld(){
+        return GameWorldManager.getWorld();
     }
 
     private void createMonster(){
         for(val stat: monster){
-            val entity = engine.createEntity();
+            val entity = getEngine().createEntity();
 
-            val animation = engine.createComponent(AnimationComponent.class);
-            val state = engine.createComponent(StateComponent.class);
-            val bodyCom = engine.createComponent(BodyComponent.class);
-            val light = engine.createComponent(LightComponent.class);
-            val monsterCom = engine.createComponent(MonsterComponent.class);
+            val animation = getEngine().createComponent(AnimationComponent.class);
+            val state = getEngine().createComponent(StateComponent.class);
+            val bodyCom = getEngine().createComponent(BodyComponent.class);
+            val light = getEngine().createComponent(LightComponent.class);
+            val monsterCom = getEngine().createComponent(MonsterComponent.class);
 
             monsterCom.setTemplate(stat);
             monsterCom.init();
-
-            engine.getSystem(MonsterSystem.class).setActor(monsterCom);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
             animation.getAnimations().put(AnimationState.RIGHT.getValue(), GameWorldManager.RIGHT);
             animation.getAnimations().put(AnimationState.LEFT.getValue(), GameWorldManager.LEFT);
 
             bodyCom.getBodyDef().type = BodyDef.BodyType.DynamicBody;
-            bodyCom.setBody(world.createBody(bodyCom.getBodyDef()));
+            bodyCom.setBody(getWorld().createBody(bodyCom.getBodyDef()));
             val bodyPolygon = new PolygonShape();
             bodyPolygon.setAsBox(10,10);
             bodyCom.getFixtureDef().shape = bodyPolygon;
@@ -83,15 +79,18 @@ public class MonsterInstance {
             entity.add(monsterCom);
             entity.add(bodyCom);
             entity.add(new MovementComponent());
+            entity.add(new TouchComponent());
             entity.add(new TextureComponent());
 
-            engine.addEntity(entity);
+            getEngine().addEntity(entity);
 
             monsterList.add(entity);
         }
     }
 
-    private MonsterInstance() {}
+    private MonsterInstance() {
+        createMonster();
+    }
 
     public static MonsterInstance getInstance() {
         return instance;

@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.model.skills;
 
-import com.nuclearthinking.myheroagency.controller.systems.ActorSystem;
+import com.nuclearthinking.myheroagency.model.components.GameActor;
 import lombok.*;
 
 /**
@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 public final class Env {
 
-    @NonNull private @Getter @Setter ActorSystem character;
-    private @Getter @Setter ActorSystem target;
+    @NonNull private @Getter @Setter GameActor character;
+    private @Getter @Setter GameActor target;
     private @Getter @Setter double value;
 
 }

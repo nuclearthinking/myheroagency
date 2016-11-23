@@ -1,19 +1,16 @@
 package com.nuclearthinking.myheroagency.model.components;
 
-import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
 import com.nuclearthinking.myheroagency.model.npc.Npc;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 
 /**
  * Created by mkuksin on 26.09.2016.
  */
 @Slf4j(topic = "NpcComponent")
+@ToString
 public final class NpcComponent extends GameActor implements Speaker {
 
     private @Getter @Setter int id;
@@ -46,7 +43,7 @@ public final class NpcComponent extends GameActor implements Speaker {
     }
 
     @Override
-    public void showDialog(@NonNull PlayerSystem player, String command) {
+    public void showDialog(@NonNull GameActor player, String command) {
         try {
             if(command == null || command.length() == 0){
                 log.info("Player " + player.getLevel() + " starting dialog with " + name);
@@ -68,12 +65,17 @@ public final class NpcComponent extends GameActor implements Speaker {
         }
     }
 
-    private void showQuestWindow(@NonNull final  PlayerSystem player, final String questId){
+    private void showQuestWindow(@NonNull final  GameActor player, final String questId){
         // TODO: должно быть что то такое
         //Quest q = ((PlayerComponent)player.getActor()).getQuest(questId);
         //q.notifyTalk(this);
 
         val quest = Quest.getQ(questId);
         quest.notifyTalk(this);
+    }
+
+    @Override
+    public boolean isNpc(){
+        return true;
     }
 }
