@@ -15,8 +15,10 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.item.ItemInstance;
 import com.nuclearthinking.myheroagency.model.monster.MonsterInstance;
 import com.nuclearthinking.myheroagency.model.npc.NpcInstance;
+import com.nuclearthinking.myheroagency.model.skills.SkillInstance;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -50,20 +52,24 @@ public final class GameWorldManager {
     }
 
     public void create(){
-        log.info("Create World");
+        log.info("Build Map");
         createWorld();
-        log.info("Create Player");
-        val player = createPlayer();
-        log.info("Create Camera");
-        createCamera(player);
-        log.info("Build Hud");
-        buildHudManager.createHud();
         log.info("Create Npc");
         NpcInstance.getInstance().initialize(engine, world);
         log.info("Create Monster");
         MonsterInstance.getInstance().initialize(engine, world);
         log.info("Create Player Listener");
         world.setContactListener(al);
+        log.info("Create Items");
+        ItemInstance.getInstance();
+        log.info("Create Skills");
+        SkillInstance.getInstance();
+        log.info("Create Player");
+        val player = createPlayer();
+        log.info("Create Camera");
+        createCamera(player);
+        log.info("Build Hud");
+        buildHudManager.createHud();
 
         //TODO: Затычки для спавна и АИ
         MonsterInstance.getInstance().getMonsterList().get(0).getComponent(MonsterComponent.class).setTarget(player);

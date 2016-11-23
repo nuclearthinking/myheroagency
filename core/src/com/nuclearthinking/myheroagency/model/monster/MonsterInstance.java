@@ -24,19 +24,13 @@ import java.util.ArrayList;
  */
 public class MonsterInstance {
 
-    private static final ArrayList<Monster> monster = Asset.getInstance().get(Constants.MONSTER_JSON, JsonToObject.class).getMonsterParser().getBaseMonster();
+    private static MonsterInstance instance = new MonsterInstance();
+
+    private final ArrayList<Monster> monster = Asset.getInstance().get(Constants.MONSTER_JSON, JsonToObject.class).getMonsterParser().getBaseMonster();
+
     private @Getter final ArrayList<Entity> monsterList = new ArrayList<Entity>();
     private PooledEngine engine;
     private World world;
-
-    private static MonsterInstance instance = new MonsterInstance();
-
-    public static MonsterInstance getInstance() {
-        return instance;
-    }
-
-    private MonsterInstance() {
-    }
 
     public void initialize(@NonNull final PooledEngine engine, @NonNull final World world){
         this.engine = engine;
@@ -95,5 +89,11 @@ public class MonsterInstance {
 
             monsterList.add(entity);
         }
+    }
+
+    private MonsterInstance() {}
+
+    public static MonsterInstance getInstance() {
+        return instance;
     }
 }

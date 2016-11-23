@@ -24,19 +24,13 @@ import java.util.ArrayList;
  */
 public class NpcInstance {
 
-    private static final ArrayList<Npc> npc = Asset.getInstance().get(Constants.NPC_JSON, JsonToObject.class).getNpcParser().getBaseNpc();
+    private static final NpcInstance instance = new NpcInstance();
+
+    private final ArrayList<Npc> npc = Asset.getInstance().get(Constants.NPC_JSON, JsonToObject.class).getNpcParser().getBaseNpc();
+
     private @Getter final ArrayList<Entity> npsList = new ArrayList<Entity>();
     private PooledEngine engine;
     private World world;
-
-    private static NpcInstance instance = new NpcInstance();
-
-    public static NpcInstance getInstance() {
-        return instance;
-    }
-
-    private NpcInstance() {
-    }
 
     public void initialize(@NonNull final PooledEngine engine, @NonNull final World world){
         this.engine = engine;
@@ -92,5 +86,11 @@ public class NpcInstance {
 
             npsList.add(entity);
         }
+    }
+
+    private NpcInstance() {}
+
+    public static NpcInstance getInstance() {
+        return instance;
     }
 }
