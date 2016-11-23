@@ -15,14 +15,20 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.item.ItemInstance;
+import com.nuclearthinking.myheroagency.model.monster.MonsterInstance;
+import com.nuclearthinking.myheroagency.model.npc.NpcInstance;
+import com.nuclearthinking.myheroagency.model.skills.SkillInstance;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 /**
  * Created by mkuksin on 01.09.2016.
  */
+@Slf4j(topic = "GameWorldManager")
 public final class GameWorldManager {
 
     public static final TextureAtlas playerAtlas = Asset.getInstance().get(Constants.PLAYER_PACK);
@@ -41,21 +47,34 @@ public final class GameWorldManager {
         this.engine = engine;
         this.world = new World(GravityComponent.getGravity(), false);
         this.buildHudManager = new BuildHudManager(engine, batch);
-        this.buildNpcManager = new BuildNpcManager(engine,world);
+        this.buildNpcManager = new BuildNpcManager();
         this.al = new PlayerContact();
     }
 
     public void create(){
+        log.info("Build Map");
         createWorld();
-        val player = createPlayer();
-        createCamera(player);
-        buildNpcManager.createMonster(player);
-        buildHudManager.createHud();
-        buildNpcManager.createNpc();
-        buildNpcManager.createNpc();
-        buildNpcManager.spawnNpc(300, 2860);
-        buildNpcManager.spawnMonster(600, 2860);
+        log.info("Create Npc");
+        NpcInstance.getInstance().initialize(engine, world);
+        log.info("Create Monster");
+        MonsterInstance.getInstance().initialize(engine, world);
+        log.info("Create Player Listener");
         world.setContactListener(al);
+        log.info("Create Items");
+        ItemInstance.getInstance();
+        log.info("Create Skills");
+        SkillInstance.getInstance();
+        log.info("Create Player");
+        val player = createPlayer();
+        log.info("Create Camera");
+        createCamera(player);
+        log.info("Build Hud");
+        buildHudManager.createHud();
+
+        //TODO: Затычки для спавна и АИ
+        MonsterInstance.getInstance().getMonsterList().get(0).getComponent(MonsterComponent.class).setTarget(player);
+        buildNpcManager.spawnNpc(NpcInstance.getInstance().getNpsList().get(0), 300, 2860);
+        buildNpcManager.spawnNpc(MonsterInstance.getInstance().getMonsterList().get(0), 600, 2860);
     }
 
     private Entity createPlayer(){

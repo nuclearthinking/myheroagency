@@ -20,12 +20,15 @@
         <asset type="com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator" path="font/RobotoSlab-Regular.ttf"/>
         <asset type="com.badlogic.gdx.scenes.scene2d.ui.Skin" path="ui/ui.json" />
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="ui/ui.atlas"/>
-        <asset type="com.badlogic.gdx.maps.tiled.TiledMap" path="map/testMap.tmx"/>
-
+        <asset type="com.badlogic.gdx.maps.tiled.TiledMap" path="data/map/testMap.tmx"/>
         <asset type="com.badlogic.gdx.graphics.Texture" path="player/player.png"/>
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="player/player.pack"/>
     </group>
-    <group name="quest">
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="quest/quest.json"/>
+    <group name="object">
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/quest/quest.quest"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/npc/npc.npc"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/monster/monster.monster"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/skill/skill.skill"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/item/item.item"/>
     </group>
 </assets>

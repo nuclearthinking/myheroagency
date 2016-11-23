@@ -8,6 +8,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 public enum AnimationState {
+
     IDLE(0),
     LEFT(1),
     RIGHT(2),

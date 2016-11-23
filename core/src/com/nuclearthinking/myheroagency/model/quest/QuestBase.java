@@ -3,10 +3,8 @@ package com.nuclearthinking.myheroagency.model.quest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by mkuksin on 01.11.2016.
@@ -24,7 +22,9 @@ import java.util.Arrays;
         "questItemCount",
         "text",
         "rewardId",
-        "rewardCount"})
+        "rewardCount"
+})
+@ToString
 public class QuestBase {
 
     public enum QuestType{
@@ -52,27 +52,9 @@ public class QuestBase {
     @JsonProperty("questItemCount")
     private @Getter int[] questItemCount;
     @JsonProperty("text")
-    private @Getter ArrayList<QuestText> text;
+    private @Getter QuestText text;
     @JsonProperty("rewardId")
     private @Getter int[] rewardId;
     @JsonProperty("rewardCount")
     private @Getter int[] rewardCount;
-
-    @Override
-    public String toString() {
-        return "QuestInfo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description +
-                ", type=" + type +
-                ", npcId=" + npcId +
-                ", monsterId=" + Arrays.toString(monsterId) +
-                ", monsterCount=" + Arrays.toString(monsterCount) +
-                ", questItemId=" + Arrays.toString(questItemId) +
-                ", questItemCount=" + Arrays.toString(questItemCount) +
-                ", text=" + text +
-                ", rewardId=" + Arrays.toString(rewardId) +
-                ", rewardCount=" + Arrays.toString(rewardCount) +
-                '}';
-    }
 }

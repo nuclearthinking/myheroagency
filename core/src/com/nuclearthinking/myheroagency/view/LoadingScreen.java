@@ -21,7 +21,7 @@ public final class LoadingScreen extends AbstractScreen {
         Asset.getInstance().finishLoading();
         Asset.getInstance().loadGroup(ASSET_GROUP_LOCALE);
         Asset.getInstance().loadGroup(ASSET_GROUP_BASE);
-        Asset.getInstance().loadGroup(ASSET_GROUP_QUEST);
+        Asset.getInstance().loadGroup(ASSET_GROUP_OBJECT);
         Asset.getInstance().finishLoading();
         QuestLoader.load();
     }

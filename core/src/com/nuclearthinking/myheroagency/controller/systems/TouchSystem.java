@@ -29,7 +29,7 @@ public class TouchSystem extends IteratingSystem {
         //TODO: Нужно добавить тип нпс и проверять наличие возможных действий с ним
         if(touch.isTouch()){
             //TODO: В ифах костыли для проверки
-            if(npc.getId() >= 2)
+            if(npc.getId() == 1)
                 getEngine().getSystem(PlayerSystem.class).talkTo(touch.getActor(), "quest0");
             else{
                 getEngine().getSystem(PlayerSystem.class).talkTo(touch.getActor(), "openWindow");

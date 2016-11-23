@@ -9,24 +9,33 @@ import lombok.Setter;
  */
 public abstract class GameActor implements Component {
 
-    private @Getter @Setter int baseCON;
-    private @Getter @Setter int baseDEX;
-    private @Getter @Setter int baseINT;
-    private @Getter @Setter int baseMEN;
-    private @Getter @Setter int baseSTR;
-    private @Getter @Setter int baseWIT;
-    private @Getter int level;
+    protected @Getter int baseHpReg;
+    protected @Getter int baseMpReg;
+    protected @Getter int baseHpMax;
+    protected @Getter int baseMpMax;
+    protected @Getter int basePAtk;
+    protected @Getter int baseMAtk;
+    protected @Getter int basePDef;
+    protected @Getter int baseMDef;
+    protected @Getter int basePAtkSpd;
+    protected @Getter int baseMAtkSpd;
+    protected @Getter int basePCritRate;
+    protected @Getter int baseMCritRate;
+    protected @Getter int basePCritChance;
+    protected @Getter int baseMCritChance;
+    protected @Getter int baseRunSpd;
+    protected @Getter @Setter int baseCON;
+    protected @Getter @Setter int baseDEX;
+    protected @Getter @Setter int baseINT;
+    protected @Getter @Setter int baseMEN;
+    protected @Getter @Setter int baseSTR;
+    protected @Getter @Setter int baseWIT;
 
+    protected @Getter int curHp;
+    protected @Getter int level;
 
-    private @Getter int curHp;
+    protected abstract void init();
 
     public GameActor(){
-        baseCON = 10;
-        baseDEX = 10;
-        baseINT = 10;
-        baseMEN = 10;
-        baseSTR = 10;
-        baseWIT = 10;
-        level = 1;
     }
 }
