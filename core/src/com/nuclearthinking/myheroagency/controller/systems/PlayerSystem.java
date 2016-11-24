@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.Components;
+import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.AnimationState;
 import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.MovementComponent;
@@ -63,7 +64,7 @@ public final class PlayerSystem extends IteratingSystem {
         checkBorderWorld(body);
     }
 
-    public void talkTo(@NonNull final Speaker object, final String command){
+    public void talkTo(@NonNull final Speaker object, final DialogComponent command){
         object.showDialog(this, command);
     }
 

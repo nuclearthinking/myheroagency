@@ -63,6 +63,8 @@ public final class GameWorldManager {
         createCamera(player);
         log.info("Create Player Listener");
         world.setContactListener(al);
+        log.info("Build Hud");
+        buildHudManager.createHud();
         log.info("Create Npc");
         NpcInstance.getInstance();
         log.info("Create Monster");
@@ -71,8 +73,6 @@ public final class GameWorldManager {
         ItemInstance.getInstance();
         log.info("Create Skills");
         SkillInstance.getInstance();
-        log.info("Build Hud");
-        buildHudManager.createHud();
 
         //TODO: Затычки для спавна и АИ
         MonsterInstance.getInstance().getMonsterList().get(0).getComponent(MonsterComponent.class).setTarget(player);

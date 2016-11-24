@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
+import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
@@ -22,9 +23,10 @@ public final class NpcComponent extends GameActor implements Speaker {
     }
 
     @Override
-    public void showDialog(@NonNull PlayerSystem actor, String command) {
+    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final DialogComponent dialog) {
         val player = getPlayer(actor);
-        try {
+        dialog.show();
+        /*try {
             if(command == null || command.length() == 0){
                 log.info("Player " + player.getName() + " starting dialog with " + name);
                 log.info(super.toString());
@@ -43,7 +45,7 @@ public final class NpcComponent extends GameActor implements Speaker {
         }
         catch (StringIndexOutOfBoundsException e){
             log.info("Incorrect command: " + "[" + command + "]" + id);
-        }
+        }*/
     }
 
     private void showQuestWindow(@NonNull final GameActor player, final String questId){

@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
+import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
 import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import lombok.NonNull;
@@ -144,9 +145,10 @@ public final class PlayerController implements InputProcessor {
         for(val npc : npcList){
             val body = npc.getComponent(BodyComponent.class);
             val speaker = npc.getComponent(NpcComponent.class);
+            val dialog = npc.getComponent(DialogComponent.class);
 
             if(vec.dst(body.getBody().getPosition().x, body.getBody().getPosition().y, 0) < body.getScale().x/2){
-                engine.getSystem(PlayerSystem.class).talkTo(speaker, "");
+                engine.getSystem(PlayerSystem.class).talkTo(speaker, dialog);
             }
         }
         return false;

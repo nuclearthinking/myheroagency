@@ -6,11 +6,14 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
+import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
 import com.nuclearthinking.myheroagency.model.effect.LightComponent;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.val;
@@ -45,8 +48,11 @@ public class NpcInstance {
             val light = getEngine().createComponent(LightComponent.class);
             val bodyCom = getEngine().createComponent(BodyComponent.class);
             val npcCom = getEngine().createComponent(NpcComponent.class);
+            val dialog = getEngine().createComponent(DialogComponent.class);
 
             npcCom.initialize(stat);
+
+            dialog.setDialog(new Dialog(npcCom.getName(), UiFactory.getSkin()));
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
@@ -76,6 +82,7 @@ public class NpcInstance {
             entity.add(npcCom);
             entity.add(bodyCom);
             entity.add(new TextureComponent());
+            entity.add(dialog);
 
             getEngine().addEntity(entity);
 
