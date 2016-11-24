@@ -15,7 +15,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 /**
  * Created by Izonami on 09.05.2016.
  */
-public final class TextActor extends Actor implements Disposable{
+public final class TextActor extends Actor implements Disposable {
+
     private final TextButton[] listchar;
     private final TextButton.TextButtonStyle style;
     private final String text;

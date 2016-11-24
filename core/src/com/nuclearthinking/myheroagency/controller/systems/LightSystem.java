@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.LightComponent;
+import com.nuclearthinking.myheroagency.model.effect.LightComponent;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;

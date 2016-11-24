@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.hud.*;
+import com.nuclearthinking.myheroagency.model.ui.hud.*;
 import lombok.val;
 
 /**

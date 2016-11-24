@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.nuclearthinking.myheroagency.model.components.hud.QuestHudComponent;
-import com.nuclearthinking.myheroagency.model.components.hud.SettingHudComponent;
-import com.nuclearthinking.myheroagency.model.components.hud.StatHudComponent;
+import com.nuclearthinking.myheroagency.model.ui.hud.QuestHudComponent;
+import com.nuclearthinking.myheroagency.model.ui.hud.SettingHudComponent;
+import com.nuclearthinking.myheroagency.model.ui.hud.StatHudComponent;
 import lombok.NonNull;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;

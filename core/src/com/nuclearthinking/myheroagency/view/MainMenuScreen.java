@@ -3,10 +3,10 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
-import com.nuclearthinking.myheroagency.controller.button.menu.LoadListener;
-import com.nuclearthinking.myheroagency.controller.button.menu.PlayListener;
-import com.nuclearthinking.myheroagency.controller.button.menu.SettingListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.LoadListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.PlayListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.SettingListener;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 
@@ -78,5 +78,4 @@ public final class MainMenuScreen extends AbstractScreen {
         settings.clearListeners();
         exit.clearListeners();
     }
-
 }

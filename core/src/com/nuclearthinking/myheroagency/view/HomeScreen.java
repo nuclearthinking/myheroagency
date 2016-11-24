@@ -5,7 +5,7 @@ import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.controller.systems.*;
-import com.nuclearthinking.myheroagency.model.components.hud.HudComponent;
+import com.nuclearthinking.myheroagency.model.ui.hud.HudComponent;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.scripts;
 
-import com.nuclearthinking.myheroagency.model.components.NpcComponent;
+import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
 import lombok.NonNull;
 

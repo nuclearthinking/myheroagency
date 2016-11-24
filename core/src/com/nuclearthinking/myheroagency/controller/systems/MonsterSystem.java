@@ -3,12 +3,12 @@ package com.nuclearthinking.myheroagency.controller.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.BodyComponent;
-import com.nuclearthinking.myheroagency.model.components.MonsterComponent;
-import com.nuclearthinking.myheroagency.model.components.MovementComponent;
-import com.nuclearthinking.myheroagency.model.components.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.AnimationState;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.MovementComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.monster.MonsterComponent;
 import lombok.NonNull;
 import lombok.val;
 

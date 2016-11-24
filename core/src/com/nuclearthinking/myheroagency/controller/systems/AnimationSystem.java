@@ -4,9 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.AnimationComponent;
-import com.nuclearthinking.myheroagency.model.components.StateComponent;
-import com.nuclearthinking.myheroagency.model.components.TextureComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.AnimationComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.TextureComponent;
 import lombok.val;
 
 /**

@@ -11,8 +11,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.model.components.MapComponent;
+import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
+import com.nuclearthinking.myheroagency.model.world.MapComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -38,7 +38,7 @@ public final class MapSystem extends IteratingSystem {
     public MapSystem(@NonNull String mapName, @NonNull World world){
         super(family);
 
-        tiledMap = Asset.getInstance().get(mapName,TiledMap.class);
+        tiledMap = AssetsManager.getInstance().get(mapName,TiledMap.class);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         @NonNull val properties = tiledMap.getProperties();

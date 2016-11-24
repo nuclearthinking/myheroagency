@@ -3,9 +3,9 @@ package com.nuclearthinking.myheroagency.controller.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.nuclearthinking.myheroagency.model.components.BodyComponent;
-import com.nuclearthinking.myheroagency.model.components.NpcComponent;
-import com.nuclearthinking.myheroagency.model.components.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import lombok.extern.slf4j.Slf4j;
 
 /**

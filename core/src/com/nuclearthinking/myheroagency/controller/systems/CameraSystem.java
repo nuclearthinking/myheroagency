@@ -5,8 +5,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.CameraComponent;
-import com.nuclearthinking.myheroagency.model.components.MapComponent;
+import com.nuclearthinking.myheroagency.model.actor.player.CameraComponent;
+import com.nuclearthinking.myheroagency.model.world.MapComponent;
 import lombok.val;
 
 /**
