@@ -1,10 +1,12 @@
 package com.nuclearthinking.myheroagency.model.components;
 
+import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
-import com.nuclearthinking.myheroagency.model.npc.Npc;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
-import lombok.*;
+import lombok.NonNull;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 /**
  * Created by mkuksin on 26.09.2016.
@@ -13,46 +15,23 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 public final class NpcComponent extends GameActor implements Speaker {
 
-    private @Getter @Setter int id;
-    private @Getter @Setter String name;
-    private @Setter Npc template;
-
     public NpcComponent(){
         super();
     }
 
-    public void init(){
-        id = template.getId();
-        name = template.getName();
-        level = template.getLevel();
-        baseHpMax = template.getBaseHpMax();
-        baseMpMax = template.getBaseMpMax();
-        baseHpReg = template.getBaseHpReg();
-        baseMpReg = template.getBaseMpReg();
-        basePAtk = template.getBasePAtk();
-        baseMAtk = template.getBaseMAtk();
-        basePDef = template.getBasePDef();
-        baseMDef = template.getBaseMDef();
-        basePAtkSpd = template.getBasePAtkSpd();
-        baseMAtkSpd = template.getBaseMAtkSpd();
-        basePCritRate = template.getBasePCritRate();
-        baseMCritRate = template.getBaseMCritRate();
-        basePCritChance = template.getBasePCritChance();
-        baseMCritChance = template.getBaseMCritChance();
-        baseRunSpd = template.getBaseRunSpd();
-    }
-
     @Override
-    public void showDialog(@NonNull GameActor player, String command) {
+    public void showDialog(@NonNull PlayerSystem actor, String command) {
+        val player = getPlayer(actor);
         try {
             if(command == null || command.length() == 0){
-                log.info("Player " + player.getLevel() + " starting dialog with " + name);
+                log.info("Player " + player.getLvl() + " starting dialog with " + name);
+                log.info(super.toString());
             }
             else if(command.equalsIgnoreCase("openWindow")){
-                log.info("Player " + player.getLevel() + " use command " + "[" + command + "]");
+                log.info("Player " + player.getLvl() + " use command " + "[" + command + "]");
             }
             else if (command.startsWith("quest")){
-                log.info("Player " + player.getLevel() + " use command " + "[" + command + "]");
+                log.info("Player "/* + player.getLevel()*/ + " use command " + "[" + command + "]");
 
                 final String quest = command.substring(5).trim();
                 if (quest.length() > 0) {
@@ -65,13 +44,17 @@ public final class NpcComponent extends GameActor implements Speaker {
         }
     }
 
-    private void showQuestWindow(@NonNull final  GameActor player, final String questId){
+    private void showQuestWindow(@NonNull final GameActor player, final String questId){
         // TODO: должно быть что то такое
         //Quest q = ((PlayerComponent)player.getActor()).getQuest(questId);
         //q.notifyTalk(this);
 
         val quest = Quest.getQ(questId);
         quest.notifyTalk(this);
+    }
+
+    private PlayerComponent getPlayer(@NonNull final PlayerSystem player){
+        return player.getEntities().first().getComponent(PlayerComponent.class);
     }
 
     @Override

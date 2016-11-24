@@ -1,19 +1,18 @@
 package com.nuclearthinking.myheroagency.model.components;
 
 import com.badlogic.ashley.core.Component;
+import com.nuclearthinking.myheroagency.model.GameObject;
 import com.nuclearthinking.myheroagency.model.skills.Calculator;
 import com.nuclearthinking.myheroagency.model.skills.Env;
 import com.nuclearthinking.myheroagency.model.skills.Function;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import com.nuclearthinking.myheroagency.model.skills.funcs.Func;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.val;
+import lombok.*;
 
 /**
  * Created by mkuksin on 03.10.2016.
  */
+@ToString
 public abstract class GameActor implements Component {
 
     private Calculator[] calc;
@@ -42,8 +41,28 @@ public abstract class GameActor implements Component {
 
     protected @Getter int curHp;
     protected @Getter int level;
+    protected @Getter int id;
+    protected @Getter String name;
 
-    protected abstract void init();
+    public void initialize(@NonNull GameObject template){
+        id = template.getId();
+        name = template.getName();
+        level = template.getLevel();
+        baseMpMax = template.getBaseMpMax();
+        baseHpReg = template.getBaseHpReg();
+        baseMpReg = template.getBaseMpReg();
+        basePAtk = template.getBasePAtk();
+        baseMAtk = template.getBaseMAtk();
+        basePDef = template.getBasePDef();
+        baseMDef = template.getBaseMDef();
+        basePAtkSpd = template.getBasePAtkSpd();
+        baseMAtkSpd = template.getBaseMAtkSpd();
+        basePCritRate = template.getBasePCritRate();
+        baseMCritRate = template.getBaseMCritRate();
+        basePCritChance = template.getBasePCritChance();
+        baseMCritChance = template.getBaseMCritChance();
+        baseRunSpd = template.getBaseRunSpd();
+    }
 
     public GameActor(){
         calc = new Calculator[Stats.NUM_STATS];

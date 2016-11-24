@@ -14,6 +14,7 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public final class PlayerSystem extends IteratingSystem {
+
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,
@@ -58,26 +59,30 @@ public final class PlayerSystem extends IteratingSystem {
         checkBorderWorld(body);
     }
 
-    private void checkBorderWorld(final BodyComponent t){
+    public void talkTo(@NonNull final Speaker object, final String command){
+        object.showDialog(this, command);
+    }
+
+    private void checkBorderWorld(final BodyComponent body){
         final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
         final int borderRight = MapComponent.getLevelPixelWidth();
         final int borderUp = MapComponent.getLevelPixelHeight();
         final int borderDown = 0;
 
-        if (t.getBody().getPosition().x <= borderLeft) {
-            t.getBody().setTransform(borderLeft, t.getBody().getPosition().y, 0.0f);
+        if (body.getBody().getPosition().x <= borderLeft) {
+            body.getBody().setTransform(borderLeft, body.getBody().getPosition().y, 0.0f);
         }
 
-        if (t.getBody().getPosition().x > borderRight) {
-            t.getBody().setTransform(borderRight, t.getBody().getPosition().y, 0.0f);
+        if (body.getBody().getPosition().x > borderRight) {
+            body.getBody().setTransform(borderRight, body.getBody().getPosition().y, 0.0f);
         }
 
-        if(t.getBody().getPosition().y > borderUp){
-            t.getBody().setTransform(t.getBody().getPosition().x, borderUp, 0.0f);
+        if (body.getBody().getPosition().y > borderUp) {
+            body.getBody().setTransform(body.getBody().getPosition().x, borderUp, 0.0f);
         }
 
-        if(t.getBody().getPosition().y <= borderDown){
-            t.getBody().setTransform(t.getBody().getPosition().x, borderDown, 0.0f);
+        if (body.getBody().getPosition().y <= borderDown){
+            body.getBody().setTransform(body.getBody().getPosition().x, borderDown, 0.0f);
         }
     }
 }

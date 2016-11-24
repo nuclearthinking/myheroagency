@@ -17,7 +17,8 @@ import lombok.val;
 /**
  * Created by mkuksin on 02.09.2016.
  */
-public final class LightSystem extends IteratingSystem{
+public final class LightSystem extends IteratingSystem {
+
     private static final Family family = Family.all(LightComponent.class).get();
 
     private final Color color;
@@ -29,20 +30,19 @@ public final class LightSystem extends IteratingSystem{
         color = new Color();
         LightComponent.setRayHandler(new RayHandler(world));
 
-        //LightComponent.getRayHandler().setBlur(true);           // enabled or disable blur
-        //LightComponent.getRayHandler().setBlurNum(1);           // set number of gaussian blur passes
+        LightComponent.getRayHandler().setBlur(true);           // enabled or disable blur
+        LightComponent.getRayHandler().setBlurNum(1);           // set number of gaussian blur passes
         LightComponent.getRayHandler().setShadows(true);        // enable or disable shadow
         LightComponent.getRayHandler().setCulling(true);        // enable or disable culling
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        @NonNull val light = Components.LIGHT.get(entity);
-        @NonNull val target = Components.BODY.get(light.getTarget());
+        val light = Components.LIGHT.get(entity);
+        val target = Components.BODY.get(light.getTarget());
 
         setAmbient(light.getRayHandler(), getLight());
         light.getPlayerLight().setPosition(target.getBody().getPosition().x, target.getBody().getPosition().y);
-        //light.getDirectionalLight().setPosition(target.getBody().getPosition().x, target.getBody().getPosition().y);
 
         light.getRayHandler().setCombinedMatrix(camera);
         light.getRayHandler().updateAndRender();

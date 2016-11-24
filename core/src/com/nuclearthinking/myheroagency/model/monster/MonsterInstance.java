@@ -46,8 +46,7 @@ public class MonsterInstance {
             val light = getEngine().createComponent(LightComponent.class);
             val monsterCom = getEngine().createComponent(MonsterComponent.class);
 
-            monsterCom.setTemplate(stat);
-            monsterCom.init();
+            monsterCom.initialize(stat);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
             animation.getAnimations().put(AnimationState.RIGHT.getValue(), GameWorldManager.RIGHT);
@@ -79,7 +78,6 @@ public class MonsterInstance {
             entity.add(monsterCom);
             entity.add(bodyCom);
             entity.add(new MovementComponent());
-            entity.add(new TouchComponent());
             entity.add(new TextureComponent());
 
             getEngine().addEntity(entity);

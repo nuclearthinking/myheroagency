@@ -5,14 +5,17 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.AnimationState;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.components.BodyComponent;
+import com.nuclearthinking.myheroagency.model.components.MonsterComponent;
+import com.nuclearthinking.myheroagency.model.components.MovementComponent;
+import com.nuclearthinking.myheroagency.model.components.StateComponent;
 import lombok.NonNull;
 import lombok.val;
 
 /**
  * Created by mkuksin on 03.10.2016.
  */
-public final class MonsterSystem extends IteratingSystem implements Speaker{
+public final class MonsterSystem extends IteratingSystem {
 
     private static final Family family = Family.all(MonsterComponent.class,
                                                     StateComponent.class,
@@ -49,10 +52,5 @@ public final class MonsterSystem extends IteratingSystem implements Speaker{
             mov.getVelocity().x = -monster.getSpeed();
             state.set(AnimationState.LEFT.getValue());
         }
-    }
-
-    @Override
-    public void showDialog(@NonNull GameActor player, String command) {
-
     }
 }

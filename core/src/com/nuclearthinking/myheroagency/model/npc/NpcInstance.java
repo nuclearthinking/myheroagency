@@ -46,8 +46,7 @@ public class NpcInstance {
             val bodyCom = getEngine().createComponent(BodyComponent.class);
             val npcCom = getEngine().createComponent(NpcComponent.class);
 
-            npcCom.setTemplate(stat);
-            npcCom.init();
+            npcCom.initialize(stat);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
@@ -76,7 +75,6 @@ public class NpcInstance {
             entity.add(light);
             entity.add(npcCom);
             entity.add(bodyCom);
-            entity.add(new TouchComponent());
             entity.add(new TextureComponent());
 
             getEngine().addEntity(entity);

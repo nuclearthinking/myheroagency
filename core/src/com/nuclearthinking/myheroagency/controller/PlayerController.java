@@ -9,8 +9,6 @@ import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.components.BodyComponent;
 import com.nuclearthinking.myheroagency.model.components.NpcComponent;
-import com.nuclearthinking.myheroagency.model.components.StateComponent;
-import com.nuclearthinking.myheroagency.model.components.TouchComponent;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -140,17 +138,15 @@ public final class PlayerController implements InputProcessor {
         val vec = new Vector3(screenX, screenY, 0);
         engine.getSystem(RenderingSystem.class).getCamera().unproject(vec);
 
-        val family = Family.all(StateComponent.class, NpcComponent.class, BodyComponent.class, TouchComponent.class).get();
+        val family = Family.all(NpcComponent.class, BodyComponent.class).get();
         val npcList = engine.getEntitiesFor(family);
 
         for(val npc : npcList){
             val body = npc.getComponent(BodyComponent.class);
-            val touch = npc.getComponent(TouchComponent.class);
             val speaker = npc.getComponent(NpcComponent.class);
 
             if(vec.dst(body.getBody().getPosition().x, body.getBody().getPosition().y, 0) < body.getScale().x/2){
-                touch.setTouch(true);
-                touch.setActor(speaker);
+                engine.getSystem(PlayerSystem.class).talkTo(speaker, "");
             }
         }
         return false;

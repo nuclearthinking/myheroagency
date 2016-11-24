@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model.npc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.nuclearthinking.myheroagency.model.GameObject;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
         "skillId"
 })
 @ToString
-public class Npc {
+public class Npc implements GameObject {
 
     @JsonProperty("id")
     private @Getter int id;
@@ -70,7 +71,6 @@ public class Npc {
     private @Getter int baseMCritChance;
     @JsonProperty("baseRunSpd")
     private @Getter int baseRunSpd;
-
     @JsonProperty("skillId")
-    private @Getter int[] skillId;
+    private @Getter int[] skills;
 }

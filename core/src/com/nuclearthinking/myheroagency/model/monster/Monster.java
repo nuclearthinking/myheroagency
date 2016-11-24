@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model.monster;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.nuclearthinking.myheroagency.model.GameObject;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
         "dropInfo"
 })
 @ToString
-public class Monster {
+public class Monster implements GameObject {
 
     @JsonProperty("id")
     private @Getter int id;
@@ -92,7 +93,7 @@ public class Monster {
     private @Getter int MEN;
 
     @JsonProperty("skillId")
-    private @Getter int[] skillId;
+    private @Getter int[] skills;
 
     @JsonProperty("dropInfo")
     private @Getter DropInfo dropInfo;

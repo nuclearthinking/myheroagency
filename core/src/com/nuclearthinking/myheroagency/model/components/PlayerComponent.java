@@ -1,10 +1,8 @@
 package com.nuclearthinking.myheroagency.model.components;
 
-import com.nuclearthinking.myheroagency.controller.systems.Speaker;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
 import com.nuclearthinking.myheroagency.model.skills.Stats;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,11 +39,6 @@ public final class PlayerComponent extends GameActor {
 
     private static final int needToLvlUp[] = {0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000}; //TODO: Статичный костыль
 
-    @Override
-    protected void init() {
-
-    }
-
     public PlayerComponent(){
         super();
     }
@@ -73,10 +66,6 @@ public final class PlayerComponent extends GameActor {
         }
         else
             log.info("You have maximum level");
-    }
-
-    public void talkTo(@NonNull final Speaker object, final String command){
-        object.showDialog(this, command);
     }
 
     public Quest getQuest(final String questId){

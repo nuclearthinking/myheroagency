@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.controller.manager;
 
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
 import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
+import com.nuclearthinking.myheroagency.model.components.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.components.hud.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
@@ -36,6 +38,7 @@ public final class BuildHudManager {
 
         //Инициализируем Stage
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
+        hud.setActor(engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).first());
 
         //Билдим слои
         val utils = buildUtils(hud);

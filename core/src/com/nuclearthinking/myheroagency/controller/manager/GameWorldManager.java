@@ -117,7 +117,6 @@ public final class GameWorldManager {
         entity.add(new MovementComponent());
         entity.add(bodyCom);
         entity.add(new TextureComponent());
-        entity.add(new TouchComponent());
 
         engine.addEntity(entity);
 
