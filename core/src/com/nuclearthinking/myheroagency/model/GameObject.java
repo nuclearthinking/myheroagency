@@ -4,6 +4,7 @@ package com.nuclearthinking.myheroagency.model;
  * Created by mkuksin on 24.11.2016.
  */
 public interface GameObject {
+
     int getId();
     String getName();
     int getLevel();
@@ -23,4 +24,11 @@ public interface GameObject {
     int getBaseMCritChance();
     int getBaseRunSpd();
     int[] getSkills();
+
+    int getSTR();
+    int getCON();
+    int getDEX();
+    int getINT();
+    int getWIT();
+    int getMEN();
 }

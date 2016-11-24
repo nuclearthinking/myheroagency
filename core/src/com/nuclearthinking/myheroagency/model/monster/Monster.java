@@ -78,6 +78,8 @@ public class Monster implements GameObject {
     private @Getter int baseMCritChance;
     @JsonProperty("baseRunSpd")
     private @Getter int baseRunSpd;
+    @JsonProperty("skillId")
+    private @Getter int[] skills;
 
     @JsonProperty("STR")
     private @Getter int STR;
@@ -91,9 +93,6 @@ public class Monster implements GameObject {
     private @Getter int WIT;
     @JsonProperty("MEN")
     private @Getter int MEN;
-
-    @JsonProperty("skillId")
-    private @Getter int[] skills;
 
     @JsonProperty("dropInfo")
     private @Getter DropInfo dropInfo;

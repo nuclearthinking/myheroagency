@@ -8,5 +8,6 @@ import lombok.Getter;
  * Created by mkuksin on 02.09.2016.
  */
 public final class GravityComponent implements Component {
+
     private @Getter static final Vector2 gravity = new Vector2(0, 0);
 }

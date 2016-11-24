@@ -42,12 +42,13 @@ public abstract class GameActor implements Component {
     protected @Getter int curHp;
     protected @Getter int level;
     protected @Getter int id;
-    protected @Getter String name;
+    protected @Getter String name = "Игрок";
 
     public void initialize(@NonNull GameObject template){
         id = template.getId();
         name = template.getName();
         level = template.getLevel();
+        baseHpMax = template.getBaseHpMax();
         baseMpMax = template.getBaseMpMax();
         baseHpReg = template.getBaseHpReg();
         baseMpReg = template.getBaseMpReg();

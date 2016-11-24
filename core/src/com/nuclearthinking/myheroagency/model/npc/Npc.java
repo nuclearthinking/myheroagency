@@ -73,4 +73,17 @@ public class Npc implements GameObject {
     private @Getter int baseRunSpd;
     @JsonProperty("skillId")
     private @Getter int[] skills;
+
+    @JsonProperty("STR")
+    private @Getter int STR;
+    @JsonProperty("CON")
+    private @Getter int CON;
+    @JsonProperty("DEX")
+    private @Getter int DEX;
+    @JsonProperty("INT")
+    private @Getter int INT;
+    @JsonProperty("WIT")
+    private @Getter int WIT;
+    @JsonProperty("MEN")
+    private @Getter int MEN;
 }

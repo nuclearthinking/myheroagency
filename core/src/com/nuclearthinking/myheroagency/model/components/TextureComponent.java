@@ -9,5 +9,6 @@ import lombok.Setter;
  * Created by mkuksin on 01.09.2016.
  */
 public final class TextureComponent implements Component {
+
     private @Getter @Setter TextureRegion region = null;
 }

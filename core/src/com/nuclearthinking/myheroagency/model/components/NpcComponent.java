@@ -24,14 +24,14 @@ public final class NpcComponent extends GameActor implements Speaker {
         val player = getPlayer(actor);
         try {
             if(command == null || command.length() == 0){
-                log.info("Player " + player.getLvl() + " starting dialog with " + name);
+                log.info("Player " + player.getName() + " starting dialog with " + name);
                 log.info(super.toString());
             }
             else if(command.equalsIgnoreCase("openWindow")){
-                log.info("Player " + player.getLvl() + " use command " + "[" + command + "]");
+                log.info("Player " + player.getName() + " use command " + "[" + command + "]");
             }
             else if (command.startsWith("quest")){
-                log.info("Player "/* + player.getLevel()*/ + " use command " + "[" + command + "]");
+                log.info("Player " + player.getName() + " use command " + "[" + command + "]");
 
                 final String quest = command.substring(5).trim();
                 if (quest.length() > 0) {

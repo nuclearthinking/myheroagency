@@ -11,6 +11,7 @@ import lombok.Setter;
  * Created by mkuksin on 03.10.2016.
  */
 public final class HudComponent implements Component {
+
     public static final UiFactory uiFactory = new UiFactory();
     private @Getter @Setter static Stage stage;
     private @Getter @Setter Entity actor;

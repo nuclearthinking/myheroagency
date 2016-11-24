@@ -12,6 +12,7 @@ import lombok.Setter;
  * Created by mkuksin on 27.09.2016.
  */
 public final class BodyComponent implements Component {
+
     private @Getter @Setter Body body = null;
     private @Getter BodyDef bodyDef = new BodyDef();
     private @Getter FixtureDef fixtureDef = new FixtureDef();

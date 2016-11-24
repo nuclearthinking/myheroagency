@@ -13,6 +13,7 @@ import lombok.Setter;
  * Created by mkuksin on 10.10.2016.
  */
 public final class SettingHudComponent implements Component {
+
     public static final Table table = new Table();
 
     private  @Getter final Localization locale = new Localization(this.getClass());
