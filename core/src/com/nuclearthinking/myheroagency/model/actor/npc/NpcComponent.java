@@ -2,7 +2,6 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
-import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;

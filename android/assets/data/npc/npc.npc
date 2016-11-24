@@ -1,0 +1,26 @@
+{
+  "npc":
+  [
+    {
+      "id":"1",
+      "name":"Vasiliy",
+      "level":"10",
+      "baseHpReg":"10",
+      "baseMpReg":"10",
+      "baseHpMax":"10",
+      "baseMpMax":"10",
+      "basePAtk":"10",
+      "baseMAtk":"10",
+      "basePDef":"10",
+      "baseMDef":"10",
+      "basePAtkSpd":"10",
+      "baseMAtkSpd":"10",
+      "basePCritRate":"10",
+      "baseMCritRate":"10",
+      "basePCritChance":"10",
+      "baseMCritChance":"10",
+      "baseRunSpd":"100",
+      "skillId":[1,2,3,4,5]
+    }
+  ]
+}

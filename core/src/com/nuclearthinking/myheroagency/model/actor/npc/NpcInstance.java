@@ -7,10 +7,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
-import com.nuclearthinking.myheroagency.model.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
 import com.nuclearthinking.myheroagency.model.effect.LightComponent;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
@@ -49,10 +50,19 @@ public class NpcInstance {
             val bodyCom = getEngine().createComponent(BodyComponent.class);
             val npcCom = getEngine().createComponent(NpcComponent.class);
             val dialog = getEngine().createComponent(DialogComponent.class);
+            val name = getEngine().createComponent(NameComponent.class);
 
             npcCom.initialize(stat);
 
-            dialog.setDialog(new Dialog(npcCom.getName(), UiFactory.getSkin()));
+            name.setLabel(new Label(stat.getName(), UiFactory.getSkin()));
+            name.show();
+
+            dialog.setDialog(new Dialog(stat.getName(), UiFactory.getSkin()));
+            dialog.getDialog().text("Welcome to my Hell!");
+            val b = new TextButton("Quest",UiFactory.getSkin());
+            dialog.getDialog().button(b, true);
+            dialog.getDialog().setResizable(true);
+            dialog.getDialog().setMovable(true);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
@@ -83,6 +93,7 @@ public class NpcInstance {
             entity.add(bodyCom);
             entity.add(new TextureComponent());
             entity.add(dialog);
+            entity.add(name);
 
             getEngine().addEntity(entity);
 

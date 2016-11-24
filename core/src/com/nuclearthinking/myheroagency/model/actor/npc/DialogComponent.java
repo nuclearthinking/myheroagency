@@ -1,4 +1,4 @@
-package com.nuclearthinking.myheroagency.model;
+package com.nuclearthinking.myheroagency.model.actor.npc;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;

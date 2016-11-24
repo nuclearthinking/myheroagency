@@ -24,7 +24,7 @@ public final class HomeScreen extends AbstractScreen {
 
     public HomeScreen() {
         engine = new PooledEngine();
-        gameWorldManager = new GameWorldManager(engine, stage.getBatch());
+        gameWorldManager = new GameWorldManager(engine, stage);
         pc = new PlayerController(engine);
         lc = new LayerController();
     }

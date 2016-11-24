@@ -1,6 +1,6 @@
 package com.nuclearthinking.myheroagency.controller.systems;
 
-import com.nuclearthinking.myheroagency.model.DialogComponent;
+import com.nuclearthinking.myheroagency.model.actor.npc.DialogComponent;
 import lombok.NonNull;
 
 /**

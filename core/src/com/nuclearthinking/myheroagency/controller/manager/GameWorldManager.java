@@ -4,11 +4,11 @@ import box2dLight.PointLight;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.nuclearthinking.myheroagency.controller.listener.PlayerContact;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
@@ -41,15 +41,17 @@ public final class GameWorldManager {
 
     private @Getter static PooledEngine engine;
     private @Getter static World world;
+    private @Getter static Stage stage;
     private PlayerContact al;
 
     private final BuildHudManager buildHudManager;
     private final BuildNpcManager buildNpcManager;
 
-    public GameWorldManager(@NonNull final PooledEngine engine, @NonNull final Batch batch) {
+    public GameWorldManager(@NonNull final PooledEngine engine, @NonNull final Stage stage) {
         this.engine = engine;
+        this.stage = stage;
         this.world = new World(GravityComponent.getGravity(), false);
-        this.buildHudManager = new BuildHudManager(engine, batch);
+        this.buildHudManager = new BuildHudManager(engine, stage.getBatch());
         this.buildNpcManager = new BuildNpcManager();
         this.al = new PlayerContact();
     }
