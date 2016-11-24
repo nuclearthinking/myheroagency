@@ -22,12 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 public class Skill {
 
-    public enum SkillType{
+    public enum SkillType {
         PASSIVE,
         ACTIVE
     }
 
-    public enum EffectType{
+    public enum EffectType {
         ADDPATK,
         ADDMATK
     }

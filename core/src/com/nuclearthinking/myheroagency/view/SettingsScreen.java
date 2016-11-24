@@ -3,8 +3,8 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.nuclearthinking.myheroagency.controller.button.menu.BackListener;
-import com.nuclearthinking.myheroagency.controller.button.menu.SaveListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.BackListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.SaveListener;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
@@ -118,5 +118,4 @@ public final class SettingsScreen extends AbstractScreen {
         back.clearListeners();
         save.clearListeners();
     }
-
 }

@@ -4,8 +4,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.BodyComponent;
-import com.nuclearthinking.myheroagency.model.components.MovementComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.MovementComponent;
 import lombok.NonNull;
 import lombok.val;
 
@@ -13,6 +13,7 @@ import lombok.val;
  * Created by mkuksin on 01.09.2016.
  */
 public final class MovementSystem extends IteratingSystem {
+
     private static final Family family = Family.all(BodyComponent.class,
                                                     MovementComponent.class).get();
 

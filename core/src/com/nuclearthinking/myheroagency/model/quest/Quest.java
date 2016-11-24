@@ -1,8 +1,8 @@
 package com.nuclearthinking.myheroagency.model.quest;
 
-import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.controller.manager.JsonToObject;
-import com.nuclearthinking.myheroagency.model.components.NpcComponent;
+import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
+import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
+import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -23,7 +23,7 @@ public abstract class Quest {
     protected @Getter final int questId;
     protected @Getter QuestBase quest;
 
-    private static final ArrayList<QuestBase> questInfo = Asset.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
+    private static final ArrayList<QuestBase> questInfo = AssetsManager.getInstance().get(Constants.QUEST_JSON, JsonToObject.class).getQuestParser().getBaseQuest();
 
     //TODO: Костыль
     private static Map<String, Quest> q = new HashMap<String, Quest>();

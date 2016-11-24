@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.hud.*;
+import com.nuclearthinking.myheroagency.model.ui.hud.*;
 import lombok.val;
 
 /**
@@ -30,14 +30,15 @@ public final class HudSystem extends IteratingSystem {
         val uhc = Components.UHC.get(entity);
         val phc = Components.PHC.get(entity);
         val sthc = Components.SHC.get(entity);
+        val player = Components.PLAYER.get(hud.getActor());
 
         hud.getStage().draw();
         hud.getStage().act(deltaTime);
 
         uhc.getFps().setText("FPS: " + Gdx.graphics.getFramesPerSecond());
-        phc.getPlayerLvl().setText("Lvl: " + getEngine().getSystem(PlayerSystem.class).getLevel());
-        sthc.getCon().setText(Integer.toString(getEngine().getSystem(PlayerSystem.class).getBaseCON()));
-        phc.getPlayerHp().setText("Hp: " + getEngine().getSystem(PlayerSystem.class).getMaxHp());
+        phc.getPlayerLvl().setText("Lvl: " + player.getLvl());
+        sthc.getCon().setText(Integer.toString(player.getCON()));
+        phc.getPlayerHp().setText("Hp: " + player.getMaxHp());
     }
 
     public void resize(int w, int h){

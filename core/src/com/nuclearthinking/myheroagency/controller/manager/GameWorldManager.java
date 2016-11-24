@@ -9,16 +9,19 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nuclearthinking.myheroagency.controller.Asset;
-import com.nuclearthinking.myheroagency.controller.PlayerContact;
-import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.controller.listener.PlayerContact;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
-import com.nuclearthinking.myheroagency.model.AnimationState;
-import com.nuclearthinking.myheroagency.model.components.*;
+import com.nuclearthinking.myheroagency.model.actor.base.*;
+import com.nuclearthinking.myheroagency.model.actor.monster.MonsterComponent;
+import com.nuclearthinking.myheroagency.model.actor.monster.MonsterInstance;
+import com.nuclearthinking.myheroagency.model.actor.npc.NpcInstance;
+import com.nuclearthinking.myheroagency.model.actor.player.CameraComponent;
+import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.effect.LightComponent;
 import com.nuclearthinking.myheroagency.model.item.ItemInstance;
-import com.nuclearthinking.myheroagency.model.monster.MonsterInstance;
-import com.nuclearthinking.myheroagency.model.npc.NpcInstance;
 import com.nuclearthinking.myheroagency.model.skills.SkillInstance;
+import com.nuclearthinking.myheroagency.model.world.GravityComponent;
+import com.nuclearthinking.myheroagency.model.world.MapComponent;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,13 +34,13 @@ import lombok.val;
 @Slf4j(topic = "GameWorldManager")
 public final class GameWorldManager {
 
-    public static final TextureAtlas playerAtlas = Asset.getInstance().get(Constants.PLAYER_PACK);
+    public static final TextureAtlas playerAtlas = AssetsManager.getInstance().get(Constants.PLAYER_PACK);
     public static final Animation IDLE = new Animation(1 / 2f, playerAtlas.findRegions("still"), Animation.PlayMode.LOOP);
     public static final Animation LEFT = new Animation(1 / 6f, playerAtlas.findRegions("left"), Animation.PlayMode.LOOP);
     public static final Animation RIGHT = new Animation(1 / 6f, playerAtlas.findRegions("right"), Animation.PlayMode.LOOP);
 
-    private PooledEngine engine;
-    private @Getter World world;
+    private @Getter static PooledEngine engine;
+    private @Getter static World world;
     private PlayerContact al;
 
     private final BuildHudManager buildHudManager;
@@ -51,23 +54,23 @@ public final class GameWorldManager {
         this.al = new PlayerContact();
     }
 
-    public void create(){
+    public void create() {
         log.info("Build Map");
         createWorld();
-        log.info("Create Npc");
-        NpcInstance.getInstance().initialize(engine, world);
-        log.info("Create Monster");
-        MonsterInstance.getInstance().initialize(engine, world);
-        log.info("Create Player Listener");
-        world.setContactListener(al);
-        log.info("Create Items");
-        ItemInstance.getInstance();
-        log.info("Create Skills");
-        SkillInstance.getInstance();
         log.info("Create Player");
         val player = createPlayer();
         log.info("Create Camera");
         createCamera(player);
+        log.info("Create Player Listener");
+        world.setContactListener(al);
+        log.info("Create Npc");
+        NpcInstance.getInstance();
+        log.info("Create Monster");
+        MonsterInstance.getInstance();
+        log.info("Create Items");
+        ItemInstance.getInstance();
+        log.info("Create Skills");
+        SkillInstance.getInstance();
         log.info("Build Hud");
         buildHudManager.createHud();
 
@@ -77,7 +80,7 @@ public final class GameWorldManager {
         buildNpcManager.spawnNpc(MonsterInstance.getInstance().getMonsterList().get(0), 600, 2860);
     }
 
-    private Entity createPlayer(){
+    private Entity createPlayer() {
         val entity = engine.createEntity();
 
         val animation = engine.createComponent(AnimationComponent.class);
@@ -85,7 +88,7 @@ public final class GameWorldManager {
         val light = engine.createComponent(LightComponent.class);
         val bodyCom = engine.createComponent(BodyComponent.class);
         val player = engine.createComponent(PlayerComponent.class);
-        engine.getSystem(PlayerSystem.class).setActor(player);
+        player.initialize(null);
 
         animation.getAnimations().put(AnimationState.IDLE.getValue(), IDLE);
         animation.getAnimations().put(AnimationState.RIGHT.getValue(), RIGHT);
@@ -127,7 +130,6 @@ public final class GameWorldManager {
 
     private void createCamera(@NonNull final Entity target) {
         val entity = engine.createEntity();
-
         val camera = engine.createComponent(CameraComponent.class);
 
         camera.setCamera(engine.getSystem(RenderingSystem.class).getCamera());

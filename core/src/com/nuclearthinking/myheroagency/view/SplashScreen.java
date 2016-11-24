@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.nuclearthinking.myheroagency.controller.Asset;
 import com.nuclearthinking.myheroagency.controller.ScreenController;
 import com.nuclearthinking.myheroagency.controller.ScreenEnum;
+import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.controller.manager.ScreenManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.ui.FontFactory;
@@ -31,7 +31,7 @@ public final class SplashScreen extends AbstractScreen {
     private final ScreenController controller;
 
     public SplashScreen() {
-        texture = Asset.getInstance().get(Constants.SPLASH_IMG, Texture.class);
+        texture = AssetsManager.getInstance().get(Constants.SPLASH_IMG, Texture.class);
         controller = new ScreenController();
         fontFactory = new FontFactory();
         //TODO: Пробелы это костыль, нужно передавать аргумент, что бы двигать положение текста
@@ -98,5 +98,4 @@ public final class SplashScreen extends AbstractScreen {
         texture.dispose();
         actor.dispose();
     }
-
 }

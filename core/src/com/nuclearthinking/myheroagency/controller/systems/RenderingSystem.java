@@ -13,8 +13,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.nuclearthinking.myheroagency.model.Components;
 import com.nuclearthinking.myheroagency.model.Settings;
-import com.nuclearthinking.myheroagency.model.components.BodyComponent;
-import com.nuclearthinking.myheroagency.model.components.TextureComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.TextureComponent;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.val;
@@ -35,8 +35,6 @@ public final class RenderingSystem extends IteratingSystem {
     private OrthogonalTiledMapRenderer renderMap;
     private World world;
     private Box2DDebugRenderer renderer;
-    private int[] layer = {0};
-    private int[] layer1 = {1};
 
     public RenderingSystem(@NonNull final OrthogonalTiledMapRenderer renderMap, @NonNull World world) {
         super(family);

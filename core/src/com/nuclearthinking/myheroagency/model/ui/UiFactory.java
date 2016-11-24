@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.nuclearthinking.myheroagency.controller.Asset;
+import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.i18n.Localization;
 import lombok.Getter;
 import lombok.NonNull;
@@ -28,8 +28,8 @@ public final class UiFactory {
 
     public UiFactory(){
         if(skin == null){
-            skin = Asset.getInstance().get(UI_JSON, Skin.class);
-            skin.addRegions(Asset
+            skin = AssetsManager.getInstance().get(UI_JSON, Skin.class);
+            skin.addRegions(AssetsManager
                     .getInstance()
                     .get(UI_ATLAS, TextureAtlas.class));
         }

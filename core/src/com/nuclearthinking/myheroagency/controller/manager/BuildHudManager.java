@@ -1,17 +1,19 @@
 package com.nuclearthinking.myheroagency.controller.manager;
 
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.nuclearthinking.myheroagency.controller.button.menu.ExitListener;
-import com.nuclearthinking.myheroagency.controller.button.menu.SaveLayerListener;
-import com.nuclearthinking.myheroagency.controller.button.player.AddStatsListener;
-import com.nuclearthinking.myheroagency.controller.button.player.RemoveStatsListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.ExitListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.menu.SaveLayerListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.player.AddStatsListener;
+import com.nuclearthinking.myheroagency.controller.listener.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
-import com.nuclearthinking.myheroagency.model.components.hud.*;
+import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.ui.hud.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +41,7 @@ public final class BuildHudManager {
 
         //Инициализируем Stage
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
+        hud.setActor(engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).first());
 
         //Билдим слои
         val utils = buildUtils(hud);
@@ -95,8 +98,8 @@ public final class BuildHudManager {
         stat.setCon(hud.uiFactory.getLabel("con"));
         stat.setPlus(hud.uiFactory.getTextButton("+"));
         stat.setMinus(hud.uiFactory.getTextButton("-"));
-        stat.setAddStatsListener(new AddStatsListener(stat.getPlus(), engine.getSystem(PlayerSystem.class)));
-        stat.setRemoveStatsListener(new RemoveStatsListener(stat.getMinus(), engine.getSystem(PlayerSystem.class)));
+        stat.setAddStatsListener(new AddStatsListener(stat.getPlus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
+        stat.setRemoveStatsListener(new RemoveStatsListener(stat.getMinus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
         stat.getPlus().addListener(stat.getAddStatsListener());
         stat.getMinus().addListener(stat.getRemoveStatsListener());
         stat.table.setSkin(hud.uiFactory.getSkin());

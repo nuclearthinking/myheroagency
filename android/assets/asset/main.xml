@@ -25,10 +25,10 @@
         <asset type="com.badlogic.gdx.graphics.g2d.TextureAtlas" path="player/player.pack"/>
     </group>
     <group name="object">
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/quest/quest.quest"/>
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/npc/npc.npc"/>
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/monster/monster.monster"/>
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/skill/skill.skill"/>
-        <asset type="com.nuclearthinking.myheroagency.controller.manager.JsonToObject" path="data/item/item.item"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject" path="data/quest/quest.quest"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject" path="data/npc/npc.npc"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject" path="data/monster/monster.monster"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject" path="data/skill/skill.skill"/>
+        <asset type="com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject" path="data/item/item.item"/>
     </group>
 </assets>

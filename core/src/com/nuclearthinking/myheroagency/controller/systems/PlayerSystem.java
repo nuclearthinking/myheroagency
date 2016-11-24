@@ -2,10 +2,14 @@ package com.nuclearthinking.myheroagency.controller.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.nuclearthinking.myheroagency.model.AnimationState;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.components.*;
-import com.nuclearthinking.myheroagency.model.skills.Stats;
+import com.nuclearthinking.myheroagency.model.actor.base.AnimationState;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.MovementComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.world.MapComponent;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.val;
@@ -13,7 +17,8 @@ import lombok.val;
 /**
  * Created by mkuksin on 01.09.2016.
  */
-public final class PlayerSystem extends ActorSystem {
+public final class PlayerSystem extends IteratingSystem {
+
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,
@@ -31,6 +36,7 @@ public final class PlayerSystem extends ActorSystem {
         @NonNull val state = Components.STATE.get(entity);
         @NonNull val mov = Components.MOVEMENT.get(entity);
         @NonNull val body = Components.BODY.get(entity);
+        @NonNull val player = Components.PLAYER.get(entity);
 
         if(accelX == 0 && state.getState() != AnimationState.IDLE.getValue()){
             mov.getVelocity().x = 0;
@@ -38,12 +44,12 @@ public final class PlayerSystem extends ActorSystem {
         }
 
         if (accelX > 0 && state.getState() != AnimationState.RIGHT.getValue()) {
-            mov.getVelocity().x = getSpeed();
+            mov.getVelocity().x = player.getSpeed();
             state.set(AnimationState.RIGHT.getValue());
         }
 
         if (accelX < 0 && state.getState() != AnimationState.LEFT.getValue()) {
-            mov.getVelocity().x = -getSpeed();
+            mov.getVelocity().x = -player.getSpeed();
             state.set(AnimationState.LEFT.getValue());
         }
 
@@ -61,40 +67,26 @@ public final class PlayerSystem extends ActorSystem {
         object.showDialog(this, command);
     }
 
-    private void checkBorderWorld(final BodyComponent t){
+    private void checkBorderWorld(final BodyComponent body){
         final int borderLeft = MapComponent.getLevelPixelWidth() - MapComponent.getLevelPixelHeight();
         final int borderRight = MapComponent.getLevelPixelWidth();
         final int borderUp = MapComponent.getLevelPixelHeight();
         final int borderDown = 0;
 
-        if (t.getBody().getPosition().x <= borderLeft) {
-            t.getBody().setTransform(borderLeft, t.getBody().getPosition().y, 0.0f);
+        if (body.getBody().getPosition().x <= borderLeft) {
+            body.getBody().setTransform(borderLeft, body.getBody().getPosition().y, 0.0f);
         }
 
-        if (t.getBody().getPosition().x > borderRight) {
-            t.getBody().setTransform(borderRight, t.getBody().getPosition().y, 0.0f);
+        if (body.getBody().getPosition().x > borderRight) {
+            body.getBody().setTransform(borderRight, body.getBody().getPosition().y, 0.0f);
         }
 
-        if(t.getBody().getPosition().y > borderUp){
-            t.getBody().setTransform(t.getBody().getPosition().x, borderUp, 0.0f);
+        if (body.getBody().getPosition().y > borderUp) {
+            body.getBody().setTransform(body.getBody().getPosition().x, borderUp, 0.0f);
         }
 
-        if(t.getBody().getPosition().y <= borderDown){
-            t.getBody().setTransform(t.getBody().getPosition().x, borderDown, 0.0f);
+        if (body.getBody().getPosition().y <= borderDown){
+            body.getBody().setTransform(body.getBody().getPosition().x, borderDown, 0.0f);
         }
     }
-
-    public int getSpeed(){
-        return (int) calcStat(Stats.RUN_SPEED, PlayerComponent.BASE_RUN_SPD);
-    }
-
-    public int getMaxHp(){
-        return (int) calcStat(Stats.MAX_HP, PlayerComponent.BASE_HP_MAX);
-    }
-
-    @Override
-    public boolean isPlayer(){
-        return true;
-    }
-
 }

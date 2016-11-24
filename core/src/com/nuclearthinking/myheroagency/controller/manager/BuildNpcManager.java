@@ -1,7 +1,7 @@
 package com.nuclearthinking.myheroagency.controller.manager;
 
 import com.badlogic.ashley.core.Entity;
-import com.nuclearthinking.myheroagency.model.components.BodyComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
 import lombok.NonNull;
 
 import java.util.Random;
