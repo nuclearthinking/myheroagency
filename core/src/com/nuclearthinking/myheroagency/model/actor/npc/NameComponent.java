@@ -11,9 +11,11 @@ import lombok.Setter;
  */
 public class NameComponent implements Component {
 
-    private @Getter @Setter Label label;
+    private @Getter @Setter Label name;
+    private @Getter @Setter Label title;
 
     public void show(){
-        GameWorldManager.getStage().addActor(label);
+        GameWorldManager.getStage().addActor(title);
+        GameWorldManager.getStage().addActor(name);
     }
 }

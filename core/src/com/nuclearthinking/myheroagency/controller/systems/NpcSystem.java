@@ -40,6 +40,6 @@ public final class NpcSystem extends IteratingSystem {
 
         int labelPosX = (int)(posNpc.x - 15);
         int labelPosY = (int)(posNpc.y + 15);
-        name.getLabel().setPosition(labelPosX, labelPosY);
+        name.getName().setPosition(labelPosX, labelPosY);
     }
 }

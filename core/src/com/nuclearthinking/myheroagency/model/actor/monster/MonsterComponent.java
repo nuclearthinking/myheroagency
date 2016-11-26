@@ -28,7 +28,7 @@ public final class MonsterComponent extends GameActor implements Speaker {
     }
 
     @Override
-    public void showDialog(@NonNull PlayerSystem player, DialogComponent dialog) {
-        System.out.println("MMMMMKOSNETE");
+    public void showDialog(@NonNull PlayerSystem player, @NonNull DialogComponent dialog, String command) {
+
     }
 }

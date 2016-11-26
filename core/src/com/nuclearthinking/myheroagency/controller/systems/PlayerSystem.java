@@ -64,8 +64,8 @@ public final class PlayerSystem extends IteratingSystem {
         checkBorderWorld(body);
     }
 
-    public void talkTo(@NonNull final Speaker object, final DialogComponent command){
-        object.showDialog(this, command);
+    public void talkTo(@NonNull final Speaker object, @NonNull final DialogComponent dialog, final String command){
+        object.showDialog(this, dialog, command);
     }
 
     private void checkBorderWorld(final BodyComponent body){

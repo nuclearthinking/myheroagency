@@ -4,7 +4,7 @@
     {
       "id":"1",
       "name":"Посмотрите я квест!",
-      "description":"Поговори с Валерой.",
+      "description":"Speak with Vasiliy",
       "type":"ONES",
       "npcId":1,
       "questItemId":[1,2],

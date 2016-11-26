@@ -142,13 +142,13 @@ public final class PlayerController implements InputProcessor {
         val family = Family.all(NpcComponent.class, BodyComponent.class).get();
         val npcList = engine.getEntitiesFor(family);
 
-        for(val npc : npcList){
+        for(val npc : npcList) {
             val body = npc.getComponent(BodyComponent.class);
             val speaker = npc.getComponent(NpcComponent.class);
             val dialog = npc.getComponent(DialogComponent.class);
 
             if(vec.dst(body.getBody().getPosition().x, body.getBody().getPosition().y, 0) < body.getScale().x/2){
-                engine.getSystem(PlayerSystem.class).talkTo(speaker, dialog);
+                engine.getSystem(PlayerSystem.class).talkTo(speaker, dialog, "openwindow");
             }
         }
         return false;

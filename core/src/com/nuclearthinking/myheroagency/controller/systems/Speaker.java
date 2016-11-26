@@ -8,5 +8,5 @@ import lombok.NonNull;
  */
 public interface Speaker {
 
-    void showDialog(@NonNull final PlayerSystem player, final DialogComponent dialog);
+    void showDialog(@NonNull final PlayerSystem player, @NonNull final DialogComponent dialog, final String command);
 }
