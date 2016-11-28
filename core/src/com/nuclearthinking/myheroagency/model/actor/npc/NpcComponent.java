@@ -3,7 +3,9 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
+import com.nuclearthinking.myheroagency.model.actor.base.GameObject;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +18,16 @@ import lombok.val;
 @ToString
 public final class NpcComponent extends GameActor implements Speaker {
 
+    private @Getter int[] quests;
+
     public NpcComponent(){
         super();
+    }
+
+    @Override
+    public void initialize(@NonNull final GameObject template) {
+        super.initialize(template);
+        quests = ((NpcObject)template).getQuests();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.nuclearthinking.myheroagency.controller.listener.button.dialog.QuestListener;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
@@ -26,15 +27,23 @@ public class DialogComponent implements Component {
     public void show(@NonNull final PlayerComponent player, @NonNull final NpcComponent npc, @NonNull final String command){
         try {
             if(command == null || command.length() == 0){
-                dialog.text("Player " + player.getName() + " starting dialog with " + npc.getName());
+                dialog.text("Something wrong, " + "Player " + player.getName() + " use command " + "[" + command + "]");
             }
             else if(command.equalsIgnoreCase("openWindow")){
                 log.info("Player " + player.getName() + " use command " + "[" + command + "]");
                 dialog.getContentTable().clear();
                 dialog.text("Welcome friend! What do you want ?");
+                if(npc.getQuests().length > 0){
+                    dialog.getButtonTable().clear();
+                    dialog.getButtonTable().clearListeners();
+                    dialog.button(questButton);
+                    questButton.addListener(new QuestListener(this, questButton, player, npc, "quest"+npc.getQuests()[0]));
+                }
             }
             else if (command.startsWith("quest")){
                 log.info("Player " + player.getName() + " use command " + "[" + command + "]");
+                dialog.getButtonTable().removeActor(questButton);
+                dialog.getButtonTable().clearListeners();
 
                 final String quest = command.substring(5).trim();
                 if (quest.length() > 0) {

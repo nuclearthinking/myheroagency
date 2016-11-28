@@ -58,7 +58,6 @@ public class NpcInstance {
             infoNpc.show();
 
             dialog.setDialog(new Dialog(stat.getName(), UiFactory.getSkin()));
-            dialog.getDialog().button(dialog.getQuestButton(), true);
             dialog.getDialog().setResizable(true);
             dialog.getDialog().setMovable(true);
 

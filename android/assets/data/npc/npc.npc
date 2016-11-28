@@ -20,7 +20,8 @@
       "basePCritChance":"10",
       "baseMCritChance":"10",
       "baseRunSpd":"100",
-      "skillId":[1,2,3,4,5]
+      "skillId":[1,2,3,4,5],
+      "questId":[0]
     }
   ]
 }
