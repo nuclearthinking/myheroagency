@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
@@ -57,8 +56,8 @@ public class NpcInstance {
             infoNpc.setTitle(new Label("", UiFactory.getSkin()));
             infoNpc.show();
 
-            dialog.setDialog(new Dialog(stat.getName(), UiFactory.getSkin()));
-            dialog.getDialog().setResizable(true);
+            dialog.getDialog().getTitleLabel().setText(stat.getName());
+            dialog.getDialog().getTitleLabel().setScale(.01f);
             dialog.getDialog().setMovable(true);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);

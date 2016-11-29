@@ -131,6 +131,12 @@
       "background": "default-window",
       "titleFontColor": "white",
       "stageBackground": "dialogDim"
+    },
+    "dialog-kramola":{
+      "titleFont": "kramola-font",
+      "background": "default-window",
+      "titleFontColor": "white",
+      "stageBackground": "dialogDim"
     }
   },
   "com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
