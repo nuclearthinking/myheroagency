@@ -3,7 +3,6 @@ package com.nuclearthinking.myheroagency.model;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
 import com.nuclearthinking.myheroagency.model.actor.monster.MonsterComponent;
-import com.nuclearthinking.myheroagency.model.actor.npc.NameComponent;
 import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.effect.LightComponent;

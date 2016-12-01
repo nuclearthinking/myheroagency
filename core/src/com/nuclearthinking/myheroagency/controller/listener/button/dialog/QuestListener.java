@@ -3,7 +3,7 @@ package com.nuclearthinking.myheroagency.controller.listener.button.dialog;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.listener.button.AbstractButtonListener;
-import com.nuclearthinking.myheroagency.model.actor.npc.DialogComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import lombok.NonNull;

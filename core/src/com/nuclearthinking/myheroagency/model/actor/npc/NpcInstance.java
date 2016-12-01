@@ -11,6 +11,8 @@ import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.NameComponent;
 import com.nuclearthinking.myheroagency.model.effect.LightComponent;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;

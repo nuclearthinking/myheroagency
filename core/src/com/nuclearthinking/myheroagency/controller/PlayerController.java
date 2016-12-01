@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.RenderingSystem;
 import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
-import com.nuclearthinking.myheroagency.model.actor.npc.DialogComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

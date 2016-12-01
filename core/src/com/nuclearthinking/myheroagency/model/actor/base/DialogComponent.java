@@ -1,11 +1,11 @@
-package com.nuclearthinking.myheroagency.model.actor.npc;
+package com.nuclearthinking.myheroagency.model.actor.base;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.listener.button.dialog.QuestListener;
-import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
+import com.nuclearthinking.myheroagency.model.actor.npc.NpcComponent;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.quest.Quest;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;

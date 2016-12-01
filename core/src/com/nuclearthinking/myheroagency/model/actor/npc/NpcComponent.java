@@ -31,7 +31,7 @@ public final class NpcComponent extends GameActor implements Speaker {
     }
 
     @Override
-    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final DialogComponent dialog, final String command) {
+    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final com.nuclearthinking.myheroagency.model.actor.base.DialogComponent dialog, final String command) {
         val player = getPlayer(actor);
         dialog.show(player, this, command);
     }
