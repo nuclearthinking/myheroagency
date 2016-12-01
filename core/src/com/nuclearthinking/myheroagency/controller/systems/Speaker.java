@@ -1,5 +1,6 @@
 package com.nuclearthinking.myheroagency.controller.systems;
 
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
 import lombok.NonNull;
 
 /**
@@ -7,5 +8,5 @@ import lombok.NonNull;
  */
 public interface Speaker {
 
-    void showDialog(@NonNull final PlayerSystem player, final String command);
+    void showDialog(@NonNull final PlayerSystem player, @NonNull final DialogComponent dialog, final String command);
 }

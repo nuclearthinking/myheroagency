@@ -6,11 +6,15 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nuclearthinking.myheroagency.controller.loader.file.JsonToObject;
 import com.nuclearthinking.myheroagency.controller.manager.AssetsManager;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.model.actor.base.*;
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.NameComponent;
 import com.nuclearthinking.myheroagency.model.effect.LightComponent;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.val;
@@ -45,8 +49,18 @@ public class NpcInstance {
             val light = getEngine().createComponent(LightComponent.class);
             val bodyCom = getEngine().createComponent(BodyComponent.class);
             val npcCom = getEngine().createComponent(NpcComponent.class);
+            val dialog = getEngine().createComponent(DialogComponent.class);
+            val infoNpc = getEngine().createComponent(NameComponent.class);
 
             npcCom.initialize(stat);
+
+            infoNpc.setName(new Label(stat.getName(), UiFactory.getSkin()));
+            infoNpc.setTitle(new Label("", UiFactory.getSkin()));
+            infoNpc.show();
+
+            dialog.getDialog().getTitleLabel().setText(stat.getName());
+            dialog.getDialog().getTitleLabel().setScale(.01f);
+            dialog.getDialog().setMovable(true);
 
             animation.getAnimations().put(AnimationState.IDLE.getValue(), GameWorldManager.IDLE);
 
@@ -76,6 +90,8 @@ public class NpcInstance {
             entity.add(npcCom);
             entity.add(bodyCom);
             entity.add(new TextureComponent());
+            entity.add(dialog);
+            entity.add(infoNpc);
 
             getEngine().addEntity(entity);
 

@@ -1,0 +1,53 @@
+{
+  "quest_base":
+  [
+    {
+      "id":"1",
+      "name":"Посмотрите я квест!",
+      "description":"Speak with Vasiliy",
+      "type":"ONES",
+      "npcId":1,
+      "questItemId":[1,2],
+      "text":{
+        "startText":"start_1.html",
+        "nextText":"nextNpcId_2.html",
+        "endText":"end_1.html"
+      },
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
+    },
+    {
+      "id":"1",
+      "name":"Посмотрите я квест!",
+      "description":"Speak with Vasiliy",
+      "type":"ONES",
+      "npcId":1,
+      "questItemId":[1,2],
+      "text":{
+        "startText":"start_1.html",
+        "nextText":"nextNpcId_2.html",
+        "endText":"end_1.html"
+      },
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
+    },
+    {
+      "id":"2",
+      "name":"Test2",
+      "description":"Поговори с Веларией.",
+      "type":"EPIC",
+      "npcId":2,
+      "monsterId":[1],
+      "monsterKillCount":[1],
+      "questItemId":[1,2],
+      "questItemCount":[1,2,3],
+      "text":{
+        "startText":"start_1.html",
+        "nextText":"nextNpcId_2.html",
+        "endText":"end_1.html"
+      },
+      "rewardId":[1,2,3],
+      "rewardCount":[100,11,11]
+    }
+  ]
+}

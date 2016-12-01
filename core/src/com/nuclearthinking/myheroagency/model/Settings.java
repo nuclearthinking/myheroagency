@@ -22,7 +22,7 @@ public final class Settings {
 
     private static Settings instance;
 
-    private Settings(){defaultSettings();}
+    private Settings(){}
 
     public static Settings getInstance(){
         if(instance == null){

@@ -3,8 +3,9 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
+import com.nuclearthinking.myheroagency.model.actor.base.GameObject;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
-import com.nuclearthinking.myheroagency.model.quest.Quest;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -17,42 +18,22 @@ import lombok.val;
 @ToString
 public final class NpcComponent extends GameActor implements Speaker {
 
+    private @Getter int[] quests;
+
     public NpcComponent(){
         super();
     }
 
     @Override
-    public void showDialog(@NonNull PlayerSystem actor, String command) {
-        val player = getPlayer(actor);
-        try {
-            if(command == null || command.length() == 0){
-                log.info("Player " + player.getName() + " starting dialog with " + name);
-                log.info(super.toString());
-            }
-            else if(command.equalsIgnoreCase("openWindow")){
-                log.info("Player " + player.getName() + " use command " + "[" + command + "]");
-            }
-            else if (command.startsWith("quest")){
-                log.info("Player " + player.getName() + " use command " + "[" + command + "]");
-
-                final String quest = command.substring(5).trim();
-                if (quest.length() > 0) {
-                    showQuestWindow(player, quest);
-                }
-            }
-        }
-        catch (StringIndexOutOfBoundsException e){
-            log.info("Incorrect command: " + "[" + command + "]" + id);
-        }
+    public void initialize(@NonNull final GameObject template) {
+        super.initialize(template);
+        quests = ((NpcObject)template).getQuests();
     }
 
-    private void showQuestWindow(@NonNull final GameActor player, final String questId){
-        // TODO: должно быть что то такое
-        //Quest q = ((PlayerComponent)player.getActor()).getQuest(questId);
-        //q.notifyTalk(this);
-
-        val quest = Quest.getQ(questId);
-        quest.notifyTalk(this);
+    @Override
+    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final com.nuclearthinking.myheroagency.model.actor.base.DialogComponent dialog, final String command) {
+        val player = getPlayer(actor);
+        dialog.show(player, this, command);
     }
 
     private PlayerComponent getPlayer(@NonNull final PlayerSystem player){

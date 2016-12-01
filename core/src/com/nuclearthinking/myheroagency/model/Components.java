@@ -36,4 +36,5 @@ public final class Components {
     public static final ComponentMapper<UtilsHudComponent> UHC = ComponentMapper.getFor(UtilsHudComponent.class);
     public static final ComponentMapper<PlayerHudComponent> PHC = ComponentMapper.getFor(PlayerHudComponent.class);
     public static final ComponentMapper<StatHudComponent> SHC = ComponentMapper.getFor(StatHudComponent.class);
+    public static final ComponentMapper<NameComponent> NAME = ComponentMapper.getFor(NameComponent.class);
 }
