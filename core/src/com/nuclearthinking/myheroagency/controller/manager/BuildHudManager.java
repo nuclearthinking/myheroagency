@@ -49,6 +49,7 @@ public final class BuildHudManager {
         val stat = buildStat(hud);
         val settings = buildSettings(hud);
         val quest = buildQuest(hud);
+        val skill = buildSkill(hud);
 
         //Добавляем их на в Stage
         hud.getStage().addActor(utils.table);
@@ -155,5 +156,12 @@ public final class BuildHudManager {
         quest.table.setBackground("default-window");
 
         return quest;
+    }
+
+    private SkillHudComponent buildSkill(@NonNull final HudComponent hud){
+        val skill = engine.createComponent(SkillHudComponent.class);
+        
+
+        return skill;
     }
 }

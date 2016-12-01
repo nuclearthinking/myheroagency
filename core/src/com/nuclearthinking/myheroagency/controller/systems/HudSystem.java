@@ -18,7 +18,8 @@ public final class HudSystem extends IteratingSystem {
                                                     PlayerHudComponent.class,
                                                     SettingHudComponent.class,
                                                     QuestHudComponent.class,
-                                                    StatHudComponent.class).get();
+                                                    StatHudComponent.class,
+                                                    SkillHudComponent.class).get();
 
     public HudSystem() {
         super(family);
