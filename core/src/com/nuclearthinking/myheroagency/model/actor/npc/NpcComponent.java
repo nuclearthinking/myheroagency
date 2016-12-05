@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model.actor.npc;
 
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
 import com.nuclearthinking.myheroagency.controller.systems.Speaker;
+import com.nuclearthinking.myheroagency.model.actor.base.DialogComponent;
 import com.nuclearthinking.myheroagency.model.actor.base.GameActor;
 import com.nuclearthinking.myheroagency.model.actor.base.GameObject;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
@@ -31,7 +32,7 @@ public final class NpcComponent extends GameActor implements Speaker {
     }
 
     @Override
-    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final com.nuclearthinking.myheroagency.model.actor.base.DialogComponent dialog, final String command) {
+    public void showDialog(@NonNull final PlayerSystem actor, @NonNull final DialogComponent dialog, final String command) {
         val player = getPlayer(actor);
         dialog.show(player, this, command);
     }

@@ -160,7 +160,7 @@ public final class BuildHudManager {
 
     private SkillHudComponent buildSkill(@NonNull final HudComponent hud){
         val skill = engine.createComponent(SkillHudComponent.class);
-        
+
 
         return skill;
     }
