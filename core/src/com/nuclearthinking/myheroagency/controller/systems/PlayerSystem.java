@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.nuclearthinking.myheroagency.model.Components;
-import com.nuclearthinking.myheroagency.model.actor.base.AnimationState;
-import com.nuclearthinking.myheroagency.model.actor.base.BodyComponent;
-import com.nuclearthinking.myheroagency.model.actor.base.MovementComponent;
-import com.nuclearthinking.myheroagency.model.actor.base.StateComponent;
+import com.nuclearthinking.myheroagency.model.actor.base.*;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.world.MapComponent;
 import lombok.NonNull;
@@ -63,8 +60,8 @@ public final class PlayerSystem extends IteratingSystem {
         checkBorderWorld(body);
     }
 
-    public void talkTo(@NonNull final Speaker object, final String command){
-        object.showDialog(this, command);
+    public void talkTo(@NonNull final Speaker object, @NonNull final DialogComponent dialog, final String command){
+        object.showDialog(this, dialog, command);
     }
 
     private void checkBorderWorld(final BodyComponent body){
