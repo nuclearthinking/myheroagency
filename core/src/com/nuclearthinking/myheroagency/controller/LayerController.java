@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.nuclearthinking.myheroagency.model.ui.hud.QuestHudComponent;
-import com.nuclearthinking.myheroagency.model.ui.hud.SettingHudComponent;
-import com.nuclearthinking.myheroagency.model.ui.hud.StatHudComponent;
+import com.nuclearthinking.myheroagency.controller.manager.BuildHudManager;
 import lombok.NonNull;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -27,11 +25,17 @@ public final class LayerController implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode){
-            case Input.Keys.ESCAPE:showTable(SettingHudComponent.table);
+            case Input.Keys.ESCAPE:
+                BuildHudManager.getInstance().buildSettings();
                 break;
-            case Input.Keys.J:showTable(QuestHudComponent.table);
+            case Input.Keys.J:
+                BuildHudManager.getInstance().buildQuest();
                 break;
-            case Input.Keys.L:showTable(StatHudComponent.table);
+            case Input.Keys.L:
+                BuildHudManager.getInstance().buildStat();
+                break;
+            case Input.Keys.K:
+                BuildHudManager.getInstance().buildSkill();
                 break;
         }
         return false;

@@ -11,6 +11,6 @@ import lombok.Setter;
  */
 public final class UtilsHudComponent implements Component {
 
-    public static final Table table = new Table();
+    private @Getter final Table table = new Table();
     private @Getter @Setter Label fps;
 }

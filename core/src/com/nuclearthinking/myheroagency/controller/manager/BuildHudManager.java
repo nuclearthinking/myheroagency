@@ -1,167 +1,248 @@
 package com.nuclearthinking.myheroagency.controller.manager;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.nuclearthinking.myheroagency.controller.listener.button.menu.ExitListener;
 import com.nuclearthinking.myheroagency.controller.listener.button.menu.SaveLayerListener;
 import com.nuclearthinking.myheroagency.controller.listener.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.listener.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.model.actor.base.SkillComponent;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import com.nuclearthinking.myheroagency.model.ui.hud.*;
 import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by mkuksin on 20.10.2016.
  */
 @Slf4j(topic = "BuildHudManager")
+//TODO: Думаю очень не хорошо постоянно хранить эти окна, нужно создавать и грохать каждый раз при открытии и закрытии окна
 public final class BuildHudManager {
 
-    private final PooledEngine engine;
-    private final Batch batch;
+    private PooledEngine engine;
+    private Batch batch;
     private final String screenName = getClass().getSimpleName();
+    private HudComponent hud;
+    private Entity entity;
 
-    public BuildHudManager(@NonNull final PooledEngine engine, @NonNull final Batch batch){
+    private SkillHudComponent skill;
+    private StatHudComponent stat;
+    private SettingHudComponent settings;
+    private QuestHudComponent quest;
+
+    private UtilsHudComponent utils;
+    private PlayerHudComponent player;
+
+    private static BuildHudManager instance;
+
+    public static BuildHudManager getInstance(){
+        if(instance == null){
+            instance = new BuildHudManager();
+        }
+        return instance;
+    }
+
+    private BuildHudManager(){
+    }
+
+    public void init(@NonNull final PooledEngine engine, @NonNull final Batch batch){
         this.engine = engine;
         this.batch = batch;
     }
 
     public void createHud(){
-        val entity = engine.createEntity();
+        entity = engine.createEntity();
 
-        val hud = engine.createComponent(HudComponent.class);
+        hud = engine.createComponent(HudComponent.class);
 
         //Инициализируем Stage
         hud.setStage(new Stage(new ScreenViewport(new OrthographicCamera()), batch));
         hud.setActor(engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).first());
 
-        //Билдим слои
-        val utils = buildUtils(hud);
-        val player = buildPlayer(hud);
-        val stat = buildStat(hud);
-        val settings = buildSettings(hud);
-        val quest = buildQuest(hud);
-        val skill = buildSkill(hud);
-
-        //Добавляем их на в Stage
-        hud.getStage().addActor(utils.table);
-        hud.getStage().addActor(player.table);
-        hud.getStage().addActor(settings.table);
-        hud.getStage().addActor(quest.table);
-        hud.getStage().addActor(stat.table);
-
         //Добавляем компоненты в Entity
         entity.add(hud);
-        entity.add(utils);
-        entity.add(player);
-        entity.add(settings);
-        entity.add(quest);
-        entity.add(stat);
 
         engine.addEntity(entity);
+
+        buildUtils();
+        buildPlayer();
     }
 
-    private UtilsHudComponent buildUtils(@NonNull final HudComponent hud){
-        val utils = engine.createComponent(UtilsHudComponent.class);
-        utils.setFps(hud.uiFactory.getLabel("fps"));
-        utils.table.setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
-        utils.table.setDebug(Constants.DEBUG);
-        utils.table.add(utils.getFps());
+    private void buildUtils(){
+        utils = engine.createComponent(UtilsHudComponent.class);
 
-        return utils;
+        utils.setFps(hud.getUiFactory().getLabel("fps"));
+        utils.getTable().setPosition(Gdx.graphics.getWidth()*.85f, Gdx.graphics.getHeight()*.95f);
+        utils.getTable().setDebug(Constants.DEBUG);
+        utils.getTable().add(utils.getFps());
+
+        hud.getStage().addActor(utils.getTable());
+        entity.add(utils);
     }
 
-    private PlayerHudComponent buildPlayer(@NonNull final HudComponent hud){
-        val player = engine.createComponent(PlayerHudComponent.class);
+    private void buildPlayer(){
+        player = engine.createComponent(PlayerHudComponent.class);
 
-        player.setPlayerHp(hud.uiFactory.getLabel("playerHp"));
-        player.setPlayerLvl(hud.uiFactory.getLabel("playerLvl"));
-        player.table.setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
-        player.table.setDebug(Constants.DEBUG);
-        player.table.add(player.getPlayerLvl()).left();
-        player.table.row();
-        player.table.add(player.getPlayerHp()).left();
+        player.setPlayerHp(hud.getUiFactory().getLabel("playerHp"));
+        player.setPlayerLvl(hud.getUiFactory().getLabel("playerLvl"));
+        player.getTable().setPosition(Gdx.graphics.getWidth()*.10f, Gdx.graphics.getHeight()*.90f);
+        player.getTable().setDebug(Constants.DEBUG);
+        player.getTable().add(player.getPlayerLvl()).left();
+        player.getTable().row();
+        player.getTable().add(player.getPlayerHp()).left();
 
-        return player;
+        hud.getStage().addActor(player.getTable());
+        entity.add(player);
     }
 
-    private StatHudComponent buildStat(@NonNull final HudComponent hud){
-        val stat = engine.createComponent(StatHudComponent.class);
+    public void buildStat(){
 
-        stat.setCon(hud.uiFactory.getLabel("con"));
-        stat.setPlus(hud.uiFactory.getTextButton("+"));
-        stat.setMinus(hud.uiFactory.getTextButton("-"));
-        stat.setAddStatsListener(new AddStatsListener(stat.getPlus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
-        stat.setRemoveStatsListener(new RemoveStatsListener(stat.getMinus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
-        stat.getPlus().addListener(stat.getAddStatsListener());
-        stat.getMinus().addListener(stat.getRemoveStatsListener());
-        stat.table.setSkin(hud.uiFactory.getSkin());
-        //stat.table.setBackground("default-window");
-        stat.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-        stat.table.setPosition(-Gdx.graphics.getWidth(), 0);
-        stat.table.add(stat.getCon()).center();
-        stat.table.add(stat.getPlus());
-        stat.table.add(stat.getMinus());
+        if(stat == null){
+            stat = engine.createComponent(StatHudComponent.class);
 
-        return stat;
+            stat.getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+            stat.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+            stat.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+
+            stat.setCon(hud.getUiFactory().getLabel("con"));
+            stat.setPlus(hud.getUiFactory().getTextButton("+"));
+            stat.setMinus(hud.getUiFactory().getTextButton("-"));
+            stat.setAddStatsListener(new AddStatsListener(stat.getPlus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
+            stat.setRemoveStatsListener(new RemoveStatsListener(stat.getMinus(), engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(PlayerComponent.class)));
+            stat.getPlus().addListener(stat.getAddStatsListener());
+            stat.getMinus().addListener(stat.getRemoveStatsListener());
+
+            stat.getTable().add(stat.getCon()).center();
+            stat.getTable().add(stat.getPlus());
+            stat.getTable().add(stat.getMinus());
+
+            hud.getStage().addActor(stat.getTable());
+            entity.add(stat);
+        }
+        else {
+            entity.remove(StatHudComponent.class);
+            hud.getStage().getActors().removeValue(stat.getTable(), true);
+            stat.undo();
+            stat = null;
+        }
     }
 
-    private SettingHudComponent buildSettings(@NonNull final HudComponent hud){
-        val settings = engine.createComponent(SettingHudComponent.class);
+    public void buildSettings(){
+        if(settings == null){
+            settings = engine.createComponent(SettingHudComponent.class);
 
-        settings.setTitleLabel(hud.uiFactory.getLabel("shc.mainTitle", screenName, settings.getLocale()));
-        settings.setWidthLabel(hud.uiFactory.getLabel("shc.widthLabel", screenName, settings.getLocale()));
-        settings.setHeightLabel(hud.uiFactory.getLabel("shc.heightLabel", screenName, settings.getLocale()));
-        settings.setExit(hud.uiFactory.getTextButton("shc.buttonExit", screenName, settings.getLocale()));
-        settings.setSave(hud.uiFactory.getTextButton("shc.buttonSave", screenName, settings.getLocale()));
-        settings.getExit().addListener(new ExitListener(settings.getExit()));
-        settings.getSave().addListener(new SaveLayerListener(settings.getSave(), settings));
-        settings.setWidth(hud.uiFactory.getTextField("800"));
-        settings.setHeight(hud.uiFactory.getTextField("600"));
-        settings.table.setSkin(hud.uiFactory.getSkin());
-        settings.table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        settings.table.setPosition(-Gdx.graphics.getWidth(), 0);
-        settings.table.setBackground("default-window");
+            settings.getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            settings.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+            settings.getTable().setBackground("default-window");
+            settings.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
 
-        settings.table.add(settings.getTitleLabel()).spaceBottom(50).colspan(3).expandX().row();
-        settings.table.row();
-        settings.table.add(settings.getWidthLabel()).height(80).right();
-        settings.table.add(settings.getWidth()).top().center().left();
-        settings.table.add().row();
-        settings.table.add(settings.getHeightLabel()).height(80).right();
-        settings.table.add(settings.getHeight()).top().center().left();
-        settings.table.row();
-        settings.table.add(settings.getSave()).right().expandX().width(100).height(40);
-        settings.table.add(settings.getExit()).left().expandX().width(100).height(40);
+            settings.setTitleLabel(hud.getUiFactory().getLabel("shc.mainTitle", screenName, settings.getLocale()));
+            settings.setWidthLabel(hud.getUiFactory().getLabel("shc.widthLabel", screenName, settings.getLocale()));
+            settings.setHeightLabel(hud.getUiFactory().getLabel("shc.heightLabel", screenName, settings.getLocale()));
+            settings.setExit(hud.getUiFactory().getTextButton("shc.buttonExit", screenName, settings.getLocale()));
+            settings.setSave(hud.getUiFactory().getTextButton("shc.buttonSave", screenName, settings.getLocale()));
+            settings.getExit().addListener(new ExitListener(settings.getExit()));
+            settings.getSave().addListener(new SaveLayerListener(settings.getSave(), settings));
+            settings.setWidth(hud.getUiFactory().getTextField("800"));
+            settings.setHeight(hud.getUiFactory().getTextField("600"));
 
-        return settings;
+            settings.getTable().add(settings.getTitleLabel()).spaceBottom(50).colspan(3).expandX().row();
+            settings.getTable().row();
+            settings.getTable().add(settings.getWidthLabel()).height(80).right();
+            settings.getTable().add(settings.getWidth()).top().center().left();
+            settings.getTable().add().row();
+            settings.getTable().add(settings.getHeightLabel()).height(80).right();
+            settings.getTable().add(settings.getHeight()).top().center().left();
+            settings.getTable().row();
+            settings.getTable().add(settings.getSave()).right().expandX().width(100).height(40);
+            settings.getTable().add(settings.getExit()).left().expandX().width(100).height(40);
+
+            hud.getStage().addActor(settings.getTable());
+            entity.add(settings);
+        }
+        else {
+            entity.remove(SettingHudComponent.class);
+            hud.getStage().getActors().removeValue(settings.getTable(), true);
+            settings.undo();
+            settings = null;
+        }
     }
 
-    private QuestHudComponent buildQuest(@NonNull final HudComponent hud){
-        val quest = engine.createComponent(QuestHudComponent.class);
-
-        quest.setFactory(hud.uiFactory);
-        quest.addQuestToList(QuestManager.getQuestById(0).getName());
-        quest.table.setSkin(hud.uiFactory.getSkin());
-        quest.table.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-        quest.table.setPosition(-Gdx.graphics.getWidth(), 0);
-        quest.table.setBackground("default-window");
-
-        return quest;
+    public void rebuildSettings(){
+        if(settings != null) {
+            settings.getTable().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+        else buildSettings();
     }
 
-    private SkillHudComponent buildSkill(@NonNull final HudComponent hud){
-        val skill = engine.createComponent(SkillHudComponent.class);
+    public void buildQuest(){
+        if(quest == null){
+            quest = engine.createComponent(QuestHudComponent.class);
+
+            quest.getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+            quest.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+            quest.getTable().setBackground("default-window");
 
 
-        return skill;
+            quest.addQuestToList(QuestManager.getQuestById(0).getName(), hud.getUiFactory());
+            quest.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+
+            hud.getStage().addActor(quest.getTable());
+            entity.add(quest);
+        }
+        else {
+            entity.remove(QuestHudComponent.class);
+            hud.getStage().getActors().removeValue(quest.getTable(), true);
+            quest.undo();
+            quest = null;
+        }
+    }
+
+    public void buildSkill(){
+        if(skill == null){
+            skill = engine.createComponent(SkillHudComponent.class);
+
+            skill.getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+            skill.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
+            skill.getTable().setBackground("default-window");
+            skill.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            //TODO: Реализовать список скилов
+            skill.getTable().add(new Label(engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(SkillComponent.class).getSkillList().get(1).getName(),
+                    UiFactory.getSkin(),
+                    Constants.UI_SKIN_TYPE));
+
+            log.info(engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(SkillComponent.class).getSkillList().toString());
+
+            hud.getStage().addActor(skill.getTable());
+            entity.add(skill);
+        }
+        else {
+            entity.remove(SkillHudComponent.class);
+            hud.getStage().getActors().removeValue(skill.getTable(), true);
+            skill.undo();
+            skill = null;
+        }
+    }
+
+    public void rebuildAll(final int w, final int h){
+        if(hud != null)
+            hud.getStage().getViewport().update(w, h, true);
+        if(utils != null)
+            utils.getTable().setPosition(w*.85f, h*.95f);
+        if(player != null)
+            player.getTable().setPosition(w*.10f, h*.90f);
     }
 }

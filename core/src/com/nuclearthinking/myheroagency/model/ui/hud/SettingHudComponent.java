@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.nuclearthinking.myheroagency.i18n.Localization;
+import com.nuclearthinking.myheroagency.model.ui.UiFactory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,6 @@ import lombok.Setter;
  * Created by mkuksin on 10.10.2016.
  */
 public final class SettingHudComponent implements Component {
-
-    public static final Table table = new Table();
 
     private  @Getter final Localization locale = new Localization(this.getClass());
 
@@ -26,6 +25,15 @@ public final class SettingHudComponent implements Component {
     private @Getter @Setter TextField height;
     private @Getter @Setter TextField width;
 
+    private Table table;
+
+    public Table getTable(){
+        if(table == null){
+            table = new Table(UiFactory.getSkin());
+        }
+        return table;
+    }
+
     //На случай если нужно будет перезагрузить локаль в слое
     public void reloadLabel(){
         locale.loadBundle();
@@ -35,5 +43,16 @@ public final class SettingHudComponent implements Component {
         heightLabel.setText(locale.get("heightLabel"));
         exit.setText(locale.get("buttonBack"));
         save.setText(locale.get("buttonSave"));
+    }
+
+    public void undo(){
+        titleLabel = null;
+        widthLabel = null;
+        heightLabel = null;
+        exit = null;
+        save = null;
+        height = null;
+        width = null;
+        table = null;
     }
 }

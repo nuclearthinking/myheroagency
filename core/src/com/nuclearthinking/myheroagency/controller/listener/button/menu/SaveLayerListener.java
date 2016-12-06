@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.nuclearthinking.myheroagency.controller.listener.button.AbstractButtonListener;
+import com.nuclearthinking.myheroagency.controller.manager.BuildHudManager;
 import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.ui.hud.SettingHudComponent;
 import lombok.NonNull;
@@ -29,6 +30,7 @@ public final class SaveLayerListener extends AbstractButtonListener {
         settings.setWidth(Integer.parseInt(layer.getWidth().getText()));
         settings.save();
         Gdx.graphics.setWindowedMode(settings.getWidth(), settings.getHeight());
+        BuildHudManager.getInstance().rebuildSettings();
     }
 
 }

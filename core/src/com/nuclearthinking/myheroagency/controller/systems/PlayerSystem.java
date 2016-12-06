@@ -19,7 +19,8 @@ public final class PlayerSystem extends IteratingSystem {
     private static final Family family = Family.all(StateComponent.class,
                                                     PlayerComponent.class,
                                                     BodyComponent.class,
-                                                    MovementComponent.class).get();
+                                                    MovementComponent.class,
+                                                    SkillComponent.class).get();
 
     private @Setter byte accelX = 0;
     private @Setter byte accelY = 0;

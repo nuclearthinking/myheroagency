@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nuclearthinking.myheroagency.controller.listener.button.menu.QuestTestListener;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
-import lombok.Setter;
+import lombok.NonNull;
 import lombok.val;
 
 import java.util.LinkedHashMap;
@@ -17,12 +17,22 @@ import java.util.Map;
  */
 public final class QuestHudComponent implements Component {
 
-    public static final Table table = new Table();
     public static final Map<String, Actor> QUEST_LIST = new LinkedHashMap<String, Actor>();
 
-    private static @Setter UiFactory factory;
+    private Table table;
 
-    public void addQuestToList(final String name){
+    public Table getTable(){
+        if(table == null){
+            table = new Table(UiFactory.getSkin());
+        }
+        return table;
+    }
+
+    public void undo(){
+        table = null;
+    }
+
+    public void addQuestToList(final String name, @NonNull final UiFactory factory){
         val quest = factory.getTextButton(name);
 
         quest.addListener(new QuestTestListener(quest));

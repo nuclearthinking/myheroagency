@@ -11,7 +11,7 @@ import lombok.Setter;
  */
 public final class PlayerHudComponent implements Component {
 
-    public  static final Table table = new Table();
+    private @Getter final Table table = new Table();
     private @Getter @Setter Label playerLvl;
     private @Getter @Setter Label playerHp;
     private @Getter @Setter Label playerMp;

@@ -44,14 +44,13 @@ public final class GameWorldManager {
     private @Getter static Stage stage;
     private PlayerContact al;
 
-    private final BuildHudManager buildHudManager;
     private final BuildNpcManager buildNpcManager;
 
     public GameWorldManager(@NonNull final PooledEngine engine, @NonNull final Stage stage) {
         this.engine = engine;
         this.stage = stage;
         this.world = new World(GravityComponent.getGravity(), false);
-        this.buildHudManager = new BuildHudManager(engine, stage.getBatch());
+        BuildHudManager.getInstance().init(engine, stage.getBatch());
         this.buildNpcManager = new BuildNpcManager();
         this.al = new PlayerContact();
     }
@@ -66,7 +65,7 @@ public final class GameWorldManager {
         log.info("Create Player Listener");
         world.setContactListener(al);
         log.info("Build Hud");
-        buildHudManager.createHud();
+        BuildHudManager.getInstance().createHud();
         log.info("Create Npc");
         NpcInstance.getInstance();
         log.info("Create Monster");
@@ -124,6 +123,7 @@ public final class GameWorldManager {
         entity.add(new MovementComponent());
         entity.add(bodyCom);
         entity.add(new TextureComponent());
+        entity.add(new SkillComponent());
 
         engine.addEntity(entity);
 

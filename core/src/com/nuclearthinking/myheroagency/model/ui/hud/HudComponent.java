@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 public final class HudComponent implements Component {
 
-    public static final UiFactory uiFactory = new UiFactory();
+    private @Getter final UiFactory uiFactory = new UiFactory();
     private @Getter @Setter static Stage stage;
     private @Getter @Setter Entity actor;
 }

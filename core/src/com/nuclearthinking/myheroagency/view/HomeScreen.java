@@ -3,6 +3,7 @@ package com.nuclearthinking.myheroagency.view;
 import com.badlogic.ashley.core.PooledEngine;
 import com.nuclearthinking.myheroagency.controller.LayerController;
 import com.nuclearthinking.myheroagency.controller.PlayerController;
+import com.nuclearthinking.myheroagency.controller.manager.BuildHudManager;
 import com.nuclearthinking.myheroagency.controller.manager.GameWorldManager;
 import com.nuclearthinking.myheroagency.controller.systems.*;
 import com.nuclearthinking.myheroagency.model.ui.hud.HudComponent;
@@ -76,7 +77,7 @@ public final class HomeScreen extends AbstractScreen {
         super.resize(width, height);
 
         engine.getSystem(RenderingSystem.class).resize(width, height);
-        engine.getSystem(HudSystem.class).resize(width,height);
+        BuildHudManager.getInstance().rebuildAll(width, height);
     }
 
 }
