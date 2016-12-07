@@ -109,13 +109,10 @@ public final class BuildHudManager {
     }
 
     public void buildStat(){
-
         if(stat == null){
             stat = engine.createComponent(StatHudComponent.class);
 
-            stat.getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-            stat.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
-            stat.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            stat.buildWindow();
 
             stat.setCon(hud.getUiFactory().getLabel("con"));
             stat.setPlus(hud.getUiFactory().getTextButton("+"));
@@ -125,16 +122,18 @@ public final class BuildHudManager {
             stat.getPlus().addListener(stat.getAddStatsListener());
             stat.getMinus().addListener(stat.getRemoveStatsListener());
 
-            stat.getTable().add(stat.getCon()).center();
-            stat.getTable().add(stat.getPlus());
-            stat.getTable().add(stat.getMinus());
+            stat.getWindow().add(stat.getCon()).center();
+            stat.getWindow().add(stat.getPlus());
+            stat.getWindow().add(stat.getMinus());
 
-            hud.getStage().addActor(stat.getTable());
+            hud.getStage().addActor(stat.getWindow());
             entity.add(stat);
         }
         else {
+            stat.setPosWinX(stat.getWindow().getX());
+            stat.setPosWinY(stat.getWindow().getY());
             entity.remove(StatHudComponent.class);
-            hud.getStage().getActors().removeValue(stat.getTable(), true);
+            hud.getStage().getActors().removeValue(stat.getWindow(), true);
             stat.undo();
             stat = null;
         }

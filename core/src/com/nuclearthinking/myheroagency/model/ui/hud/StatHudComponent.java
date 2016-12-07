@@ -1,12 +1,14 @@
 package com.nuclearthinking.myheroagency.model.ui.hud;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.nuclearthinking.myheroagency.controller.listener.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.listener.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
+import com.nuclearthinking.myheroagency.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,27 +17,33 @@ import lombok.Setter;
  */
 public final class StatHudComponent implements Component {
 
-    private Table table;
+    private @Getter Window window;
 
     private @Getter @Setter TextButton plus;
     private @Getter @Setter TextButton minus;
     private @Getter @Setter Label con;
     private @Getter @Setter AddStatsListener addStatsListener;
     private @Getter @Setter RemoveStatsListener removeStatsListener;
+    //TODO:Положить в настройки(Settings.class)
+    private @Setter float posWinX;
+    private @Setter float posWinY;
 
-    public Table getTable(){
-        if(table == null){
-            table = new Table(UiFactory.getSkin());
-        }
-        return table;
+    public void buildWindow() {
+        this.window = new Window("Характеристики", UiFactory.getSkin(), "dialog-kramola");
+        this.window.setMovable(true);
+        this.window.setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        this.window.setPosition(posWinX == 0 ? Gdx.graphics.getWidth()/2:posWinX,
+                posWinY == 0 ? Gdx.graphics.getHeight()/2:posWinY);
+        
+        this.window.setDebug(Constants.DEBUG);
     }
 
-    public void undo(){
+    public void undo() {
         plus.getListeners().removeValue(addStatsListener, true);
         plus = null;
         minus.getListeners().removeValue(removeStatsListener, true);
         minus = null;
         con = null;
-        table = null;
+        window = null;
     }
 }
