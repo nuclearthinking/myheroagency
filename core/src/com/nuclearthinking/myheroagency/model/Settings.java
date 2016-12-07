@@ -2,6 +2,7 @@ package com.nuclearthinking.myheroagency.model;
 
 import com.badlogic.gdx.Gdx;
 import com.nuclearthinking.myheroagency.utils.Constants;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -16,9 +17,16 @@ public final class Settings {
     private final String WIDTH_KEY = "width";
     private final String DEFAULT_LANGUAGE = "en";
 
-    private @Setter String language;
-    private @Setter int height;
-    private @Setter int width;
+    private @Getter @Setter String language;
+    private @Getter @Setter int height;
+    private @Getter @Setter int width;
+
+    //Сохранение позиций для UI
+    private final String POS_STATX = "posstatx";
+    private final String POS_STATY = "posstaty";
+
+    private @Getter @Setter float posStatX;
+    private @Getter @Setter float posStatY;
 
     private static Settings instance;
 
@@ -37,6 +45,9 @@ public final class Settings {
         setLanguage(DEFAULT_LANGUAGE);
         setWidth(Constants.GAME_W);
         setHeight(Constants.GAME_H);
+
+        setPosStatX(Constants.GAME_W/2);
+        setPosStatY(Constants.GAME_H/2);
     }
 
     public void loadSettings() {
@@ -53,6 +64,9 @@ public final class Settings {
             setLanguage(preferences.getString(LANGUAGE_KEY, language));
             setHeight(preferences.getInteger(HEIGHT_KEY, height));
             setWidth(preferences.getInteger(WIDTH_KEY, width));
+
+            setPosStatX(preferences.getFloat(POS_STATX, posStatX));
+            setPosStatY(preferences.getFloat(POS_STATY, posStatY));
         }
     }
 
@@ -63,21 +77,9 @@ public final class Settings {
         preferences.putString(LANGUAGE_KEY, language);
         preferences.putInteger(HEIGHT_KEY, height);
         preferences.putInteger(WIDTH_KEY, width);
+
+        preferences.putFloat(POS_STATX, posStatX);
+        preferences.putFloat(POS_STATY, posStatY);
         preferences.flush();
     }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public int getHeight()
-    {
-        return height;
-    }
-
-    public int getWidth()
-    {
-        return width;
-    }
-
 }

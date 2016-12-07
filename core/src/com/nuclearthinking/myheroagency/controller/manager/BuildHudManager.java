@@ -14,6 +14,7 @@ import com.nuclearthinking.myheroagency.controller.listener.button.menu.SaveLaye
 import com.nuclearthinking.myheroagency.controller.listener.button.player.AddStatsListener;
 import com.nuclearthinking.myheroagency.controller.listener.button.player.RemoveStatsListener;
 import com.nuclearthinking.myheroagency.controller.systems.PlayerSystem;
+import com.nuclearthinking.myheroagency.model.Settings;
 import com.nuclearthinking.myheroagency.model.actor.base.SkillComponent;
 import com.nuclearthinking.myheroagency.model.actor.player.PlayerComponent;
 import com.nuclearthinking.myheroagency.model.ui.UiFactory;
@@ -130,6 +131,8 @@ public final class BuildHudManager {
             entity.add(stat);
         }
         else {
+            Settings.getInstance().setPosStatX(stat.getWindow().getX());
+            Settings.getInstance().setPosStatY(stat.getWindow().getY());
             stat.setPosWinX(stat.getWindow().getX());
             stat.setPosWinY(stat.getWindow().getY());
             entity.remove(StatHudComponent.class);
