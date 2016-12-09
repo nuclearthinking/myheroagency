@@ -1,24 +1,20 @@
 package com.nuclearthinking.myheroagency.model.ui.hud;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.nuclearthinking.myheroagency.model.ui.UiFactory;
+import com.nuclearthinking.myheroagency.model.Settings;
 
 /**
  * Created by mkuksin on 01.12.2016.
  */
-public class SkillHudComponent implements Component {
+public class SkillHudComponent extends HudWindow implements Component {
 
-    private Table table;
-
-    public Table getTable(){
-        if(table == null){
-            table = new Table(UiFactory.getSkin());
-        }
-        return table;
-    }
-
-    public void undo(){
-        table = null;
+    @Override
+    public void dispose(){
+        Settings.getInstance().setPosStatX(window.getX());
+        Settings.getInstance().setPosStatY(window.getY());
+        posWinX = window.getX();
+        posWinY = window.getY();
+        HudComponent.getStage().getActors().removeValue(window, true);
+        window = null;
     }
 }

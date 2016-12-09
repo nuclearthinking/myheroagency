@@ -55,7 +55,7 @@ public final class LayerController implements InputProcessor {
 
     //TODO: Тестирование создания окна
     private void testWindow(){
-        val win = new Window("Test Window", UiFactory.getSkin());
+        val win = new Window("Test IWindow", UiFactory.getSkin());
         val t = AssetsManager.getInstance().get(Constants.SPLASH_IMG, Texture.class);
 
         val s = new Image(t);

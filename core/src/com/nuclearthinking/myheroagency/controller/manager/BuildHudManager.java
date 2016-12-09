@@ -136,8 +136,8 @@ public final class BuildHudManager {
             stat.setPosWinX(stat.getWindow().getX());
             stat.setPosWinY(stat.getWindow().getY());
             entity.remove(StatHudComponent.class);
-            hud.getStage().getActors().removeValue(stat.getWindow(), true);
-            stat.undo();
+            //hud.getStage().getActors().removeValue(stat.getWindow(), true);
+            stat.dispose();
             stat = null;
         }
     }
@@ -217,24 +217,22 @@ public final class BuildHudManager {
         if(skill == null){
             skill = engine.createComponent(SkillHudComponent.class);
 
-            skill.getTable().setSize(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
-            skill.getTable().setPosition(-Gdx.graphics.getWidth(), 0);
-            skill.getTable().setBackground("default-window");
-            skill.getTable().addAction(sequence(moveTo(-Gdx.graphics.getWidth(), 0), moveTo(0, 0, .5f)));
+            skill.buildWindow();
+
             //TODO: Реализовать список скилов
-            skill.getTable().add(new Label(engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(SkillComponent.class).getSkillList().get(1).getName(),
+            skill.getWindow().add(new Label(engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(SkillComponent.class).getSkillList().get(1).getName(),
                     UiFactory.getSkin(),
                     Constants.UI_SKIN_TYPE));
 
             log.info(engine.getSystem(PlayerSystem.class).getEntities().first().getComponent(SkillComponent.class).getSkillList().toString());
 
-            hud.getStage().addActor(skill.getTable());
+            hud.getStage().addActor(skill.getWindow());
             entity.add(skill);
         }
         else {
             entity.remove(SkillHudComponent.class);
-            hud.getStage().getActors().removeValue(skill.getTable(), true);
-            skill.undo();
+            //hud.getStage().getActors().removeValue(skill.getTable(), true);
+            skill.dispose();
             skill = null;
         }
     }

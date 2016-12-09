@@ -79,5 +79,4 @@ public final class HomeScreen extends AbstractScreen {
         engine.getSystem(RenderingSystem.class).resize(width, height);
         BuildHudManager.getInstance().rebuildAll(width, height);
     }
-
 }
